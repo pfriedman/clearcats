@@ -1,6 +1,8 @@
+config.action_controller.relative_url_root = "/clearcats"
+
 # Settings specified here will take precedence over those in config/environment.rb
 
-# The production environment is meant for finished, "live" apps.
+# The staging environment is meant to demo finished, "live" apps.
 # Code is not reloaded between requests
 config.cache_classes = true
 
@@ -32,6 +34,6 @@ config.after_initialize do
     ui_mode :cas
     api_mode :cas_proxy
     authorities :cas, :pers, :netid
-    central '/etc/nubic/bcsec-prod.yml'
+    central '/etc/nubic/bcsec-staging.yml'
   end
 end

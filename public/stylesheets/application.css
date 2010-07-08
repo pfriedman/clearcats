@@ -1,0 +1,235 @@
+/* GLOBAL STYLES */
+
+.clear {
+  clear: both;
+}
+
+.links {
+  margin: 1em 0;
+}
+
+.buttons {
+  clear: both;
+}
+
+/* Flash Messages */
+
+.message {
+  padding: 0.5em;
+  text-align: center;
+  margin: .75em auto;
+}
+
+#error,
+#warning {
+  border: 1px solid maroon;
+  color: maroon;
+  background-color: lavenderblush;
+}
+
+#notice,
+#success {
+  border: 1px solid green;
+  color: darkgreen;
+  background-color: #cfc;
+}
+
+/* Layout */
+
+#menu {
+  padding: 0.5em 0 0.25em 0;
+  border-bottom: 1px solid #ccc;
+}
+
+#menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+#menu ul li {
+  list-style: none;
+  display: inline;
+  padding: 0.5em 2em 0.5em 0.5em;
+  border-right: 1px solid #ccc;
+}
+
+#menu ul li:hover {
+  background: gainsboro;
+}
+
+#banner {
+  font-size: 1.25em;
+  margin: 0.5em 0 1em 0;
+}
+
+#footer {
+  text-align: right;
+  font-size: 0.8em;
+}
+
+/* Error Styles */
+
+#error_message {
+  /*text-align: center;*/
+}
+
+#errorExplanation {
+  text-align: left;
+  border: 1px solid;
+  border-color: #c00;
+  margin-bottom: 1em;
+  background-color: #fff;
+}
+
+#errorExplanation h2 {
+  font-weight: bold;
+  padding: .5em;
+  padding-left: 1.5em;
+  font-size: 1em;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  padding-left: 1.5em;
+}
+
+/* Tabular Data */
+
+table.records {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.records td {
+  padding: 0.125em 0.25em;
+}
+
+table.records td.action {
+  width: 5em;
+}
+
+table.records th {
+  background-color: lightgray;
+}
+
+table.records tr {
+  border: 1px solid lightgray;
+}
+
+table.records tr.even_record {
+  background-color: whitesmoke;
+}
+
+table.records tr.odd_record {
+  background-color: white;
+}
+
+table.nested {
+  width: 50%;
+  margin-top: 1em;
+}
+
+/* Nested Forms */
+.nested {
+  padding: 2em;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+/* pagination */
+
+.pagination {
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 0.5em;
+  margin: 3px;
+}
+
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #aad;
+  text-decoration: none;
+  color: #009;
+}
+
+.pagination a:hover, 
+.pagination a:active {
+  border: 1px solid #009;
+  color: black;
+}
+
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #009;
+  font-weight: bold;
+  background-color: #009;
+  color: white;
+}
+
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #eee;
+  color: #ddd;
+}
+
+/* Link styles */
+
+.icon_link {
+  padding: 2px 2px 2px 20px;
+  text-decoration: none;
+}
+
+.icon_link:hover {
+  color: orange !important;
+  text-decoration: none;
+}
+
+.add_link, .add_link:hover {
+  background: url(../images/add.png) 0 2px no-repeat !important;
+}
+
+.add_person_link, .add_person_link:hover {
+  background: url(../images/user_add.png) 0 2px no-repeat !important;
+}
+
+.edit_link, .edit_link:hover {
+  background: url(../images/edit.png) 0 2px no-repeat !important;
+}
+
+.search_link, .search_link:hover {
+  background: url(../images/find.png) 0 2px no-repeat !important;
+}
+
+.show_link, .show_link:hover {
+  background: url(../images/show.png) 0 2px no-repeat !important;
+}
+
+.list_link, .list_link:hover {
+  background: url(../images/list.png) 0 2px no-repeat !important;
+}
+
+.delete_link, .delete_link:hover {
+  background: url(../images/delete.png) 0 2px no-repeat !important;
+}
+
+/* Blueprint css overrides */
+
+.container {
+  width: 95% !important;
+}
+
+a:after {
+  content: "" !important;
+}
+
+textarea {
+  height: 10em !important;
+}
+
+.container p {
+  margin-bottom: .25em;
+}

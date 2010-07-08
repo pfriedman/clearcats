@@ -1,0 +1,9 @@
+users:
+  user:
+    password: user
+    portals:
+      - ClearCATS:
+  admin:
+    password: admin
+    portals:
+      - ClearCATS:

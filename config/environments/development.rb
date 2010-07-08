@@ -15,3 +15,19 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+config.after_initialize do
+  Bcsec.configure do
+    login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
+    authority Bcsec::Authorities::Static.from_file(login_config)
+  end
+
+  #Comment out the previous call to Bcsec.configure and uncomment the following
+  #if you want to develop against a local CAS server.
+  # Bcsec.configure do
+  #   ui_mode :cas
+  #   api_mode :cas_proxy
+  #   authorities :cas, :pers
+  #   central '/etc/nubic/bcsec-local.yml'
+  # end
+end
