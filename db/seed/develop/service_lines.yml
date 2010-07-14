@@ -1,0 +1,48 @@
+summer_series:
+  id: 1
+  name: Clinical and Translational Research Summer Seminar Series
+tl1:
+  id: 2
+  name: TL1 Multidiscplinary Clinical and Translational Pre-Doctoral Training Program
+master_clin:
+  id: 3
+  name: Master of Science in Clinical Investigation
+phy_train:
+  id: 4
+  name: Physician Scientist Training Program
+resp_conduct:
+  id: 5
+  name: Responsible Conduct of Research
+kl2:
+  id: 6
+  name: KL2 Multidisciplinary Clinical and Translational Scholar Program
+navig:
+  id: 7
+  name: Navigating the Translational Research Enterprise
+evolv:
+  id: 8
+  name: Evolving the Translational Research Career seminar
+grant_writing:
+  id: 9
+  name: Grant Writing Collaborative
+trip:
+  id: 10
+  name: Translational Research Incubator Program (TRIP)
+crc_basic:
+  id: 11
+  name: CRC Basic Training
+k_award:
+  id: 12
+  name: How to write a K Award 
+compl_train:
+  id: 13
+  name: Clinical Research Compliance Training
+mcrra:
+  id: 14
+  name: Master of Science in Clinical Research and Regulatory Administration (MCRRA)
+mini_sabb:
+  id: 15
+  name: Engineering into Medicine Faculty Mini-Sabbatical
+eng_to_med:
+  id: 16
+  name:  Engineering into Medicine, Post Doctoral Fellowship

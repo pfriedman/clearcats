@@ -1,0 +1,1979 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by NCRR (National Institute Of Health) -->
+<!-- $Revision: 83 $ $Date: 12/03/09 12:35p $ -->
+<xs:schema xmlns:sis="http://sis.ncrr.nih.gov" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sis.ncrr.nih.gov" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="country_list">
+		<xs:annotation>
+			<xs:documentation>List of countries to be used in the participating countries.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AFGHANISTAN"/>
+			<xs:enumeration value="ALBANIA"/>
+			<xs:enumeration value="ALGERIA"/>
+			<xs:enumeration value="ANDORRA"/>
+			<xs:enumeration value="ANGOLA"/>
+			<xs:enumeration value="ANGUILLA"/>
+			<xs:enumeration value="ANTARCTICA"/>
+			<xs:enumeration value="ANTIGUA/BARBUD"/>
+			<xs:enumeration value="ARGENTINA"/>
+			<xs:enumeration value="ARMENIA"/>
+			<xs:enumeration value="ARUBA"/>
+			<xs:enumeration value="ASHMOR/CARTIER"/>
+			<xs:enumeration value="AUSTRALIA"/>
+			<xs:enumeration value="AUSTRIA"/>
+			<xs:enumeration value="AZERHAIJAN"/>
+			<xs:enumeration value="BAHAMAS"/>
+			<xs:enumeration value="BAHRAIN"/>
+			<xs:enumeration value="BANGLADESH"/>
+			<xs:enumeration value="BARBADOS"/>
+			<xs:enumeration value="BASSAS D INDIA"/>
+			<xs:enumeration value="BELARUS"/>
+			<xs:enumeration value="BELGIUM"/>
+			<xs:enumeration value="BELIZE"/>
+			<xs:enumeration value="BENIN"/>
+			<xs:enumeration value="BERMUDA"/>
+			<xs:enumeration value="BHUTAN"/>
+			<xs:enumeration value="BOLIVIA"/>
+			<xs:enumeration value="BOSNIA/HERZEG"/>
+			<xs:enumeration value="BOTSWANA"/>
+			<xs:enumeration value="BOUVET ISLAND"/>
+			<xs:enumeration value="BRAZIL"/>
+			<xs:enumeration value="BRITISH IOT"/>
+			<xs:enumeration value="BRITISH VI ISS"/>
+			<xs:enumeration value="BRUNEI"/>
+			<xs:enumeration value="BULGARIA"/>
+			<xs:enumeration value="BURKINA"/>
+			<xs:enumeration value="BURUNDI"/>
+			<xs:enumeration value="CAMBODIA"/>
+			<xs:enumeration value="CAMEROON"/>
+			<xs:enumeration value="CANADA"/>
+			<xs:enumeration value="CAPE VERDE"/>
+			<xs:enumeration value="CAYMAN ISLANDS"/>
+			<xs:enumeration value="CENTRAL AFR R"/>
+			<xs:enumeration value="CHAD"/>
+			<xs:enumeration value="CHILE"/>
+			<xs:enumeration value="CHINA"/>
+			<xs:enumeration value="CHRISTMAS IS"/>
+			<xs:enumeration value="CLIPPERTON IS"/>
+			<xs:enumeration value="COCOS (KEELNG)"/>
+			<xs:enumeration value="COLOMBIA"/>
+			<xs:enumeration value="COMOROS"/>
+			<xs:enumeration value="CONGO"/>
+			<xs:enumeration value="CONGO DEM REP"/>
+			<xs:enumeration value="COOK ISLANDS"/>
+			<xs:enumeration value="CORAL SEA ISS"/>
+			<xs:enumeration value="COSTA RICA"/>
+			<xs:enumeration value="COTE D'IVOIRE"/>
+			<xs:enumeration value="CROATIA"/>
+			<xs:enumeration value="CUBA"/>
+			<xs:enumeration value="CYPRUS"/>
+			<xs:enumeration value="CZECH REPUBLIC"/>
+			<xs:enumeration value="DENMARK"/>
+			<xs:enumeration value="DJIBOUTI"/>
+			<xs:enumeration value="DOMINICA"/>
+			<xs:enumeration value="DOMINICAN REP"/>
+			<xs:enumeration value="EAST TIMOR"/>
+			<xs:enumeration value="ECUADOR"/>
+			<xs:enumeration value="EGYPT"/>
+			<xs:enumeration value="EL SALVADOR"/>
+			<xs:enumeration value="EQUATOR GUINEA"/>
+			<xs:enumeration value="ERITREA"/>
+			<xs:enumeration value="ESTONIA"/>
+			<xs:enumeration value="ETHIOPIA"/>
+			<xs:enumeration value="EUROPA ISLAND"/>
+			<xs:enumeration value="FALKLAND ISS"/>
+			<xs:enumeration value="FAROE ISLANDS"/>
+			<xs:enumeration value="FED MICRONESIA"/>
+			<xs:enumeration value="FIJI"/>
+			<xs:enumeration value="FINLAND"/>
+			<xs:enumeration value="FRANCE"/>
+			<xs:enumeration value="FRANCE, METRO"/>
+			<xs:enumeration value="FRENCH GUIANA"/>
+			<xs:enumeration value="FRENCH POLYNES"/>
+			<xs:enumeration value="FRENCH SO/ANT"/>
+			<xs:enumeration value="GABON"/>
+			<xs:enumeration value="GAMBIA"/>
+			<xs:enumeration value="GAZA STRIP"/>
+			<xs:enumeration value="GEORGIA"/>
+			<xs:enumeration value="GERMANY"/>
+			<xs:enumeration value="GHANA"/>
+			<xs:enumeration value="GIBRALTAR"/>
+			<xs:enumeration value="GLORIOSO ISS"/>
+			<xs:enumeration value="GREECE"/>
+			<xs:enumeration value="GREENLAND"/>
+			<xs:enumeration value="GRENADA"/>
+			<xs:enumeration value="GUADELOUPE"/>
+			<xs:enumeration value="GUATEMALA"/>
+			<xs:enumeration value="GUERNSEY"/>
+			<xs:enumeration value="GUINEA"/>
+			<xs:enumeration value="GUINEA-BISSAU"/>
+			<xs:enumeration value="GUYANA"/>
+			<xs:enumeration value="HAITI"/>
+			<xs:enumeration value="HEARD/MCDON IS"/>
+			<xs:enumeration value="HONDURAS"/>
+			<xs:enumeration value="HONG KONG"/>
+			<xs:enumeration value="HUNGARY"/>
+			<xs:enumeration value="ICELAND"/>
+			<xs:enumeration value="INDIA"/>
+			<xs:enumeration value="INDONESIA"/>
+			<xs:enumeration value="IRAN"/>
+			<xs:enumeration value="IRAQ"/>
+			<xs:enumeration value="IRAQ-SAUDI ARA"/>
+			<xs:enumeration value="IRELAND"/>
+			<xs:enumeration value="ISRAEL"/>
+			<xs:enumeration value="ITALY"/>
+			<xs:enumeration value="JAMAICA"/>
+			<xs:enumeration value="JAN MAYEN"/>
+			<xs:enumeration value="JAPAN"/>
+			<xs:enumeration value="JERSEY"/>
+			<xs:enumeration value="JORDAN"/>
+			<xs:enumeration value="JUAN DE NOVA I"/>
+			<xs:enumeration value="KAZAKHSTAN"/>
+			<xs:enumeration value="KENYA"/>
+			<xs:enumeration value="KIRIBATI"/>
+			<xs:enumeration value="KOREA PEO REP"/>
+			<xs:enumeration value="KOREA REP OF"/>
+			<xs:enumeration value="KUWAIT"/>
+			<xs:enumeration value="KYRGYZSTAN"/>
+			<xs:enumeration value="LAOS"/>
+			<xs:enumeration value="LATVIA"/>
+			<xs:enumeration value="LEBANON"/>
+			<xs:enumeration value="LESOTHO"/>
+			<xs:enumeration value="LIBERIA"/>
+			<xs:enumeration value="LIBYA"/>
+			<xs:enumeration value="LIECHTENSTEIN"/>
+			<xs:enumeration value="LITHUANIA"/>
+			<xs:enumeration value="LUXEMBOURG"/>
+			<xs:enumeration value="MACAU"/>
+			<xs:enumeration value="MACEDONIA"/>
+			<xs:enumeration value="MADAGASCAR"/>
+			<xs:enumeration value="MALAWI"/>
+			<xs:enumeration value="MALAYSIA"/>
+			<xs:enumeration value="MALDIVES"/>
+			<xs:enumeration value="MALI"/>
+			<xs:enumeration value="MALTA"/>
+			<xs:enumeration value="MAN ISLE OF"/>
+			<xs:enumeration value="MARTINIQUE"/>
+			<xs:enumeration value="MAURITANIA"/>
+			<xs:enumeration value="MAURITIUS"/>
+			<xs:enumeration value="MAYOTTE"/>
+			<xs:enumeration value="MEXICO"/>
+			<xs:enumeration value="MOLDOVA"/>
+			<xs:enumeration value="MONACO"/>
+			<xs:enumeration value="MONGOLIA"/>
+			<xs:enumeration value="MONTENEGRO"/>
+			<xs:enumeration value="MONTSERRAT"/>
+			<xs:enumeration value="MOROCCO"/>
+			<xs:enumeration value="MOZAMBIQUE"/>
+			<xs:enumeration value="MYANMAR"/>
+			<xs:enumeration value="NAMIBIA"/>
+			<xs:enumeration value="NAURU"/>
+			<xs:enumeration value="NEPAL"/>
+			<xs:enumeration value="NETHERLANDS"/>
+			<xs:enumeration value="NETHERLANDS AN"/>
+			<xs:enumeration value="NEW CALEDONIA"/>
+			<xs:enumeration value="NEW ZEALAND"/>
+			<xs:enumeration value="NICARAGUA"/>
+			<xs:enumeration value="NIGER"/>
+			<xs:enumeration value="NIGERIA"/>
+			<xs:enumeration value="NIUE"/>
+			<xs:enumeration value="NORFOLK IS"/>
+			<xs:enumeration value="NORWAY"/>
+			<xs:enumeration value="NOT STATED"/>
+			<xs:enumeration value="OMAN"/>
+			<xs:enumeration value="PAKISTAN"/>
+			<xs:enumeration value="PALESTINIAN TR"/>
+			<xs:enumeration value="PANAMA"/>
+			<xs:enumeration value="PAPUA N GUINEA"/>
+			<xs:enumeration value="PARACEL ISS"/>
+			<xs:enumeration value="PARAGUAY"/>
+			<xs:enumeration value="PERU"/>
+			<xs:enumeration value="PHILIPPINES"/>
+			<xs:enumeration value="PITCAIRN ISS"/>
+			<xs:enumeration value="POLAND"/>
+			<xs:enumeration value="PORTUGAL"/>
+			<xs:enumeration value="QATAR"/>
+			<xs:enumeration value="REUNION"/>
+			<xs:enumeration value="ROMANIA"/>
+			<xs:enumeration value="RUSSIA"/>
+			<xs:enumeration value="RWANDA"/>
+			<xs:enumeration value="SAMOA"/>
+			<xs:enumeration value="SAN MARINO"/>
+			<xs:enumeration value="SAO TOME/PRINC"/>
+			<xs:enumeration value="SAUDI ARABIA"/>
+			<xs:enumeration value="SENEGAL"/>
+			<xs:enumeration value="SERBIA"/>
+			<xs:enumeration value="SEYCHELLES"/>
+			<xs:enumeration value="SIERRA LEONE"/>
+			<xs:enumeration value="SINGAPORE"/>
+			<xs:enumeration value="SLOVAKIA"/>
+			<xs:enumeration value="SLOVENIA"/>
+			<xs:enumeration value="SOLOMON ISS"/>
+			<xs:enumeration value="SOMALIA"/>
+			<xs:enumeration value="SOUTH AFRICA"/>
+			<xs:enumeration value="SOUTH GEORGIA"/>
+			<xs:enumeration value="SPAIN"/>
+			<xs:enumeration value="SPRATLEY ISS"/>
+			<xs:enumeration value="SRI LANKA"/>
+			<xs:enumeration value="ST HELENA"/>
+			<xs:enumeration value="ST KITTS/NEVIS"/>
+			<xs:enumeration value="ST LUCIA"/>
+			<xs:enumeration value="ST PIERRE/MIQU"/>
+			<xs:enumeration value="ST VINCENT/GRN"/>
+			<xs:enumeration value="SUDAN"/>
+			<xs:enumeration value="SURINAME"/>
+			<xs:enumeration value="SVALBARD"/>
+			<xs:enumeration value="SWAZILAND"/>
+			<xs:enumeration value="SWEDEN"/>
+			<xs:enumeration value="SWITZERLAND"/>
+			<xs:enumeration value="SYRIA"/>
+			<xs:enumeration value="TAIWAN"/>
+			<xs:enumeration value="TAJIKISTAN"/>
+			<xs:enumeration value="TANZANIA U REP"/>
+			<xs:enumeration value="THAILAND"/>
+			<xs:enumeration value="TOGO"/>
+			<xs:enumeration value="TOKELAU"/>
+			<xs:enumeration value="TONGA"/>
+			<xs:enumeration value="TRINIDAD/TOBA"/>
+			<xs:enumeration value="TROMELIN IS"/>
+			<xs:enumeration value="TUNISIA"/>
+			<xs:enumeration value="TURKEY"/>
+			<xs:enumeration value="TURKMENISTAN"/>
+			<xs:enumeration value="TURKS/CAICOS I"/>
+			<xs:enumeration value="TUVALU"/>
+			<xs:enumeration value="UGANDA"/>
+			<xs:enumeration value="UKRAINE"/>
+			<xs:enumeration value="UNITED ARAB EM"/>
+			<xs:enumeration value="UNITED KINGDOM"/>
+			<xs:enumeration value="UNITED STATES"/>
+			<xs:enumeration value="URUGUAY"/>
+			<xs:enumeration value="US MINOR ISLAN"/>
+			<xs:enumeration value="UZBEKISTAN"/>
+			<xs:enumeration value="VANUATU"/>
+			<xs:enumeration value="VATICAN CITY"/>
+			<xs:enumeration value="VENEZUELA"/>
+			<xs:enumeration value="VIETNAM"/>
+			<xs:enumeration value="WALLIS/FUTUNA"/>
+			<xs:enumeration value="WEST BANK"/>
+			<xs:enumeration value="WESTERN SAHARA"/>
+			<xs:enumeration value="YEMEN"/>
+			<xs:enumeration value="YUGOSLAVIA"/>
+			<xs:enumeration value="ZAMBIA"/>
+			<xs:enumeration value="ZIMBABWE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="activity_code_list">
+		<xs:annotation>
+			<xs:documentation>B01 is Preventive Health Services</xs:documentation>
+			<xs:documentation>B08 is Substance Abuse Prevention and Treatment Block Grant</xs:documentation>
+			<xs:documentation>B09 is Mental Health Services Block Grant</xs:documentation>
+			<xs:documentation>C06 is Research Facilities Construction Grants</xs:documentation>
+			<xs:documentation>DP1 is NIH Director’s Pioneer Award</xs:documentation>
+			<xs:documentation>DP2 is NIH Director’s New Innovator Award</xs:documentation>
+			<xs:documentation>DP3 is Type 1 Diabetes Targeted Research Award</xs:documentation>
+			<xs:documentation>D43 is International Training Grants in Epidemiology </xs:documentation>
+			<xs:documentation>D71 is International Training Program Planning Grant</xs:documentation>
+			<xs:documentation>E11 is Grants for Public Health Special Projects</xs:documentation>
+			<xs:documentation>F05 is International Fellowships </xs:documentation>
+			<xs:documentation>F30 is Individual Predoctoral NRSA for M.D./Ph.D. Fellowships </xs:documentation>
+			<xs:documentation>F31 is Predoctoral Individual National Research Service Award</xs:documentation>
+			<xs:documentation>F32 is Postdoctoral Individual National Research Service Award</xs:documentation>
+			<xs:documentation>F33 is National Research Service Award for Senior Fellows</xs:documentation>
+			<xs:documentation>F34 is MARC (NRSA) Faculty Fellowships</xs:documentation>
+			<xs:documentation>F37 is Medical Informatics Fellowship </xs:documentation>
+			<xs:documentation>F38 is Applied Medical Informatics Fellowship </xs:documentation>
+			<xs:documentation>G07 is Resources Improvement Grant </xs:documentation>
+			<xs:documentation>G08 is Resources Project Grant </xs:documentation>
+			<xs:documentation>G11 is Extramural Associate Research Development Award (EARDA)</xs:documentation>
+			<xs:documentation>G12 is Research Centers in Minority Institutions Award</xs:documentation>
+			<xs:documentation>G13 is Health Sciences Publication Support Awards </xs:documentation>
+			<xs:documentation>G20 is Grants for Repair, Renovation and Modernization of Existing Research Facilities </xs:documentation>
+			<xs:documentation>G94 is Administrative Support for Public Health Service Agency Foundations</xs:documentation>
+			<xs:documentation>HD4 is Drug Use/Alcohol Abuse Prevention Demo: Community Partnership Study</xs:documentation>
+			<xs:documentation>HR1 is State Mental Health and Substance Abuse Data Resources Projects</xs:documentation>
+			<xs:documentation>HS5 is Child Mental Health Services Initiative: Comprehensive Community Mental Health Services for Children and Adolescents with Serious Emotional Disturbances</xs:documentation>
+			<xs:documentation>H13 is Conferences </xs:documentation>
+			<xs:documentation>H23 is Immunization Program</xs:documentation>
+			<xs:documentation>H25 is Venereal Disease Control</xs:documentation>
+			<xs:documentation>H28 is State and Community-Based Injury Control Programs</xs:documentation>
+			<xs:documentation>H50 is Maternal and Child Health Services Project, RB Funds</xs:documentation>
+			<xs:documentation>H57 is Indian Health Service Loan Repayment Program</xs:documentation>
+			<xs:documentation>H62 is Services or Education on AIDS</xs:documentation>
+			<xs:documentation>H64 is State and Community-Based Childhood Lead Poisoning Prevention Program</xs:documentation>
+			<xs:documentation>H75 is Health Investigations/Assessments of Control/Prevent Methods</xs:documentation>
+			<xs:documentation>H79 is Mental Health and Substance Abuse Services Grants</xs:documentation>
+			<xs:documentation>I01 is Non-DHHS Research Projects</xs:documentation>
+			<xs:documentation>K01 is Research Scientist Development Award - Research and Training</xs:documentation>
+			<xs:documentation>K02 is Research Scientist Development Award - Research</xs:documentation>
+			<xs:documentation>K05 is Research Scientist Award</xs:documentation>
+			<xs:documentation>K06 is Research Career Award</xs:documentation>
+			<xs:documentation>K07 is Academic/Teacher Award</xs:documentation>
+			<xs:documentation>K08 is Clinical Investigator Award</xs:documentation>
+			<xs:documentation>K12 is Physician Scientist Award (Program)</xs:documentation>
+			<xs:documentation>K14 is Minority School Faculty Development Award</xs:documentation>
+			<xs:documentation>K18 is Career Enhancement Award</xs:documentation>
+			<xs:documentation>K21 is Scientist Development Award</xs:documentation>
+			<xs:documentation>K22 is Career Transition Award</xs:documentation>
+			<xs:documentation>K23 is Mentored Patient-Oriented Research Career Development Award</xs:documentation>
+			<xs:documentation>K24 is Midcareer Investigator Award in Patient-Oriented Research</xs:documentation>
+			<xs:documentation>K25 is Mentored Quantitative Research Career Development</xs:documentation>
+			<xs:documentation>K26 is Midcareer Investigator Award in Biomedical and Behavioral Research</xs:documentation>
+			<xs:documentation>K30 is Clinical Research Curriculum Award (CRCA)</xs:documentation>
+			<xs:documentation>K99 is Career Transition Award</xs:documentation>
+			<xs:documentation>KD1 is Mental Health and Substance Abuse  KD and A Grants</xs:documentation>
+			<xs:documentation>KL1 is Linked Research Career Development Award</xs:documentation>
+			<xs:documentation>KL2 is Mentored Career Development Award</xs:documentation>
+			<xs:documentation>L30 is Loan Repayment Program for Clinical Researchers</xs:documentation>
+			<xs:documentation>L32 is Loan Repayment Program for Clinical Researchers from Disadvantaged Backgrounds</xs:documentation>
+			<xs:documentation>L40 is Loan Repayment Program for Pediatric Research</xs:documentation>
+			<xs:documentation>L50 is Loan Repayment Program for Contraception and Infertility Research</xs:documentation>
+			<xs:documentation>L60 is Loan Repayment Program for Health Disparities Research (HD-LRP)</xs:documentation>
+			<xs:documentation>M01 is General Clinical Research Centers </xs:documentation>
+			<xs:documentation>PL1 is Linked Center Core Grant</xs:documentation>
+			<xs:documentation>P01 is Research Program Projects</xs:documentation>
+			<xs:documentation>P20 is Exploratory Grants</xs:documentation>
+			<xs:documentation>P30 is Center Core Grants</xs:documentation>
+			<xs:documentation>P40 is Animal (Mammalian and Nonmammalian) Model, and Animal and Biological Material Resource Grants </xs:documentation>
+			<xs:documentation>P41 is Biotechnology Resource Grant Program</xs:documentation>
+			<xs:documentation>P42 is Hazardous Substances Basic Research Grants Program </xs:documentation>
+			<xs:documentation>P50 is Specialized Center</xs:documentation>
+			<xs:documentation>P51 is Primate Research Center Grants </xs:documentation>
+			<xs:documentation>P60 is Comprehensive Center</xs:documentation>
+			<xs:documentation>P76 is Projects to Design and Implement Health Exhibits/Materials for Public Education</xs:documentation>
+			<xs:documentation>PN1 is Concept Development Award</xs:documentation>
+			<xs:documentation>PN2 is Research Development Center</xs:documentation>
+			<xs:documentation>RC1 is NIH Challenge Grants and Partnership Program - Phase 1</xs:documentation>
+			<xs:documentation>RC2 is High Impact Research and Research Infrastructure Programs</xs:documentation>
+			<xs:documentation>RC3 is Biomedical Research, Development, and Growth to Spur the Acceleration of New Technologies (BRDG-SPAN) Program</xs:documentation>
+			<xs:documentation>RC4 is High Impact Research and Research Infrastructure Programs, Multi-Year Funding</xs:documentation>
+			<xs:documentation>RL1 is Linked Research Project Award</xs:documentation>
+			<xs:documentation>RL2 is Linked Exploratory/Development Award</xs:documentation>
+			<xs:documentation>RL5 is Linked Education Award</xs:documentation>
+			<xs:documentation>RL9 is Linked Research Training Award</xs:documentation>
+			<xs:documentation>RS1 is Programs to Prevent the Emergence and Spread of Antimicrobial Resistance in the United States</xs:documentation>
+			<xs:documentation>R00 is Research Transition Award</xs:documentation>
+			<xs:documentation>R01 is Research Project</xs:documentation>
+			<xs:documentation>R03 is Small Research Grants</xs:documentation>
+			<xs:documentation>R04 is Anthrop. Fellow Res. Support (old)</xs:documentation>
+			<xs:documentation>R06 is Translations</xs:documentation>
+			<xs:documentation>R08 is Development of Innovative Technology for Measurement of Lead</xs:documentation>
+			<xs:documentation>R13 is Conferences</xs:documentation>
+			<xs:documentation>R15 is Academic Research Enhancement Awards (AREA)</xs:documentation>
+			<xs:documentation>R17 is Mental Health Career Investigator Grants</xs:documentation>
+			<xs:documentation>R18 is Research Demonstration and Dissemination Projects</xs:documentation>
+			<xs:documentation>R21 is Exploratory/Developmental Grants</xs:documentation>
+			<xs:documentation>R24 is Resource-Related Research Projects</xs:documentation>
+			<xs:documentation>R25 is Education Projects</xs:documentation>
+			<xs:documentation>R30 is Preventive Health Service - Venereal Disease Research, Demonstration, and Public Information and Education Grants</xs:documentation>
+			<xs:documentation>R33 is Exploratory/Developmental Grants Phase II</xs:documentation>
+			<xs:documentation>R34 is Clinical Trial Planning Grant</xs:documentation>
+			<xs:documentation>R36 is Dissertation Award</xs:documentation>
+			<xs:documentation>R37 is Method to Extend Research in Time (MERIT) Award</xs:documentation>
+			<xs:documentation>R41 is Small Business Technology Transfer (STTR) Grants - Phase I</xs:documentation>
+			<xs:documentation>R42 is Small Business Technology Transfer (STTR) Grants - Phase II</xs:documentation>
+			<xs:documentation>R43 is Small Business Innovation Research Grants (SBIR) - Phase I</xs:documentation>
+			<xs:documentation>R44 is Small Business Innovation Research Grants (SBIR) - Phase II</xs:documentation>
+			<xs:documentation>R49 is Injury Control Research and Demonstration Projects and Injury Prevention Research Centers</xs:documentation>
+			<xs:documentation>R55 is James A. Shannon Director's Award</xs:documentation>
+			<xs:documentation>R56 is High Priority, Short Term Project Award</xs:documentation>
+			<xs:documentation>R90 is Interdisciplinary Training Regular Research Award</xs:documentation>
+			<xs:documentation>S06 is Minority Biomedical Research Support - MBRS</xs:documentation>
+			<xs:documentation>S10 is Biomedical Research Support Shared Instrumentation Grants </xs:documentation>
+			<xs:documentation>S11 is Minority Biomedical Research Support Thematic Project Grants</xs:documentation>
+			<xs:documentation>S21 is Research and Institutional Resources Health Disparities Endowment Grants-Capacity Building</xs:documentation>
+			<xs:documentation>S22 is Research and Student Resources Health Disparities Endowment Grants - Educational Programs</xs:documentation>
+			<xs:documentation>SC1 is Research Enhancement Award</xs:documentation>
+			<xs:documentation>SC2 is Pilot Research Project</xs:documentation>
+			<xs:documentation>SC3 is Research Continuance Award</xs:documentation>
+			<xs:documentation>T01 is Graduate Training Program</xs:documentation>
+			<xs:documentation>T02 is Undergraduate Training Program</xs:documentation>
+			<xs:documentation>T03 is Combined Undergraduate and Graduate Training Program</xs:documentation>
+			<xs:documentation>T06 is Minority Supplements to Clinical Training Grants</xs:documentation>
+			<xs:documentation>T14 is Conferences</xs:documentation>
+			<xs:documentation>T15 is Continuing Education Training Program</xs:documentation>
+			<xs:documentation>T32 is Institutional National Research Service Award</xs:documentation>
+			<xs:documentation>T34 is MARC Undergraduate NRSA Institutional Grants</xs:documentation>
+			<xs:documentation>T35 is NRSA Short-Term Research Training</xs:documentation>
+			<xs:documentation>T36 is MARC Ancillary Training Activities (GRANT) </xs:documentation>
+			<xs:documentation>T37 is Minority International Research Training Grants </xs:documentation>
+			<xs:documentation>T42 is Educational Resource Center Training Grants </xs:documentation>
+			<xs:documentation>T90 is Interdisciplinary Research Training Award</xs:documentation>
+			<xs:documentation>TL1 is Linked Training Award</xs:documentation>
+			<xs:documentation>TU2 is Institutional National Research Service Award with Involvement of NIH Intramural Faculty</xs:documentation>
+			<xs:documentation>U01 is Research Project Cooperative Agreements</xs:documentation>
+			<xs:documentation>U09 is Scientific Review and Evaluation Cooperative Agreements</xs:documentation>
+			<xs:documentation>U10 is Cooperative Clinical Research Cooperative Agreements</xs:documentation>
+			<xs:documentation>U11 is Study (in China) of Periconceptional Vitamin Supplements to Prevent Spina Bifida and Anencephaly Cooperative Agreements</xs:documentation>
+			<xs:documentation>U13 is Conference Cooperative Agreement</xs:documentation>
+			<xs:documentation>U17 is Applied Methods in Violence-Related or Accidental Injury Surveillance Cooperative Agreements</xs:documentation>
+			<xs:documentation>U18 is Research Demonstration Cooperative Agreements</xs:documentation>
+			<xs:documentation>U19 is Research Program Cooperative Agreements</xs:documentation>
+			<xs:documentation>U1A is Capacity Building for Core Components of Tobacco Prevention and Control Programs Cooperative Agreements</xs:documentation>
+			<xs:documentation>U1Q is Emergency Disaster Relief Relating to CDC Programs Cooperative Agreements</xs:documentation>
+			<xs:documentation>U1V is Electronic Networking: Prevention of Violence Against Women Cooperative Agreement</xs:documentation>
+			<xs:documentation>U21 is Immunization Service for Racial and Ethnic Minorities Cooperative Agreements</xs:documentation>
+			<xs:documentation>U22 is HIV/STD Preventive Services for  Racial and Ethnic Minorities Cooperative Agreements</xs:documentation>
+			<xs:documentation>U23 is TB Prevention and Control Services for Racial and Ethnic Minorities</xs:documentation>
+			<xs:documentation>U24 is Resource-Related Research Related Cooperative Agreements</xs:documentation>
+			<xs:documentation>U27 is Surveillance of Complications of Hemophilia Cooperative Agreements</xs:documentation>
+			<xs:documentation>U2G is Global HIV/AIDS Non-Research Cooperative Agreements</xs:documentation>			 <xs:documentation>U2R is International Training Cooperative Agreement</xs:documentation>			
+			<xs:documentation>U30 is Preventive Health Services:  Venereal Disease Research, Demonstration, and Public Information and Education Projects</xs:documentation>
+			<xs:documentation>U32 is State-Based Diabetes Control Programs</xs:documentation>
+			<xs:documentation>U34 is Clinical Planning Grant Cooperative Agreement</xs:documentation>
+			<xs:documentation>U36 is Program Improvements for Schools of Public Health</xs:documentation>
+			<xs:documentation>U38 is Uniform National Health Program Reporting System</xs:documentation>
+			<xs:documentation>U41 is Biotechnology Resource Cooperative Agreements</xs:documentation>
+			<xs:documentation>U42 is Animal (Mammalian and Nonmammalian) Model, and Animal and Biological Materials Resource Cooperative Agreements </xs:documentation>
+			<xs:documentation>U43 is Small Business Innovation Research (SBIR) Cooperative Agreements - Phase I</xs:documentation>
+			<xs:documentation>U44 is Small Business Innovation Research (SBIR) Cooperative Agreements - Phase II</xs:documentation>
+			<xs:documentation>U45 is Hazardous Waste Worker Health and Safety Training Cooperative Agreements </xs:documentation>
+			<xs:documentation>U47 is Laboratory/Other Diagnostic Medical Quality Improvement Cooperative Agreements</xs:documentation>
+			<xs:documentation>U48 is Health Promotion and Disease Prevention Research Centers</xs:documentation>
+			<xs:documentation>U49 is Coop:  Injury Control Res. and Demo and Injury Prevention</xs:documentation>
+			<xs:documentation>U50 is Special Cooperative Investigations/Assessment of Control/Prevention Methods</xs:documentation>
+			<xs:documentation>U51 is Health Planning Strategies/National Academy of Sciences Activities</xs:documentation>
+			<xs:documentation>U52 is Cooperative Agreement for Tuberculosis Control</xs:documentation>
+			<xs:documentation>U53 is Capacity Building: Occupational Safety/Community Environmental Health</xs:documentation>
+			<xs:documentation>U54 is Specialized Center Cooperative Agreements</xs:documentation>
+			<xs:documentation>U55 is Core Support for American Council on Transplantation</xs:documentation>
+			<xs:documentation>U56 is Exploratory Grants Cooperative Agreements </xs:documentation>
+			<xs:documentation>U57 is State Based Comprehensive Breast/Cervical Cancer Control Program Cooperative Agreements</xs:documentation>
+			<xs:documentation>U58 is Chronic Disease Control Cooperative Agreement</xs:documentation>
+			<xs:documentation>U59 is Disabilities Prevention Cooperative Agreement Program</xs:documentation>
+			<xs:documentation>U60 is Cooperative Agreements in Occupational Safety and Health Research, Demonstrations , Evaluation and Education</xs:documentation>
+			<xs:documentation>U61 is Preventive Health Activities Regarding Hazardous Substances</xs:documentation>
+			<xs:documentation>U62 is Prevention/Surveillance Activities/Studies of AIDS</xs:documentation>
+			<xs:documentation>U65 is Minority/Other Community-Based HIV Prevention Project Cooperative Agreements</xs:documentation>
+			<xs:documentation>U66 is Immunization Demonstration Projects Cooperative Agreements</xs:documentation>
+			<xs:documentation>U75 is National Cancer Registries Cooperative Agreements</xs:documentation>
+			<xs:documentation>U79 is Mental Health and Substance Abuse Services Cooperative Agreements</xs:documentation>
+			<xs:documentation>U81 is Injury Community Demonstration Projects:  Evaluation of Youth Violence Prevention Program</xs:documentation>
+			<xs:documentation>U82 is Enhancement of State/Local Capacity to Assess the Progress Toward Healthy People 2000 Objectives Cooperative Agreements</xs:documentation>
+			<xs:documentation>U83 is Research to Advance the Understanding of the Health of Racial and Ethnic Populations or Subpopulations Cooperative Agreements</xs:documentation>
+			<xs:documentation>U84 is Cooperative Agreements for Fetal Alcohol Syndrome Prevention Research Programs</xs:documentation>
+			<xs:documentation>U87 is State Demonstration: Comprehensive School Health Program to Prevent Sexual Behaviors that Result in HIV Infection and to Improve Educational Outcome Cooperative Agreements</xs:documentation>
+			<xs:documentation>U88 is Services Demonstration Cooperative Agreements</xs:documentation>
+			<xs:documentation>U90 is Cooperative Agreements for Special Projects of National Significance (SPNS)</xs:documentation>
+			<xs:documentation>UA1 is AIDS Research Project Cooperative Agreement</xs:documentation>
+			<xs:documentation>UC1 is NIH Challenge Grants and Partnerships Program - Phase II Cooperative Agreements</xs:documentation>
+			<xs:documentation>UC6 is Construction Cooperative Agreement</xs:documentation>
+			<xs:documentation>UC7 is National Biocontainment Laboratory Operation Cooperative Agreement</xs:documentation>
+			<xs:documentation>UD1 is Mental Health and/or Substance Abuse KD and A Cooperative Agreements</xs:documentation>
+			<xs:documentation>UE2 is Emergency and Environmental Health Services</xs:documentation>
+			<xs:documentation>UH1 is HBCU Research Scientist Award</xs:documentation>
+			<xs:documentation>UH2 is Exploratory/Development Cooperative Agreement Phase I</xs:documentation>
+			<xs:documentation>UL1 is Linked Specialized Center Cooperative Agreement</xs:documentation>
+			<xs:documentation>UR1 is Cooperative Agreements for Resources and Technical Assistance Projects to Support Mental Health and Substance Abuse Services</xs:documentation>
+			<xs:documentation>UR3 is School Health:  Findings from Evaluated Programs Cooperative Agreements</xs:documentation>
+			<xs:documentation>UR6 is Prevention Intervention Research on Substance Abuse in Children Cooperative Agreements</xs:documentation>
+			<xs:documentation>UR8 is Applied Research in Emerging Infections (including Tick-borne Diseases) Cooperative Agreements</xs:documentation>
+			<xs:documentation>US3 is Hantaviral Reservoir Studies Cooperative Agreements</xs:documentation>
+			<xs:documentation>US4 is Community-Based Primary Prevention Programs: Intimate Partner Violence Cooperative Agreements</xs:documentation>
+			<xs:documentation>UT1 is Small Business Technology Transfer (STTR) Cooperative Agreements - Phase I</xs:documentation>
+			<xs:documentation>UT2 is Small Business Technology Transfer (STTR) Cooperative Agreements - Phase II</xs:documentation>
+			<xs:documentation>VF1 is Rape Prevention and Education Grants</xs:documentation>
+			<xs:documentation>X01 is Resource Access Award</xs:documentation>
+			<xs:documentation>X02 is Pre-application</xs:documentation>
+			<xs:documentation>X06 is Projects for Assistance in Transition from Homelessness</xs:documentation>
+			<xs:documentation>X98 is Protection and Advocacy for Individuals with Mental Ilness</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="B01"/>
+			<xs:enumeration value="B08"/>
+			<xs:enumeration value="B09"/>
+			<xs:enumeration value="C06"/>
+			<xs:enumeration value="DP1"/>
+			<xs:enumeration value="DP2"/>
+			<xs:enumeration value="DP3"/>
+			<xs:enumeration value="D43"/>
+			<xs:enumeration value="D71"/>
+			<xs:enumeration value="E11"/>
+			<xs:enumeration value="F05"/>
+			<xs:enumeration value="F30"/>
+			<xs:enumeration value="F31"/>
+			<xs:enumeration value="F32"/>
+			<xs:enumeration value="F33"/>
+			<xs:enumeration value="F34"/>
+			<xs:enumeration value="F37"/>
+			<xs:enumeration value="F38"/>
+			<xs:enumeration value="G07"/>
+			<xs:enumeration value="G08"/>
+			<xs:enumeration value="G11"/>
+			<xs:enumeration value="G12"/>
+			<xs:enumeration value="G13"/>
+			<xs:enumeration value="G20"/>
+			<xs:enumeration value="G94"/>
+			<xs:enumeration value="HD4"/>
+			<xs:enumeration value="HR1"/>
+			<xs:enumeration value="HS5"/>
+			<xs:enumeration value="H13"/>
+			<xs:enumeration value="H23"/>
+			<xs:enumeration value="H25"/>
+			<xs:enumeration value="H28"/>
+			<xs:enumeration value="H50"/>
+			<xs:enumeration value="H57"/>
+			<xs:enumeration value="H62"/>
+			<xs:enumeration value="H64"/>
+			<xs:enumeration value="H75"/>
+			<xs:enumeration value="H79"/>
+			<xs:enumeration value="I01"/>
+			<xs:enumeration value="K01"/>
+			<xs:enumeration value="K02"/>
+			<xs:enumeration value="K05"/>
+			<xs:enumeration value="K06"/>
+			<xs:enumeration value="K07"/>
+			<xs:enumeration value="K08"/>
+			<xs:enumeration value="K12"/>
+			<xs:enumeration value="K14"/>
+			<xs:enumeration value="K18"/>
+			<xs:enumeration value="K21"/>
+			<xs:enumeration value="K22"/>
+			<xs:enumeration value="K23"/>
+			<xs:enumeration value="K24"/>
+			<xs:enumeration value="K25"/>
+			<xs:enumeration value="K26"/>
+			<xs:enumeration value="K30"/>
+			<xs:enumeration value="K99"/>
+			<xs:enumeration value="KD1"/>
+			<xs:enumeration value="KL1"/>
+			<xs:enumeration value="KL2"/>
+			<xs:enumeration value="L30"/>
+			<xs:enumeration value="L32"/>
+			<xs:enumeration value="L40"/>
+			<xs:enumeration value="L50"/>
+			<xs:enumeration value="L60"/>
+			<xs:enumeration value="M01"/>
+			<xs:enumeration value="PL1"/>
+			<xs:enumeration value="P01"/>
+			<xs:enumeration value="P20"/>
+			<xs:enumeration value="P30"/>
+			<xs:enumeration value="P40"/>
+			<xs:enumeration value="P41"/>
+			<xs:enumeration value="P42"/>
+			<xs:enumeration value="P50"/>
+			<xs:enumeration value="P51"/>
+			<xs:enumeration value="P60"/>
+			<xs:enumeration value="P76"/>
+			<xs:enumeration value="PN1"/>
+			<xs:enumeration value="PN2"/>
+			<xs:enumeration value="RC1"/>
+			<xs:enumeration value="RC2"/>
+			<xs:enumeration value="RC3"/>
+			<xs:enumeration value="RC4"/>
+			<xs:enumeration value="RL1"/>
+			<xs:enumeration value="RL2"/>
+			<xs:enumeration value="RL5"/>
+			<xs:enumeration value="RL9"/>
+			<xs:enumeration value="RS1"/>
+			<xs:enumeration value="R00"/>
+			<xs:enumeration value="R01"/>
+			<xs:enumeration value="R03"/>
+			<xs:enumeration value="R04"/>
+			<xs:enumeration value="R06"/>
+			<xs:enumeration value="R08"/>
+			<xs:enumeration value="R13"/>
+			<xs:enumeration value="R15"/>
+			<xs:enumeration value="R17"/>
+			<xs:enumeration value="R18"/>
+			<xs:enumeration value="R21"/>
+			<xs:enumeration value="R24"/>
+			<xs:enumeration value="R25"/>
+			<xs:enumeration value="R30"/>
+			<xs:enumeration value="R33"/>
+			<xs:enumeration value="R34"/>
+			<xs:enumeration value="R36"/>
+			<xs:enumeration value="R37"/>
+			<xs:enumeration value="R41"/>
+			<xs:enumeration value="R42"/>
+			<xs:enumeration value="R43"/>
+			<xs:enumeration value="R44"/>
+			<xs:enumeration value="R49"/>
+			<xs:enumeration value="R55"/>
+			<xs:enumeration value="R56"/>
+			<xs:enumeration value="R90"/>
+			<xs:enumeration value="S06"/>
+			<xs:enumeration value="S10"/>
+			<xs:enumeration value="S11"/>
+			<xs:enumeration value="S21"/>
+			<xs:enumeration value="S22"/>
+			<xs:enumeration value="SC1"/>
+			<xs:enumeration value="SC2"/>
+			<xs:enumeration value="SC3"/>
+			<xs:enumeration value="T01"/>
+			<xs:enumeration value="T02"/>
+			<xs:enumeration value="T03"/>
+			<xs:enumeration value="T06"/>
+			<xs:enumeration value="T09"/>
+			<xs:enumeration value="T14"/>
+			<xs:enumeration value="T15"/>
+			<xs:enumeration value="T32"/>
+			<xs:enumeration value="T34"/>
+			<xs:enumeration value="T35"/>
+			<xs:enumeration value="T36"/>
+			<xs:enumeration value="T37"/>
+			<xs:enumeration value="T42"/>
+			<xs:enumeration value="T90"/>
+			<xs:enumeration value="TL1"/>
+			<xs:enumeration value="TU2"/>
+			<xs:enumeration value="U01"/>
+			<xs:enumeration value="U09"/>
+			<xs:enumeration value="U10"/>
+			<xs:enumeration value="U11"/>
+			<xs:enumeration value="U13"/>
+			<xs:enumeration value="U17"/>
+			<xs:enumeration value="U18"/>
+			<xs:enumeration value="U19"/>
+			<xs:enumeration value="U1A"/>
+			<xs:enumeration value="U1Q"/>
+			<xs:enumeration value="U1V"/>
+			<xs:enumeration value="U21"/>
+			<xs:enumeration value="U22"/>
+			<xs:enumeration value="U23"/>
+			<xs:enumeration value="U24"/>
+			<xs:enumeration value="U27"/>
+			<xs:enumeration value="U2G"/>
+			<xs:enumeration value="U2R"/>
+			<xs:enumeration value="U30"/>
+			<xs:enumeration value="U32"/>
+			<xs:enumeration value="U34"/>
+			<xs:enumeration value="U36"/>
+			<xs:enumeration value="U38"/>
+			<xs:enumeration value="U41"/>
+			<xs:enumeration value="U42"/>
+			<xs:enumeration value="U43"/>
+			<xs:enumeration value="U44"/>
+			<xs:enumeration value="U45"/>
+			<xs:enumeration value="U47"/>
+			<xs:enumeration value="U48"/>
+			<xs:enumeration value="U49"/>
+			<xs:enumeration value="U50"/>
+			<xs:enumeration value="U51"/>
+			<xs:enumeration value="U52"/>
+			<xs:enumeration value="U53"/>
+			<xs:enumeration value="U54"/>
+			<xs:enumeration value="U55"/>
+			<xs:enumeration value="U56"/>
+			<xs:enumeration value="U57"/>
+			<xs:enumeration value="U58"/>
+			<xs:enumeration value="U59"/>
+			<xs:enumeration value="U60"/>
+			<xs:enumeration value="U61"/>
+			<xs:enumeration value="U62"/>
+			<xs:enumeration value="U65"/>
+			<xs:enumeration value="U66"/>
+			<xs:enumeration value="U75"/>
+			<xs:enumeration value="U79"/>
+			<xs:enumeration value="U81"/>
+			<xs:enumeration value="U82"/>
+			<xs:enumeration value="U83"/>
+			<xs:enumeration value="U84"/>
+			<xs:enumeration value="U87"/>
+			<xs:enumeration value="U88"/>
+			<xs:enumeration value="U90"/>
+			<xs:enumeration value="UA1"/>
+			<xs:enumeration value="UC1"/>
+			<xs:enumeration value="UC6"/>
+			<xs:enumeration value="UC7"/>
+			<xs:enumeration value="UD1"/>
+			<xs:enumeration value="UE2"/>
+			<xs:enumeration value="UH1"/>
+			<xs:enumeration value="UH2"/>
+			<xs:enumeration value="UL1"/>
+			<xs:enumeration value="UR1"/>
+			<xs:enumeration value="UR3"/>
+			<xs:enumeration value="UR6"/>
+			<xs:enumeration value="UR8"/>
+			<xs:enumeration value="US3"/>
+			<xs:enumeration value="US4"/>
+			<xs:enumeration value="UT1"/>
+			<xs:enumeration value="UT2"/>
+			<xs:enumeration value="VF1"/>
+			<xs:enumeration value="X01"/>
+			<xs:enumeration value="X02"/>
+			<xs:enumeration value="X06"/>
+			<xs:enumeration value="X98"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="commons_username_type">
+		<xs:annotation>
+			<xs:documentation>The URL for registering anyone in commons is: commons.era.nih.gov\commons</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="30"/>
+			<xs:pattern value="[^ ][\S\d\.\-_@ ]*[^ ]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="degree_types_1">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>PhD in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
+				<xs:documentation>MS in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
+				<xs:documentation>PhD (in any other field)</xs:documentation>
+				<xs:documentation>Masters (in any other field)</xs:documentation>
+			</xs:annotation>
+			<xs:maxLength value="15"/>
+			<xs:enumeration value="PhD CTS"/>
+			<xs:enumeration value="MS CTS"/>
+			<xs:enumeration value="PhD non-CTS"/>
+			<xs:enumeration value="Masters non-CTS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="degree_types_2">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>MD is Doctor of Medicine</xs:documentation>
+				<xs:documentation>DDS is Doctor of Dental Surgery</xs:documentation>
+				<xs:documentation>DMD is Doctor of Medical Dentistry</xs:documentation>
+				<xs:documentation>DO is Doctor of Osteopathic Medicine</xs:documentation>
+				<xs:documentation>PHAR (PharmD) is Doctor of Pharmacy</xs:documentation>
+				<xs:documentation>ND is Doctor of Naturopathy</xs:documentation>
+				<xs:documentation>DNP is Doctor of Nursing Practice</xs:documentation>
+				<xs:documentation>DVM is Doctor of Veterinary Medicine</xs:documentation>
+				<xs:documentation>DPT is Doctor of Physical Therapy - NCRR Approval Required</xs:documentation>
+				<xs:documentation>DAUD is Doctor of Audiology - NCRR Approval Required</xs:documentation>
+			</xs:annotation>
+			<xs:maxLength value="4"/>
+			<xs:enumeration value="MD"/>
+			<xs:enumeration value="DDS"/>
+			<xs:enumeration value="DMD"/>
+			<xs:enumeration value="DO"/>
+			<xs:enumeration value="PHAR"/>
+			<xs:enumeration value="ND"/>
+			<xs:enumeration value="DNP"/>
+			<xs:enumeration value="DVM"/>
+			<xs:enumeration value="DPT"/>
+			<xs:enumeration value="DAUD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="filename_str">
+		<xs:annotation>
+			<xs:documentation>Length of filename</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:pattern value=".+(\.pdf|\.PDF)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phs_organization_list">
+		<xs:annotation>
+			<xs:documentation>AA is National Institute on Alcohol Abuse and Alcoholism</xs:documentation>
+			<xs:documentation>AE is Assistant Secretary of Planning and Evaluation</xs:documentation>
+			<xs:documentation>AG is National Institute on Aging</xs:documentation>
+			<xs:documentation>AI is National Institute of Allergy and Infectious Diseases</xs:documentation>
+			<xs:documentation>AR is National Institute of Arthritis and Musculoskeletal and Skin Diseases</xs:documentation>
+			<xs:documentation>AT is National Center For Complementary and Alternative Medicine</xs:documentation>
+			<xs:documentation>CA is National Cancer Institute</xs:documentation>
+			<xs:documentation>CC is Centers for Disease Control and Prevention</xs:documentation>
+			<xs:documentation>CH is Coordinating Center for Infectious Diseases, CDC</xs:documentation>
+			<xs:documentation>CI is National Center for Preparedness, Detection, and Control of Infectious Diseases, CDC</xs:documentation>
+			<xs:documentation>CK is National Center for Zoonotic, Vector-Borne, and Enteric Diseases, CDC</xs:documentation>
+			<xs:documentation>DA is National Institute on Drug Abuse</xs:documentation>
+			<xs:documentation>DC is National Institute on Deafness and Other Communication Disorders</xs:documentation>
+			<xs:documentation>DD is National Center on Birth Defects and Developmental Disabilities, CDC</xs:documentation>
+			<xs:documentation>DE is National Institute of Dental and Craniofacial Research</xs:documentation>
+			<xs:documentation>DK is National Institute of Diabetes and Digestive and Kidney Diseases</xs:documentation>
+			<xs:documentation>DP is National Center for Chronic Disease Prevention and Health Promotion, CDC</xs:documentation>
+			<xs:documentation>EB is National Institute of Biomedical Imaging and Bioengineering</xs:documentation>
+			<xs:documentation>EH is National Center for Environmental Health, CDC</xs:documentation>
+			<xs:documentation>EP is Epidemiology Program Office, CDC</xs:documentation>
+			<xs:documentation>ES is National Institute of Environmental Health Sciences</xs:documentation>
+			<xs:documentation>EY is National Eye Institute</xs:documentation>
+			<xs:documentation>FD is Food and Drug Administration</xs:documentation>
+			<xs:documentation>GD is Office of Genomics and Disease Prevention, CDC</xs:documentation>
+			<xs:documentation>GH is Coordinating Office for Global Health, CDC</xs:documentation>
+			<xs:documentation>GM is National Institute of General Medical Sciences</xs:documentation>
+			<xs:documentation>GW is Genome Wide Association Studies</xs:documentation>
+			<xs:documentation>HD is National Institute of Child Health and Human Development</xs:documentation>
+			<xs:documentation>HG is National Human Genome Research Institute</xs:documentation>
+			<xs:documentation>HH is Department of Health and Human Services</xs:documentation>
+			<xs:documentation>HK is Office of National Center for Public Health Informatics, CDC</xs:documentation>
+			<xs:documentation>HL is National Heart, Lung, and Blood Institute</xs:documentation>
+			<xs:documentation>HM is National Center for Health Marketing, CDC</xs:documentation>
+			<xs:documentation>HS is Agency for Healthcare Research and Quality</xs:documentation>
+			<xs:documentation>IP is National Center for Immunization and Respiratory Diseases, CDC</xs:documentation>
+			<xs:documentation>IS is Indian Health Service</xs:documentation>
+			<xs:documentation>LM is National Library of Medicine</xs:documentation>
+			<xs:documentation>MC is Maternal and Child Health Services</xs:documentation>
+			<xs:documentation>MD is National Center on Minority Health and Health Disparities</xs:documentation>
+			<xs:documentation>MH is National Institute of Mental Health</xs:documentation>
+			<xs:documentation>MN is Office of Minority Health, CDC</xs:documentation>
+			<xs:documentation>NR is National Institute of Nursing Research</xs:documentation>
+			<xs:documentation>NS is National Institute of Neurological Disorders and Stroke</xs:documentation>
+			<xs:documentation>OD is Office of the Director, NIH</xs:documentation>
+			<xs:documentation>OH is National Institute for Occupational Safety and Health</xs:documentation>
+			<xs:documentation>PH is Public Health Practice Program Office, CDC</xs:documentation>
+			<xs:documentation>PR is Office of Chief Public Health Practice, CDC</xs:documentation>
+			<xs:documentation>PS is National Center for HIV, Viral Hepatitis, STDs, and Tuberculosis Prevention, CDC</xs:documentation>
+			<xs:documentation>RR is National Center for Research Resources</xs:documentation>
+			<xs:documentation>SH is National Center for Health Statistics</xs:documentation>
+			<xs:documentation>SM is Center for Mental Health Services, SAMHSA</xs:documentation>
+			<xs:documentation>SP is Center for Substance Abuse Prevention, SAMHSA</xs:documentation>
+			<xs:documentation>TI is Center for Substance Abuse Treatment, SAMHSA</xs:documentation>
+			<xs:documentation>TP is Coordinating Office for Terrorism Preparedness and Emergency Response, CDC</xs:documentation>
+			<xs:documentation>TS is Agency for Toxic Substances and Disease Registry</xs:documentation>
+			<xs:documentation>TW is Fogarty International Center</xs:documentation>
+			<xs:documentation>WC is Office of Workforce and Career Development, CDC</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AA"/>
+			<xs:enumeration value="AE"/>
+			<xs:enumeration value="AG"/>
+			<xs:enumeration value="AI"/>
+			<xs:enumeration value="AR"/>
+			<xs:enumeration value="AT"/>
+			<xs:enumeration value="CA"/>
+			<xs:enumeration value="CC"/>
+			<xs:enumeration value="CH"/>
+			<xs:enumeration value="CI"/>
+			<xs:enumeration value="CK"/>
+			<xs:enumeration value="DA"/>
+			<xs:enumeration value="DC"/>
+			<xs:enumeration value="DD"/>
+			<xs:enumeration value="DE"/>
+			<xs:enumeration value="DK"/>
+			<xs:enumeration value="DP"/>
+			<xs:enumeration value="EB"/>
+			<xs:enumeration value="EH"/>
+			<xs:enumeration value="EP"/>
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="EY"/>
+			<xs:enumeration value="FD"/>
+			<xs:enumeration value="GD"/>
+			<xs:enumeration value="GH"/>
+			<xs:enumeration value="GM"/>
+			<xs:enumeration value="GW"/>
+			<xs:enumeration value="HD"/>
+			<xs:enumeration value="HG"/>
+			<xs:enumeration value="HH"/>
+			<xs:enumeration value="HK"/>
+			<xs:enumeration value="HL"/>
+			<xs:enumeration value="HM"/>
+			<xs:enumeration value="HS"/>
+			<xs:enumeration value="IP"/>
+			<xs:enumeration value="IS"/>
+			<xs:enumeration value="LM"/>
+			<xs:enumeration value="MC"/>
+			<xs:enumeration value="MD"/>
+			<xs:enumeration value="MH"/>
+			<xs:enumeration value="MN"/>
+			<xs:enumeration value="NR"/>
+			<xs:enumeration value="NS"/>
+			<xs:enumeration value="OD"/>
+			<xs:enumeration value="OH"/>
+			<xs:enumeration value="PH"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="RR"/>
+			<xs:enumeration value="SH"/>
+			<xs:enumeration value="SM"/>
+			<xs:enumeration value="SP"/>
+			<xs:enumeration value="TI"/>
+			<xs:enumeration value="TP"/>
+			<xs:enumeration value="TS"/>
+			<xs:enumeration value="TW"/>
+			<xs:enumeration value="WC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="non_phs_organization_list">
+		<xs:annotation>
+			<xs:documentation>ACF is Administration for Children and Families</xs:documentation>
+			<xs:documentation>ADD is Administration on Developmental Disabilities</xs:documentation>
+			<xs:documentation>AID is Agency for International Development</xs:documentation>
+			<xs:documentation>AOA is Administration on Aging</xs:documentation>
+			<xs:documentation>ARC is Appalachian Regional Commission</xs:documentation>
+			<xs:documentation>CNCS is Corporation for National and Community Service</xs:documentation>
+			<xs:documentation>DOD is U.S. Department of Defense</xs:documentation>
+			<xs:documentation>DOE is U.S. Department of Energy</xs:documentation>
+			<xs:documentation>ED is U.S. Department of Education</xs:documentation>
+			<xs:documentation>EPA is U.S. Environmental Protection Agency</xs:documentation>
+			<xs:documentation>FEMA is Federal Emergency Management Administration</xs:documentation>
+			<xs:documentation>HUD is U.S. Department of Housing and Urban Development</xs:documentation>
+			<xs:documentation>NASA is National Aeronautics and Space Administration</xs:documentation>
+			<xs:documentation>NEA is National Endowment for the Arts</xs:documentation>
+			<xs:documentation>NEH is National Endowment for the Humanities</xs:documentation>
+			<xs:documentation>NHRPC is National Historical Records and Publications Commission</xs:documentation>
+			<xs:documentation>NSF is National Science Foundation</xs:documentation>
+			<xs:documentation>NWP is National Writing Project</xs:documentation>
+			<xs:documentation>PC is Peace Corps</xs:documentation>
+			<xs:documentation>SBA is U.S. Small Business Administration</xs:documentation>
+			<xs:documentation>TVA is Tennessee Valley Authority</xs:documentation>
+			<xs:documentation>UCARC is U.S. China Advanced Research Center</xs:documentation>
+			<xs:documentation>USDA is U.S. Department of Agriculture</xs:documentation>
+			<xs:documentation>USDC is U.S. Department of Commerce</xs:documentation>
+			<xs:documentation>USDI is U.S. Department of Interior</xs:documentation>
+			<xs:documentation>USDJ is U.S. Department of Justice</xs:documentation>
+			<xs:documentation>USDL is U.S. Department of Labor</xs:documentation>
+			<xs:documentation>USDS is U.S. Department of State</xs:documentation>
+			<xs:documentation>USDT is U.S. Department of Transportation</xs:documentation>
+			<xs:documentation>USGS is U.S. Geological Survey</xs:documentation>
+			<xs:documentation>USIA is U.S. Information Agency</xs:documentation>
+			<xs:documentation>USIP is U.S. Institute of Peace</xs:documentation>
+			<xs:documentation>USOC is U.S. Olympic Committee</xs:documentation>
+			<xs:documentation>VA is Veterans Administration</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACF"/>
+			<xs:enumeration value="ADD"/>
+			<xs:enumeration value="AID"/>
+			<xs:enumeration value="AOA"/>
+			<xs:enumeration value="ARC"/>
+			<xs:enumeration value="CNCS"/>
+			<xs:enumeration value="DOD"/>
+			<xs:enumeration value="DOE"/>
+			<xs:enumeration value="ED"/>
+			<xs:enumeration value="EPA"/>
+			<xs:enumeration value="FEMA"/>
+			<xs:enumeration value="HUD"/>
+			<xs:enumeration value="NASA"/>
+			<xs:enumeration value="NEA"/>
+			<xs:enumeration value="NEH"/>
+			<xs:enumeration value="NHRPC"/>
+			<xs:enumeration value="NSF"/>
+			<xs:enumeration value="NWP"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="SBA"/>
+			<xs:enumeration value="TVA"/>
+			<xs:enumeration value="UCARC"/>
+			<xs:enumeration value="USDA"/>
+			<xs:enumeration value="USDC"/>
+			<xs:enumeration value="USDI"/>
+			<xs:enumeration value="USDJ"/>
+			<xs:enumeration value="USDL"/>
+			<xs:enumeration value="USDS"/>
+			<xs:enumeration value="USDT"/>
+			<xs:enumeration value="USGS"/>
+			<xs:enumeration value="USIA"/>
+			<xs:enumeration value="USIP"/>
+			<xs:enumeration value="USOC"/>
+			<xs:enumeration value="VA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="country_name">
+		<xs:annotation>
+			<xs:documentation>Name of Country.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="percent_type">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="serial_number_type">
+		<xs:restriction>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="\d{6}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="specialty_list">
+		<xs:annotation>
+			<xs:documentation>1000-Predominantly Non-Clinical or Lab-Based Research Training</xs:documentation>
+			<xs:documentation>1100-BIOCHEMISTRY</xs:documentation>
+			<xs:documentation>1110-Biological Chemistry</xs:documentation>
+			<xs:documentation>1120-Bioenergetics</xs:documentation>
+			<xs:documentation>1130-Enzymology</xs:documentation>
+			<xs:documentation>1140-Metabolism</xs:documentation>
+			<xs:documentation>1200-BIOENGINEERING</xs:documentation>
+			<xs:documentation>1210-Bioelectric/Biomagnetic</xs:documentation>
+			<xs:documentation>1220-Biomaterials</xs:documentation>
+			<xs:documentation>1230-Biomechanical Engineering</xs:documentation>
+			<xs:documentation>1240-Imaging</xs:documentation>
+			<xs:documentation>1250-Instrumentation and Devices</xs:documentation>
+			<xs:documentation>1260-Mathematical Modeling</xs:documentation>
+			<xs:documentation>1270-Medical Implant Science </xs:documentation>
+			<xs:documentation>1280-Nanotechnology</xs:documentation>
+			<xs:documentation>1290-Rehabilitation Engineering</xs:documentation>
+			<xs:documentation>1310-Tissue Engineering</xs:documentation>
+			<xs:documentation>1400-BIOPHYSICS</xs:documentation>
+			<xs:documentation>1410-Kinetics</xs:documentation>
+			<xs:documentation>1420-Spectroscopy</xs:documentation>
+			<xs:documentation>1430-Structural Biology</xs:documentation>
+			<xs:documentation>1440-Theoretical Biophysics</xs:documentation>
+			<xs:documentation>1500-BIOTECHNOLOGY</xs:documentation>
+			<xs:documentation>1510-Applied Molecular Biology</xs:documentation>
+			<xs:documentation>1520-Bioprocessing and Fermentation</xs:documentation>
+			<xs:documentation>1530-Metabolic Engineering</xs:documentation>
+			<xs:documentation>1600-CELL AND DEVELOPMENTAL BIOLOGY</xs:documentation>
+			<xs:documentation>1610-Cell Biology</xs:documentation>
+			<xs:documentation>1620-Developmental Biology</xs:documentation>
+			<xs:documentation>1700-CHEMISTRY</xs:documentation>
+			<xs:documentation>1710-Analytical Chemistry</xs:documentation>
+			<xs:documentation>1720-Bioinorganic Chemistry</xs:documentation>
+			<xs:documentation>1730-Bioorganic Chemistry</xs:documentation>
+			<xs:documentation>1740-Biophysical Chemistry</xs:documentation>
+			<xs:documentation>1750-Medicinal Chemistry</xs:documentation>
+			<xs:documentation>1760-Physical Chemistry</xs:documentation>
+			<xs:documentation>1770-Synthetic Chemistry</xs:documentation>
+			<xs:documentation>1900-ENVIRONMENTAL SCIENCES</xs:documentation>
+			<xs:documentation>2000-GENETICS</xs:documentation>
+			<xs:documentation>2010-Behavioral Genetics</xs:documentation>
+			<xs:documentation>2020-Developmental Genetics</xs:documentation>
+			<xs:documentation>2030-Genetic Epidemiology</xs:documentation>
+			<xs:documentation>2040-Genetics of Aging</xs:documentation>
+			<xs:documentation>2050-Genomics</xs:documentation>
+			<xs:documentation>2060-Human Genetics</xs:documentation>
+			<xs:documentation>2070-Molecular Genetics</xs:documentation>
+			<xs:documentation>2080-Population Genetics</xs:documentation>
+			<xs:documentation>2200-IMMUNOLOGY</xs:documentation>
+			<xs:documentation>2210-Asthma and Allergic Mechanisms</xs:documentation>
+			<xs:documentation>2220-Autoimmunity</xs:documentation>
+			<xs:documentation>2230-Immunodeficiency</xs:documentation>
+			<xs:documentation>2240-Immunogenetics</xs:documentation>
+			<xs:documentation>2250-Immunopathology</xs:documentation>
+			<xs:documentation>2260-Immunoregulation</xs:documentation>
+			<xs:documentation>2270-Inflammation</xs:documentation>
+			<xs:documentation>2280-Structural Immunology</xs:documentation>
+			<xs:documentation>2290-Transplantation Biology</xs:documentation>
+			<xs:documentation>2310-Vaccine Development</xs:documentation>
+			<xs:documentation>2400-MICROBIOLOGY AND INFECTIOUS DISEASES</xs:documentation>
+			<xs:documentation>2410-Bacteriology</xs:documentation>
+			<xs:documentation>2420-Etiology</xs:documentation>
+			<xs:documentation>2430-HIV/AIDS</xs:documentation>
+			<xs:documentation>2440-Mycology</xs:documentation>
+			<xs:documentation>2450-Parasitology</xs:documentation>
+			<xs:documentation>2460-Pathogenesis of Infectious Diseases</xs:documentation>
+			<xs:documentation>2470-Virology</xs:documentation>
+			<xs:documentation>2600-MOLECULAR BIOLOGY</xs:documentation>
+			<xs:documentation>2800-NEUROSCIENCE</xs:documentation>
+			<xs:documentation>2810-Behavioral Neuroscience</xs:documentation>
+			<xs:documentation>2820-Cellular Neuroscience</xs:documentation>
+			<xs:documentation>2830-Cognitive Neuroscience</xs:documentation>
+			<xs:documentation>2840-Communication Neuroscience</xs:documentation>
+			<xs:documentation>2850-Computational Neuroscience</xs:documentation>
+			<xs:documentation>2860-Developmental Neuroscience</xs:documentation>
+			<xs:documentation>2870-Molecular Neuroscience</xs:documentation>
+			<xs:documentation>2880-Neurochemistry</xs:documentation>
+			<xs:documentation>2890-Neurodegeneration</xs:documentation>
+			<xs:documentation>2910-Neuropharmacology</xs:documentation>
+			<xs:documentation>2920-Systems/Integrative Neuroscience</xs:documentation>
+			<xs:documentation>3100-NUTRITIONAL SCIENCES</xs:documentation>
+			<xs:documentation>3200-PHARMACOLOGY</xs:documentation>
+			<xs:documentation>3210-Molecular Pharmacology</xs:documentation>
+			<xs:documentation>3220-Pharmacodynamics</xs:documentation>
+			<xs:documentation>3230-Pharmacogenetics</xs:documentation>
+			<xs:documentation>3240-Toxicology</xs:documentation>
+			<xs:documentation>3300-PHYSIOLOGY</xs:documentation>
+			<xs:documentation>3310-Aging</xs:documentation>
+			<xs:documentation>3320-Anesthesiology (basic science)</xs:documentation>
+			<xs:documentation>3330-Endocrinology (basic science)</xs:documentation>
+			<xs:documentation>3340-Exercise Physiology (basic science)</xs:documentation>
+			<xs:documentation>3350-Integrative Biology</xs:documentation>
+			<xs:documentation>3360-Molecular Medicine</xs:documentation>
+			<xs:documentation>3370-Physiological Optics</xs:documentation>
+			<xs:documentation>3380-Reproductive Physiology</xs:documentation>
+			<xs:documentation>3500-PLANT BIOLOGY</xs:documentation>
+			<xs:documentation>3600-PSYCHOLOGY, NON-CLINICAL</xs:documentation>
+			<xs:documentation>3610-Behavioral Communication Sciences</xs:documentation>
+			<xs:documentation>3620-Behavioral Medicine (non-clinical)</xs:documentation>
+			<xs:documentation>3630-Cognitive Psychology</xs:documentation>
+			<xs:documentation>3640-Developmental and Child Psychology</xs:documentation>
+			<xs:documentation>3650-Experimental and General Psychology</xs:documentation>
+			<xs:documentation>3660-Mind-Body Studies</xs:documentation>
+			<xs:documentation>3680-Neuropsychology</xs:documentation>
+			<xs:documentation>3690-Personality and Emotion</xs:documentation>
+			<xs:documentation>3710-Physiological Psychology and Psychobiology</xs:documentation>
+			<xs:documentation>3720-Psychology of Aging</xs:documentation>
+			<xs:documentation>3730-Psychometrics</xs:documentation>
+			<xs:documentation>3740-Psychophysics</xs:documentation>
+			<xs:documentation>3750-Social Psychology</xs:documentation>
+			<xs:documentation>3900-PUBLIC HEALTH</xs:documentation>
+			<xs:documentation>3910-Disease Prevention and Control</xs:documentation>
+			<xs:documentation>3920-Epidemiology</xs:documentation>
+			<xs:documentation>3930-Health Economics</xs:documentation>
+			<xs:documentation>3940-Health Education</xs:documentation>
+			<xs:documentation>3950-Health Policy Research</xs:documentation>
+			<xs:documentation>3960-Health Services Research</xs:documentation>
+			<xs:documentation>3970-Occupational and Environmental Health</xs:documentation>
+			<xs:documentation>4100-RADIATION, NON-CLINICAL</xs:documentation>
+			<xs:documentation>4110-Nuclear Chemistry</xs:documentation>
+			<xs:documentation>4120-Radiation Physics</xs:documentation>
+			<xs:documentation>4130-Radiobiology</xs:documentation>
+			<xs:documentation>4200-SOCIAL SCIENCES</xs:documentation>
+			<xs:documentation>4210-Anthropology</xs:documentation>
+			<xs:documentation>4220-Bioethics</xs:documentation>
+			<xs:documentation>4230-Demography and Population Studies</xs:documentation>
+			<xs:documentation>4240-Economics</xs:documentation>
+			<xs:documentation>4250-Education</xs:documentation>
+			<xs:documentation>4260-Language and Linguistics</xs:documentation>
+			<xs:documentation>4270-Sociology</xs:documentation>
+			<xs:documentation>4400-STATISTICS AND/OR RESEARCH METHODS AND/OR INFORMATICS</xs:documentation>
+			<xs:documentation>4410-Biostatistics and/or Biometry</xs:documentation>
+			<xs:documentation>4420-Bioinformatics</xs:documentation>
+			<xs:documentation>4430-Computational Science</xs:documentation>
+			<xs:documentation>4440-Information Science</xs:documentation>
+			<xs:documentation>4450-Clinical Trials Methodology</xs:documentation>
+			<xs:documentation>4600-TRAUMA, NON-CLINICAL</xs:documentation>
+			<xs:documentation>6000-Predominantly Clinical Research Training</xs:documentation>
+			<xs:documentation>6100-ALLIED HEALTH</xs:documentation>
+			<xs:documentation>6110-Audiology</xs:documentation>
+			<xs:documentation>6120-Community Psychology</xs:documentation>
+			<xs:documentation>6130-Exercise Physiology (clinical)</xs:documentation>
+			<xs:documentation>6140-Medical Genetics</xs:documentation>
+			<xs:documentation>6150-Occupational Health</xs:documentation>
+			<xs:documentation>6160-Palliative Care</xs:documentation>
+			<xs:documentation>6170-Physical Therapy</xs:documentation>
+			<xs:documentation>6180-Pharmacy</xs:documentation>
+			<xs:documentation>6190-Social Work</xs:documentation>
+			<xs:documentation>6210-Speech-language Pathology</xs:documentation>
+			<xs:documentation>6211-Rehabilitation</xs:documentation>
+			<xs:documentation>6400-CLINICAL DENTISTRY</xs:documentation>
+			<xs:documentation>6500-MEDICAL DISCIPLINES</xs:documentation>
+			<xs:documentation>6510-Allergy</xs:documentation>
+			<xs:documentation>6520-Anesthesiology</xs:documentation>
+			<xs:documentation>6530-Behavioral Medicine (clinical)</xs:documentation>
+			<xs:documentation>6540-Cardiovascular Diseases</xs:documentation>
+			<xs:documentation>6550-Clinical Laboratory Medicine</xs:documentation>
+			<xs:documentation>6560-Clinical Nutrition</xs:documentation>
+			<xs:documentation>6570-Clinical Pharmacology</xs:documentation>
+			<xs:documentation>6580-Complementary and Alternative Medicine</xs:documentation>
+			<xs:documentation>6590-Clinical Psychology</xs:documentation>
+			<xs:documentation>6610-Connective Tissue Diseases</xs:documentation>
+			<xs:documentation>6620-Dermatology</xs:documentation>
+			<xs:documentation>6630-Diabetes</xs:documentation>
+			<xs:documentation>6640-Gastroenterology</xs:documentation>
+			<xs:documentation>6650-Endocrinology</xs:documentation>
+			<xs:documentation>6660-Immunology</xs:documentation>
+			<xs:documentation>6670-Gene Therapy (clinical)</xs:documentation>
+			<xs:documentation>6680-Geriatrics</xs:documentation>
+			<xs:documentation>6690-Hematology</xs:documentation>
+			<xs:documentation>6710-HIV/AIDS</xs:documentation>
+			<xs:documentation>6820-Infectious Diseases</xs:documentation>
+			<xs:documentation>6830-Liver Diseases</xs:documentation>
+			<xs:documentation>6840-Metabolic Diseases</xs:documentation>
+			<xs:documentation>6850-Nephrology</xs:documentation>
+			<xs:documentation>6860-Neurology</xs:documentation>
+			<xs:documentation>6870-Ophthalmology</xs:documentation>
+			<xs:documentation>6880-Nuclear Medicine</xs:documentation>
+			<xs:documentation>6890-OB-GYN</xs:documentation>
+			<xs:documentation>6910-Oncology</xs:documentation>
+			<xs:documentation>6920-Orthopedics</xs:documentation>
+			<xs:documentation>6930-Otorhinolarynology</xs:documentation>
+			<xs:documentation>6940-Preventive Medicine</xs:documentation>
+			<xs:documentation>6950-Radiation, Interventional</xs:documentation>
+			<xs:documentation>6960-Pulmonary Diseases</xs:documentation>
+			<xs:documentation>6970-Radiology, Diagnostic</xs:documentation>
+			<xs:documentation>6980-Rehabilitation Medicine</xs:documentation>
+			<xs:documentation>6990-Psychiatry</xs:documentation>
+			<xs:documentation>7110-Surgery</xs:documentation>
+			<xs:documentation>7120-Trauma</xs:documentation>
+			<xs:documentation>7130-Urology</xs:documentation>
+			<xs:documentation>7300-PEDIATRIC DISCIPLINES</xs:documentation>
+			<xs:documentation>7310-Pediatric Endocrinology</xs:documentation>
+			<xs:documentation>7320-Pediatric Hematology</xs:documentation>
+			<xs:documentation>7330-Pediatric Oncology</xs:documentation>
+			<xs:documentation>7340-Pediatric, Prematurity and Newborn</xs:documentation>
+			<xs:documentation>7500-NURSING</xs:documentation>
+			<xs:documentation>7700-VETERINARY MEDICINE</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1000"/>
+			<xs:enumeration value="1100"/>
+			<xs:enumeration value="1110"/>
+			<xs:enumeration value="1120"/>
+			<xs:enumeration value="1130"/>
+			<xs:enumeration value="1140"/>
+			<xs:enumeration value="1200"/>
+			<xs:enumeration value="1210"/>
+			<xs:enumeration value="1220"/>
+			<xs:enumeration value="1230"/>
+			<xs:enumeration value="1240"/>
+			<xs:enumeration value="1250"/>
+			<xs:enumeration value="1260"/>
+			<xs:enumeration value="1270"/>
+			<xs:enumeration value="1280"/>
+			<xs:enumeration value="1290"/>
+			<xs:enumeration value="1310"/>
+			<xs:enumeration value="1400"/>
+			<xs:enumeration value="1410"/>
+			<xs:enumeration value="1420"/>
+			<xs:enumeration value="1430"/>
+			<xs:enumeration value="1440"/>
+			<xs:enumeration value="1500"/>
+			<xs:enumeration value="1510"/>
+			<xs:enumeration value="1520"/>
+			<xs:enumeration value="1530"/>
+			<xs:enumeration value="1600"/>
+			<xs:enumeration value="1610"/>
+			<xs:enumeration value="1620"/>
+			<xs:enumeration value="1700"/>
+			<xs:enumeration value="1710"/>
+			<xs:enumeration value="1720"/>
+			<xs:enumeration value="1730"/>
+			<xs:enumeration value="1740"/>
+			<xs:enumeration value="1750"/>
+			<xs:enumeration value="1760"/>
+			<xs:enumeration value="1770"/>
+			<xs:enumeration value="1900"/>
+			<xs:enumeration value="2000"/>
+			<xs:enumeration value="2010"/>
+			<xs:enumeration value="2020"/>
+			<xs:enumeration value="2030"/>
+			<xs:enumeration value="2040"/>
+			<xs:enumeration value="2050"/>
+			<xs:enumeration value="2060"/>
+			<xs:enumeration value="2070"/>
+			<xs:enumeration value="2080"/>
+			<xs:enumeration value="2200"/>
+			<xs:enumeration value="2210"/>
+			<xs:enumeration value="2220"/>
+			<xs:enumeration value="2230"/>
+			<xs:enumeration value="2240"/>
+			<xs:enumeration value="2250"/>
+			<xs:enumeration value="2260"/>
+			<xs:enumeration value="2270"/>
+			<xs:enumeration value="2280"/>
+			<xs:enumeration value="2290"/>
+			<xs:enumeration value="2310"/>
+			<xs:enumeration value="2400"/>
+			<xs:enumeration value="2410"/>
+			<xs:enumeration value="2420"/>
+			<xs:enumeration value="2430"/>
+			<xs:enumeration value="2440"/>
+			<xs:enumeration value="2450"/>
+			<xs:enumeration value="2460"/>
+			<xs:enumeration value="2470"/>
+			<xs:enumeration value="2600"/>
+			<xs:enumeration value="2800"/>
+			<xs:enumeration value="2810"/>
+			<xs:enumeration value="2820"/>
+			<xs:enumeration value="2830"/>
+			<xs:enumeration value="2840"/>
+			<xs:enumeration value="2850"/>
+			<xs:enumeration value="2860"/>
+			<xs:enumeration value="2870"/>
+			<xs:enumeration value="2880"/>
+			<xs:enumeration value="2890"/>
+			<xs:enumeration value="2910"/>
+			<xs:enumeration value="2920"/>
+			<xs:enumeration value="3100"/>
+			<xs:enumeration value="3200"/>
+			<xs:enumeration value="3210"/>
+			<xs:enumeration value="3220"/>
+			<xs:enumeration value="3230"/>
+			<xs:enumeration value="3240"/>
+			<xs:enumeration value="3300"/>
+			<xs:enumeration value="3310"/>
+			<xs:enumeration value="3320"/>
+			<xs:enumeration value="3330"/>
+			<xs:enumeration value="3340"/>
+			<xs:enumeration value="3350"/>
+			<xs:enumeration value="3360"/>
+			<xs:enumeration value="3370"/>
+			<xs:enumeration value="3380"/>
+			<xs:enumeration value="3500"/>
+			<xs:enumeration value="3600"/>
+			<xs:enumeration value="3610"/>
+			<xs:enumeration value="3620"/>
+			<xs:enumeration value="3630"/>
+			<xs:enumeration value="3640"/>
+			<xs:enumeration value="3650"/>
+			<xs:enumeration value="3660"/>
+			<xs:enumeration value="3680"/>
+			<xs:enumeration value="3690"/>
+			<xs:enumeration value="3710"/>
+			<xs:enumeration value="3720"/>
+			<xs:enumeration value="3730"/>
+			<xs:enumeration value="3740"/>
+			<xs:enumeration value="3750"/>
+			<xs:enumeration value="3900"/>
+			<xs:enumeration value="3910"/>
+			<xs:enumeration value="3920"/>
+			<xs:enumeration value="3930"/>
+			<xs:enumeration value="3940"/>
+			<xs:enumeration value="3950"/>
+			<xs:enumeration value="3960"/>
+			<xs:enumeration value="3970"/>
+			<xs:enumeration value="4100"/>
+			<xs:enumeration value="4110"/>
+			<xs:enumeration value="4120"/>
+			<xs:enumeration value="4130"/>
+			<xs:enumeration value="4200"/>
+			<xs:enumeration value="4210"/>
+			<xs:enumeration value="4220"/>
+			<xs:enumeration value="4230"/>
+			<xs:enumeration value="4240"/>
+			<xs:enumeration value="4250"/>
+			<xs:enumeration value="4260"/>
+			<xs:enumeration value="4270"/>
+			<xs:enumeration value="4400"/>
+			<xs:enumeration value="4410"/>
+			<xs:enumeration value="4420"/>
+			<xs:enumeration value="4430"/>
+			<xs:enumeration value="4440"/>
+			<xs:enumeration value="4450"/>
+			<xs:enumeration value="4600"/>
+			<xs:enumeration value="6000"/>
+			<xs:enumeration value="6100"/>
+			<xs:enumeration value="6110"/>
+			<xs:enumeration value="6120"/>
+			<xs:enumeration value="6130"/>
+			<xs:enumeration value="6140"/>
+			<xs:enumeration value="6150"/>
+			<xs:enumeration value="6160"/>
+			<xs:enumeration value="6170"/>
+			<xs:enumeration value="6180"/>
+			<xs:enumeration value="6190"/>
+			<xs:enumeration value="6210"/>
+			<xs:enumeration value="6211"/>
+			<xs:enumeration value="6400"/>
+			<xs:enumeration value="6500"/>
+			<xs:enumeration value="6510"/>
+			<xs:enumeration value="6520"/>
+			<xs:enumeration value="6530"/>
+			<xs:enumeration value="6540"/>
+			<xs:enumeration value="6550"/>
+			<xs:enumeration value="6560"/>
+			<xs:enumeration value="6570"/>
+			<xs:enumeration value="6580"/>
+			<xs:enumeration value="6590"/>
+			<xs:enumeration value="6610"/>
+			<xs:enumeration value="6620"/>
+			<xs:enumeration value="6630"/>
+			<xs:enumeration value="6640"/>
+			<xs:enumeration value="6650"/>
+			<xs:enumeration value="6660"/>
+			<xs:enumeration value="6670"/>
+			<xs:enumeration value="6680"/>
+			<xs:enumeration value="6690"/>
+			<xs:enumeration value="6710"/>
+			<xs:enumeration value="6820"/>
+			<xs:enumeration value="6830"/>
+			<xs:enumeration value="6840"/>
+			<xs:enumeration value="6850"/>
+			<xs:enumeration value="6860"/>
+			<xs:enumeration value="6870"/>
+			<xs:enumeration value="6880"/>
+			<xs:enumeration value="6890"/>
+			<xs:enumeration value="6910"/>
+			<xs:enumeration value="6920"/>
+			<xs:enumeration value="6930"/>
+			<xs:enumeration value="6940"/>
+			<xs:enumeration value="6950"/>
+			<xs:enumeration value="6960"/>
+			<xs:enumeration value="6970"/>
+			<xs:enumeration value="6980"/>
+			<xs:enumeration value="6990"/>
+			<xs:enumeration value="7110"/>
+			<xs:enumeration value="7120"/>
+			<xs:enumeration value="7130"/>
+			<xs:enumeration value="7300"/>
+			<xs:enumeration value="7310"/>
+			<xs:enumeration value="7320"/>
+			<xs:enumeration value="7330"/>
+			<xs:enumeration value="7340"/>
+			<xs:enumeration value="7500"/>
+			<xs:enumeration value="7700"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="missing_PMCID_reason_list">
+		<xs:annotation>
+			<!--			<xs:documentation>PMC Journal in process.</xs:documentation> -->
+			<xs:documentation>Manuscript accepted prior to April 7, 2008.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="12"/>
+			<xs:enumeration value="Accepted_Prior_To_Policy"/>
+			<!--			<xs:enumeration value="PMC_Journal_In_Process"/> -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="yn_flag">
+		<xs:annotation>
+			<xs:documentation>flag for Yes or No</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="state_code">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>AK ALASKA</xs:documentation>
+				<xs:documentation>AL ALABAMA</xs:documentation>
+				<xs:documentation>AR ARKANSAS</xs:documentation>
+				<xs:documentation>AS AMERICAN SAMOA</xs:documentation>
+				<xs:documentation>AZ ARIZONA</xs:documentation>
+				<xs:documentation>CA CALIFORNIA</xs:documentation>
+				<xs:documentation>CO COLORADO</xs:documentation>
+				<xs:documentation>CT CONNECTICUT</xs:documentation>
+				<xs:documentation>DC DIST OF COL</xs:documentation>
+				<xs:documentation>DE DELAWARE</xs:documentation>
+				<xs:documentation>FL FLORIDA</xs:documentation>
+				<xs:documentation>FM FED MICRONASIA</xs:documentation>
+				<xs:documentation>GA GEORGIA</xs:documentation>
+				<xs:documentation>GU GUAM</xs:documentation>
+				<xs:documentation>HI HAWAII</xs:documentation>
+				<xs:documentation>IA IOWA</xs:documentation>
+				<xs:documentation>ID IDAHO</xs:documentation>
+				<xs:documentation>IL ILLINOIS</xs:documentation>
+				<xs:documentation>IN INDIANA</xs:documentation>
+				<xs:documentation>KS KANSAS</xs:documentation>
+				<xs:documentation>KY KENTUCKY</xs:documentation>
+				<xs:documentation>LA LOUISIANA</xs:documentation>
+				<xs:documentation>MA MASSACHUSETTS</xs:documentation>
+				<xs:documentation>MD MARYLAND</xs:documentation>
+				<xs:documentation>ME MAINE</xs:documentation>
+				<xs:documentation>MH MARSHALL IS</xs:documentation>
+				<xs:documentation>MI MICHIGAN</xs:documentation>
+				<xs:documentation>MN MINNESOTA</xs:documentation>
+				<xs:documentation>MO MISSOURI</xs:documentation>
+				<xs:documentation>MP NORTHN MARIANA</xs:documentation>
+				<xs:documentation>MS MISSISSIPPI</xs:documentation>
+				<xs:documentation>MT MONTANA</xs:documentation>
+				<xs:documentation>NC NORTH CAROLINA</xs:documentation>
+				<xs:documentation>ND NORTH DAKOTA</xs:documentation>
+				<xs:documentation>NE NEBRASKA</xs:documentation>
+				<xs:documentation>NH NEW HAMPSHIRE</xs:documentation>
+				<xs:documentation>NJ NEW JERSEY</xs:documentation>
+				<xs:documentation>NM NEW MEXICO</xs:documentation>
+				<xs:documentation>NV NEVADA</xs:documentation>
+				<xs:documentation>NY NEW YORK</xs:documentation>
+				<xs:documentation>OH OHIO</xs:documentation>
+				<xs:documentation>OK OKLAHOMA</xs:documentation>
+				<xs:documentation>OR OREGON</xs:documentation>
+				<xs:documentation>PA PENNSYLVANIA</xs:documentation>
+				<xs:documentation>PR PUERTO RICO</xs:documentation>
+				<xs:documentation>PW PALAU</xs:documentation>
+				<xs:documentation>RI RHODE ISLAND</xs:documentation>
+				<xs:documentation>SC SOUTH CAROLINA</xs:documentation>
+				<xs:documentation>SD SOUTH DAKOTA</xs:documentation>
+				<xs:documentation>TN TENNESSEE</xs:documentation>
+				<xs:documentation>TX TEXAS</xs:documentation>
+				<xs:documentation>UM US MINOR OUTLY</xs:documentation>
+				<xs:documentation>UT UTAH</xs:documentation>
+				<xs:documentation>VA VIRGINIA</xs:documentation>
+				<xs:documentation>VI VIRGIN ISLANDS</xs:documentation>
+				<xs:documentation>VT VERMONT</xs:documentation>
+				<xs:documentation>WA WASHINGTON</xs:documentation>
+				<xs:documentation>WI WISCONSIN</xs:documentation>
+				<xs:documentation>WV WEST VIRGINIA</xs:documentation>
+				<xs:documentation>WY WYOMING</xs:documentation>
+			</xs:annotation>
+			<xs:length value="2"/>
+			<xs:enumeration value="AK"/>
+			<xs:enumeration value="AL"/>
+			<xs:enumeration value="AR"/>
+			<xs:enumeration value="AS"/>
+			<xs:enumeration value="AZ"/>
+			<xs:enumeration value="CA"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="CT"/>
+			<xs:enumeration value="DC"/>
+			<xs:enumeration value="DE"/>
+			<xs:enumeration value="FL"/>
+			<xs:enumeration value="FM"/>
+			<xs:enumeration value="GA"/>
+			<xs:enumeration value="GU"/>
+			<xs:enumeration value="HI"/>
+			<xs:enumeration value="IA"/>
+			<xs:enumeration value="ID"/>
+			<xs:enumeration value="IL"/>
+			<xs:enumeration value="IN"/>
+			<xs:enumeration value="KS"/>
+			<xs:enumeration value="KY"/>
+			<xs:enumeration value="LA"/>
+			<xs:enumeration value="MA"/>
+			<xs:enumeration value="MD"/>
+			<xs:enumeration value="ME"/>
+			<xs:enumeration value="MH"/>
+			<xs:enumeration value="MI"/>
+			<xs:enumeration value="MN"/>
+			<xs:enumeration value="MO"/>
+			<xs:enumeration value="MP"/>
+			<xs:enumeration value="MS"/>
+			<xs:enumeration value="MT"/>
+			<xs:enumeration value="NC"/>
+			<xs:enumeration value="ND"/>
+			<xs:enumeration value="NE"/>
+			<xs:enumeration value="NH"/>
+			<xs:enumeration value="NJ"/>
+			<xs:enumeration value="NM"/>
+			<xs:enumeration value="NV"/>
+			<xs:enumeration value="NY"/>
+			<xs:enumeration value="OH"/>
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="OR"/>
+			<xs:enumeration value="PA"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="PW"/>
+			<xs:enumeration value="RI"/>
+			<xs:enumeration value="SC"/>
+			<xs:enumeration value="SD"/>
+			<xs:enumeration value="TN"/>
+			<xs:enumeration value="TX"/>
+			<xs:enumeration value="UM"/>
+			<xs:enumeration value="UT"/>
+			<xs:enumeration value="VA"/>
+			<xs:enumeration value="VI"/>
+			<xs:enumeration value="VT"/>
+			<xs:enumeration value="WA"/>
+			<xs:enumeration value="WI"/>
+			<xs:enumeration value="WV"/>
+			<xs:enumeration value="WY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="characteristics_type">
+		<xs:sequence>
+			<xs:element name="Entire_Enrollment">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Ethnic_Category" type="sis:ethnic_type"/>
+						<xs:element name="Racial_Category" type="sis:race_type"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Hispanic_Enrollment" type="sis:race_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="characteristics_appointed_type">
+		<xs:sequence>
+			<xs:element name="Entire_Enrollment">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Ethnic_Category" type="sis:ethnic_appointed_type"/>
+						<xs:element name="Racial_Category" type="sis:race_appointed_type"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Hispanic_Enrollment" type="sis:race_appointed_type"/>
+			<xs:element name="Number_with_Disabilities" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>Number of Disabilities</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Number_from_Disadvantaged_Backgrounds" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>Number from Disadvantaged Backgrouonds</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="enrollment_status">
+		<xs:all>
+			<xs:element name="Applied" type="sis:gender_type"/>
+			<xs:element name="Interviewed" type="sis:gender_type"/>
+			<xs:element name="Accepted" type="sis:gender_type"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ethnic_type">
+		<xs:all>
+			<xs:element name="HispanicOrLatino" type="sis:enrollment_status"/>
+			<xs:element name="Non-Hispanic" type="sis:enrollment_status"/>
+			<xs:element name="Unknown" type="sis:enrollment_status"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ethnic_appointed_type">
+		<xs:all>
+			<xs:element name="HispanicOrLatino" type="sis:gender_type"/>
+			<xs:element name="Non-Hispanic" type="sis:gender_type"/>
+			<xs:element name="Unknown" type="sis:gender_type"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="fed_non_phs_funding_type">
+		<xs:sequence>
+			<xs:element name="PI_Name">
+				<xs:annotation>
+					<xs:documentation>Follow "LastName, FirstName  MiddleInitial."  naming convention. For example: "Smith, John Q."</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[^,\.]+, [^,]+"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Organization" type="sis:non_phs_organization_list"/>
+			<xs:element name="Grant_Contract_Number">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Grant_Title">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="150"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Total_Dollars" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fed_phs_funding_type">
+		<xs:sequence>
+			<xs:element name="Organization" type="sis:phs_organization_list"/>
+			<xs:element name="Activity_Code" type="sis:activity_code_list"/>
+			<xs:element name="Six_Digit_Grant_Number" type="sis:serial_number_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="gender_type">
+		<xs:sequence>
+			<xs:element name="Females" type="xs:nonNegativeInteger"/>
+			<xs:element name="Males" type="xs:nonNegativeInteger"/>
+			<xs:element name="Not_Reported" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="grants_type">
+		<xs:annotation>
+			<xs:documentation>Cover sheet information. Required type with Required elements.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Six_Digit_Grant_Number" type="sis:serial_number_type"/>
+			<!--xs:element name="PI_Commons_Username" type="sis:commons_username_type">
+                <xs:annotation>
+                    <xs:documentation>Principal Investigator's eRA Commons Username</xs:documentation>
+                </xs:annotation>
+            </xs:element-->
+			<xs:element name="Creation_Date" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date this XML is created</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="investigator_type">
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Area_of_Expertise" type="sis:specialty_list"/>
+			<xs:element name="Federal_Non_PHS_Funding" type="sis:fed_non_phs_funding_type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Federal_PHS_Funding" type="sis:fed_phs_funding_type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="publications_type">
+		<xs:sequence>
+			<xs:element name="Cited" type="sis:yn_flag"/>
+			<xs:element name="PubMed_ID">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedLong">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="999999999999999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Missing_PMCID_Reason" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="sis:missing_PMCID_reason_list">
+							<xs:maxLength value="25"/>
+							<xs:minLength value="12"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="race_type">
+		<xs:sequence>
+			<xs:element name="American_Indian_or_Alaska_Native" type="sis:enrollment_status"/>
+			<xs:element name="Asian" type="sis:enrollment_status"/>
+			<xs:element name="Native_Hawaiian_or_Other_Pacific_Islander" type="sis:enrollment_status"/>
+			<xs:element name="Black_Or_African_American" type="sis:enrollment_status"/>
+			<xs:element name="White" type="sis:enrollment_status"/>
+			<xs:element name="More_Than_One_Race" type="sis:enrollment_status"/>
+			<xs:element name="Unknown" type="sis:enrollment_status"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="race_appointed_type">
+		<xs:sequence>
+			<xs:element name="American_Indian_or_Alaska_Native" type="sis:gender_type"/>
+			<xs:element name="Asian" type="sis:gender_type"/>
+			<xs:element name="Native_Hawaiian_or_Other_Pacific_Islander" type="sis:gender_type"/>
+			<xs:element name="Black_Or_African_American" type="sis:gender_type"/>
+			<xs:element name="White" type="sis:gender_type"/>
+			<xs:element name="More_Than_One_Race" type="sis:gender_type"/>
+			<xs:element name="Unknown" type="sis:gender_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="scholar_type">
+		<xs:annotation>
+			<xs:documentation>Type used for Scholar</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Degrees Sought are not required.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="Degree_Sought_1" type="sis:degree_types_1" maxOccurs="4">
+						<xs:annotation>
+							<xs:documentation>Required if Degree_Sought_2 elements are to be included.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Degree_Sought_2" type="sis:degree_types_2" minOccurs="0" maxOccurs="10">
+						<xs:annotation>
+							<xs:documentation>This may only be entered if at least one value has been entered in the Degree_Sought_1 element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="Area_of_Training" type="sis:specialty_list"/>
+			<xs:element name="Date_of_Appointment" type="xs:date"/>
+			<xs:element name="End_Date" type="xs:date"/>
+			<xs:element name="Mentor_Commons_Username" type="sis:commons_username_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Mentor's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ocdev_training_type">
+		<xs:annotation>
+			<xs:documentation>Type used for Other career Developmetn and Training</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Degree_Sought_1" type="sis:degree_types_1" minOccurs="0" maxOccurs="4"/>
+			<xs:element name="Degree_Sought_2" type="sis:degree_types_2" minOccurs="0" maxOccurs="10"/>
+			<xs:element name="Area_of_Training" type="sis:specialty_list"/>
+			<xs:element name="Date_of_Appointment" type="xs:date"/>
+			<xs:element name="End_Date" type="xs:date"/>
+			<xs:element name="Mentor_Commons_Username" type="sis:commons_username_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Mentor's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Progress_Report">
+		<xs:annotation>
+			<xs:documentation>Holds the entire UL1 annual progress report</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Grant_Info" type="sis:grants_type"/>
+				<xs:element name="Roster">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Investigator" type="sis:investigator_type" maxOccurs="unbounded"/>
+							<xs:element name="Training">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Scholar" type="sis:scholar_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_SCHOLAR_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+										<xs:element name="Other_Career_Development" type="sis:ocdev_training_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_OTHER_CAREER_DEV_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+										<xs:element name="Trainee" type="sis:ocdev_training_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_TRAINEE_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+											<xs:unique name="DEGREE_SOUGHT_UNIQUE">
+												<xs:selector xpath="sis:Roster/sis:Training/sis:Trainee/sis:Degree_Sought"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Publications">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Publication" type="sis:publications_type" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Resource_Projections">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Percent_Clinical_Trials" type="sis:percent_type"/>
+							<xs:element name="Percent_Pediatrics" type="sis:percent_type"/>
+							<xs:element name="Percent_AIDS" type="sis:percent_type"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Program_Description">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Participating_Organization_or_Institution" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Participating Organization or Institutions</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Participant_Name">
+											<xs:annotation>
+												<xs:documentation>Name of participating organization or institution</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="100"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Participant_City">
+											<xs:annotation>
+												<xs:documentation>City of participating organization or institution</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:choice>
+											<xs:element name="Participant_Non_US_Country" type="sis:country_list">
+												<xs:annotation>
+													<xs:documentation>Non-US Country of participating organization or institution.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Participant_US_State" type="sis:state_code">
+												<xs:annotation>
+													<xs:documentation>US State of participating organization or institution.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Characteristics" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Applicant_Trainee_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a TL1 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Applicant_Scholar_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a KL2 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Applicant_Other_Career_Dev_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if any Other Career Development are listed in Personnel Roster.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Trainee_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a TL1 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Scholar_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a KL2 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Other_Career_Dev_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if any Other Career Development are listed in Personnel Roster.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Attachments">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Highlights_Milestones_Challenges_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Report_Self_Evaluation_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Report_CTSA_Components_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="External_Advisory_Committee_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="IRB_Approval_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Career_Dev_Ind_Progress_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Is_There_Technology_Transfer_Info_To_Report" type="sis:yn_flag"/>
+							<xs:element name="Technology_Transfer_Report_Attachment" type="sis:filename_str" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Must be supplied if there is Technology Transfer to be reported.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Investigator/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:key>
+		<xs:keyref name="SCHOLAR_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Scholar/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<xs:keyref name="TRAINEE_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Trainee/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<xs:keyref name="OTHER_CAREER_DEV_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Other_Career_Development/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<!-- xs:keyref name="PI_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+            <xs:selector xpath="sis:Grant_Info"/>
+            <xs:field xpath="sis:PI_Commons_Username"/>
+        </xs:keyref-->
+		<xs:unique name="PUBLICATION_NOT_UNIQ_UK">
+			<xs:selector xpath="sis:Publications/sis:Publication"/>
+			<xs:field xpath="sis:PubMed_ID"/>
+		</xs:unique>
+		<xs:unique name="COMMONS_USERNAME_NOT_UNIQ_IN_INVESTIGATOR_ROSTER">
+			<xs:selector xpath="sis:Roster/sis:Investigator/*/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:unique>
+		<xs:unique name="COMMONS_USERNAME_NOT_UNIQ_IN_TRAINING_ROSTER">
+			<xs:selector xpath="sis:Roster/sis:Training/*/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:unique>
+	</xs:element>
+</xs:schema>

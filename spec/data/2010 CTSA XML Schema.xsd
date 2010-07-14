@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by NCRR (National Institute Of Health) -->
+<!-- $Revision: 83 $ $Date: 12/03/09 12:35p $ -->
+<xs:schema xmlns:sis="http://sis.ncrr.nih.gov" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sis.ncrr.nih.gov" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="country_list">
+		<xs:annotation>
+			<xs:documentation>List of countries to be used in the participating countries.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AFGHANISTAN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="activity_code_list">
+		<xs:annotation>
+			<xs:documentation>B01 is Preventive Health Services</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="B01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="commons_username_type">
+		<xs:annotation>
+			<xs:documentation>The URL for registering anyone in commons is: commons.era.nih.gov\commons</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="30"/>
+			<xs:pattern value="[^ ][\S\d\.\-_@ ]*[^ ]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="degree_types_1">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>PhD in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
+				<xs:documentation>MS in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
+				<xs:documentation>PhD (in any other field)</xs:documentation>
+				<xs:documentation>Masters (in any other field)</xs:documentation>
+			</xs:annotation>
+			<xs:maxLength value="15"/>
+			<xs:enumeration value="PhD CTS"/>
+			<xs:enumeration value="MS CTS"/>
+			<xs:enumeration value="PhD non-CTS"/>
+			<xs:enumeration value="Masters non-CTS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="degree_types_2">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>MD is Doctor of Medicine</xs:documentation>
+				<xs:documentation>DDS is Doctor of Dental Surgery</xs:documentation>
+			</xs:annotation>
+			<xs:maxLength value="4"/>
+			<xs:enumeration value="MD"/>
+			<xs:enumeration value="DDS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="filename_str">
+		<xs:annotation>
+			<xs:documentation>Length of filename</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+			<xs:pattern value=".+(\.pdf|\.PDF)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phs_organization_list">
+		<xs:annotation>
+			<xs:documentation>AA is National Institute on Alcohol Abuse and Alcoholism</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="non_phs_organization_list">
+		<xs:annotation>
+			<xs:documentation>ACF is Administration for Children and Families</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="country_name">
+		<xs:annotation>
+			<xs:documentation>Name of Country.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="percent_type">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="serial_number_type">
+		<xs:restriction>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="\d{6}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="specialty_list">
+		<xs:annotation>
+			<xs:documentation>1000-Predominantly Non-Clinical or Lab-Based Research Training</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="missing_PMCID_reason_list">
+		<xs:annotation>
+			<!--			<xs:documentation>PMC Journal in process.</xs:documentation> -->
+			<xs:documentation>Manuscript accepted prior to April 7, 2008.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="12"/>
+			<xs:enumeration value="Accepted_Prior_To_Policy"/>
+			<!--			<xs:enumeration value="PMC_Journal_In_Process"/> -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="yn_flag">
+		<xs:annotation>
+			<xs:documentation>flag for Yes or No</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="state_code">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>AK ALASKA</xs:documentation>
+			</xs:annotation>
+			<xs:length value="2"/>
+			<xs:enumeration value="AK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="characteristics_type">
+		<xs:sequence>
+			<xs:element name="Entire_Enrollment">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Ethnic_Category" type="sis:ethnic_type"/>
+						<xs:element name="Racial_Category" type="sis:race_type"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Hispanic_Enrollment" type="sis:race_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="characteristics_appointed_type">
+		<xs:sequence>
+			<xs:element name="Entire_Enrollment">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Ethnic_Category" type="sis:ethnic_appointed_type"/>
+						<xs:element name="Racial_Category" type="sis:race_appointed_type"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Hispanic_Enrollment" type="sis:race_appointed_type"/>
+			<xs:element name="Number_with_Disabilities" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>Number of Disabilities</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Number_from_Disadvantaged_Backgrounds" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>Number from Disadvantaged Backgrouonds</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="enrollment_status">
+		<xs:all>
+			<xs:element name="Applied" type="sis:gender_type"/>
+			<xs:element name="Interviewed" type="sis:gender_type"/>
+			<xs:element name="Accepted" type="sis:gender_type"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ethnic_type">
+		<xs:all>
+			<xs:element name="HispanicOrLatino" type="sis:enrollment_status"/>
+			<xs:element name="Non-Hispanic" type="sis:enrollment_status"/>
+			<xs:element name="Unknown" type="sis:enrollment_status"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="ethnic_appointed_type">
+		<xs:all>
+			<xs:element name="HispanicOrLatino" type="sis:gender_type"/>
+			<xs:element name="Non-Hispanic" type="sis:gender_type"/>
+			<xs:element name="Unknown" type="sis:gender_type"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="fed_non_phs_funding_type">
+		<xs:sequence>
+			<xs:element name="PI_Name">
+				<xs:annotation>
+					<xs:documentation>Follow "LastName, FirstName  MiddleInitial."  naming convention. For example: "Smith, John Q."</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[^,\.]+, [^,]+"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Organization" type="sis:non_phs_organization_list"/>
+			<xs:element name="Grant_Contract_Number">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Grant_Title">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="150"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Total_Dollars" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fed_phs_funding_type">
+		<xs:sequence>
+			<xs:element name="Organization" type="sis:phs_organization_list"/>
+			<xs:element name="Activity_Code" type="sis:activity_code_list"/>
+			<xs:element name="Six_Digit_Grant_Number" type="sis:serial_number_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="gender_type">
+		<xs:sequence>
+			<xs:element name="Females" type="xs:nonNegativeInteger"/>
+			<xs:element name="Males" type="xs:nonNegativeInteger"/>
+			<xs:element name="Not_Reported" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="grants_type">
+		<xs:annotation>
+			<xs:documentation>Cover sheet information. Required type with Required elements.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Six_Digit_Grant_Number" type="sis:serial_number_type"/>
+			<!--xs:element name="PI_Commons_Username" type="sis:commons_username_type">
+                <xs:annotation>
+                    <xs:documentation>Principal Investigator's eRA Commons Username</xs:documentation>
+                </xs:annotation>
+            </xs:element-->
+			<xs:element name="Creation_Date" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date this XML is created</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="investigator_type">
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Area_of_Expertise" type="sis:specialty_list"/>
+			<xs:element name="Federal_Non_PHS_Funding" type="sis:fed_non_phs_funding_type" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Federal_PHS_Funding" type="sis:fed_phs_funding_type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="publications_type">
+		<xs:sequence>
+			<xs:element name="Cited" type="sis:yn_flag"/>
+			<xs:element name="PubMed_ID">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedLong">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="999999999999999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Missing_PMCID_Reason" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="sis:missing_PMCID_reason_list">
+							<xs:maxLength value="25"/>
+							<xs:minLength value="12"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="race_type">
+		<xs:sequence>
+			<xs:element name="American_Indian_or_Alaska_Native" type="sis:enrollment_status"/>
+			<xs:element name="Asian" type="sis:enrollment_status"/>
+			<xs:element name="Native_Hawaiian_or_Other_Pacific_Islander" type="sis:enrollment_status"/>
+			<xs:element name="Black_Or_African_American" type="sis:enrollment_status"/>
+			<xs:element name="White" type="sis:enrollment_status"/>
+			<xs:element name="More_Than_One_Race" type="sis:enrollment_status"/>
+			<xs:element name="Unknown" type="sis:enrollment_status"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="race_appointed_type">
+		<xs:sequence>
+			<xs:element name="American_Indian_or_Alaska_Native" type="sis:gender_type"/>
+			<xs:element name="Asian" type="sis:gender_type"/>
+			<xs:element name="Native_Hawaiian_or_Other_Pacific_Islander" type="sis:gender_type"/>
+			<xs:element name="Black_Or_African_American" type="sis:gender_type"/>
+			<xs:element name="White" type="sis:gender_type"/>
+			<xs:element name="More_Than_One_Race" type="sis:gender_type"/>
+			<xs:element name="Unknown" type="sis:gender_type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="scholar_type">
+		<xs:annotation>
+			<xs:documentation>Type used for Scholar</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Degrees Sought are not required.</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="Degree_Sought_1" type="sis:degree_types_1" maxOccurs="4">
+						<xs:annotation>
+							<xs:documentation>Required if Degree_Sought_2 elements are to be included.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Degree_Sought_2" type="sis:degree_types_2" minOccurs="0" maxOccurs="10">
+						<xs:annotation>
+							<xs:documentation>This may only be entered if at least one value has been entered in the Degree_Sought_1 element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="Area_of_Training" type="sis:specialty_list"/>
+			<xs:element name="Date_of_Appointment" type="xs:date"/>
+			<xs:element name="End_Date" type="xs:date"/>
+			<xs:element name="Mentor_Commons_Username" type="sis:commons_username_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Mentor's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ocdev_training_type">
+		<xs:annotation>
+			<xs:documentation>Type used for Other career Developmetn and Training</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Commons_Username" type="sis:commons_username_type">
+				<xs:annotation>
+					<xs:documentation>Individual's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Degree_Sought_1" type="sis:degree_types_1" minOccurs="0" maxOccurs="4"/>
+			<xs:element name="Degree_Sought_2" type="sis:degree_types_2" minOccurs="0" maxOccurs="10"/>
+			<xs:element name="Area_of_Training" type="sis:specialty_list"/>
+			<xs:element name="Date_of_Appointment" type="xs:date"/>
+			<xs:element name="End_Date" type="xs:date"/>
+			<xs:element name="Mentor_Commons_Username" type="sis:commons_username_type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Mentor's eRA Commons Username</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Progress_Report">
+		<xs:annotation>
+			<xs:documentation>Holds the entire UL1 annual progress report</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Grant_Info" type="sis:grants_type"/>
+				<xs:element name="Roster">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Investigator" type="sis:investigator_type" maxOccurs="unbounded"/>
+							<xs:element name="Training">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Scholar" type="sis:scholar_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_SCHOLAR_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+										<xs:element name="Other_Career_Development" type="sis:ocdev_training_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_OTHER_CAREER_DEV_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+										<xs:element name="Trainee" type="sis:ocdev_training_type" minOccurs="0" maxOccurs="unbounded">
+											<xs:unique name="UNIQ_TRAINEE_MENTOR_UK">
+												<xs:selector xpath="sis:Mentor_Commons_Username"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+											<xs:unique name="DEGREE_SOUGHT_UNIQUE">
+												<xs:selector xpath="sis:Roster/sis:Training/sis:Trainee/sis:Degree_Sought"/>
+												<xs:field xpath="."/>
+											</xs:unique>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Publications">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Publication" type="sis:publications_type" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Resource_Projections">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Percent_Clinical_Trials" type="sis:percent_type"/>
+							<xs:element name="Percent_Pediatrics" type="sis:percent_type"/>
+							<xs:element name="Percent_AIDS" type="sis:percent_type"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Program_Description">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Participating_Organization_or_Institution" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Participating Organization or Institutions</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Participant_Name">
+											<xs:annotation>
+												<xs:documentation>Name of participating organization or institution</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="100"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Participant_City">
+											<xs:annotation>
+												<xs:documentation>City of participating organization or institution</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:choice>
+											<xs:element name="Participant_Non_US_Country" type="sis:country_list">
+												<xs:annotation>
+													<xs:documentation>Non-US Country of participating organization or institution.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Participant_US_State" type="sis:state_code">
+												<xs:annotation>
+													<xs:documentation>US State of participating organization or institution.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:choice>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Characteristics" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Applicant_Trainee_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a TL1 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Applicant_Scholar_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a KL2 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Applicant_Other_Career_Dev_Characts" type="sis:characteristics_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if any Other Career Development are listed in Personnel Roster.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Trainee_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a TL1 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Scholar_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if a KL2 grant is associated.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Appointed_Other_Career_Dev_Characts" type="sis:characteristics_appointed_type" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Required if any Other Career Development are listed in Personnel Roster.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Attachments">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Highlights_Milestones_Challenges_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Report_Self_Evaluation_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Report_CTSA_Components_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="External_Advisory_Committee_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="IRB_Approval_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Career_Dev_Ind_Progress_Report_Attachment" type="sis:filename_str">
+								<xs:annotation>
+									<xs:documentation>Always required.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Is_There_Technology_Transfer_Info_To_Report" type="sis:yn_flag"/>
+							<xs:element name="Technology_Transfer_Report_Attachment" type="sis:filename_str" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Must be supplied if there is Technology Transfer to be reported.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Investigator/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:key>
+		<xs:keyref name="SCHOLAR_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Scholar/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<xs:keyref name="TRAINEE_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Trainee/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<xs:keyref name="OTHER_CAREER_DEV_MENTOR_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+			<xs:selector xpath="sis:Roster/sis:Training/sis:Other_Career_Development/sis:Mentor_Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<!-- xs:keyref name="PI_NOT_IN_ROSTER_FK" refer="sis:PEOPLE_PK">
+            <xs:selector xpath="sis:Grant_Info"/>
+            <xs:field xpath="sis:PI_Commons_Username"/>
+        </xs:keyref-->
+		<xs:unique name="PUBLICATION_NOT_UNIQ_UK">
+			<xs:selector xpath="sis:Publications/sis:Publication"/>
+			<xs:field xpath="sis:PubMed_ID"/>
+		</xs:unique>
+		<xs:unique name="COMMONS_USERNAME_NOT_UNIQ_IN_INVESTIGATOR_ROSTER">
+			<xs:selector xpath="sis:Roster/sis:Investigator/*/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:unique>
+		<xs:unique name="COMMONS_USERNAME_NOT_UNIQ_IN_TRAINING_ROSTER">
+			<xs:selector xpath="sis:Roster/sis:Training/*/sis:Commons_Username"/>
+			<xs:field xpath="."/>
+		</xs:unique>
+	</xs:element>
+</xs:schema>

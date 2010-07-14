@@ -1,0 +1,12 @@
+- form_for(@activity_type) do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br/
+    = f.text_field :name
+  %p
+    = f.label :service_line_id
+    %br/
+    = f.text_field :service_line_id
+  %p
+    = f.submit 'Save'

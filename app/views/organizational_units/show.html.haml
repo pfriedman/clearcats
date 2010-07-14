@@ -1,0 +1,8 @@
+- title "Organizational Unit"
+%p
+  %b Name:
+  = h @organizational_unit.name
+.links
+  = link_to 'Edit', edit_organizational_unit_path(@organizational_unit), :class => "edit_link icon_link"
+  |
+  \#{link_to 'List', organizational_units_path, :class => "list_link icon_link"}

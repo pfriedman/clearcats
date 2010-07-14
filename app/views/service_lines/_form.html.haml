@@ -1,0 +1,39 @@
+- stylesheet "service_lines"
+
+- form_for(@service_line) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name 
+    %br
+    = f.text_field :name
+  
+  %table{ :class => "records organizational_services" }
+    %thead
+      %tr
+        %th
+          Organizational Units
+        %th
+    %tbody{ :class => "nested_records" }
+      - f.fields_for :organizational_services do |organizational_service_form|
+        = render 'organizational_service_fields', :f => organizational_service_form
+    %tfoot
+      %tr
+        %td{ :colspan => '2' }
+          = link_to_add_fields "Add", f, :organizational_services
+  
+  %table{ :class => "records activity_types" }
+    %thead
+      %tr
+        %th
+          Activity Types
+        %th
+    %tbody{ :class => "nested_records" }
+      - f.fields_for :activity_types do |activity_type_form|
+        = render 'activity_type_fields', :f => activity_type_form
+    %tfoot
+      %tr
+        %td{ :colspan => '2' }
+          = link_to_add_fields "Add Activity Type", f, :activity_types
+  %p
+    = f.submit "Save", :disable_with => 'Saving...'

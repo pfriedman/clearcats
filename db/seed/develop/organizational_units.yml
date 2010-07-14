@@ -1,0 +1,62 @@
+nucats:
+  id: 1
+  abbreviation: NUCATS
+  name: Clinical and Translational Sciences Institute
+  lft: 1
+  rgt: 16
+  
+clinical_research:
+  id: 2
+  abbreviation: CRC
+  name: Center for Clinical Research
+  parent_id: 1
+  lft: 2
+  rgt: 3
+
+education_and_career_development:
+  id: 3
+  abbreviation: CECD
+  name: Center for Education and Career Development
+  parent_id: 1
+  lft: 4
+  rgt: 5
+  
+translational_innovation:
+  id: 4
+  abbreviation: CTI
+  name: Center for Translational Innovation
+  parent_id: 1
+  lft: 6
+  rgt: 7
+  
+community_engaged_research:
+  id: 5
+  abbreviation: CERC
+  name: Community Engaged Research Center
+  parent_id: 1
+  lft: 8
+  rgt: 9
+
+biomedical_informatics:
+  id: 6
+  abbreviation: NUBIC
+  name: Biomedical Informatics Center
+  parent_id: 1
+  lft: 10
+  rgt: 11
+  
+research_team_support:
+  id: 7
+  abbreviation: RTC
+  name: Research Team Support Program
+  parent_id: 1
+  lft: 12
+  rgt: 13
+  
+tracking_and_evaluation:
+  id: 8
+  abbreviation: T & E
+  name: Tracking and Evaluation Program
+  parent_id: 1
+  lft: 14
+  rgt: 15

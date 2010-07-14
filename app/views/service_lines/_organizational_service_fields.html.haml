@@ -1,0 +1,6 @@
+%tr.organizational_unit.fields
+  %td
+    = f.select(:organizational_unit_id, organizational_units_list.collect { |org_unit| [ org_unit.to_s, org_unit.id ] }, |
+      { :include_blank => "-- Select Organizational Unit --" })                                                          |
+  %td
+    = link_to_remove_fields 'Remove', f

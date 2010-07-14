@@ -1,0 +1,10 @@
+%p
+  %b Name:
+  = h @activity_type.name
+%p
+  %b Service line:
+  = h @activity_type.service_line
+.links
+  = link_to 'Edit', edit_activity_type_path(@activity_type)
+  |
+  \#{link_to 'List', activity_types_path}

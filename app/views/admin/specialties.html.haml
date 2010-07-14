@@ -1,0 +1,19 @@
+- title "Specialties"
+- if @ctsa_data.blank?
+  %p.no_records
+    No specialties were found.
+  %p
+    Would you like to #{link_to "upload ctsa data?", :controller => "admin", :action => "upload_ctsa_data"}
+- else
+  %table.records
+    %tr
+      %th= order @search, :by => :code, :as => "Code", :params => {:page => params[:page]}
+      %th= order @search, :by => :name, :as => "Name", :params => {:page => params[:page]}
+    - @ctsa_data.each do |item|
+      %tr{:class => cycle('even_record', 'odd_record')}
+        %td= h item.code
+        %td= h item.name
+= will_paginate @ctsa_data
+
+.links
+  = link_to "View CTSA Data", {:controller => "admin", :action => "view_ctsa_data"}, {:class => "show_link icon_link"}

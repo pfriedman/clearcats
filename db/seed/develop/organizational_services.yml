@@ -1,0 +1,64 @@
+summer_series_cecd:
+  id: 1
+  service_line_id: 1
+  organizational_unit_id: 3
+tl1_cecd:
+  id: 2
+  service_line_id: 2
+  organizational_unit_id: 3
+master_clin_cecd:
+  id: 3
+  service_line_id: 3
+  organizational_unit_id: 3
+phy_train_cecd:
+  id: 4
+  service_line_id: 4
+  organizational_unit_id: 3
+resp_conduct_cecd:
+  id: 5
+  service_line_id: 5
+  organizational_unit_id: 3
+kl2_cecd:
+  id: 6
+  service_line_id: 6
+  organizational_unit_id: 3
+navig_cecd:
+  id: 7
+  service_line_id: 7
+  organizational_unit_id: 3
+evolv_cecd:
+  id: 8
+  service_line_id: 8
+  organizational_unit_id: 3
+grant_writing_cecd:
+  id: 9
+  service_line_id: 9
+  organizational_unit_id: 3
+trip_cecd:
+  id: 10
+  service_line_id: 10
+  organizational_unit_id: 3
+crc_basic_cecd:
+  id: 11
+  service_line_id: 11
+  organizational_unit_id: 3
+k_award_cecd:
+  id: 12
+  service_line_id: 12
+  organizational_unit_id: 3
+compl_train_cecd:
+  id: 13
+  service_line_id: 13
+  organizational_unit_id: 3
+mcrra_cecd:
+  id: 14
+  service_line_id: 14
+  organizational_unit_id: 3
+mini_sabb_cecd:
+  id: 15
+  service_line_id: 15
+  organizational_unit_id: 3
+eng_to_med_cecd:
+  id: 16
+  service_line_id: 16
+  organizational_unit_id: 3
