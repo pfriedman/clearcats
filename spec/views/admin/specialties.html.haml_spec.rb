@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe "/admin/phs_organizations.html.erb" do
+describe "/admin/specialties.html.haml" do
 
   context "with a logged in admin user" do
     before(:each) do
       login(admin_login)
-      assigns[:search] = PhsOrganization.search
-      @phs_organization = Factory.create(:phs_organization)
-      arr = [@phs_organization]
+      assigns[:search] = Specialty.search
+      @specialty = Factory.create(:specialty)
+      arr = [@specialty]
       assigns[:ctsa_data] = WillPaginate::Collection.create(1, 10) do |pager|
         pager.replace(arr)
         unless pager.total_entries
@@ -17,10 +17,10 @@ describe "/admin/phs_organizations.html.erb" do
       
     end
     
-    it "should render a list of phs_organizations" do
+    it "should render a list of specialties" do
       render
       response.should have_tag("table.records")
-      response.should have_tag("table.records>tr.even_record>td", @phs_organization.code)
+      response.should have_tag("table.records>tr.even_record>td", @specialty.code)
     end
     
   end

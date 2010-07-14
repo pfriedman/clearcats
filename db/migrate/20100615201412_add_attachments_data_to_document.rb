@@ -4,8 +4,6 @@ class AddAttachmentsDataToDocument < ActiveRecord::Migration
     add_column :documents, :data_content_type, :string
     add_column :documents, :data_file_size, :integer
     add_column :documents, :data_updated_at, :datetime
-    
-    
   end
 
   def self.down

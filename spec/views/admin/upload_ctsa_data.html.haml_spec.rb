@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "/admin/upload_ctsa_data.html.erb" do
+describe "/admin/upload_ctsa_data.html.haml" do
 
   context "with a logged in admin user" do
     before(:each) do

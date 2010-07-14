@@ -1,0 +1,8 @@
+:faculty_ws:
+  :host:
+    development: https://clinical-rails-stg.nubic.northwestern.edu/
+    test: https://clinical-rails-stg.nubic.northwestern.edu/
+    staging: https://clinical-rails-stg.nubic.northwestern.edu/
+    production: https://clinical-rails-stg.nubic.northwestern.edu/
+  :path:
+    :ws: ws-faculty

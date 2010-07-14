@@ -55,6 +55,14 @@ Factory.define :service_line do |sl|
   sl.name "service line name"
 end
 
+Factory.define :department do |dept|
+  dept.name "department name"
+end
+
+Factory.define :institution_position do |p|
+  p.name "position name"
+end
+
 Factory.define :organizational_service do |org_svc|
   org_svc.organizational_unit { |a| a.association(:organizational_unit) }
   org_svc.service_line        { |a| a.association(:service_line) }
@@ -64,3 +72,21 @@ Factory.define :activity_type do |t|
   t.name         "activity type name"
   t.service_line { |a| a.association(:service_line) }
 end
+
+Factory.define :person do |p|
+  p.first_name             "first_name"
+  p.middle_name            "middle_name"
+  p.last_name              "last_name"
+  p.phone                  "phone"
+  p.sequence(:email)       { |n| "email#{n}@dev.null" }
+  p.last_four_of_ssn       "four"
+  p.department_affiliation "dept"
+  p.school_affiliation     "school"
+  p.era_commons_username   "era_commons"
+
+  p.country             { |a| a.association(:country) }
+  p.degree_type_one     { |a| a.association(:degree_type_one) }
+  p.degree_type_two     { |a| a.association(:degree_type_two) }
+  p.specialty           { |a| a.association(:specialty) }
+end
+

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "/admin/activity_codes.html.erb" do
+describe "/admin/activity_codes.html.haml" do
 
   context "with a logged in admin user" do
     before(:each) do

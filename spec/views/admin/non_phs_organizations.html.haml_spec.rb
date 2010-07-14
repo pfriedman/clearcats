@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "/admin/non_phs_organizations.html.erb" do
+describe "/admin/non_phs_organizations.html.haml" do
 
   context "with a logged in admin user" do
     before(:each) do

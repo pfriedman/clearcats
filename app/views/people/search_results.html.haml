@@ -1,0 +1,26 @@
+- title "Faculty Search Results"
+
+- if @people.blank?
+  .no_records
+    No faculty members were found. 
+- else
+  %table.records
+    %tr
+      %th Select
+      %th Last Name
+      %th First Name
+      %th Middle Name
+      %th Email
+      %th Net ID
+    - @people.each do |person|
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = link_to "Select", { :controller => :intake_forms, :action => :new, :person_id => person.id, :organizational_unit_id => @organizational_unit_id }, { :class => "add_person_link icon_link" }
+        %td= h person.last_name
+        %td= h person.first_name
+        %td= h person.middle_name
+        %td= h person.email
+        %td= h person.netid
+
+.links
+  = link_to "New Search", {:controller => "people", :action => "search", :organizational_unit_id => @organizational_unit_id}, { :class => "search_link icon_link"  }

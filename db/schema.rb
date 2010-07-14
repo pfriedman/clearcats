@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100702160308) do
+ActiveRecord::Schema.define(:version => 20100714190938) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20100702160308) do
     t.datetime "updated_at"
   end
 
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.integer  "externalid"
+    t.string   "entity_name"
+    t.string   "school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "documents", :force => true do |t|
     t.string   "name"
     t.integer  "documentable_id"
@@ -55,6 +64,17 @@ ActiveRecord::Schema.define(:version => 20100702160308) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "institution_positions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "institution_positions_people", :id => false, :force => true do |t|
+    t.integer "institution_position_id"
+    t.integer "person_id"
   end
 
   create_table "organizational_services", :force => true do |t|
@@ -82,6 +102,30 @@ ActiveRecord::Schema.define(:version => 20100702160308) do
     t.datetime "updated_at"
   end
 
+  create_table "people", :force => true do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "netid"
+    t.string   "email"
+    t.string   "department_affiliation"
+    t.string   "school_affiliation"
+    t.string   "last_four_of_ssn"
+    t.string   "phone"
+    t.string   "era_commons_username"
+    t.string   "employeeid"
+    t.integer  "department_id"
+    t.integer  "degree_type_one_id"
+    t.integer  "degree_type_two_id"
+    t.integer  "specialty_id"
+    t.integer  "country_id"
+    t.integer  "ethnic_type_id"
+    t.integer  "race_type_id"
+    t.boolean  "disadvantaged_background"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "race_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -90,6 +134,14 @@ ActiveRecord::Schema.define(:version => 20100702160308) do
 
   create_table "service_lines", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "services", :force => true do |t|
+    t.integer  "service_line_id"
+    t.integer  "person_id"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
