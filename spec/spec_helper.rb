@@ -5,6 +5,14 @@ require File.expand_path(File.join(File.dirname(__FILE__),'..','config','environ
 require 'spec/autorun'
 require 'spec/rails'
 
+# Factory Girl was not autoloading factories hence the call to Factory.find_definitions
+# cf. http://stackoverflow.com/questions/1160004/setup-factory-girl-with-testunit-and-shoulda
+require 'factory_girl'
+Factory.find_definitions
+
+# Paperclip matchers
+require "paperclip/matchers"
+
 module TestLogins
   def user_login
     Bcsec.authority.valid_credentials?(:user, 'user', 'user')
@@ -32,7 +40,7 @@ Spec::Runner.configure do |config|
   # in your config/boot.rb
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.fixture_path = Rails.root + '/spec/fixtures/'
   config.include TestLogins
 
   # == Fixtures
@@ -66,6 +74,8 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+  
+  config.include Paperclip::Shoulda::Matchers
 end
 
 def will_paginate_collection(collection, page = 1, per_page = 10)

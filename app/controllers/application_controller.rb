@@ -7,4 +7,20 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+  private
+  
+    def ensure_admin
+      if current_user_is_admin 
+        # NOOP - render requested page
+      else
+        flash[:warning] = "You do not have access to the page you requested."
+        redirect_to :controller => "welcome", :action => "index"
+      end
+    end
+  
+    def current_user_is_admin
+      # TODO: determine if the current user is an administrator
+      current_user and current_user.username == "admin"
+    end
 end

@@ -1,4 +1,9 @@
+.bundle/*
+Gemfile.lock
 log/*.log
 tmp/**/*
 doc/app
+cc
 coverage/*
+*.tmproj
+to_haml.rb

@@ -26,7 +26,7 @@ group :test do
   gem "rspec-rails", ">= 1.3.2"
   
   # factory_girl
-  gem "factory_girl"
+  gem "factory_girl", '1.2.4'
   
   # shoulda
   gem "shoulda"
