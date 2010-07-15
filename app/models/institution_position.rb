@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100702191146
+# Schema version: 20100714190938
 #
 # Table name: institution_positions
 #

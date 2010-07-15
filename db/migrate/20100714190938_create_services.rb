@@ -3,6 +3,8 @@ class CreateServices < ActiveRecord::Migration
     create_table :services do |t|
       t.integer :service_line_id
       t.integer :person_id
+      t.integer :created_by_id
+      t.date :entered_on
       t.string :state
 
       t.timestamps

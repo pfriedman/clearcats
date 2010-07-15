@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20100714190938
+#
+# Table name: services
+#
+#  id              :integer         not null, primary key
+#  service_line_id :integer
+#  person_id       :integer
+#  created_by_id   :integer
+#  entered_on      :date
+#  state           :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:

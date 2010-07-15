@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100702160308
+# Schema version: 20100714190938
 #
 # Table name: service_lines
 #

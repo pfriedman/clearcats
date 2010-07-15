@@ -15,6 +15,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :activity_types
   map.resources :organizational_units
   map.resources :service_lines
+  map.resources :services, 
+    :member     => { :choose_service_line => :get, :choose_person => :get, :update_person => :put, :continue => :get }, 
+    :collection => { :choose_service_line => :get, :choose_person => :get }
+  
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }

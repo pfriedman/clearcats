@@ -5,6 +5,7 @@ gem "rails", "2.3.8", :require => nil
 
 # gem "acts_as_secure"
 # gem "authlogic"
+gem "aasm"
 gem "bcdatabase"
 gem "bcsec-rails", "2.0.0.pre3"
 gem "bundler", "~> 0.9"

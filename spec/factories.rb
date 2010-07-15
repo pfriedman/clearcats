@@ -90,3 +90,7 @@ Factory.define :person do |p|
   p.specialty           { |a| a.association(:specialty) }
 end
 
+Factory.define :service do |svc|
+  svc.service_line { |a| a.association(:service_line) }
+  svc.person       { |a| a.association(:person) }
+end

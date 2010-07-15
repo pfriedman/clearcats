@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(:version => 20100714190938) do
   create_table "services", :force => true do |t|
     t.integer  "service_line_id"
     t.integer  "person_id"
+    t.integer  "created_by_id"
+    t.date     "entered_on"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -152,5 +154,26 @@ ActiveRecord::Schema.define(:version => 20100714190938) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "business_phone"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "username"
+    t.string   "nu_employeeid"
+    t.string   "personnelid"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["username"], :name => "users_username_idx", :unique => true
 
 end

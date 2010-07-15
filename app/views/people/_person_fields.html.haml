@@ -1,0 +1,81 @@
+%p
+  = f.label :last_name, "Last Name" 
+  %br
+  = f.text_field :last_name
+
+%p
+  = f.label :first_name, "First Name" 
+  %br
+  = f.text_field :first_name 
+
+%p
+  = f.label :middle_name, "Middle Initial" 
+  %br
+  = f.text_field :middle_name 
+
+%p
+  = f.label :department_affiliation, "Department Affiliation" 
+  %br
+  = f.text_field :department_affiliation 
+
+%p
+  = f.label :school_affiliation, "School Affiliation" 
+  %br
+  = f.text_field :school_affiliation 
+
+%p
+  = f.label :era_commons_username, "eRA Commons Username" 
+  %br
+  = f.text_field :era_commons_username 
+
+%p
+  = f.label :last_four_of_ssn, "Last 4 digits SSN" 
+  %br
+  = f.text_field :last_four_of_ssn 
+
+%p
+  = f.label :degree_type_one_id, "Degree Type 1" 
+  %br
+  = f.select(:degree_type_one_id, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 1 --" }) 
+
+%p
+  = f.label :degree_type_two_id, "Degree Type 2" 
+  %br
+  = f.select(:degree_type_two_id, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 2 --" }) 
+
+%p
+  = f.label :institution_position_id, "What is your position/title category? (check all that apply)" 
+  %br
+  - for institution_position in InstitutionPosition.all(:order => :id)
+    %div
+      = check_box_tag "person[institution_position_ids][]", institution_position.id, f.object.institution_positions.include?(institution_position)
+      = institution_position.to_s
+
+%p
+  = f.label :country_id, "Country" 
+  %br
+  = f.select(:country_id, Country.all(:order => :name).collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Country --" }) 
+
+%p
+  = f.label :specialty_id, "Area of Expertise (select the one that best describes your area of expertise)" 
+  %br
+  = f.select(:specialty_id, Specialty.all(:order => :code).collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Area of Expertise --" })
+
+%p
+  = f.label :ethnic_type_id, "Please indicate your ethnic background. (Optional)" 
+  %br
+  = f.select(:ethnic_type_id, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
+
+%p
+  = f.label :race_type_id, "Please indicate your racial background below. (Optional)" 
+  %br
+  = f.select(:race_type_id, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" }) 
+
+%p
+  Are you from a disadvantaged background? (Optional)
+  %br
+  = f.radio_button :disadvantaged_background, true
+  = f.label "disadvantaged_background_true", "Yes"
+  %br
+  = f.radio_button :disadvantaged_background, false
+  = f.label "disadvantaged_background_false", "No"

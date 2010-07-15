@@ -23,4 +23,9 @@ class ApplicationController < ActionController::Base
       # TODO: determine if the current user is an administrator
       current_user and current_user.username == "admin"
     end
+    
+    def find_or_create_user
+      User.find_or_create_by_username(current_user.username)
+    end
+    
 end

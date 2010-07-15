@@ -1,6 +1,6 @@
 - title "Edit Activity Type"
-= render :partial => 'form'
+= render 'form'
 .links
   = link_to 'Show', @activity_type, :class => "show_link icon_link"
   |
-  \#{link_to 'List', activity_types_path, :class => "list_link icon_link"}
+  = link_to 'List', activity_types_path, :class => "list_link icon_link"
