@@ -1,6 +1,5 @@
 class ServicesController < ApplicationController
 
-  
   def new
     @service = Service.new
     @pending_services = Service.all(:conditions => ["created_by_id = ? and state <> ?", find_or_create_user.id, "complete"])
@@ -58,6 +57,22 @@ class ServicesController < ApplicationController
     @service.update_attributes(params[:service])
     @service.update_state
     determine_redirect
+  end
+  
+  def identified
+    @service = Service.find(params[:id])
+    if request.put?
+      @service.update_attributes(params[:service])
+      determine_redirect
+    end
+  end
+  
+  def choose_organizational_units
+    @service = Service.find(params[:id])
+  end
+  
+  def choose_awards
+    @service = Service.find(params[:id])
   end
   
   # GET /services/wizard

@@ -1,5 +1,8 @@
 - title "New Service - Update Person"
 
+%p
+  = @service.state
+
 - form_for @service.person, :url => { :controller => "services", :action => "update_person", :id => @service.id } do |f|
 
   = render '/people/person_fields', :f => f

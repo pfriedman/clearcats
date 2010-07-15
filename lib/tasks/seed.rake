@@ -11,9 +11,16 @@ namespace :nucats do
     desc "Seed the database with develop/ fixtures."
     task :develop => :environment do 
       load_fixtures 'seed/develop', :always
+      load_ctsa_data
     end
  
     private
+    
+      def load_ctsa_data
+        file_path = File.expand_path(File.dirname(__FILE__) + '../../../doc/ctsa/2010 CTSA XML Schema.xsd')
+        reader = CtsaSchemaReader.new(file_path)
+        reader.process
+      end
  
       def load_fixtures(dir, always = false)
         Dir.glob(File.join(RAILS_ROOT, 'db', dir, '*.yml')).each do |fixture_file|

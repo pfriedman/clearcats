@@ -29,6 +29,9 @@ class Service < ActiveRecord::Base
   aasm_state :choose_person
   aasm_state :choose_service_line
   aasm_state :initiated
+  aasm_state :identified
+  aasm_state :choose_awards
+  aasm_state :choose_organizational_units
   
   aasm_event :set_service_line do
     transitions :to => :choose_person, :from => [:new, :choose_service_line]
@@ -40,6 +43,10 @@ class Service < ActiveRecord::Base
   
   aasm_event :initiate do
     transitions :to => :initiated, :from => [:choose_service_line, :choose_person]
+  end
+  
+  aasm_event :update_person do
+    transitions :to => :identified, :from => [:initiated]
   end
   
   def update_state
@@ -54,6 +61,8 @@ class Service < ActiveRecord::Base
       self.initiate!         unless self.person.blank?
     when "choose_service_line"
       self.initiate!         unless self.service_line.blank?
+    when "initiated"
+      self.update_person!
     end
   end
 

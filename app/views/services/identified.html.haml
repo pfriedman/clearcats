@@ -1,0 +1,31 @@
+- title "New Service"
+
+%p
+  = @service.state
+  
+- form_for @service, :url => { :action => "identified" } do |f|
+
+  .service_question
+    %span
+      Has any research you have conducted since you were last surveyed benefitted from the NUCATS Institute programs and services either directly or indirectly?
+    
+    %p
+      Benefits might include, but are not limited to:
+      %ul
+        %li Direct funding (pilot grant, K or T award)
+        %li Assistance in obtaining funding
+        %li Attendance at an educational program
+        %li Statistical support or analysis
+        %li Research team support
+        %li Regulatory, budget, or coordinator support
+        %li Use of the Clinical Research Unit
+        %li Use of the EDW system for patient data
+
+  .choices
+    = f.radio_button :state, :choose_awards
+    = f.label :state_choose_awards, "Yes"
+    %br
+    = f.radio_button :state, :choose_organizational_units
+    = f.label :state_choose_organizational_units, "No"
+
+  = f.submit "Continue", :disable_with => 'Continuing...'

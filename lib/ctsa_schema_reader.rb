@@ -8,7 +8,7 @@ class CtsaSchemaReader
   def initialize(file_path)
     @file_path = file_path
     
-    raise "Please supply a valid document path" if !File.exists?(@file_path)
+    raise "Please supply a valid document path - was given #{@file_path}" if !File.exists?(@file_path)
     
     @xml_schema = REXML::Document.new(File.open(@file_path, 'r'))
   end
