@@ -4,11 +4,13 @@
   %head
     %meta{ "http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
     %title= "ClearCATS :: " + h(yield(:title) || "Northwestern University")
+    = stylesheet_link_tag('blueprint/screen')
+    = stylesheet_link_tag('blueprint/print', :media => "print")
     = stylesheet_link_tag('application', :media => "all")
     = stylesheet_link_tag('jquery-ui-1.8.1.custom')
-    = stylesheet_link_tag('blueprint/screen', 'blueprint/print')
+    = stylesheet_link_tag('ddsmoothmenu', 'ddsmoothmenu-v')
     = yield :stylesheet
-    = javascript_include_tag("application", "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min", "jrails")
+    = javascript_include_tag("application", "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min", "jrails", "jquery.blockUI", "modal_form", "jquery.livequery")
     = yield :javascript
     = yield(:head)
   %body
@@ -17,18 +19,29 @@
         
       #header
         #banner
+          = image_tag("banner_right.jpg", :class => "banner_right") 
+          #fl
+            = image_tag("banner_edge.jpg")
+            = render "shared/menus"
+            = image_tag("banner_edge.jpg")
+          #menu2
+            = session[:name] || current_user.username
+        #title
           = link_to("ClearCATS", "/", :class => "no_link")
           - if show_title?
             %span= " :: " + h(yield(:title))
-
+      #niceline
       .clear
 
-      - flash.each do |message_type, message|
-        %div{ :class => "message", :id => message_type }
-          = h(message)
-
-      = yield
+      #main
+        - flash.each do |message_type, message|
+          %div{ :class => "message", :id => message_type }
+            = h(message)
+      
+        = yield
 
       #footer
-        = link_to "Logout", "/logout"
-        = "v. " + application_version
+        .branding
+          = link_to(image_tag("pageheader.jpg", options={:alt=>"The Northwestern University Clinical and Translational Sciences Institute"}), "http://www.nucats.northwestern.edu")
+        .version
+          = "v. " + application_version

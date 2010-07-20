@@ -10,6 +10,7 @@
 
 .buttons {
   clear: both;
+  margin-bottom: 0.5em;
 }
 
 /* Flash Messages */
@@ -57,14 +58,106 @@
   background: gainsboro;
 }
 
+/* banner and menus */
+
 #banner {
+  border-bottom: 1px solid #1c1079;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 29px;
+  vertical-align: bottom;
+  text-align: center;
   font-size: 1.25em;
-  margin: 0.5em 0 1em 0;
+  display: block; 
+}
+
+#banner a span {
+  visibility: hidden; 
+}
+
+#banner img {
+  float: left; 
+}
+
+#banner #menu2 {
+  float: right;
+  z-index: 4;
+  margin-top: -21px;
+  color: #aaaaaa;
+  padding-right: 15px; 
+}
+
+#banner .banner_right {
+  width: 100%;
+  height: 29px;
+  z-index: 1; 
+}
+
+#banner #fl {
+  float: left;
+  z-index: 2;
+  margin-top: -29px; 
+}
+
+#header {
+  clear: both; 
+}
+
+#title {
+  margin: 0px;
+  padding: 5px 20px;
+  font-family: Arial, Helvetica, Geneva, sans-serif;
+  font-size: 150%;
+  font-weight: bold;
+  color: #222266;
+  line-height: 180%;
+  background-color: lightyellow; 
+}
+
+#title a {
+  padding: 5px;
+  color: #222266;
+  text-decoration: none;
+  background: lightyellow; 
+}
+
+#title a:hover {
+  color: darkorange; 
+}
+
+#niceline {
+  padding-left: 5px;
+  height: 8px;
+  margin: 0px;
+  color: white;
+  font-size: 13px;
+  background-color: #a3a3a3; 
+}
+
+#main {
+  min-height: 40em;
 }
 
 #footer {
+  border-top: 2px solid #a3a3a3;
   text-align: right;
-  font-size: 0.8em;
+  font-size: 0.8em; 
+}
+
+#footer img {
+  float: left; 
+}
+
+#footer img .banner {
+  width: 100%; 
+}
+
+#footer .version {
+  border-top: 2px solid #a3a3a3;
+  float: left;
+  clear: both;
+  width: 100%; 
 }
 
 /* Error Styles */
@@ -189,31 +282,31 @@ table.nested {
 }
 
 .add_link, .add_link:hover {
-  background: url(../images/add.png) 0 2px no-repeat !important;
+  background: url(/images/add.png) 0 2px no-repeat !important;
 }
 
 .add_person_link, .add_person_link:hover {
-  background: url(../images/user_add.png) 0 2px no-repeat !important;
+  background: url(/images/user_add.png) 0 2px no-repeat !important;
 }
 
 .edit_link, .edit_link:hover {
-  background: url(../images/edit.png) 0 2px no-repeat !important;
+  background: url(/images/edit.png) 0 2px no-repeat !important;
 }
 
 .search_link, .search_link:hover {
-  background: url(../images/find.png) 0 2px no-repeat !important;
+  background: url(/images/find.png) 0 2px no-repeat !important;
 }
 
 .show_link, .show_link:hover {
-  background: url(../images/show.png) 0 2px no-repeat !important;
+  background: url(/images/show.png) 0 2px no-repeat !important;
 }
 
 .list_link, .list_link:hover {
-  background: url(../images/list.png) 0 2px no-repeat !important;
+  background: url(/images/list.png) 0 2px no-repeat !important;
 }
 
 .delete_link, .delete_link:hover {
-  background: url(../images/delete.png) 0 2px no-repeat !important;
+  background: url(/images/delete.png) 0 2px no-repeat !important;
 }
 
 /* Blueprint css overrides */

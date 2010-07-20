@@ -49,6 +49,10 @@ class ServicesController < ApplicationController
 
   def continue
     @service = Service.find(params[:id])
+    if params[:service]
+      @service.update_attributes(params[:service])
+      @service.update_state
+    end
     determine_redirect
   end
   
@@ -63,6 +67,7 @@ class ServicesController < ApplicationController
     @service = Service.find(params[:id])
     if request.put?
       @service.update_attributes(params[:service])
+      # @service.update_state
       determine_redirect
     end
   end
@@ -71,8 +76,18 @@ class ServicesController < ApplicationController
     @service = Service.find(params[:id])
   end
   
+  def choose_publications
+    @service = Service.find(params[:id])
+  end
+  
   def choose_awards
     @service = Service.find(params[:id])
+    FacultyWebService.awards_for_employee({:employeeid => @service.person.employeeid})
+    params[:search] ||= Hash.new
+    params[:search][:person_id] = @service.person.id
+    params[:search][:order] ||= "ascend_by_project_period_start_date"
+    @search_params = params[:search]
+    @awards = Award.search(@search_params)
   end
   
   # GET /services/wizard

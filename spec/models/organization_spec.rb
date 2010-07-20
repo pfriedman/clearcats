@@ -19,6 +19,8 @@ describe Organization do
   it { should validate_presence_of(:code) }
   it { should validate_presence_of(:name) }
   
+  it { should have_many(:awards) }
+  
   it "should create non-phs organizations" do
     org = NonPhsOrganization.new
     org.type.should == "NonPhsOrganization"

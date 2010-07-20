@@ -1,0 +1,24 @@
+.awards select {
+  width: 25em;
+}
+
+#modal_window {
+  display: none;
+}
+
+#modal_window .header_option {
+  float: right;
+}
+
+#award_form select,
+#award_form input[type="text"] {
+  width: 35em;
+}
+
+#awards .edit_modal_form_add_link {
+  float: right;
+}
+
+#awards h3 {
+  margin-bottom: 0.25em;
+}

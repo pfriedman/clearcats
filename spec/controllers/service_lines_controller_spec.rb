@@ -8,7 +8,7 @@ describe ServiceLinesController do
   
   context "with an authenticated user" do
     before(:each) do
-      login(user_login)
+      login(admin_login)
     end
 
     describe "GET index" do

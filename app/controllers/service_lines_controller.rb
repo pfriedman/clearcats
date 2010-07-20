@@ -1,4 +1,8 @@
 class ServiceLinesController < ApplicationController
+  before_filter :ensure_admin
+  # include Bcsec::Rails::SecuredController
+  # permit :administrators
+  
   # GET /service_lines
   # GET /service_lines.xml
   def index
@@ -45,7 +49,7 @@ class ServiceLinesController < ApplicationController
 
     respond_to do |format|
       if @service_line.save
-        flash[:notice] = 'ServiceLine was successfully created.'
+        flash[:notice] = 'Service Line was successfully created.'
         format.html { redirect_to(@service_line) }
         format.xml  { render :xml => @service_line, :status => :created, :location => @service_line }
       else
@@ -62,7 +66,7 @@ class ServiceLinesController < ApplicationController
 
     respond_to do |format|
       if @service_line.update_attributes(params[:service_line])
-        flash[:notice] = 'ServiceLine was successfully updated.'
+        flash[:notice] = 'Service Line was successfully updated.'
         format.html { redirect_to(@service_line) }
         format.xml  { head :ok }
       else

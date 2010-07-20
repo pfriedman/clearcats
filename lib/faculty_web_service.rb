@@ -16,11 +16,11 @@ class FacultyWebService
 
     results = []
 
-    uri, req = create_request(params)
+    uri, req = create_faculty_request(params)
 
     begin
       resp = make_request(uri, req)
-      results = parse_response(resp.body) unless resp.body.blank?
+      results = parse_faculty_response(resp.body) unless resp.body.blank?
 
     rescue Exception => e
       Rails.logger.error("FacultyWebService.locate - Exception [#{e.message}] occurred when calling web service.\n")
@@ -39,7 +39,7 @@ class FacultyWebService
   def self.award_organizations
     results = []
 
-    uri, req = create_request(nil, "/award/organizations")
+    uri, req = create_award_request(nil)
 
     begin
       resp = make_request(uri, req)
@@ -57,21 +57,61 @@ class FacultyWebService
 
     return results
   end
+  
+  def self.awards_for_employee(params)
+
+    results = []
+
+    uri, req = create_award_request(params)
+
+    begin
+      resp = make_request(uri, req)
+      results = parse_award_response(resp.body) unless resp.body.blank?
+
+      person = Person.find_by_employeeid(params[:employeeid])
+      results.each { |r| r.person = person; r.save!; }
+
+    rescue Exception => e
+      Rails.logger.error("FacultyWebService.awards_for_employee - Exception [#{e.message}] occurred when calling web service.\n")
+      Rails.logger.error(e.backtrace.join("\n"))
+    end
+
+    return results
+  end
 
   private
 
-    def self.create_request(params, path = "/faculty/")
+    def self.create_award_request(params)
       url   = ClearCats::ExternalServices::Resource.new(:faculty_ws, :ws).to_s ||= DEFAULT_HOST_URL
-      query = nil
+      path = "/award/"
 
       if params.nil?
-        # NOOP - no need to alter request uri
-      elsif !params[:netid].blank?
+        path += "organizations"
+      elsif !params[:employeeid].blank?
+        path += "list/#{URI::escape(params[:employeeid])}"
+      else
+        # NOOP
+      end
+
+      uri = URI.parse(url + path)
+
+      get_request = uri.path
+
+      req = Net::HTTP::Get.new(get_request)
+      return uri, req
+    end
+
+    def self.create_faculty_request(params)
+      url   = ClearCats::ExternalServices::Resource.new(:faculty_ws, :ws).to_s ||= DEFAULT_HOST_URL
+      query = nil
+      path = "/faculty/"
+
+      if !params[:netid].blank?
         path += "show/#{URI::escape(params[:netid])}"
       elsif !params[:last_name].blank?
         path += "search"
         query = "last_name=#{URI::escape(params[:last_name])}"
-      elsif path.include?("faculty")
+      else
         path += "list"
       end
 
@@ -108,8 +148,32 @@ class FacultyWebService
 
       return person
     end
+    
+    def self.instantiate_award(attributes)
+      award = Award.find_by_budget_number(attributes["budget_number"])
+      award = Award.new if award.nil?
 
-    def self.parse_response(body)
+      sponsor = nil
+      attributes.each do |name, value|
+        if name.include?("sponsor") and name != "sponsor_award_number"
+          sponsor ||= Sponsor.new
+          sponsor.send(name.to_s + '=', value)
+        else
+          award.send(name.to_s + '=', value)
+        end
+      end
+      award.sponsor = sponsor
+
+      dept = Department.find_or_create_by_name(attributes["department"])
+      award.department = dept if dept
+      award.save!
+
+      Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
+
+      return award
+    end
+
+    def self.parse_faculty_response(body)
       results = []
       value = ActiveSupport::JSON.decode(body)
       if value.is_a?(Array)
@@ -117,6 +181,13 @@ class FacultyWebService
       elsif value.is_a?(Hash)
         results << instantiate_person(value)
       end
+      results
+    end
+    
+    def self.parse_award_response(body)
+      results = []
+      value = ActiveSupport::JSON.decode(body)
+      value.each { |attributes| results << instantiate_award(attributes) }
       results
     end
 

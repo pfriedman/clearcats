@@ -1,5 +1,7 @@
 class OrganizationalUnitsController < ApplicationController
   before_filter :ensure_admin
+  # include Bcsec::Rails::SecuredController
+  # permit :administrators
   
   # GET /organizational_units
   # GET /organizational_units.xml

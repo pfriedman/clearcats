@@ -1,0 +1,36 @@
+#awards
+  = link_to "Add New Award", { :controller => "/awards", :action => "new", :service_id => @service.id, :search_params => @search_params }, { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+  
+  %h3 Awards for #{person}
+  
+  - form_for person, :url => { :controller => "services", :action => "update_person_awards", :id => service.id } do |f|
+  
+    - if awards
+
+      %table.records
+        %tr
+          %th Select
+          %th
+            = order awards, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+          %th Award Code
+          %th
+            = order awards, :by => :sponsor, :as => "Sponsor", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+          %th
+            = order awards, :by => :sponsor_award_number, :as => "Sponsor Award Number", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+          %th
+            = order awards, :by => :grant_title, :as => "Grant Title", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+          %th
+            = order awards, :by => :budget_number, :as => "Budget Number", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+          %th
+            = order awards, :by => :project_period_start_date, :as => "Project Start Date", :params => { :controller => "services", :action => "choose_awards", :id => service.id }
+        - awards.each do |award|
+          %tr{ :class => cycle('even_record', 'odd_record') }
+            %td 
+              = link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :service_id => service.id, :search_params => @search_params }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+            %td= h award.nucats_assisted? ? "Yes" : "No"
+            %td.ctsa_award= h award.ctsa_award_type.to_s
+            %td= h award.sponsor
+            %td= h award.sponsor_award_number
+            %td= h truncate(award.grant_title)
+            %td= h award.budget_number.sub("NORTHWESTU00000", "")
+            %td= h award.project_period_start_date

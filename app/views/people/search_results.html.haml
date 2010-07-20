@@ -12,6 +12,7 @@
       %th Middle Name
       %th Email
       %th Net ID
+      %th NU Employee ID
     - @people.each do |person|
       %tr{ :class => cycle('even_record', 'odd_record') }
         %td
@@ -21,6 +22,7 @@
         %td= h person.middle_name
         %td= h person.email
         %td= h person.netid
+        %td= h person.employeeid
 
 .links
   = link_to "New Search", {:controller => "people", :action => "search", :organizational_unit_id => @organizational_unit_id}, { :class => "search_link icon_link"  }

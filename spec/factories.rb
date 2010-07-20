@@ -94,3 +94,16 @@ Factory.define :service do |svc|
   svc.service_line { |a| a.association(:service_line) }
   svc.person       { |a| a.association(:person) }
 end
+
+Factory.define :award do |a|
+  a.person            { |a| a.association(:person) }
+  a.ctsa_award_type   { |a| a.association(:phs_organization) }
+  a.grant_number      "grant number"
+  a.grant_title       "grant title"
+  a.grant_amount      11.00
+  a.years_of_award    "2010"
+end
+
+Factory.define :sponsor do |sponsor|
+  sponsor.name "sponsor name"
+end

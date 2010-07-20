@@ -25,6 +25,43 @@ ActiveRecord::Schema.define(:version => 20100714190938) do
     t.datetime "updated_at"
   end
 
+  create_table "awards", :force => true do |t|
+    t.string   "grant_number"
+    t.string   "years_of_award"
+    t.string   "grant_title",                            :limit => 2500
+    t.float    "grant_amount"
+    t.integer  "person_id"
+    t.integer  "investigator_id"
+    t.string   "role"
+    t.string   "parent_institution_number"
+    t.string   "institution_number"
+    t.string   "subproject_number"
+    t.string   "ctsa_award_type_award_number"
+    t.string   "budget_period"
+    t.date     "budget_period_start_date"
+    t.date     "budget_period_end_date"
+    t.float    "budget_period_direct_cost"
+    t.float    "budget_period_direct_and_indirect_cost"
+    t.date     "project_period_start_date"
+    t.date     "project_period_end_date"
+    t.float    "project_period_total_cost"
+    t.float    "total_project_cost"
+    t.integer  "ctsa_award_type_id"
+    t.string   "ctsa_award_type_type"
+    t.string   "proposal_status"
+    t.string   "award_status"
+    t.string   "sponsor_award_number"
+    t.string   "budget_number"
+    t.float    "direct_amount"
+    t.float    "indirect_amount"
+    t.float    "total_amount"
+    t.boolean  "nucats_assisted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sponsor_id"
+    t.integer  "originating_sponsor_id"
+  end
+
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -151,6 +188,15 @@ ActiveRecord::Schema.define(:version => 20100714190938) do
   create_table "specialties", :force => true do |t|
     t.string   "code"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sponsors", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "sponsor_type_description"
+    t.string   "sponsor_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

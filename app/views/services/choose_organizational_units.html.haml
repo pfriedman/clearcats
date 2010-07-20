@@ -3,4 +3,16 @@
 %p
   = @service.state
   
-  = aasm_back_button
+- form_for @service do |f|
+  #organizational_unit_services_rendered
+    .instructions
+      Please indicate the NUCATS Institute Centers that you participated in. For a list of Center programs and services, continue to the following pages:
+      %br
+      (Please check all that apply)
+    %ul
+      - OrganizationalUnit.all(:order => :name).each do |ou|
+        %li
+          = check_box_tag :organizational_unit_service_rendered
+          = ou.name
+    .buttons
+      = f.submit "Save", :disable_with => 'Saving...'  

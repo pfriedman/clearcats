@@ -31,7 +31,7 @@ class Person < ActiveRecord::Base
   
   belongs_to :department
 
-  # has_many :awards
+  has_many :awards
   # has_many :publications
   has_and_belongs_to_many :institution_positions
     
@@ -44,13 +44,17 @@ class Person < ActiveRecord::Base
 
   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
   
-  # accepts_nested_attributes_for :awards, :allow_destroy => true
+  accepts_nested_attributes_for :awards, :allow_destroy => true
   # accepts_nested_attributes_for :publications, :allow_destroy => true
   
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division
   attr_accessor :joint, :rank, :employee_id, :division_id, :pmids, :centers, :secondary
+  
+  def employee_id=(emplid)
+    self.employeeid = emplid
+  end
   
   def to_s
     return "#{first_name} #{last_name}".strip

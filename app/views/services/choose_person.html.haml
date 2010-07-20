@@ -17,6 +17,7 @@
         %th Middle Name
         %th Email
         %th Net ID
+        %th NU Employee ID
       - @people.each do |person|
         %tr{ :class => cycle('even_record', 'odd_record') }
           %td= f.radio_button "person_id", person.id
@@ -25,6 +26,7 @@
           %td= h person.middle_name
           %td= h person.email
           %td= h person.netid
+          %td= h person.employeeid
 
     .buttons
       = f.submit "Save", :disable_with => 'Saving...'

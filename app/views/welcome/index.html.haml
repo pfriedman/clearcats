@@ -7,4 +7,4 @@
   %ul
     %li= link_to "Initiate Service", :controller => "services", :action => "new"
 
-  = render "/admin/admin_list"
+  = render "/admin/admin_list" if current_user and current_user.permit?(:Administrators)

@@ -1,0 +1,45 @@
+- stylesheet "awards"
+
+.header_option
+  = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+
+%div{ :id => "award_form", :class => "awards" }
+  - form_remote_for @award, :html => { :id => "modal_edit_form"} do |f|
+    -@search_params.each do |k, v| 
+      = hidden_field_tag "search[#{k}]", v
+    %p
+      = f.check_box :nucats_assisted
+      = f.label :nucats_assisted, "NUCATS Assisted"
+    %p
+      = f.label :sponsor_name, "Sponsor"
+      %br
+      = f.text_field :sponsor_name
+    %p
+      = f.label :sponsor_award_number, "Sponsor Award Number"
+      %br
+      = f.text_field :sponsor_award_number
+    %p 
+      = f.label :grant_title, "Grant Title"
+      %br
+      = f.text_field :grant_title
+    %p
+      = f.label :budget_number, "Budget Number"
+      %br
+      = f.text_field :budget_number
+    %p
+      = f.label :phs_organization, "PHS Organization"
+      %br
+      = f.select(:phs_organization, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
+    %p
+      = f.label :activity_code, "Activity Code"
+      %br
+      = f.select(:activity_code, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
+    %p
+      = f.label :non_phs_organization, "Non PHS Organization"
+      %br
+      = f.select(:non_phs_organization, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
+
+    .buttons
+      = hidden_field_tag :service_id, @service.id
+      = f.hidden_field :person_id
+      = f.submit "Save", :class => "close"

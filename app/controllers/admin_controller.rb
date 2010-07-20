@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
   before_filter :ensure_admin
+  # include Bcsec::Rails::SecuredController
+  # permit :administrators
   
   def index
   end

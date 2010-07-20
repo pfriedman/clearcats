@@ -64,6 +64,17 @@ describe FacultyWebService do
         result.class.should == Organization
         result.name.should == "3M Company"
       end
+
+      it "should locate awards for a particular nu employee" do
+        FacultyWebService.stub!(:make_request).and_return(awards_response)
+        results = FacultyWebService.awards_for_employee({:employeeid => "1000176"})
+        results.should_not be_nil
+        results.size.should == 2
+        result = results.first
+        result.class.should == Award
+        result.sponsor.should_not be_nil
+        result.sponsor.name.should == "Beckman Coulter Inc."
+      end
       
       it "should catch any exception and return no results" do
         FacultyWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
@@ -88,6 +99,12 @@ end
 
 def organizations_response
   body = '[{"name":"3M Company"},{"name":"AAI Corporation"},{"name":"ACCESS Medical Group Ltd."},{"name":"ACTELION Ltd."},{"name":"ADMA Biologics Inc."},{"name":"AECOM Consult Inc."},{"name":"AGA Medical Corporation"},{"name":"AGI Dermatics Inc."},{"name":"AIDS Prevention Initiative Nigeria Ltd./Gte."},{"name":"AIDS Research Alliance - Chicago"},{"name":"ALS Society of Canada"},{"name":"ALS Therapy Alliance Inc."}]'
+  resp = mock_model(Net::HTTPOK, :body => body)
+  return resp
+end
+
+def awards_response
+  body = '[{"orig_sponsor_code_l3":"BECKCOU","award_end_date":"Sun Jul 24 00:00:00 -0500 2011","sponsor_name_l3":"Beckman Coulter Inc.","sponsor_code_l3":"BECKCOU","award_status":"Active-Award","proposal_status":"Awarded QA Check Complete","nu_employee_id":"1000176","total_amount":"0.30001E5","inst_num":"SP0004293","indirect_amount":"0.6191E4","restricted_budget_amount":"0.0","project_begin_date":"Thu Jul 24 00:00:00 -0500 2008","orig_sponsor_name_l3":"Beckman Coulter Inc.","proposal_title":"External Evaluation of Immunphenotyping Reagents","project_end_date":"Sun Jul 24 00:00:00 -0500 2011","direct_amount":"0.2381E5","proposal_flag":"P","parent_inst_num":"SP0004293","modified_date":"Fri Sep 04 14:15:00 -0500 2009","moved_to_projects":null,"load_date":"Thu May 20 20:03:03 -0500 2010","cufs_fund":null,"budget_number":"NORTHWESTU0000015776300020001","last_name":"Goolsby","cufs_org":null,"cufs_area":null,"award_begin_date":"Thu Jul 24 00:00:00 -0500 2008","sponsor_type_desc_l1":"Industry and Trade Organizations","department":"Pathology","budget_period":"1","sponsor_award_number":"Agmt 05/20/09","sponsor_type_l1":"INDUS","sponsor_name_l1":"Beckman Coulter Inc.","sponsor_code_l1":"BECKCOU","sponsor_name_l2":"Beckman Coulter Inc.","sponsor_code_l2":"BECKCOU","middle_name":null,"first_name":"Charles Lewis"},{"orig_sponsor_code_l3":"BECKCOU","award_end_date":"Sun Jul 24 00:00:00 -0500 2011","sponsor_name_l3":"Beckman Coulter Inc.","sponsor_code_l3":"BECKCOU","award_status":"Active-Award","proposal_status":"Awarded QA Check Complete","nu_employee_id":"1000176","total_amount":"0.38674E5","inst_num":"SP0004293","indirect_amount":"0.7568E4","restricted_budget_amount":"0.0","project_begin_date":"Thu Jul 24 00:00:00 -0500 2008","orig_sponsor_name_l3":"Beckman Coulter Inc.","proposal_title":"External Evaluation of Immunphenotyping Reagents","project_end_date":"Sun Jul 24 00:00:00 -0500 2011","direct_amount":"0.31106E5","proposal_flag":"P","parent_inst_num":"SP0004293","modified_date":"Fri Sep 04 14:15:00 -0500 2009","moved_to_projects":null,"load_date":"Thu May 20 20:03:03 -0500 2010","cufs_fund":null,"budget_number":"NORTHWESTU0000015776300010001","last_name":"Goolsby","cufs_org":null,"cufs_area":null,"award_begin_date":"Thu Jul 24 00:00:00 -0500 2008","sponsor_type_desc_l1":"Industry and Trade Organizations","department":"Pathology","budget_period":"1","sponsor_award_number":"Agmt 07/24/08","sponsor_type_l1":"INDUS","sponsor_name_l1":"Beckman Coulter Inc.","sponsor_code_l1":"BECKCOU","sponsor_name_l2":"Beckman Coulter Inc.","sponsor_code_l2":"BECKCOU","middle_name":null,"first_name":"Charles Lewis"}]'
   resp = mock_model(Net::HTTPOK, :body => body)
   return resp
 end
