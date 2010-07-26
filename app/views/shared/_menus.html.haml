@@ -1,4 +1,10 @@
 #banner_menu.ddsmoothmenu
   %ul
     %li= link_to "Home", root_path
+    %li= link_to "Services", :controller => "services", :action => "new"
+    - if current_user and current_user.permit?(:Administrators)
+      %li= link_to "Users", :controller => "users", :action => "index"
+      %li= link_to "Organizational Units", :controller => "organizational_units", :action => "index"
+      %li= link_to "Service Lines", :controller => "service_lines", :action => "index"
+      %li= link_to "CTSA Data", {:controller => "admin", :action => "view_ctsa_data"}
     %li= link_to "Logout", "/logout"
