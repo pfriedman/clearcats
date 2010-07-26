@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100714190938) do
+ActiveRecord::Schema.define(:version => 20100726162256) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -159,6 +159,18 @@ ActiveRecord::Schema.define(:version => 20100714190938) do
     t.integer  "ethnic_type_id"
     t.integer  "race_type_id"
     t.boolean  "disadvantaged_background"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "publications", :force => true do |t|
+    t.string   "pmcid"
+    t.string   "pmid"
+    t.string   "nihms_number"
+    t.date     "publication_date"
+    t.integer  "person_id"
+    t.text     "abstract"
+    t.string   "title",            :limit => 1000
     t.datetime "created_at"
     t.datetime "updated_at"
   end

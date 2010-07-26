@@ -107,3 +107,13 @@ end
 Factory.define :sponsor do |sponsor|
   sponsor.name "sponsor name"
 end
+
+Factory.define :publication do |pub|
+  pub.pmcid            "pmcid"
+  pub.pmid             "pmid"
+  pub.nihms_number     "nihms_number"
+  pub.publication_date Time.now
+  pub.person           { |a| a.association(:person) }
+  pub.abstract         "boogadeehoo"
+  pub.title            "title"
+end

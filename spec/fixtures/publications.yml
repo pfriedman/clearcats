@@ -1,0 +1,36 @@
+# == Schema Information
+# Schema version: 20100726162256
+#
+# Table name: publications
+#
+#  id               :integer         not null, primary key
+#  pmcid            :string(255)
+#  pmid             :string(255)
+#  nihms_number     :string(255)
+#  publication_date :date
+#  person_id        :integer
+#  abstract         :text
+#  title            :string(1000)
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pmcid: MyString
+  pmid: MyString
+  nihms_number: MyString
+  year_published: 1
+  person_id: 1
+  abstract: MyText
+  title: MyString
+
+two:
+  pmcid: MyString
+  pmid: MyString
+  nihms_number: MyString
+  year_published: 1
+  person_id: 1
+  abstract: MyText
+  title: MyString

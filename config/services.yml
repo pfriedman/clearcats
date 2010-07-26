@@ -1,7 +1,20 @@
+:lattice_grid:
+  :host:
+    development: http://localhost:3033
+    test: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
+    cucumber: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
+    staging: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
+    production: http://latticegrid.feinberg.northwestern.edu/
+  :path:
+    :mesh_json: mesh.json
+    :mesh: mesh
+    :investigators: investigators
+    :investigator: investigator
 :faculty_ws:
   :host:
     development: https://clinical-rails-stg.nubic.northwestern.edu/
     test: https://clinical-rails-stg.nubic.northwestern.edu/
+    cucumber: https://clinical-rails-stg.nubic.northwestern.edu/
     staging: https://clinical-rails-stg.nubic.northwestern.edu/
     production: https://clinical-rails-stg.nubic.northwestern.edu/
   :path:
