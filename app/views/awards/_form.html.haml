@@ -5,7 +5,7 @@
 
 %div{ :id => "award_form", :class => "awards" }
   - form_remote_for @award, :html => { :id => "modal_edit_form"} do |f|
-    -@search_params.each do |k, v| 
+    - params[:search].each do |k, v| 
       = hidden_field_tag "search[#{k}]", v
     %p
       = f.check_box :nucats_assisted

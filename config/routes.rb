@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :activity_types
   map.resources :awards, :except => [ :index, :destroy ]
+  map.resources :publications, :only => [ :edit, :update ]
   map.resources :organizational_units
   map.resources :service_lines
   map.resources :services, 

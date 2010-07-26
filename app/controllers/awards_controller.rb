@@ -13,8 +13,9 @@ class AwardsController < ApplicationController
   end
   
   def create
-    @award = Award.new(params[:award])
-    @service = Service.find(params[:service_id])
+    @search_params  = params[:search_params]
+    @award          = Award.new(params[:award])
+    @service        = Service.find(params[:service_id])
 
     respond_to do |format|
       if @award.save
@@ -33,8 +34,9 @@ class AwardsController < ApplicationController
   
   # POST /awards
   def update
-    @award   = Award.find(params[:id])
-    @service = Service.find(params[:service_id])
+    @search_params  = params[:search_params]
+    @award          = Award.find(params[:id])
+    @service        = Service.find(params[:service_id])
     respond_to do |format|
       if @award.update_attributes(params[:award])
         @awards = Award.search(params[:search])

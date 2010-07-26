@@ -8,6 +8,7 @@ class CreatePublications < ActiveRecord::Migration
       t.integer :person_id
       t.text :abstract
       t.string :title, :limit => 1000
+      t.boolean :nucats_assisted
 
       t.timestamps
     end

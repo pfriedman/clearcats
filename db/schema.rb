@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20100726162256) do
     t.integer  "person_id"
     t.text     "abstract"
     t.string   "title",            :limit => 1000
+    t.boolean  "nucats_assisted"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,41 @@
+:javascript
+  $(function () {
+    $(".datepicker").datepicker();
+  });
+
+.header_option
+  = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+
+%div{ :id => "publication_form", :class => "publications" }
+  - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
+    - params[:search].each do |k, v| 
+      = hidden_field_tag "search[#{k}]", v
+    %p
+      = f.check_box :nucats_assisted
+      = f.label :nucats_assisted, "NUCATS Assisted"
+    %p
+      = f.label :pmid, "PMID"
+      %br
+      = f.text_field :pmid
+      = link_to "PMCID to PMID Converter", "http://www.ncbi.nlm.nih.gov/sites/pmctopmid", :popup => true
+    %p
+      = f.label :pmcid, "PMCID"
+      %br
+      = f.text_field :pmcid
+    %p
+      = f.label :nihms_number, "NIHMS Number"
+      %br
+      = f.text_field :nihms_number
+    %p 
+      = f.label :title, "Title"
+      %br
+      = f.text_field :title
+    %p
+      = f.label :publication_date, "Publication Date"
+      %br
+      = f.text_field :publication_date, :class => "datepicker"
+
+    .buttons
+      = hidden_field_tag :service_id, @service.id
+      = f.hidden_field :person_id
+      = f.submit "Save", :class => "close"

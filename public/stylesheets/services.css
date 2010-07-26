@@ -22,3 +22,7 @@
 #awards h3 {
   margin-bottom: 0.25em;
 }
+
+.publications #publication_title {
+  width: 45em;
+}
