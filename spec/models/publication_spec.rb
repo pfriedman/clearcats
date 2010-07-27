@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100726162256
+# Schema version: 20100727181206
 #
 # Table name: publications
 #
@@ -11,6 +11,7 @@
 #  person_id        :integer
 #  abstract         :text
 #  title            :string(1000)
+#  nucats_assisted  :boolean
 #  created_at       :datetime
 #  updated_at       :datetime
 #

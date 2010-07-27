@@ -1,30 +1,32 @@
 # == Schema Information
-# Schema version: 20100726162256
+# Schema version: 20100727181206
 #
 # Table name: people
 #
-#  id                       :integer         not null, primary key
-#  first_name               :string(255)
-#  middle_name              :string(255)
-#  last_name                :string(255)
-#  netid                    :string(255)
-#  email                    :string(255)
-#  department_affiliation   :string(255)
-#  school_affiliation       :string(255)
-#  last_four_of_ssn         :string(255)
-#  phone                    :string(255)
-#  era_commons_username     :string(255)
-#  employeeid               :string(255)
-#  department_id            :integer
-#  degree_type_one_id       :integer
-#  degree_type_two_id       :integer
-#  specialty_id             :integer
-#  country_id               :integer
-#  ethnic_type_id           :integer
-#  race_type_id             :integer
-#  disadvantaged_background :boolean
-#  created_at               :datetime
-#  updated_at               :datetime
+#  id                                            :integer         not null, primary key
+#  first_name                                    :string(255)
+#  middle_name                                   :string(255)
+#  last_name                                     :string(255)
+#  netid                                         :string(255)
+#  email                                         :string(255)
+#  department_affiliation                        :string(255)
+#  school_affiliation                            :string(255)
+#  last_four_of_ssn                              :string(255)
+#  phone                                         :string(255)
+#  era_commons_username                          :string(255)
+#  employeeid                                    :string(255)
+#  department_id                                 :integer
+#  degree_type_one_id                            :integer
+#  degree_type_two_id                            :integer
+#  specialty_id                                  :integer
+#  country_id                                    :integer
+#  ethnic_type_id                                :integer
+#  race_type_id                                  :integer
+#  disadvantaged_background                      :boolean
+#  created_at                                    :datetime
+#  updated_at                                    :datetime
+#  human_subject_protection_training_institution :string(255)
+#  human_subject_protection_training_date        :date
 #
 
 class Person < ActiveRecord::Base
