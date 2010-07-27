@@ -3,8 +3,9 @@
     $(".datepicker").datepicker();
   });
 
-.header_option
-  = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+- if @show_close_button
+  .header_option
+    = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
 
 %div{ :id => "publication_form", :class => "publications" }
   - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
@@ -36,6 +37,6 @@
       = f.text_field :publication_date, :class => "datepicker"
 
     .buttons
-      = hidden_field_tag :service_id, @service.id
+      = hidden_field_tag :service_id, @service.id if @service
       = f.hidden_field :person_id
       = f.submit "Save", :class => "close"

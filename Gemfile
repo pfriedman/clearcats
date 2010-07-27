@@ -52,5 +52,8 @@ group :test do
   # webrat
   # gem "rack-test"
   # gem "webrat"
+
+  # mocking web services
+  # gem "fakeweb"
   
 end

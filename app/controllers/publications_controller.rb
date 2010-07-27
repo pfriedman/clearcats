@@ -1,16 +1,25 @@
 class PublicationsController < ApplicationController
-  layout nil
 
   # GET /publications/edit
   def edit
-    @search_params  = params[:search_params]
-    @service        = Service.find(params[:service_id])
+    params[:search] ||= Hash.new
+    @service        = Service.find(params[:service_id]) if params[:service_id]
     @publication    = Publication.find(params[:id])
+    respond_to do |format|
+      format.js do
+        @show_close_button = true
+        render 'edit', :layout => nil 
+      end
+      format.html do
+        @show_close_button = false
+        render 'edit' 
+      end
+    end
   end
   
   # POST /publications
   def update
-    @search_params  = params[:search_params]
+    params[:search] ||= Hash.new
     @service        = Service.find(params[:service_id])
     @publication    = Publication.find(params[:id])
     respond_to do |format|

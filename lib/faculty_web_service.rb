@@ -116,7 +116,6 @@ class FacultyWebService
       end
 
       uri = URI.parse(url + path)
-
       get_request = uri.path
 
       if query
@@ -129,7 +128,7 @@ class FacultyWebService
 
     def self.make_request(uri, req)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
+      http.use_ssl = true unless ["development", "test", "cucumber"].include?(Rails.env)
       resp = http.start { |h| h.request(req) }
       return resp
     end

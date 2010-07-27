@@ -2,9 +2,10 @@ module ClearCats
   module ExternalServices
     class Resource
       def initialize(service, identifier)
-        services = YAML.load_file(SERVICES_CONFIG_FILE)
-        host = services[service][:host][ENV['RAILS_ENV']]
+        services = YAML.load_file(SERVICES_CONFIG_FILE)[ENV['RAILS_ENV']]
+        host = services[service][:host]
         path = services[service][:path][identifier]
+        path = "/" if path.blank?
         @resource = URI.join(host, path)
       end
 
