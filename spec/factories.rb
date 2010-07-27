@@ -117,3 +117,12 @@ Factory.define :publication do |pub|
   pub.abstract         "boogadeehoo"
   pub.title            "title"
 end
+
+Factory.define :approval do |a|
+  a.tracking_number "tracking_number"
+  a.approval_type "Other"
+  a.project_title "project_title"
+  a.approval_date Time.now
+  a.nucats_assisted false
+  a.principal_investigator "principal_investigator"
+end

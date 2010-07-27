@@ -31,6 +31,8 @@ class Service < ActiveRecord::Base
   aasm_state :initiated
   aasm_state :identified
   aasm_state :choose_awards
+  aasm_state :choose_publications
+  aasm_state :choose_approvals
   aasm_state :choose_organizational_units
   
   aasm_event :set_service_line do
@@ -49,10 +51,11 @@ class Service < ActiveRecord::Base
     transitions :to => :identified, :from => [:initiated]
   end
   
+  aasm_event :project_approvals_chosen do
+    transitions :to => :choose_organizational_units, :from => [:choose_approvals]
+  end
+  
   def update_state
-
-    Rails.logger.debug("~~~ state = #{self.state}")
-
     case self.state
     when "new"
       self.set_service_line! unless self.service_line.blank?
@@ -63,6 +66,8 @@ class Service < ActiveRecord::Base
       self.initiate!         unless self.service_line.blank?
     when "initiated"
       self.update_person!
+    when "choose_approvals"
+      self.project_approvals_chosen!
     end
   end
 

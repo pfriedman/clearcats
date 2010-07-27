@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tracking_number: MyString
+  approval_type: MyString
+  project_title: MyString
+  approval_date: MyString
+  nucats_assisted: false
+  principal_investigator: MyString
+
+two:
+  tracking_number: MyString
+  approval_type: MyString
+  project_title: MyString
+  approval_date: MyString
+  nucats_assisted: false
+  principal_investigator: MyString

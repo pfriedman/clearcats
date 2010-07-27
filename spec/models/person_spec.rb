@@ -59,33 +59,34 @@ describe Person do
   
   it { should have_and_belong_to_many(:institution_positions) }
   
-  # it { should have_many(:awards) }
-  # it { should have_many(:publications) }
+  it { should have_many(:awards) }
+  it { should have_many(:publications) }
+  it { should have_many(:approvals) }
   
-  # context "with awards" do
-  #   
-  #   it "should find awards for a particular ctsa_award_type" do
-  #     person      = Factory(:person)
-  #     phs_org     = Factory(:phs_organization)
-  #     non_phs_org = Factory(:non_phs_organization)
-  #     activity    = Factory(:activity_code) 
-  #     award       = Factory(:award, :ctsa_award_type => activity, :person => person)
-  #     
-  #     person.awards.should_not be_empty
-  #     person.awards.first.should == award
-  #     
-  #     award_for_ctsa_award_type = person.awards_for_ctsa_award_type(non_phs_org)
-  #     award_for_ctsa_award_type.should be_empty
-  #     
-  #     award_for_ctsa_award_type = person.awards_for_ctsa_award_type(phs_org)
-  #     award_for_ctsa_award_type.should be_empty
-  #     
-  #     award_for_ctsa_award_type = person.awards_for_ctsa_award_type(activity)
-  #     award_for_ctsa_award_type.should_not be_empty
-  #     
-  #   end
-  #   
-  # end
+  context "with awards" do
+    
+    it "should find awards for a particular ctsa_award_type" do
+      person      = Factory(:person)
+      phs_org     = Factory(:phs_organization)
+      non_phs_org = Factory(:non_phs_organization)
+      activity    = Factory(:activity_code) 
+      award       = Factory(:award, :ctsa_award_type => activity, :person => person)
+      
+      person.awards.should_not be_empty
+      person.awards.first.should == award
+      
+      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(non_phs_org)
+      award_for_ctsa_award_type.should be_empty
+      
+      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(phs_org)
+      award_for_ctsa_award_type.should be_empty
+      
+      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(activity)
+      award_for_ctsa_award_type.should_not be_empty
+      
+    end
+    
+  end
   
   
 end

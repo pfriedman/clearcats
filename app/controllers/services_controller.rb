@@ -37,18 +37,18 @@ class ServicesController < ApplicationController
   end
   
   def edit
-    @service = Service.find(params[:id])
+    get_service
   end
   
   def update_person
-    @service = Service.find(params[:id])
+    get_service
     @service.person.update_attributes(params[:person])
     @service.update_state
     determine_redirect
   end
 
   def continue
-    @service = Service.find(params[:id])
+    get_service
     if params[:service]
       @service.update_attributes(params[:service])
       @service.update_state
@@ -57,14 +57,14 @@ class ServicesController < ApplicationController
   end
   
   def update
-    @service = Service.find(params[:id])
+    get_service
     @service.update_attributes(params[:service])
     @service.update_state
     determine_redirect
   end
   
   def identified
-    @service = Service.find(params[:id])
+    get_service
     if request.put?
       @service.update_attributes(params[:service])
       # @service.update_state
@@ -73,11 +73,11 @@ class ServicesController < ApplicationController
   end
   
   def choose_organizational_units
-    @service = Service.find(params[:id])
+    get_service
   end
   
   def choose_publications
-    @service = Service.find(params[:id])
+    get_service
     LatticeGridWebService.investigator_publications_search(@service.person.netid)
     
     params[:search] ||= Hash.new
@@ -88,13 +88,24 @@ class ServicesController < ApplicationController
   end
   
   def choose_awards
-    @service = Service.find(params[:id])
+    get_service
     FacultyWebService.awards_for_employee({:employeeid => @service.person.employeeid})
     params[:search] ||= Hash.new
     params[:search][:person_id] = @service.person.id
     params[:search][:order] ||= "ascend_by_project_period_start_date"
     @search_params = params[:search]
     @awards = Award.search(@search_params)
+  end
+  
+  def choose_approvals
+    get_service
+  end
+  
+  def update_approvals
+    get_service
+    @service.person.update_attributes(params[:person])
+    @service.update_state
+    determine_redirect
   end
   
   # GET /services/wizard

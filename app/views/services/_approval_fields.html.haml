@@ -1,0 +1,17 @@
+%tr.approval.fields
+  %td
+    = f.select(:approval_type, Approval::TYPES, { :include_blank => "-- Select Approval Type --"})
+  %td
+    = f.text_field :tracking_number
+  %td
+    = f.text_field :institution
+  %td
+    = f.text_field :project_title
+  %td
+    = f.text_field :approval_date, :class => "datepicker"
+  %td
+    = f.text_field :principal_investigator
+  %td
+    = f.check_box :nucats_assisted
+  %td
+    = link_to_remove_fields 'Remove', f

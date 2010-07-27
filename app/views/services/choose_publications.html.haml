@@ -1,8 +1,7 @@
 - stylesheet "services"
 - title "New Service - Choose Publications"
 
-%p
-  = @service.state
+= render "menu"
 
 %p
   Publications PMCIDs that resulted from support from this program.
@@ -10,7 +9,7 @@
 = render '/publications/list', :service => @service, :publications => @publications, :person => @service.person, :search_params => @search_params
 
 - form_for @service do |f|
-  = hidden_field_tag "service[state]", "choose_pending_approvals"
+  = hidden_field_tag "service[state]", "choose_approvals"
   = f.submit "Continue", :disable_with => 'Continuing...'
 
 #modal_window

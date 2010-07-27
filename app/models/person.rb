@@ -32,7 +32,8 @@ class Person < ActiveRecord::Base
   belongs_to :department
 
   has_many :awards
-  # has_many :publications
+  has_many :publications
+  has_many :approvals
   has_and_belongs_to_many :institution_positions
     
   belongs_to :country
@@ -45,7 +46,8 @@ class Person < ActiveRecord::Base
   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
   
   accepts_nested_attributes_for :awards, :allow_destroy => true
-  # accepts_nested_attributes_for :publications, :allow_destroy => true
+  accepts_nested_attributes_for :publications, :allow_destroy => true
+  accepts_nested_attributes_for :approvals, :allow_destroy => true
   
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
@@ -69,8 +71,8 @@ class Person < ActiveRecord::Base
     end
   end
   
-  # def awards_for_ctsa_award_type(ctsa_award_type)
-  #   self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
-  # end
+  def awards_for_ctsa_award_type(ctsa_award_type)
+    self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
+  end
   
 end

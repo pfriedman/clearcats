@@ -1,8 +1,8 @@
+- stylesheet "services"
 - title "New Service - Choose Organizational Units"
 
-%p
-  = @service.state
-  
+= render "menu"
+
 - form_for @service do |f|
   #organizational_unit_services_rendered
     .instructions

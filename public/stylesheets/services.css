@@ -26,3 +26,18 @@
 .publications #publication_title {
   width: 45em;
 }
+
+ul#service_menu {
+  padding: 0;
+}
+
+ul#service_menu li {
+  display: inline-block;
+  border-right: 5px solid #A3A3A3;
+  width: 15em;
+  padding-left: 1em;
+}
+
+.datepicker {
+  width: 7.5em;
+}
