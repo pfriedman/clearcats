@@ -31,40 +31,44 @@ describe Service do
     end
     
     context "transitioning from new" do
+      
+      before(:each) do
+        @svc = Factory(:service, :person => nil, :service_line => nil) 
+        @svc.should be_new
+        @person   = Factory(:person)
+        @svc_line = Factory(:service_line)
+      end
     
       it "should transition into the choose_service_line state after assigned to a person" do
-        svc = Factory(:service, :person => nil, :service_line => nil)
-        svc.should be_new
-
-        svc.person = Factory(:person)
-        svc.save!
-      
-        svc.should be_choose_service_line
+        @svc.person = @person
+        @svc.save!
+        @svc.should be_choose_service_line
       end
     
       it "should transition into the choose_person state after assigned to a service line" do
-        svc = Factory(:service, :person => nil, :service_line => nil)
-        svc.should be_new
-
-        svc.service_line = Factory(:service_line)
-        svc.save!
-      
-        svc.should be_choose_person
+        @svc.service_line = @svc_line
+        @svc.save!      
+        @svc.should be_choose_person
       end
       
       it "should become 'initiatied' once a person and service line are set" do
-        svc = Factory(:service, :person => nil, :service_line => nil)
-        svc.should be_new
-
-        svc.service_line = Factory(:service_line)
-        svc.save!
+        @svc.service_line = @svc_line
+        @svc.save!
+        @svc.should be_choose_person
+        
+        @svc.person = @person
+        @svc.save!
+        @svc.should be_initiated
+      end
       
-        svc.should be_choose_person
-        
-        svc.person = Factory(:person)
-        svc.save!
-        
-        svc.should be_initiated
+      it "should become 'initiatied' once a person and service line are set" do
+        @svc.person = @person
+        @svc.save!
+        @svc.should be_choose_service_line
+
+        @svc.service_line = @svc_line
+        @svc.save!
+        @svc.should be_initiated
       end
       
     end

@@ -54,7 +54,8 @@ describe FacultyWebService do
       end
     end
     
-    context "awards and grantmakers" do
+    context "grantmakers" do
+      
       it "should locate all the organizations that have given awards to NU Faculty" do
         FacultyWebService.stub!(:make_request).and_return(organizations_response)
         results = FacultyWebService.award_organizations
@@ -64,7 +65,16 @@ describe FacultyWebService do
         result.class.should == Organization
         result.name.should == "3M Company"
       end
+      
+      it "should catch any exception and return no results" do
+        FacultyWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
+        results = FacultyWebService.award_organizations
+        results.should be_empty
+      end
+    end
 
+    context "awards" do
+      
       it "should locate awards for a particular nu employee" do
         FacultyWebService.stub!(:make_request).and_return(awards_response)
         results = FacultyWebService.awards_for_employee({:employeeid => "1000176"})
@@ -78,10 +88,12 @@ describe FacultyWebService do
       
       it "should catch any exception and return no results" do
         FacultyWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
-        results = FacultyWebService.award_organizations
+        results = FacultyWebService.awards_for_employee({:employeeid => "1000176"})
         results.should be_empty
       end
+      
     end
+
   end
 end
 

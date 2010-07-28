@@ -15,13 +15,11 @@ end
 Factory.define :non_phs_organization, :class => "NonPhsOrganization" do |org|
   org.code "npo code"
   org.name "non_phs_organization name"
-  # org.type "NonPhsOrganization"
 end
 
 Factory.define :phs_organization, :class => "PhsOrganization" do |org|
   org.code "po code"
   org.name "phs_organization name"
-  # org.type "PhsOrganization"
 end
 
 Factory.define :country do |c|
@@ -29,12 +27,10 @@ Factory.define :country do |c|
 end
 
 Factory.define :degree_type_one, :class => "DegreeTypeOne" do |dt|
-  # dt.type "DegreeTypeOne"
   dt.name "dt1 name"
 end
 
 Factory.define :degree_type_two, :class => "DegreeTypeTwo" do |dt|
-  # dt.type "DegreeTypeTwo"
   dt.name "dt2 name"
 end
 

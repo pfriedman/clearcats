@@ -15,7 +15,7 @@ Feature: Editing an existing service
     | How to write a K Award |
     And a service "How to write a K Award" for person "wakibbe" having been initiated by the logged in user
     And a service "CRC Basic Training" for person "pgreenld" having been initiated by the logged in user
-    When I go to the new service page
+    And I am on the new service page
     Then I should see "Services In Process"
     And I should see "Warren Kibbe"
     And I should see "How to write a K Award"

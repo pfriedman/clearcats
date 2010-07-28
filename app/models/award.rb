@@ -45,7 +45,6 @@ class Award < ActiveRecord::Base
   belongs_to :ctsa_award_type, :polymorphic => true
   
   belongs_to :sponsor
-  belongs_to :department
 
   # attributes from faculty_web_service that are not persisted
   attr_accessor :nu_employee_id, :first_name, :last_name, :middle_name
@@ -83,6 +82,18 @@ class Award < ActiveRecord::Base
     self.parent_institution_number = num
   end
   
+  # Sponsor
+  
+  def sponsor_name
+    self.sponsor.to_s
+  end
+  
+  def sponsor_name=(sponsor_name)
+    self.sponsor = Sponsor.find_or_create_by_name(sponsor_name)
+  end
+  
+  # CTSA award type 
+  
   def phs_organization=(id)
     if !id.blank?
       self.ctsa_award_type_id = id.to_i
@@ -102,15 +113,6 @@ class Award < ActiveRecord::Base
       self.ctsa_award_type_id = id.to_i
       self.ctsa_award_type_type = "ActivityCode"
     end
-  end
-  
-  def sponsor_name
-    self.sponsor.to_s
-  end
-  
-  def sponsor_name=(sponsor_name)
-    s = Sponsor.find_or_create_by_name(sponsor_name)
-    self.sponsor = s
   end
   
   def phs_organization

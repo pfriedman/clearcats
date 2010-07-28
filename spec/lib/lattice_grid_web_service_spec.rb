@@ -4,23 +4,43 @@ describe LatticeGridWebService do
 
   context "calling lattice grid" do
     
-    it "should return faculty members who match a mesh term" do
-      person = Factory(:person)
-      FacultyWebService.stub!(:locate_one).and_return(person)
-      LatticeGridWebService.stub!(:make_request).and_return(investigators_response)
-      results = LatticeGridWebService.investigators_search('genetics')
-      results.size.should == 3
-      results.first.class.should == Person
+    context "to discover investigators" do
+    
+      it "should return faculty members who match a mesh term" do
+        person = Factory(:person)
+        FacultyWebService.stub!(:locate_one).and_return(person)
+        LatticeGridWebService.stub!(:make_request).and_return(investigators_response)
+        results = LatticeGridWebService.investigators_search('genetics')
+        results.size.should == 3
+        results.first.class.should == Person
+      end
+      
+      it "should catch any exception and return no results" do
+        LatticeGridWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
+        results = LatticeGridWebService.investigators_search('genetics')
+        results.should be_empty
+      end
+      
     end
 
-    it "should return publication information for an investigator" do
-      person = Factory(:person)
-      FacultyWebService.stub!(:locate_one).and_return(person)
-      LatticeGridWebService.stub!(:make_request).and_return(publications_reponse)
-      results = LatticeGridWebService.investigator_publications_search('wakibbe')
-      results.size.should == 2
-      results.first.class.should == Publication
-      results.first.pmid.should == "20180973"
+    context "to discover publications" do
+
+      it "should return publication information for an investigator" do
+        person = Factory(:person)
+        FacultyWebService.stub!(:locate_one).and_return(person)
+        LatticeGridWebService.stub!(:make_request).and_return(publications_reponse)
+        results = LatticeGridWebService.investigator_publications_search('wakibbe')
+        results.size.should == 2
+        results.first.class.should == Publication
+        results.first.pmid.should == "20180973"
+      end
+      
+      it "should catch any exception and return no results" do
+        LatticeGridWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
+        results = LatticeGridWebService.investigator_publications_search('jdoe')
+        results.should be_empty
+      end
+      
     end
 
   end

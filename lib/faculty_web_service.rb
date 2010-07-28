@@ -89,8 +89,6 @@ class FacultyWebService
         path += "organizations"
       elsif !params[:employeeid].blank?
         path += "list/#{URI::escape(params[:employeeid])}"
-      else
-        # NOOP
       end
 
       uri = URI.parse(url + path)

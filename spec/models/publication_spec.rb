@@ -23,5 +23,10 @@ describe Publication do
     Factory(:publication)
   end
   
+  it "should alias the older pmid (pubmed id) as pubmed" do
+    pub = Factory(:publication)
+    pub.pubmed.should == pub.pmid
+  end
+  
   it { should belong_to(:person) }
 end
