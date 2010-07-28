@@ -9,6 +9,8 @@
 - form_for @service.person, :url => { :controller => "services", :action => "update_approvals", :id => @service.id } do |f|
   = f.error_messages
 
+  = hidden_field_tag "service[state]", 
+
   %h4 Approvals
   %table{ :class => "records approvals" }
     %thead

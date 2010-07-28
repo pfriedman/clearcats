@@ -27,20 +27,20 @@ Feature: Creating a new service
     Then I should see "Service was successfully created."
     And I should see "Please select client"
     
-    Scenario: Creating a new service starting with a client selection
-      Given a person having the name "Warren Kibbe" and the username "wakibbe"
-      When I go to the new service page
-      Then I should see "Choose Client"
-      And I should see "Choose Service Line"
-      When I follow "Choose Client"
-      Then I should see "Please select client"
-      When I fill in "Net ID" with "wakibbe"
-      And I press "Search"
-      Then I should see "Kibbe"
-      And I should see "Warren"
-      And I should see "wakibbe"
-      When I choose "service[person_id]"
-      And I press "Save"
-      Then I should see "Service was successfully created."
-      And I should see "Choose Service Line"
+  Scenario: Creating a new service starting with a client selection
+    Given a person having the name "Warren Kibbe" and the username "wakibbe"
+    When I go to the new service page
+    Then I should see "Choose Client"
+    And I should see "Choose Service Line"
+    When I follow "Choose Client"
+    Then I should see "Please select client"
+    When I fill in "Net ID" with "wakibbe"
+    And I press "Search"
+    Then I should see "Kibbe"
+    And I should see "Warren"
+    And I should see "wakibbe"
+    When I choose "service[person_id]"
+    And I press "Save"
+    Then I should see "Service was successfully created."
+    And I should see "Choose Service Line"
       

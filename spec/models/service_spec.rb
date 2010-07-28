@@ -20,12 +20,94 @@ describe Service do
   it "should create a new instance given valid attributes" do
     Factory(:service)
   end
-  
-  it "should start in the new state" do
-    svc = Factory(:service, :person => nil, :service_line => nil)
-    svc.should be_new
-  end
-  
+    
   it { should belong_to(:created_by) }
+  
+  context "state" do
+  
+    it "should start in the new state" do
+      svc = Factory(:service, :person => nil, :service_line => nil)
+      svc.should be_new
+    end
+    
+    context "transitioning from new" do
+    
+      it "should transition into the choose_service_line state after assigned to a person" do
+        svc = Factory(:service, :person => nil, :service_line => nil)
+        svc.should be_new
+
+        svc.person = Factory(:person)
+        svc.save!
+      
+        svc.should be_choose_service_line
+      end
+    
+      it "should transition into the choose_person state after assigned to a service line" do
+        svc = Factory(:service, :person => nil, :service_line => nil)
+        svc.should be_new
+
+        svc.service_line = Factory(:service_line)
+        svc.save!
+      
+        svc.should be_choose_person
+      end
+      
+      it "should become 'initiatied' once a person and service line are set" do
+        svc = Factory(:service, :person => nil, :service_line => nil)
+        svc.should be_new
+
+        svc.service_line = Factory(:service_line)
+        svc.save!
+      
+        svc.should be_choose_person
+        
+        svc.person = Factory(:person)
+        svc.save!
+        
+        svc.should be_initiated
+      end
+      
+    end
+    
+    context "transitioning from a post initiated state" do
+      
+      it "should not be able to become 'uninitiated' after being initiated" do
+        svc = Factory(:service)
+        svc.should be_initiated
+        
+        svc.person = nil
+        svc.save!
+        
+        svc.should be_initiated
+        svc.person.should_not be_nil
+        
+        svc.service_line = nil
+        svc.save!
+
+        svc.should be_initiated
+        svc.service_line.should_not be_nil
+      end
+    
+      it "should know the order (if any)"
+      
+    end
+    
+    it "should know all the possible states" do
+      Service.aasm_states.size.should == 9
+      Service.aasm_states.include?(:new).should be_true
+      Service.aasm_states.include?(:choose_person).should be_true
+      Service.aasm_states.include?(:choose_service_line).should be_true
+      Service.aasm_states.include?(:initiated).should be_true
+      Service.aasm_states.include?(:identified).should be_true
+      Service.aasm_states.include?(:choose_awards).should be_true
+      Service.aasm_states.include?(:choose_publications).should be_true
+      Service.aasm_states.include?(:choose_approvals).should be_true
+      Service.aasm_states.include?(:choose_organizational_units).should be_true
+      
+      Service.aasm_states.include?(:asdf).should_not be_true
+    end
+    
+    
+  end
 
 end

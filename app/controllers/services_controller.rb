@@ -27,8 +27,7 @@ class ServicesController < ApplicationController
     @service = Service.new(params[:service])
     @service.created_by = find_or_create_user
 
-    if @service.save
-      @service.update_state
+    if @service.save!
       flash[:notice] = 'Service was successfully created.'
       determine_redirect
     else
@@ -41,33 +40,21 @@ class ServicesController < ApplicationController
   end
   
   def update_person
-    get_service
-    @service.person.update_attributes(params[:person])
-    @service.update_state
-    determine_redirect
+    process_request
   end
 
   def continue
-    get_service
-    if params[:service]
-      @service.update_attributes(params[:service])
-      @service.update_state
-    end
-    determine_redirect
+    process_request
   end
   
   def update
-    get_service
-    @service.update_attributes(params[:service])
-    @service.update_state
-    determine_redirect
+    process_request
   end
   
   def identified
     get_service
-    if request.put?
-      @service.update_attributes(params[:service])
-      # @service.update_state
+    if !request.get?
+      update_service
       determine_redirect
     end
   end
@@ -102,23 +89,17 @@ class ServicesController < ApplicationController
   end
   
   def update_approvals
-    get_service
-    @service.person.update_attributes(params[:person])
-    @service.update_state
-    determine_redirect
+    process_request
   end
   
-  # GET /services/wizard
-  # def wizard
-  #   @service_line = ServiceLine.find_by_id(params[:service_line_id])
-  #   @service = params[:id] ? Service.find(params[:id]) : Service.create!(:service_line => @service_line)
-  #   
-  #   @service.send "#{params[:aasm_action]}!" if params[:aasm_action]
-  #   
-  #   render
-  # end
   
   private 
+  
+    def process_request
+      get_service
+      update_service
+      determine_redirect
+    end
   
     def get_service
       if params[:id]
@@ -126,6 +107,11 @@ class ServicesController < ApplicationController
       else
         @service = Service.new
       end
+    end
+    
+    def update_service
+      @service.person.update_attributes(params[:person]) if params[:person]
+      @service.update_attributes(params[:service])       if params[:service]
     end
     
     def determine_redirect

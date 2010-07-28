@@ -47,25 +47,45 @@ class Service < ActiveRecord::Base
     transitions :to => :initiated, :from => [:choose_service_line, :choose_person]
   end
   
-  aasm_event :update_person do
-    transitions :to => :identified, :from => [:initiated]
-  end
-  
   aasm_event :project_approvals_chosen do
     transitions :to => :choose_organizational_units, :from => [:choose_approvals]
   end
   
+  
+  def person=(person)
+    self.person_id = person.id if person
+  end
+  
+  def person_id=(person_id)
+    if person_id
+      self.write_attribute(:person_id, person_id)
+      update_state
+    end    
+  end
+  
+  def service_line=(service_line)
+    self.service_line_id = service_line.id if service_line
+  end
+  
+  def service_line_id=(service_line_id)
+    if service_line_id
+      self.write_attribute(:service_line_id, service_line_id)
+      update_state
+    end
+  end
+  
   def update_state
+    
+    Rails.logger.info("~~~ Service#update_state - [#{self.state}]")
+    
     case self.state
-    when "new"
-      self.set_service_line! unless self.service_line.blank?
-      self.identify!         unless self.person.blank?
+    when "new", nil
+      self.set_service_line! unless self.service_line_id.blank?
+      self.identify!         unless self.person_id.blank?
     when "choose_person"
-      self.initiate!         unless self.person.blank?
+      self.initiate!         unless self.person_id.blank?
     when "choose_service_line"
-      self.initiate!         unless self.service_line.blank?
-    when "initiated"
-      self.update_person!
+      self.initiate!         unless self.service_line_id.blank?
     when "choose_approvals"
       self.project_approvals_chosen!
     end
