@@ -127,4 +127,37 @@ class Award < ActiveRecord::Base
     ctsa_award_type if ctsa_award_type and ctsa_award_type.type == "ActivityCode"
   end
   
+  # formatted date fields
+  def formatted_budget_period_start_date
+    self.budget_period_start_date.strftime("%m/%d/%Y") unless self.budget_period_start_date.nil?
+  end
+  
+  def formatted_budget_period_start_date=(dt)
+    self.budget_period_start_date = dt
+  end
+
+  def formatted_budget_period_end_date
+    self.budget_period_end_date.strftime("%m/%d/%Y") unless self.budget_period_end_date.nil?
+  end
+  
+  def formatted_budget_period_end_date=(dt)
+    self.budget_period_end_date = dt
+  end
+  
+  def formatted_project_period_start_date
+    self.project_period_start_date.strftime("%m/%d/%Y") unless self.project_period_start_date.nil?
+  end
+  
+  def formatted_project_period_start_date=(dt)
+    self.project_period_start_date = dt
+  end
+
+  def formatted_project_period_end_date
+    self.project_period_end_date.strftime("%m/%d/%Y") unless self.project_period_end_date.nil?
+  end
+  
+  def formatted_project_period_end_date=(dt)
+    self.project_period_end_date = dt
+  end
+  
 end

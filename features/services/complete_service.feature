@@ -31,3 +31,10 @@ Feature: Creating a new service
     When I fill in "award_sponsor_award_number" with "new_award_sponsor_award_number"
     And I press "Save"
     Then I should see "new_award_sponsor_award_number"
+    When I go to the service choose publications page
+    Then I should see "Some aspects of analysis of gene array data."
+    When I follow "Edit" 
+    Then I should see "PMCID to PMID Converter"
+    And the "publication_title" field should contain "Some aspects of analysis of gene array data."
+    
+    

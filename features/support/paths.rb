@@ -34,6 +34,9 @@ module NavigationHelpers
       
     when /the service choose awards page/
       choose_awards_service_path(Service.last)
+      
+    when /the service choose publications page/
+      choose_publications_service_path(Service.last)
 
     when /the edit publication page for the "(.*)"/
       edit_publication_path(Publication.find_by_title($1))

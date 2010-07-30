@@ -4,10 +4,20 @@
 
 #modal_window {
   display: none;
+  height: 55em;
+  overflow: auto;
 }
 
 #modal_window .header_option {
-  float: right;
+  top: 0;
+  right: 0;
+  padding-top: .25em;
+  padding-right: 2em;
+  position: absolute;
+}
+
+#modal_window p {
+  margin: 0 0 0.5em 0;
 }
 
 #award_form select,
@@ -23,10 +33,6 @@
   margin-bottom: 0.25em;
 }
 
-.publications #publication_title {
-  width: 45em;
-}
-
 ul#service_menu {
   padding: 0;
 }
@@ -39,5 +45,20 @@ ul#service_menu li {
 }
 
 .datepicker {
-  width: 7.5em;
+  width: 7.5em !important;
+}
+
+.award_section {
+  border: 1px solid #ddd;
+  padding: 0.25em;
+  margin: 0.25em 0;
+  width: 34em;
+}
+
+.award_section p b {
+  font-size: 1.25em;
+}
+
+.buttons {
+  margin-top: 0.75em;
 }

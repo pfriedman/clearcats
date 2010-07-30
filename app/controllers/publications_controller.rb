@@ -1,4 +1,5 @@
 class PublicationsController < ApplicationController
+  layout nil
 
   # GET /publications/edit
   def edit
@@ -12,7 +13,7 @@ class PublicationsController < ApplicationController
       end
       format.js do
         @show_close_button = true
-        render 'edit', :layout => nil 
+        render 'edit'
       end
     end
   end
@@ -24,7 +25,7 @@ class PublicationsController < ApplicationController
     @publication    = Publication.find(params[:id])
     respond_to do |format|
       if @publication.update_attributes(params[:publication])
-        @publications = Publication.search(params[:search])
+        @publications = Publication.search(params[:search])        
         format.html do
           flash[:notice] = "Publication was successfully updated"
           redirect_to edit_publication_path(@publication)

@@ -7,39 +7,146 @@
   - form_remote_for @award, :html => { :id => "modal_edit_form"} do |f|
     - params[:search].each do |k, v| 
       = hidden_field_tag "search[#{k}]", v
-    %p
-      = f.check_box :nucats_assisted
-      = f.label :nucats_assisted, "NUCATS Assisted"
-    %p
-      = f.label :sponsor_name, "Sponsor"
-      %br
-      = f.text_field :sponsor_name
-    %p
-      = f.label :sponsor_award_number, "Sponsor Award Number"
-      %br
-      = f.text_field :sponsor_award_number
-    %p 
-      = f.label :grant_title, "Grant Title"
-      %br
-      = f.text_field :grant_title
-    %p
-      = f.label :budget_number, "Budget Number"
-      %br
-      = f.text_field :budget_number
-    %p
-      = f.label :phs_organization, "PHS Organization"
-      %br
-      = f.select(:phs_organization, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
-    %p
-      = f.label :activity_code, "Activity Code"
-      %br
-      = f.select(:activity_code, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
-    %p
-      = f.label :non_phs_organization, "Non PHS Organization"
-      %br
-      = f.select(:non_phs_organization, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
+
+    .award_section
+      %p
+        %b Award Details
+      %p
+        = f.check_box :nucats_assisted
+        = f.label :nucats_assisted, "NUCATS Assisted"
+      %p
+        = f.label :sponsor_name, "Sponsor"
+        %br
+        = f.text_field :sponsor_name
+      %p
+        = f.label :sponsor_award_number, "Sponsor Award Number"
+        %br
+        = f.text_field :sponsor_award_number
+      %p 
+        = f.label :grant_title, "Grant Title"
+        %br
+        = f.text_field :grant_title
+      %p
+        = f.label :budget_number, "Budget Number"
+        %br
+        = f.text_field :budget_number
+      %p
+        = f.label :grant_number, "Grant Number"
+        %br
+        = f.text_field :grant_number
+      %p
+        = f.label :grant_amount, "Grant Amount"
+        %br
+        = f.text_field :grant_amount
+      %p
+        = f.label :years_of_award, "Years Of Award"
+        %br
+        = f.text_field :years_of_award
+      %p
+        = f.label :role, "Role"
+        %br
+        = f.text_field :role
+      %p
+        = f.label :institution_number, "Institution Number"
+        %br
+        = f.text_field :institution_number
+      %p
+        = f.label :parent_institution_number, "Parent Institution Number"
+        %br
+        = f.text_field :parent_institution_number
+      %p
+        = f.label :subproject_number, "Subproject Number"
+        %br
+        = f.text_field :subproject_number
+      %p
+        = f.label :proposal_status, "Proposal Status"
+        %br
+        = f.text_field :proposal_status
+      %p
+        = f.label :award_status, "Award Status"
+        %br
+        = f.text_field :award_status
+    
+    .award_section
+      %p
+        %b CTSA Award Type
+      %p
+        = f.label :ctsa_award_type_award_number, "CTSA Award Number"
+        %br
+        = f.text_field :ctsa_award_type_award_number
+      %p
+        = f.label :phs_organization, "PHS Organization"
+        %br
+        = f.select(:phs_organization, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
+      %p
+        = f.label :activity_code, "Activity Code"
+        %br
+        = f.select(:activity_code, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
+      %p
+        = f.label :non_phs_organization, "Non PHS Organization"
+        %br
+        = f.select(:non_phs_organization, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
+
+    .award_section
+      %p
+        %b Budget Information
+      %p
+        = f.label :budget_period, "Budget Period"
+        %br
+        = f.text_field :budget_period
+      %p
+        = f.label :formatted_budget_period_start_date, "Budget Period Start Date"
+        %br
+        = f.text_field :formatted_budget_period_start_date, :class => "datepicker"
+      %p
+        = f.label :formatted_budget_period_end_date, "Budget Period End Date"
+        %br
+        = f.text_field :formatted_budget_period_end_date, :class => "datepicker"
+      %p
+        = f.label :budget_period_direct_cost, "Budget Period Direct Cost"
+        %br
+        = f.text_field :budget_period_direct_cost
+      %p
+        = f.label :budget_period_direct_and_indirect_cost, "Budget Period Direct And Indirect Cost"
+        %br
+        = f.text_field :budget_period_direct_and_indirect_cost
+
+    .award_section
+      %p
+        %b Project Information
+      %p
+        = f.label :formatted_project_period_start_date, "Project Period Start Date"
+        %br
+        = f.text_field :formatted_project_period_start_date, :class => "datepicker"
+      %p
+        = f.label :formatted_project_period_end_date, "Project Period End Date"
+        %br
+        = f.text_field :formatted_project_period_end_date, :class => "datepicker"
+      %p
+        = f.label :project_period_total_cost, "Project Period Total Cost"
+        %br
+        = f.text_field :project_period_total_cost
+      %p
+        = f.label :total_project_cost, "Total Project Cost"
+        %br
+        = f.text_field :total_project_cost
+      %p
+        = f.label :direct_amount, "Direct Amount"
+        %br
+        = f.text_field :direct_amount
+      %p
+        = f.label :indirect_amount, "Indirect Amount"
+        %br
+        = f.text_field :indirect_amount
+      %p
+        = f.label :total_amount, "Total Amount"
+        %br
+        = f.text_field :total_amount
 
     .buttons
       = hidden_field_tag :service_id, @service.id
       = f.hidden_field :person_id
       = f.submit "Save", :class => "close"
+      
+      / #  investigator_id                        :integer
+      / #  originating_sponsor_id                 :integer

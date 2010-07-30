@@ -2,6 +2,9 @@
 - javascript "jquery.blockUI", "modal_form"
 - title "New Service - Choose Awards"
 
+:javascript
+  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+
 = render "menu"
 
 %p

@@ -32,5 +32,13 @@ class Publication < ActiveRecord::Base
   def pubmed
     self.pmid
   end
+  
+  def formatted_publication_date
+    self.publication_date.strftime("%m/%d/%Y") unless self.project_period_start_date.nil?
+  end
+
+  def formatted_publication_date=(dt)
+    self.publication_date = dt
+  end
 
 end

@@ -69,7 +69,7 @@ class ServicesController < ApplicationController
     
     params[:search] ||= Hash.new
     params[:search][:person_id] = @service.person.id
-    params[:search][:order] ||= "ascend_by_project_period_start_date"
+    params[:search][:order] ||= "ascend_by_publication_date"
     @search_params = params[:search]
     @publications = Publication.search(@search_params)
   end
