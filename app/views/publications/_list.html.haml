@@ -3,29 +3,8 @@
   %h3 Publications for #{person}
   
   - if publications
-
-    %table.records
-      %tr
-        %th Select
-        %th
-          = order publications, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-        %th
-          = order publications, :by => :pmcid, :as => "PMCID", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-        %th
-          = order publications, :by => :pmid, :as => "PMID", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-        %th
-          = order publications, :by => :nihms_number, :as => "NIHMS Number", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-        %th
-          = order publications, :by => :publication_date, :as => "Publication Date", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-        %th
-          = order publications, :by => :title, :as => "Title", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
-      - publications.each do |pub|
-        %tr{ :class => cycle('even_record', 'odd_record') }
-          %td 
-            = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :service_id => service.id, :search => params[:search] }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
-          %td= h pub.nucats_assisted? ? "Yes" : "No"
-          %td= h pub.pmcid
-          %td= h pub.pmid
-          %td= h pub.nihms_number
-          %td= h pub.publication_date
-          %td= h pub.title
+  
+    - if service
+      = render 'publications/service_publications_table', :publications => publications, :service => service
+    - else
+      = render 'publications/publications_table', :publications => publications

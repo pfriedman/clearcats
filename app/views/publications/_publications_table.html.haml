@@ -1,0 +1,19 @@
+%table.records
+  %tr
+    %th Select
+    %th NUCATS Assisted
+    %th PMCID
+    %th PMID
+    %th NIHMS Number
+    %th Publication Date
+    %th Title
+  - publications.each do |pub|
+    %tr{ :class => cycle('even_record', 'odd_record') }
+      %td 
+        = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub }, { :class => "edit_link icon_link" }
+      %td= h pub.nucats_assisted? ? "Yes" : "No"
+      %td= h pub.pmcid
+      %td= h pub.pmid
+      %td= h pub.nihms_number
+      %td= h pub.publication_date
+      %td= h pub.title

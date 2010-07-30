@@ -3,6 +3,8 @@ require 'uri'
 
 class FacultyWebService
 
+  NON_SSL_ENVS = ["development", "test", "cucumber", "culerity"]
+
   DEFAULT_HOST_URL = "https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/"
   # url to faculty_ws on staging: https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/
   #
@@ -126,7 +128,7 @@ class FacultyWebService
 
     def self.make_request(uri, req)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true unless ["development", "test", "cucumber"].include?(Rails.env)
+      http.use_ssl = true unless NON_SSL_ENVS.include?(Rails.env)
       resp = http.start { |h| h.request(req) }
       return resp
     end

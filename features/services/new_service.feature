@@ -3,16 +3,15 @@ Feature: Creating a new service
   A user is expected to login
   And enter the required data for that service
   
-  Background: with an authenticated user
-    Given an authenticated user
-  
   Scenario: Creating a new service
+    Given an authenticated user
     When I go to the new service page
     Then I should see "Choose Client"
     And I should see "Choose Service Line"
     
   Scenario: Creating a new service starting with a service line selection
-    Given an organizational_unit "CECD" with these service_lines:
+    Given an authenticated user
+    And an organizational_unit "CECD" with these service_lines:
       | name                   |
       | CRC Basic Training     |
       | How to write a K Award |
@@ -28,7 +27,8 @@ Feature: Creating a new service
     And I should see "Please select client"
     
   Scenario: Creating a new service starting with a client selection
-    Given a person having the name "Warren Kibbe" and the username "wakibbe"
+    Given an authenticated user
+    And a person having the name "Warren Kibbe" and the username "wakibbe"
     When I go to the new service page
     Then I should see "Choose Client"
     And I should see "Choose Service Line"
@@ -43,4 +43,5 @@ Feature: Creating a new service
     And I press "Save"
     Then I should see "Service was successfully created."
     And I should see "Choose Service Line"
+    
       
