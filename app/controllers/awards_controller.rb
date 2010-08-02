@@ -19,13 +19,15 @@ class AwardsController < ApplicationController
 
     respond_to do |format|
       if @award.save
-        @awards = Award.search(params[:search])
         format.js do
+          @awards = Award.search(params[:search])
           render :update do |page|
             page.replace "awards",
-              :partial => "/awards/list", :locals => { :service => @service, :awards => @awards, :person => @service.person, :search => params[:search] }
+              :partial => "/awards/list", :locals => { 
+                  :service => @service, :awards => @awards, :person => @service.person, :search => params[:search] }
           end
         end
+        format.html { redirect_to edit_award_url(@award) }
       else
         format.html { render :action => "new" }
       end
@@ -39,13 +41,16 @@ class AwardsController < ApplicationController
     @service        = Service.find(params[:service_id])
     respond_to do |format|
       if @award.update_attributes(params[:award])
-        @awards = Award.search(params[:search])
+        format.html { redirect_to edit_award_url(@award) }
         format.js do
+          @awards = Award.search(params[:search])
           render :update do |page|
             page.replace "awards",
-              :partial => "/awards/list", :locals => { :service => @service, :awards => @awards, :person => @service.person, :search => params[:search] }
+              :partial => "/awards/list", :locals => { 
+                  :service => @service, :awards => @awards, :person => @service.person, :search => params[:search] }
           end
         end
+        
       else
         format.html { render :action => "edit" }
       end
@@ -56,7 +61,7 @@ class AwardsController < ApplicationController
   
     def populate_common
       @search_params  = params[:search_params]
-      @service        = Service.find(params[:service_id])
+      @service        = Service.find(params[:service_id]) if params[:service_id]
 
       @non_phs_orgs   = NonPhsOrganization.all(:order => :code)
       @phs_orgs       = PhsOrganization.all(:order => :code)

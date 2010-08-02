@@ -14,7 +14,8 @@
 
 - form_for @service do |f|
   = hidden_field_tag "service[state]", "choose_publications"
-  = f.submit "Continue", :disable_with => 'Continuing...'
+  .buttons
+    = f.submit "Continue", :disable_with => 'Continuing...'
 
 
 #modal_window

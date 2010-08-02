@@ -1,17 +1,22 @@
+- stylesheet "services"
 - title "New Service - Choose Service Line"
 
 - form_for @service do |f|
   #projects
     %h3 Choose Service Line
-    %ul
+    %ul.service_lines
       - OrganizationalUnit.all(:order => :name).each do |ou|
         %li
-          = ou.name
           - if !ou.service_lines.blank?
-            %ul
+            %a{ :href => "javascript:{}", :onclick => "$('##{ou.abbreviation.downcase}').toggle(); return false;" }
+              = ou.name
+            %ul{ :class => "ou_service_lines", :id => "#{ou.abbreviation.downcase}"}
               - ou.service_lines.all(:order => "name").each do |svc_line|
                 %li 
                   = f.radio_button "service_line_id", svc_line.id
                   = f.label "service_line_id_#{svc_line.id}", svc_line.name
+          - else
+            %span 
+              = ou.name
     .buttons
       = f.submit "Save", :disable_with => 'Saving...'

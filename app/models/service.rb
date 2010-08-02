@@ -51,7 +51,6 @@ class Service < ActiveRecord::Base
     transitions :to => :choose_organizational_units, :from => [:choose_approvals]
   end
   
-  
   def person=(person)
     self.person_id = person.id if person
   end

@@ -1,3 +1,6 @@
+#
+# CECD - Center for Education and Career Development
+#
 summer_series:
   id: 1
   name: Clinical and Translational Research Summer Seminar Series
@@ -46,3 +49,137 @@ mini_sabb:
 eng_to_med:
   id: 16
   name: Engineering into Medicine, Post Doctoral Fellowship
+
+
+#
+# CRC - Center for Clinical Research
+#
+research_facilities:
+  id: 17
+  name: Clinical Research Facilities
+research_nursing:
+  id: 18
+  name: Research Nursing
+laboratory:
+  id: 19
+  name: Laboratory
+bionutrition:
+  id: 20
+  name: Bionutrition
+study_recruitment:
+  id: 21
+  name: Study Recruitment
+budget_and_financial_mgmt:
+  id: 22
+  name: Study Budget and Financial Management
+qa:
+  id: 23
+  name: Quality Assurance/Investigator Advocacy
+coord_svcs:
+  id: 24
+  name: Coordinator Services
+  
+
+#
+# CTI - Center for Translational Innovation
+#
+pilot_grants:
+  id: 25
+  name: Pilot Grants
+dixon_awards:
+  id: 26
+  name: Dixon Awards
+frb:
+  id: 27
+  name: Faculty Resource Bank
+invo:
+  id: 28
+  name: INVO
+inno2comm:
+  id: 29
+  name: Innovation to Commercialization
+tipi:
+  id: 30
+  name: Translational Investigator Pathway Initiative
+
+
+#
+# RTC - Research Team Support Program
+#
+cross_discipline:
+  id: 31
+  name: Cross-disciplinary research
+research_teams:
+  id: 32
+  name: Research Teams
+grantsmanship:
+  id: 33
+  name: Grantsmanship
+praxis:
+  id: 34
+  name: Praxis of Team Science
+collab_research:
+  id: 35
+  name: Collaboration Research
+collab_research_funding:
+  id: 36
+  name: Collaboration Research Funding Mechanisms
+team_science:
+  id: 37
+  name: Team Science Training
+catalytic_research:
+  id: 38
+  name: Catalytic Research Events
+supported_team:
+  id: 39
+  name: Supported Team Science Research
+team_science_conf:
+  id: 40
+  name: Science of Team Science Conference
+
+
+#
+# CERC - Community Engaged Research Center
+#
+alliance_for_research:
+  id: 41
+  name: Alliance for Research In Chicagoland Communities
+seed_grants:
+  id: 42
+  name: Seed Grants
+capacity_bldg:
+  id: 43
+  name: Capacity Building and Training
+partner_facilitation:
+  id: 44
+  name: Partnership Facilitation
+proposal_prep:
+  id: 45
+  name: Proposal Preparation
+reach_net:
+  id: 46
+  name: Reach Network
+seed_grants:
+  id: 47
+  name: Seed Grants
+comm_practice:
+  id: 48
+  name: Community Practice Resources
+comm_health:
+  id: 49
+  name: Community Health Training and Education
+practice_based:
+  id: 50
+  name: Practice-Based Research
+edu_and_net:
+  id: 51
+  name: Education and Networking
+wkshops:
+  id: 52
+  name: Workshops
+resource_ref:
+  id: 53
+  name: Resource Referral
+mini_grants:
+  id: 54
+  name: Mini-grants for Geospacial analysis

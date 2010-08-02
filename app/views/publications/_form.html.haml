@@ -9,8 +9,9 @@
 
 %div{ :id => "publication_form", :class => "publications" }
   - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
-    - params[:search].each do |k, v| 
-      = hidden_field_tag "search[#{k}]", v
+    - if params[:search]
+      - params[:search].each do |k, v| 
+        = hidden_field_tag "search[#{k}]", v
     %p
       = f.check_box :nucats_assisted
       = f.label :nucats_assisted, "NUCATS Assisted"

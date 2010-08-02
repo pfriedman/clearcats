@@ -13,6 +13,8 @@ module NavigationHelpers
       
     when /login/
       '/login'
+
+    ### SERVICES ###
       
     when /the edit service page/
       edit_service_path(Service.last)
@@ -38,9 +40,20 @@ module NavigationHelpers
     when /the service choose publications page/
       choose_publications_service_path(Service.last)
 
+    ### PUBLICATIONS ###
+
     when /the edit publication page for the "(.*)"/
       edit_publication_path(Publication.find_by_title($1))
       
+    when /the publications edit page/
+      edit_publication_path(Publication.first(:order => "updated_at desc"))
+      
+    ### AWARDS ###
+
+    when /the awards edit page/
+      edit_award_path(Award.first(:order => "updated_at desc"))
+    
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

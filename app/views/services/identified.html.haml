@@ -24,5 +24,6 @@
     %br
     = f.radio_button :state, :choose_organizational_units
     = f.label :state_choose_organizational_units, "No"
-
-  = f.submit "Continue", :disable_with => 'Continuing...'
+  
+  .buttons
+    = f.submit "Continue", :disable_with => 'Continuing...'

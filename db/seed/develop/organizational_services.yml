@@ -1,3 +1,6 @@
+#
+# CECD - Center for Education and Career Development
+#
 summer_series_cecd:
   id: 1
   service_line_id: 1
@@ -62,3 +65,175 @@ eng_to_med_cecd:
   id: 16
   service_line_id: 16
   organizational_unit_id: 3
+
+
+#
+# CRC - Center for Clinical Research
+#
+research_facilities_crc:
+  id: 17
+  service_line_id: 17
+  organizational_unit_id: 2
+research_nursing_crc:
+  id: 18
+  service_line_id: 18
+  organizational_unit_id: 2
+laboratory_crc:
+  id: 19
+  service_line_id: 19
+  organizational_unit_id: 2
+bionutrition_crc:
+  id: 20
+  service_line_id: 20
+  organizational_unit_id: 2
+study_recruitment_crc:
+  id: 21
+  service_line_id: 21
+  organizational_unit_id: 2
+budget_and_financial_mgmt_crc:
+  id: 22
+  service_line_id: 22
+  organizational_unit_id: 2
+qa_crc:
+  id: 23
+  service_line_id: 23
+  organizational_unit_id: 2
+coord_svcs_crc:
+  id: 24
+  service_line_id: 24
+  organizational_unit_id: 2
+
+
+#
+# CTI - Center for Translational Innovation
+#
+pilot_grants_cti:
+  id: 25
+  service_line_id: 25
+  organizational_unit_id: 4
+dixon_awards_cti:
+  id: 26
+  service_line_id: 26
+  organizational_unit_id: 4
+frb_cti:
+  id: 27
+  service_line_id: 27
+  organizational_unit_id: 4
+invo_cti:
+  id: 28
+  service_line_id: 28
+  organizational_unit_id: 4
+inno2comm_cti:
+  id: 29
+  service_line_id: 29
+  organizational_unit_id: 4
+tipi_cti:
+  id: 30
+  service_line_id: 30
+  organizational_unit_id: 4
+
+
+#
+# RTC - Research Team Support Program
+#
+cross_discipline_rtc:
+  id: 31
+  service_line_id: 31
+  organizational_unit_id: 7
+research_teams_rtc:
+  id: 32
+  service_line_id: 32
+  organizational_unit_id: 7
+grantsmanship_rtc:
+  id: 33
+  service_line_id: 33
+  organizational_unit_id: 7
+praxis_rtc:
+  id: 34
+  service_line_id: 34
+  organizational_unit_id: 7
+collab_research_rtc:
+  id: 35
+  service_line_id: 35
+  organizational_unit_id: 7
+collab_research_funding_rtc:
+  id: 36
+  service_line_id: 36
+  organizational_unit_id: 7
+team_science_rtc:
+  id: 37
+  service_line_id: 37
+  organizational_unit_id: 7
+catalytic_research_rtc:
+  id: 38
+  service_line_id: 38
+  organizational_unit_id: 7
+supported_team_rtc:
+  id: 39
+  service_line_id: 39
+  organizational_unit_id: 7
+team_science_conf_rtc:
+  id: 40
+  service_line_id: 40
+  organizational_unit_id: 7
+
+
+#
+# CERC - Community Engaged Research Center
+#
+alliance_for_research_cerc:
+  id: 41
+  service_line_id: 41
+  organizational_unit_id: 5
+seed_grants_cerc:
+  id: 42
+  service_line_id: 42
+  organizational_unit_id: 5
+capacity_bldg_cerc:
+  id: 43
+  service_line_id: 43
+  organizational_unit_id: 5
+partner_facilitation_cerc:
+  id: 44
+  service_line_id: 44
+  organizational_unit_id: 5
+proposal_prep_cerc:
+  id: 45
+  service_line_id: 45
+  organizational_unit_id: 5
+reach_net_cerc:
+  id: 46
+  service_line_id: 46
+  organizational_unit_id: 5
+seed_grants_cerc:
+  id: 47
+  service_line_id: 47
+  organizational_unit_id: 5
+comm_practice_cerc:
+  id: 48
+  service_line_id: 48
+  organizational_unit_id: 5
+comm_health_cerc:
+  id: 49
+  service_line_id: 49
+  organizational_unit_id: 5
+practice_based_cerc:
+  id: 50
+  service_line_id: 50
+  organizational_unit_id: 5
+edu_and_net_cerc:
+  id: 51
+  service_line_id: 51
+  organizational_unit_id: 5
+wkshops_cerc:
+  id: 52
+  service_line_id: 52
+  organizational_unit_id: 5
+resource_ref_cerc:
+  id: 53
+  service_line_id: 53
+  organizational_unit_id: 5
+mini_grants_cerc:
+  id: 54
+  service_line_id: 54
+  organizational_unit_id: 5
