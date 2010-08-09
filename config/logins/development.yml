@@ -3,9 +3,9 @@ users:
     password: user
     portals:
       - ClearCATS:
-        - Users
+        - User
   admin:
     password: admin
     portals:
       - ClearCATS:
-        - Administrators
+        - Admin

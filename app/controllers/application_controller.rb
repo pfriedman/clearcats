@@ -10,17 +10,8 @@ class ApplicationController < ActionController::Base
 
   private
   
-    def ensure_admin
-      if current_user_is_admin 
-        # NOOP - render requested page
-      else
-        flash[:warning] = "You do not have access to the page you requested."
-        redirect_to :controller => "welcome", :action => "index"
-      end
-    end
-  
     def current_user_is_admin
-      current_user and current_user.permit?(:Administrators)
+      current_user and current_user.permit?(:Admin)
     end
     
     def find_or_create_user

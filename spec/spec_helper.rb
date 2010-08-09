@@ -86,3 +86,9 @@ def will_paginate_collection(collection, page = 1, per_page = 10)
     end
   end
 end
+
+class Bcsec::Rack::Facade
+  def permit!(*groups)
+    true
+  end
+end

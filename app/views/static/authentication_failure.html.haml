@@ -1,0 +1,54 @@
+!!!
+
+%html{ :xmlns =>"http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en" }
+  %head
+    %meta{ "http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
+    %title= "ClearCATS :: Authentication Failure"
+    %link{ :href => "/stylesheets/blueprint/screen.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/stylesheets/application.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/stylesheets/ddsmoothmenu.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/stylesheets/ddsmoothmenu-v.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+    %link{ :href => "/stylesheets/jquery-ui-1.8.1.custom.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
+  %body
+    .container
+      #menu
+        
+      #header
+        #banner
+          %img{ :src => "/images/banner_right.jpg", :class => "banner_right" }
+          #fl
+            %img{ :src => "/images/banner_edge.jpg", :class => "banner_edge" }
+            #banner_menu.ddsmoothmenu
+              %ul
+                %li
+                  %a{ :href => "/" }
+                    Home
+                %li
+                  %a{ :href => "/logout" }
+                    Logout
+            %img{ :src => "/images/banner_edge.jpg", :class => "banner_edge" }
+          #menu2
+            = @user.username
+        #title
+          %a{ :href => "/", :class => "no_link" }
+            ClearCATS
+      #niceline
+      .clear
+
+      #main
+
+        %h3
+          Authentication Denied
+        
+        %h4
+          %span
+            You
+          %em
+            = @user.username 
+          %span
+            have requested a resource to which you do not have access.
+
+      #footer
+        .branding
+          %a{ :href => "http://www.nucats.northwestern.edu" }
+            %img{ :src => "/images/pageheader.jpg", :alt => "The Northwestern University Clinical and Translational Sciences Institute" }

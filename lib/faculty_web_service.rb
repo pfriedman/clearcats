@@ -3,8 +3,6 @@ require 'uri'
 
 class FacultyWebService
 
-  NON_SSL_ENVS = ["development", "test", "cucumber", "culerity"]
-
   DEFAULT_HOST_URL = "https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/"
   # url to faculty_ws on staging: https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/
   #
@@ -128,7 +126,7 @@ class FacultyWebService
 
     def self.make_request(uri, req)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true unless NON_SSL_ENVS.include?(Rails.env)
+      http.use_ssl = true if uri.is_a?(URI::HTTPS)
       resp = http.start { |h| h.request(req) }
       return resp
     end
@@ -149,27 +147,32 @@ class FacultyWebService
     end
     
     def self.instantiate_award(attributes)
-      award = Award.find_by_budget_number(attributes["budget_number"])
-      award = Award.new if award.nil?
+      
+      begin
+        award = Award.find_by_budget_number(attributes["budget_number"])
+        award = Award.new if award.nil?
 
-      sponsor = nil
-      attributes.each do |name, value|
-        if name.include?("sponsor") and name != "sponsor_award_number"
-          sponsor ||= Sponsor.new
-          sponsor.send(name.to_s + '=', value)
-        else
-          award.send(name.to_s + '=', value)
+        sponsor = nil
+        attributes.each do |name, value|
+          if name.include?("sponsor") and name != "sponsor_award_number"
+            sponsor ||= Sponsor.new
+            sponsor.send(name.to_s + '=', value)
+          else
+            award.send(name.to_s + '=', value)
+          end
         end
+        award.sponsor = sponsor
+
+        dept = Department.find_or_create_by_name(attributes["department"])
+        award.department = dept if dept
+        award.save!
+
+        Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
+
+        return award
+      rescue Exception => e
+        Rails.logger.error("FacultyWebService.instantiate_award - Error occurred #{e} \n #{e.backtrace.join('\n')}")
       end
-      award.sponsor = sponsor
-
-      dept = Department.find_or_create_by_name(attributes["department"])
-      award.department = dept if dept
-      award.save!
-
-      Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
-
-      return award
     end
 
     def self.parse_faculty_response(body)
@@ -186,7 +189,10 @@ class FacultyWebService
     def self.parse_award_response(body)
       results = []
       value = ActiveSupport::JSON.decode(body)
-      value.each { |attributes| results << instantiate_award(attributes) }
+      value.each do |attributes|
+        award = instantiate_award(attributes) 
+        results << award if award
+      end
       results
     end
 

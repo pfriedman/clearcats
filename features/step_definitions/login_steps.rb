@@ -1,19 +1,19 @@
 Given /^an authenticated admin user/ do
-  @current_user = User.find_or_create_by_username("admin")
+  @current_user = User.find_or_create_by_username("cc_admin")
   steps %Q{
     Given I am on login
-    And I fill in "username" with "admin"
-    And I fill in "password" with "admin"
+    And I fill in "username" with "cc_admin"
+    And I fill in "password" with "cc_admin"
     And I press "Log in" 
   }
 end
 
 Given /^an authenticated user$/ do
-  @current_user = User.find_or_create_by_username("user")
+  @current_user = User.find_or_create_by_username("cc_user")
   steps %Q{
     Given I am on login
-    And I fill in "username" with "user"
-    And I fill in "password" with "user"
+    And I fill in "username" with "cc_user"
+    And I fill in "password" with "cc_user"
     And I press "Log in" 
   }
 end

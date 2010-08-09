@@ -27,7 +27,7 @@ Feature: Creating a new service
     Then I should see "Sponsor"
     And the "award_sponsor_award_number" field should not contain "asdf"
     # This next assertion is dependent on external data - if this line fails then remove it or update properly
-    And the "award_sponsor_name" field should contain "National Institute of Mental Health"
+    And the "award_sponsor_name" field should contain "Booz Allen & Hamilton Inc."
     When I fill in "award_sponsor_award_number" with "asdf"
     And I press "Save"
     # FIXME: test javascript

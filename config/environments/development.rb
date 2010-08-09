@@ -17,9 +17,17 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 config.after_initialize do
+  # uncomment the following if you'd like to use the static file for login information
+  # Bcsec.configure do
+  #   login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
+  #   authority Bcsec::Authorities::Static.from_file(login_config)
+  # end
+  
+  # look at db/user-setup.sql for user and group security settings when developing in a local environment
   Bcsec.configure do
-    login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
-    authority Bcsec::Authorities::Static.from_file(login_config)
+    ui_mode :form
+    authorities :pers
+    central '/etc/nubic/bcsec-local.yml'
   end
 
   #Comment out the previous call to Bcsec.configure and uncomment the following

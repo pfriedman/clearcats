@@ -8,6 +8,8 @@ gem "rails", "2.3.8", :require => nil
 gem "aasm"
 gem "bcdatabase"
 gem "bcsec-rails", "2.0.0.pre3"
+gem "ruby-oci8"
+gem "activerecord-oracle_enhanced-adapter", "1.2.3"
 gem "bundler", "~> 0.9"
 # gem "declarative_authorization"
 # gem "ezcrypto"

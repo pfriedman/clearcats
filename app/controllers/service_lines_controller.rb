@@ -1,7 +1,6 @@
 class ServiceLinesController < ApplicationController
-  before_filter :ensure_admin
-  # include Bcsec::Rails::SecuredController
-  # permit :administrators
+  include Bcsec::Rails::SecuredController
+  permit :Admin
   
   # GET /service_lines
   # GET /service_lines.xml
