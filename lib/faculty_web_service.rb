@@ -69,7 +69,11 @@ class FacultyWebService
       results = parse_award_response(resp.body) unless resp.body.blank?
 
       person = Person.find_by_employeeid(params[:employeeid])
-      results.each { |r| r.person = person; r.save!; }
+      results.each do |r|
+        
+        r.person = person
+        r.save!
+      end
 
     rescue Exception => e
       Rails.logger.error("FacultyWebService.awards_for_employee - Exception [#{e.message}] occurred when calling web service.\n")

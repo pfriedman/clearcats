@@ -20,5 +20,6 @@ describe ServiceLine do
   
   it { should have_many(:organizational_services) }
   it { should have_many(:organizational_units) }
+  it { should have_many(:services) }
   
 end

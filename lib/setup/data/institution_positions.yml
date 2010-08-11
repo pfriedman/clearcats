@@ -1,0 +1,41 @@
+junior_faculty:
+  name: Junior Faculty Member
+  
+tenured_faculty:
+  name: Tenured Faculty Member
+  
+research_faculty:
+  name: Research Faculty Member
+  
+inservice_faculty:
+  name: In-service Faculty
+  
+adjunct_faculty:
+  name: Adjunct Faculty Member
+  
+rn_researcher:
+  name: RN Researcher
+  
+community_researcher:
+  name: Community Researcher
+  
+post_doctoral_fellow:
+  name: Post-doctoral Fellow
+  
+med_school_student:
+  name: Medical School Student
+  
+grad_student:
+  name: Graduate Student
+  
+undergrad:
+  name: Undergraduate Student
+  
+professional_staff:
+  name: Professional Staff
+  
+resident:
+  name: Resident
+  
+fellow:
+  name: Fellow

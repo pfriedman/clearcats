@@ -55,7 +55,7 @@ research_team_support:
   
 tracking_and_evaluation:
   id: 8
-  abbreviation: T & E
+  abbreviation: T and E
   name: Tracking and Evaluation Program
   parent_id: 1
   lft: 14

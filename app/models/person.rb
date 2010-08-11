@@ -33,6 +33,7 @@ class Person < ActiveRecord::Base
   
   belongs_to :department
 
+  has_many :services
   has_many :awards
   has_many :publications
   has_many :approvals
@@ -55,6 +56,7 @@ class Person < ActiveRecord::Base
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division
   attr_accessor :joint, :rank, :employee_id, :division_id, :pmids, :centers, :secondary
+  attr_accessor :demographics
   
   def employee_id=(emplid)
     self.employeeid = emplid

@@ -64,6 +64,7 @@ describe Person do
   it { should have_many(:awards) }
   it { should have_many(:publications) }
   it { should have_many(:approvals) }
+  it { should have_many(:services) }
   
   context "with awards" do
     
