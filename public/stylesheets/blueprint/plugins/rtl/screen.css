@@ -100,8 +100,8 @@ body .push-3, body .push-4 { float: left; }
 
 /* Typography with RTL support */
 body h1,body h2,body h3,
-body h4,body h5,body h6 { font-family: Arial, sans-serif; }
-html body { font-family: Arial, sans-serif;  }
+body h4,body h5,body h6 { font-family: Verdana, Arial, sans-serif; }
+html body { font-family: Verdana, Arial, sans-serif;  }
 body pre,body code,body tt { font-family: monospace; }
 
 /* Mirror floats and margins on typographic elements */

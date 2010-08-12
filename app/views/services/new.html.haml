@@ -9,16 +9,4 @@
     %li= link_to "Choose Client", choose_person_services_path
     %li= link_to "Choose Service Line", choose_service_line_services_path
 
-- if !@pending_services.empty?
-  %h4 Services In Process
-
-  %table{ :class => "records pending_services" }
-    %tr
-      %th Select
-      %th Client
-      %th Service Line
-    - @pending_services.each do |svc|
-      %tr{:class => cycle('even_record', 'odd_record')}
-        %td= link_to "Select", :controller => "services", :action => "continue", :id => svc
-        %td= svc.person
-        %td= svc.service_line 
+= render 'list', { :services => @pending_services, :header => "Services In Process" }

@@ -1,0 +1,18 @@
+%h4
+  = header
+  
+- if services.empty?
+  .no_records No services were found.
+- else
+  %table{ :class => "records pending_services" }
+    %tr
+      %th Select
+      %th Client
+      %th Service Line
+    - services.each do |svc|
+      %tr{:class => cycle('even_record', 'odd_record')}
+        %td= link_to "Select", :controller => "services", :action => "continue", :id => svc
+        %td= svc.person
+        %td= svc.service_line
+
+  = will_paginate services

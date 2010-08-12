@@ -1,0 +1,28 @@
+- title "Clients"
+
+%table{ :class => "records" }
+  %tr
+    %th
+      = order @search, :by => :first_name, :as => "First Name"
+    %th
+      = order @search, :by => :last_name, :as => "Last Name"
+    %th
+      
+  - form_for @search, :method => :get do |f|
+    %tr
+      %td
+        = f.text_field :first_name_like
+      %td
+        = f.text_field :last_name_like
+      %td
+        = f.submit "Search", :disable_with => 'Searching...'
+
+  - @people.each do |person|
+    %tr{ :class => cycle('even_record', 'odd_record') }
+      %td
+        = h person.first_name
+      %td
+        = h person.last_name
+      %td 
+        
+= will_paginate @people

@@ -2,7 +2,7 @@ div#banner_menu {
   float: left; 
   z-index: 3; 
   margin: 0;
-  width: 600px;
+  width: 400px;
  /* background-image: url('../images/banner_menu.jpg'); */
 }
 
@@ -29,7 +29,7 @@ float: left;
 
 /*Top level menu link items style*/
 .ddsmoothmenu ul li a{
-font: bold 11px Verdana;
+font: 13px Verdana;
 display: block;
 background: #656565; /*background of menu items (default state)*/
 color: white;

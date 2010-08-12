@@ -1,8 +1,14 @@
 class ServicesController < ApplicationController
 
+  def index
+    @search = Service.search(params[:search])
+    @services = @search.paginate(:page => params[:page], :per_page => 10)
+  end
+
   def new
     @service = Service.new
-    @pending_services = Service.all(:conditions => ["created_by_id = ? and state <> ?", find_or_create_user.id, "complete"])
+    @search  = Service.search(:created_by_id_equals => find_or_create_user.id, :state_does_not_equal => "complete")
+    @pending_services = @search.paginate(:page => params[:page], :per_page => 10)
     
     respond_to do |format|
       format.html # new.html.erb

@@ -15,6 +15,9 @@ module NavigationHelpers
       '/login'
 
     ### SERVICES ###
+
+    when /the service index page/
+      services_path
       
     when /the edit service page/
       edit_service_path(Service.last)
