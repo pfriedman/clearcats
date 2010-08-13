@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+  permit :Admin, :User
 
   def index
     @search = Service.search(params[:search])

@@ -1,4 +1,6 @@
 class ActivityTypesController < ApplicationController
+  permit :Admin, :User
+  
   # GET /activity_types
   # GET /activity_types.xml
   def index

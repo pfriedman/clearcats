@@ -1,27 +1,24 @@
 source "http://rubygems.org"
 source 'http://download.bioinformatics.northwestern.edu/gems'
+source 'http://gems.github.com'
 
 gem "rails", "2.3.8", :require => nil
 
-# gem "acts_as_secure"
-# gem "authlogic"
 gem "aasm"
 gem "bcdatabase"
 gem "bcsec-rails", "2.0.0.pre3"
 gem "ruby-oci8"
 gem "activerecord-oracle_enhanced-adapter", "1.2.3"
 gem "bundler", "~> 0.9"
-# gem "declarative_authorization"
-# gem "ezcrypto"
+# gem "crafterm-comma" - cf. plugin dir
 gem "facets"
+gem "fastercsv"
 gem "haml", "= 2.2.24"
 gem "nokogiri"
 gem "paperclip"
 gem "pg"
-# gem "prawn"
 gem "searchlogic"
 gem "will_paginate"
-# gem "workflow"
 
 group :test do
   # rspec

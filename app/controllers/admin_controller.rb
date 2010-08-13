@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-  include Bcsec::Rails::SecuredController
   permit :Admin
   
   def index

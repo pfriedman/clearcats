@@ -1,5 +1,4 @@
 class OrganizationalUnitsController < ApplicationController
-  include Bcsec::Rails::SecuredController
   permit :Admin
   
   # GET /organizational_units

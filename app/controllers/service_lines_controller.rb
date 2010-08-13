@@ -1,5 +1,4 @@
 class ServiceLinesController < ApplicationController
-  include Bcsec::Rails::SecuredController
   permit :Admin
   
   # GET /service_lines

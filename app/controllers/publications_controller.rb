@@ -1,4 +1,5 @@
 class PublicationsController < ApplicationController
+  permit :Admin, :User
   layout nil
 
   # GET /publications/edit

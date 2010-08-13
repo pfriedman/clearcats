@@ -66,9 +66,13 @@ describe Service do
         @svc.save!
         @svc.should be_choose_service_line
 
+        @svc.person.service_rendered.should == false
+
         @svc.service_line = @svc_line
         @svc.save!
         @svc.should be_initiated
+        
+        @svc.person.service_rendered.should == true
       end
       
     end

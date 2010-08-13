@@ -82,9 +82,15 @@ class Service < ActiveRecord::Base
       self.set_service_line! unless self.service_line_id.blank?
       self.identify!         unless self.person_id.blank?
     when "choose_person"
-      self.initiate!         unless self.person_id.blank?
+      if !self.person_id.blank?
+        self.initiate!
+        self.person.update_attribute(:service_rendered, true) unless person.service_rendered?
+      end
     when "choose_service_line"
-      self.initiate!         unless self.service_line_id.blank?
+      if !self.service_line_id.blank?
+        self.initiate!
+        self.person.update_attribute(:service_rendered, true) unless person.service_rendered?
+      end
     when "choose_approvals"
       self.project_approvals_chosen!
     end

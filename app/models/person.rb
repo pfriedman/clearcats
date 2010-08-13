@@ -29,6 +29,7 @@
 #  human_subject_protection_training_date        :date
 #
 
+require 'comma'
 class Person < ActiveRecord::Base
   
   belongs_to :department
@@ -52,6 +53,10 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :publications, :allow_destroy => true
   accepts_nested_attributes_for :approvals, :allow_destroy => true
   
+  named_scope :awards_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'", {:id => id} ]} }
+  named_scope :awards_activity_code_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'", {:id => id} ]} }
+  named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
+
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division
@@ -78,5 +83,40 @@ class Person < ActiveRecord::Base
   def awards_for_ctsa_award_type(ctsa_award_type)
     self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
   end
+
+  # Support for exporting to csv
+  comma do
+    last_name
+    first_name
+    netid
+    email
+    employeeid
+  end
   
+  # # starts a Comma description block, generating 2 methods #to_comma and
+  # # #to_comma_headers for this class.
+  # comma do
+  # 
+  #   # name, description are attributes of Book with the header being reflected as
+  #   # 'Name', 'Description'
+  #   name
+  #   description
+  # 
+  #   # pages is an association returning an array, :size is called on the
+  #   # association results, with the header name specified as 'Pages'
+  #   pages :size => 'Pages'
+  # 
+  #   # publisher is an association returning an object, :name is called on the
+  #   # associated object, with the reflected header 'Name'
+  #   publisher :name
+  # 
+  #   # isbn is an association returning an object, :number_10 and :number_13 are
+  #   # called on the object with the specified headers 'ISBN-10' and 'ISBN-13'
+  #   isbn :number_10 => 'ISBN-10', :number_13 => 'ISBN-13'
+  # 
+  #   # blurb is an attribute of Book, with the header being specified directly
+  #   # as 'Summary'
+  #   blurb 'Summary'
+  # 
+  # end
 end

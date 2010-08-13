@@ -1,4 +1,5 @@
 class AwardsController < ApplicationController
+  permit :Admin, :User
   layout nil
 
   def new

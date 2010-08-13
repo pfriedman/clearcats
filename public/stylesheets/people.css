@@ -1,0 +1,16 @@
+#people_search_form {
+  padding: 0.5em;
+}
+
+.span-5 select {
+  width: 18em;
+}
+
+.span-6 select {
+  width: 20em;
+}
+
+select#search_service_rendered,
+select#search_disadvantaged_background {
+  width: 5em;
+}

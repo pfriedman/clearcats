@@ -1,28 +1,192 @@
+- stylesheet "people"
 - title "Clients"
 
-%table{ :class => "records" }
-  %tr
-    %th
-      = order @search, :by => :first_name, :as => "First Name"
-    %th
-      = order @search, :by => :last_name, :as => "Last Name"
-    %th
-      
+#people_search_form.container
   - form_for @search, :method => :get do |f|
-    %tr
-      %td
+    .span-24
+      .span-5
+        = f.label :first_name_like, "First Name"
+      .span-6
         = f.text_field :first_name_like
-      %td
+      .span-5
+        = f.label :last_name_like, "Last Name"
+      .span-6
         = f.text_field :last_name_like
-      %td
-        = f.submit "Search", :disable_with => 'Searching...'
+    .span-24
+      .span-5
+        = f.label :netid_like, "Net ID"
+      .span-6
+        = f.text_field :netid_like
+      .span-5
+        = f.label :employeeid_like, "Employee ID"
+      .span-6
+        = f.text_field :employeeid_like
+    .span-24
+      .span-5
+        = f.label :email_like, "Email"
+      .span-6
+        = f.text_field :email_like
+      .span-5
+        = f.label :era_commons_username_like, "Era Commons Username"
+      .span-6
+        = f.text_field :era_commons_username_like
+    .span-24
+      .span-5
+        = f.label :degree_type_one_id_equals, "Degree Type One"
+      .span-6
+        = f.select(:degree_type_one_id_equals, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type One --" })
+      .span-5
+        = f.label :degree_type_two_id_equals, "Degree Type Two"
+      .span-6
+        = f.select(:degree_type_two_id_equals, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type Two --" })
+    .span-24
+      .span-5
+        = f.label :institution_positions_id_equals, "Position/Title"
+      .span-6
+        = f.select(:institution_positions_id_equals, InstitutionPosition.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Position/Title --" })
+      .span-5
+        = f.label :disadvantaged_background, "Disadvantaged Background?"
+      .span-6
+        = f.select :disadvantaged_background, [["N/A", nil], ["Yes", true], ["No", false]]
+    .span-24
+      .span-5
+        = f.label :ethnic_type_id_equals, "Ethnic Background"
+      .span-6
+        = f.select(:ethnic_type_id_equals, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
+      .span-5
+        = f.label :race_type_id_equals, "Racial Background"
+      .span-6
+        = f.select(:race_type_id_equals, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" })
 
-  - @people.each do |person|
-    %tr{ :class => cycle('even_record', 'odd_record') }
-      %td
-        = h person.first_name
-      %td
-        = h person.last_name
-      %td 
-        
+    .span-24
+      .span-5
+        = label_tag "CTSA Award Type", "CTSA Award Type"
+      .span-6
+        - phs_orgs = [["-- Select Federal PHS Award Organizational Code --",  ""]] + PhsOrganization.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
+        = select_tag("search[awards_phs_organization_id_equals]", options_for_select(phs_orgs, params[:search][:awards_phs_organization_id_equals].to_i))
+      .span-5
+        - act_codes = [["-- Select PHS Award --",  ""]] + ActivityCode.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
+        = select_tag("search[awards_activity_code_id_equals]", options_for_select(act_codes, params[:search][:awards_activity_code_id_equals].to_i))
+      .span-6
+        - non_phs_orgs = [["-- Select Federal Non-PHS Award --",  ""]] + NonPhsOrganization.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
+        = select_tag("search[awards_non_phs_organization_id_equals]", options_for_select(non_phs_orgs, params[:search][:awards_non_phs_organization_id_equals].to_i))
+
+    .span-24
+      .span-5
+        = f.label :service_rendered, "Service Rendered"
+      .span-17
+        = f.select :service_rendered, [["N/A", nil], ["Yes", true], ["No", false]]
+
+    .buttons
+      = f.submit "Search", :disable_with => 'Searching...'
+      = link_to "Export All Results", :controller => "people", :action => "index", :format => "csv", :params => params
+
+%hr
+
+- if @people.blank?
+  .no_records No clients were found.
+- else
+
+  %table{ :class => "records" }
+    %tr
+      %th
+        = order @search, :by => :first_name, :as => "First Name"
+      %th
+        = order @search, :by => :last_name, :as => "Last Name"
+      %th
+        = order @search, :by => :netid, :as => "Net ID"
+      %th
+        = order @search, :by => :employeeid, :as => "Employee ID"
+      %th
+        = order @search, :by => :email, :as => "Email"
+      %th
+        = order @search, :by => :era_commons_username, :as => "ERA Commons"
+      %th
+        = order @search, :by => :degree_type_one_name, :as => "Degree Type One"
+      %th
+        = order @search, :by => :degree_type_two_name, :as => "Degree Type Two"
+      %th
+        = order @search, :by => :institution_positions_name, :as => "Position/Title"
+      %th
+        &nbsp;
+
+    - @people.each do |person|
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = h person.first_name
+        %td
+          = h person.last_name
+        %td
+          = h person.netid
+        %td
+          = h person.employeeid
+        %td
+          = h person.email
+        %td 
+          = h person.era_commons_username
+        %td
+          = h person.degree_type_one
+        %td
+          = h person.degree_type_two
+        %td
+          = h person.institution_positions.map{|p| p.name}.to_sentence
+        %td 
+          &nbsp;
+
 = will_paginate @people
+
+/ Person.awards_ctsa_award_type_id_equals(35).awards_ctsa_award_type_type_equals("PhsOrganization")
+
+/ #  first_name                                    :string(255)
+/ #  middle_name                                   :string(255)
+/ #  last_name                                     :string(255)
+/ #  netid                                         :string(255)
+/ #  email                                         :string(255)
+/ #  department_affiliation                        :string(255)
+/ #  school_affiliation                            :string(255)
+/ #  last_four_of_ssn                              :string(255)
+/ #  phone                                         :string(255)
+/ #  era_commons_username                          :string(255)
+/ #  employeeid                                    :string(255)
+/ #  department_id                                 :integer
+/ #  degree_type_one_id                            :integer
+/ #  degree_type_two_id                            :integer
+/ #  specialty_id                                  :integer
+/ #  country_id                                    :integer
+/ #  ethnic_type_id                                :integer
+/ #  race_type_id                                  :integer
+/ #  disadvantaged_background                      :boolean
+/ #  created_at                                    :datetime
+/ #  updated_at                                    :datetime
+/ #  human_subject_protection_training_institution :string(255)
+/ #  human_subject_protection_training_date        :date
+/ #
+/ 
+/ class Person < ActiveRecord::Base
+/   
+/   belongs_to :department
+/ 
+/   has_many :services
+/   has_many :awards
+/   has_many :publications
+/   has_many :approvals
+/   has_and_belongs_to_many :institution_positions
+/     
+/   belongs_to :country
+/   belongs_to :degree_type_one
+/   belongs_to :degree_type_two
+/   belongs_to :specialty
+/   belongs_to :ethnic_type
+/   belongs_to :race_type
+/ 
+/   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
+/   
+/   accepts_nested_attributes_for :awards, :allow_destroy => true
+/   accepts_nested_attributes_for :publications, :allow_destroy => true
+/   accepts_nested_attributes_for :approvals, :allow_destroy => true
+/   
+/   # attributes from faculty_web_service that are not persisted
+/   attr_accessor :interests, :campus, :descriptions, :dv_abbr
+/   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division
+/   attr_accessor :joint, :rank, :employee_id, :division_id, :pmids, :centers, :secondary
+/   attr_accessor :demographics

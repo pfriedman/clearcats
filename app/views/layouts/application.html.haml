@@ -26,7 +26,8 @@
             = render "shared/menus"
             = image_tag("banner_edge.jpg")
           #menu2
-            = session[:name] || current_user.username
+            - username = current_user ? current_user.username : "anonymous"
+            = session[:name] || username
         #title
           = link_to("ClearCATS", "/", :class => "no_link")
           - if show_title?

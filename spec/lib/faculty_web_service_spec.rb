@@ -38,6 +38,12 @@ describe FacultyWebService do
         results.size.should == 6
         results.first.last_name.should == "Friedman"
       end
+      
+      it "should default faculty entry to not have a service rendered" do
+        FacultyWebService.stub!(:make_request).and_return(last_name_response)
+        results = FacultyWebService.locate({:last_name => "Friedman"})
+        results.first.service_rendered.should == false
+      end
     
       it "should list all faculty members" do
         FacultyWebService.stub!(:make_request).and_return(last_name_response)
