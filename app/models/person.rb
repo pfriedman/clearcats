@@ -83,6 +83,10 @@ class Person < ActiveRecord::Base
   def awards_for_ctsa_award_type(ctsa_award_type)
     self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
   end
+  
+  def services_to_sentence
+    self.services.to_sentence
+  end
 
   # Support for exporting to csv
   comma do
@@ -91,6 +95,7 @@ class Person < ActiveRecord::Base
     netid
     email
     employeeid
+    services :to_sentence => "Services"
   end
   
   # # starts a Comma description block, generating 2 methods #to_comma and

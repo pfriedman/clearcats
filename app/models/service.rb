@@ -95,5 +95,9 @@ class Service < ActiveRecord::Base
       self.project_approvals_chosen!
     end
   end
+  
+  def to_s
+    "[#{self.updated_at}] #{self.service_line} - #{self.state}"
+  end
 
 end
