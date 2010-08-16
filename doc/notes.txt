@@ -48,6 +48,13 @@ Data Questions
       a. maybe but not always 
 
 
+Reporting Questions
+-------------------
+
+ - CTSA - what is the difference between an Investigator and a Training Scholar ? (in data)
+          - e.g. do only scholars have degree types? or only scholars have a mentor commons username ?
+
+
 Data Owners
 -----------
 

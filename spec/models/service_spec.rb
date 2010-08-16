@@ -20,6 +20,11 @@ describe Service do
   it "should create a new instance given valid attributes" do
     Factory(:service)
   end
+  
+  it "should describe itself in human readable format" do
+    svc = Factory(:service)
+    svc.to_s.should == "service line name"
+  end
     
   it { should belong_to(:created_by) }
   

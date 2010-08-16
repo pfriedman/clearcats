@@ -41,11 +41,40 @@ describe Person do
     p.to_s.should == "Thomas Jefferson"
   end
   
+  it "should output in a csv format" do
+    p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
+    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", ""]
+  
+  end
+  
   it "should set affiliations based on department" do
     dept = Factory(:department, :entity_name => "dept entity name", :school => "dept school")
     p = Factory(:person, :department => dept)
     p.department_affiliation.should == "dept entity name"
     p.school_affiliation.should == "dept school"
+  end
+  
+  context "finding people of a particular reporting type" do
+  
+    before(:each) do
+      @investigator = Factory(:person, :training_type => nil)
+      @trainee      = Factory(:person, :training_type => Person::SCHOLAR, :appointed_trainee => true)
+    end
+  
+    it "should retrieve all investigators" do
+      investigators = Person.all_investigators
+      investigators.should_not be_empty
+      investigators.size.should == 1
+      investigators.first.should == @investigator
+    end
+  
+    it "should retrieve all trainees" do
+      trainees = Person.all_trainees
+      trainees.should_not be_empty
+      trainees.size.should == 1
+      trainees.first.should == @trainee
+    end
+  
   end
   
   it { should ensure_length_of(:last_four_of_ssn) }

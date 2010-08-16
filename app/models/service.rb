@@ -97,7 +97,7 @@ class Service < ActiveRecord::Base
   end
   
   def to_s
-    "[#{self.updated_at}] #{self.service_line} - #{self.state}"
+    "#{self.service_line.organizational_units.to_sentence} #{self.service_line}".strip #  [#{self.updated_at}]
   end
 
 end

@@ -35,6 +35,7 @@ Feature: Creating a new service
     # And I should see "asdf"
     Then I should be on the awards edit page
     And the "award_sponsor_award_number" field should contain "asdf"
+    # work around to get past js and back to service workflow
     When I go to the service choose publications page
     Then I should see "Some aspects of analysis of gene array data."
     When I follow "Edit" 

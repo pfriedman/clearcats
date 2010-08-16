@@ -79,6 +79,8 @@ Factory.define :person do |p|
   p.department_affiliation "dept"
   p.school_affiliation     "school"
   p.era_commons_username   "era_commons"
+  p.training_type          nil
+  p.appointed_trainee      false
 
   p.country             { |a| a.association(:country) }
   p.degree_type_one     { |a| a.association(:degree_type_one) }

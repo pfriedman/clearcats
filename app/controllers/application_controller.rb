@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   private
-  
-    def current_user_is_admin
-      current_user and current_user.permit?(:Admin)
-    end
     
     def find_or_create_user
       User.find_or_create_by_username(current_user.username)

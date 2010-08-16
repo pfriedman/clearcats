@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100812161634) do
+ActiveRecord::Schema.define(:version => 20100816181209) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(:version => 20100812161634) do
     t.string   "human_subject_protection_training_institution"
     t.date     "human_subject_protection_training_date"
     t.boolean  "service_rendered",                              :default => false
+    t.string   "training_type"
+    t.boolean  "appointed_trainee"
   end
 
   create_table "publications", :force => true do |t|

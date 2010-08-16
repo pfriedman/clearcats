@@ -29,8 +29,56 @@
 #  human_subject_protection_training_date        :date
 #
 
+# TurboCATS                 ClearCATS
+# commons_username          era_commons_username
+# middle_initial            middle_name
+# area_of_expertise_code    specialty.name
+# degree_1                  degree_type_one.name
+# degree_2                  degree_type_two.name
+# ethnic_category           ethnic_type.name
+# racial_category           race_type.name
+
+# Same
+# first_name
+# last_name
+# disadvantaged_background
+
+
+# ClearCATS only
+#  netid                                         :string(255)
+#  email                                         :string(255)
+#  department_affiliation                        :string(255)
+#  school_affiliation                            :string(255)
+#  last_four_of_ssn                              :string(255)
+#  phone                                         :string(255)
+#  human_subject_protection_training_institution :string(255)
+#  human_subject_protection_training_date        :date
+
+# TurboCATS only
+
+#  gender                   :string(255)
+#  mentor_commons_username  :string(255)
+#  invalid                  :boolean
+#  validation_messages      :text
+#  reporting_year           :string(255)
+#  training_type            :string(255)
+#  appointed                :boolean
+#  accepted                 :boolean
+#  applied                  :boolean
+#  interviewed              :boolean
+#  end_date                 :date
+#  date_of_appointment      :date
+#  has_disability           :boolean
+
+
 require 'comma'
 class Person < ActiveRecord::Base
+  
+  SCHOLAR = "scholar"
+  OTHER_CAREER = "other_career_development"
+  TRAINEE = "trainee"
+  
+  TRAINING_TYPES = [SCHOLAR, OTHER_CAREER, TRAINEE]
   
   belongs_to :department
 
@@ -49,6 +97,8 @@ class Person < ActiveRecord::Base
 
   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
   
+  validates_inclusion_of :training_type, :in => TRAINING_TYPES, :if => proc { |obj| !obj.training_type.nil? }
+  
   accepts_nested_attributes_for :awards, :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true
   accepts_nested_attributes_for :approvals, :allow_destroy => true
@@ -56,12 +106,18 @@ class Person < ActiveRecord::Base
   named_scope :awards_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'", {:id => id} ]} }
   named_scope :awards_activity_code_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'", {:id => id} ]} }
   named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
+  
+  named_scope :all_investigators, :conditions => "training_type IS NULL"
+  named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND appointed_trainee = true"]
+  named_scope :scholars,      :conditions => { :appointed_trainee => true, :training_type => SCHOLAR }
+  named_scope :other_careers, :conditions => { :appointed_trainee => true, :training_type => OTHER_CAREER }
+  named_scope :trainees,      :conditions => { :appointed_trainee => true, :training_type => TRAINEE }
 
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division
   attr_accessor :joint, :rank, :employee_id, :division_id, :pmids, :centers, :secondary
-  attr_accessor :demographics
+  attr_accessor :demographics, :certifications, :field_of_study
   
   def employee_id=(emplid)
     self.employeeid = emplid
@@ -84,20 +140,65 @@ class Person < ActiveRecord::Base
     self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
   end
   
-  def services_to_sentence
-    self.services.to_sentence
+  # for CTSA reporting
+  
+  def commons_username
+    self.era_commons_username.to_s
+  end
+  
+  def area_of_expertise_code
+    self.specialty.blank? ? "" : self.specialty.code
+  end
+
+  def degree_1
+    self.degree_type_one.to_s
+  end
+  
+  def degree_2
+    self.degree_type_two.to_s    
+  end
+  
+  # TODO: determine the date_of_appointment reporting item
+  def date_of_appointment
+    Date.today
+  end
+  
+  # TODO: determine the end_date reporting item
+  def end_date
+    Date.today
+  end
+  
+  # TODO: determine the mentor_commons_name reporting item
+  def mentor_commons_username
+    ""
   end
 
   # Support for exporting to csv
   comma do
     last_name
     first_name
+    middle_name
     netid
     email
+    phone
     employeeid
+    era_commons_username
+    department_affiliation
+    school_affiliation
+    last_four_of_ssn
+    degree_type_one
+    degree_type_two
+    specialty
+    country
+    ethnic_type "Ethnic Background"
+    race_type "Racial Background"
+    disadvantaged_background
+    human_subject_protection_training_institution
+    human_subject_protection_training_date
+    institution_positions :to_sentence => "Position/Title"
     services :to_sentence => "Services"
   end
-  
+
   # # starts a Comma description block, generating 2 methods #to_comma and
   # # #to_comma_headers for this class.
   # comma do

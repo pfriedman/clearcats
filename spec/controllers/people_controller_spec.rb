@@ -9,6 +9,13 @@ describe PeopleController do
     login(user_login)
   end
 
+  describe "GET index" do
+    it "should render the index page" do
+      get :index
+      response.should be_success
+    end
+  end
+
   describe "GET search" do
     it "should render the search form" do
       get :search
