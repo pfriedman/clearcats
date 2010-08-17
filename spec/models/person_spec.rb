@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100727181206
+# Schema version: 20100817202539
 #
 # Table name: people
 #
@@ -27,6 +27,11 @@
 #  updated_at                                    :datetime
 #  human_subject_protection_training_institution :string(255)
 #  human_subject_protection_training_date        :date
+#  service_rendered                              :boolean
+#  training_type                                 :string(255)
+#  trainee_status                                :string(255)
+#  has_disability                                :boolean
+#  gender                                        :string(255)
 #
 
 require 'spec_helper'

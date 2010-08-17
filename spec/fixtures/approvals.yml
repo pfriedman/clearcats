@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100727181206
+# Schema version: 20100817202539
 #
 # Table name: approvals
 #
