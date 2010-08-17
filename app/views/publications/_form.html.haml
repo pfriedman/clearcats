@@ -16,6 +16,10 @@
       = f.check_box :nucats_assisted
       = f.label :nucats_assisted, "NUCATS Assisted"
     %p
+      = f.label :reporting_year, "Reporting Year"
+      %br
+      = f.text_field :reporting_year, :size => 5
+    %p
       = f.label :pmid, "PMID"
       %br
       = f.text_field :pmid
@@ -28,6 +32,13 @@
       = f.label :nihms_number, "NIHMS Number"
       %br
       = f.text_field :nihms_number
+    %p
+      = f.label :missing_pmcid_reason, "Missing PMCID Reason"
+      %br
+      = f.text_field :missing_pmcid_reason
+    %p
+      = f.check_box :cited
+      = f.label :cited, "Cited"
     %p
       = f.label :publication_date, "Publication Date"
       %br

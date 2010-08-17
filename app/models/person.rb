@@ -74,11 +74,14 @@
 require 'comma'
 class Person < ActiveRecord::Base
   
-  SCHOLAR = "scholar"
+  SCHOLAR      = "scholar"
   OTHER_CAREER = "other_career_development"
-  TRAINEE = "trainee"
+  TRAINEE      = "trainee"
+  APPLICANT    = "applicant"
+  APPOINTED    = "appointed"
   
-  TRAINING_TYPES = [SCHOLAR, OTHER_CAREER, TRAINEE]
+  TRAINING_TYPES   = [TRAINEE, SCHOLAR, OTHER_CAREER]
+  TRAINEE_STATUSES = [APPLICANT, APPOINTED]
   
   belongs_to :department
 
@@ -97,7 +100,8 @@ class Person < ActiveRecord::Base
 
   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
   
-  validates_inclusion_of :training_type, :in => TRAINING_TYPES, :if => proc { |obj| !obj.training_type.nil? }
+  validates_inclusion_of :training_type,  :in => TRAINING_TYPES,   :if => proc { |obj| !obj.training_type.nil? }
+  validates_inclusion_of :trainee_status, :in => TRAINEE_STATUSES, :if => proc { |obj| !obj.trainee_status.nil? }
   
   accepts_nested_attributes_for :awards, :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true
@@ -107,11 +111,11 @@ class Person < ActiveRecord::Base
   named_scope :awards_activity_code_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'", {:id => id} ]} }
   named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
   
-  named_scope :all_investigators, :conditions => "training_type IS NULL"
-  named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND appointed_trainee = true"]
-  named_scope :scholars,      :conditions => { :appointed_trainee => true, :training_type => SCHOLAR }
-  named_scope :other_careers, :conditions => { :appointed_trainee => true, :training_type => OTHER_CAREER }
-  named_scope :trainees,      :conditions => { :appointed_trainee => true, :training_type => TRAINEE }
+  named_scope :all_investigators, :conditions => "training_type IS NULL AND trainee_status IS NULL"
+  named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND trainee_status IS NOT NULL"]
+  named_scope :scholars,      :conditions => { :training_type => SCHOLAR }
+  named_scope :other_careers, :conditions => { :training_type => OTHER_CAREER }
+  named_scope :trainees,      :conditions => { :training_type => TRAINEE }
 
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr

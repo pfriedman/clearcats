@@ -29,4 +29,18 @@ describe Publication do
   end
   
   it { should belong_to(:person) }
+  
+  context "ctsa reporting" do
+    
+    before(:each) do
+      @pub2009 = Factory(:publication, :reporting_year => 2009)
+      @pub2010 = Factory(:publication, :reporting_year => 2010)
+    end
+    
+    it "should retrieve items by reporting year" do
+      pubs = Publication.all_for_reporting_year(2010)
+      pubs.size.should  == 1
+      pubs.first.should == @pub2010
+    end
+  end
 end

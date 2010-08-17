@@ -53,7 +53,7 @@ Reporting Questions
 
  - CTSA - what is the difference between an Investigator and a Training Scholar ? (in data)
           - e.g. do only scholars have degree types? or only scholars have a mentor commons username ?
-
+ - CTSA - what is the participating organization? is it the top level organizational unit ?
 
 Data Owners
 -----------

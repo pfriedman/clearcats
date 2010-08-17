@@ -80,7 +80,7 @@ Factory.define :person do |p|
   p.school_affiliation     "school"
   p.era_commons_username   "era_commons"
   p.training_type          nil
-  p.appointed_trainee      false
+  p.trainee_status         nil
 
   p.country             { |a| a.association(:country) }
   p.degree_type_one     { |a| a.association(:degree_type_one) }
@@ -107,13 +107,16 @@ Factory.define :sponsor do |sponsor|
 end
 
 Factory.define :publication do |pub|
-  pub.pmcid            "pmcid"
-  pub.pmid             "pmid"
-  pub.nihms_number     "nihms_number"
-  pub.publication_date Time.now
-  pub.person           { |a| a.association(:person) }
-  pub.abstract         "boogadeehoo"
-  pub.title            "title"
+  pub.pmcid             "pmcid"
+  pub.pmid              "pmid"
+  pub.nihms_number      "nihms_number"
+  pub.publication_date  Time.now
+  pub.person            { |a| a.association(:person) }
+  pub.abstract          "boogadeehoo"
+  pub.title             "title"
+  pub.cited             true
+  pub.reporting_year    2010
+  pub.missing_pmcid_reason ""
 end
 
 Factory.define :approval do |a|

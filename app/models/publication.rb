@@ -16,8 +16,24 @@
 #  updated_at       :datetime
 #
 
+# TurboCATS             ClearCATS
+# pubmed_id             pmcid
+
+# Same
+#  person_id
+#  cited
+#  missing_pmcid_reason
+#  reporting_year
+
+# TurboCATS only
+#  manuscript_id        :integer
+#  invalid              :boolean
+#  validation_messages  :text
+
 class Publication < ActiveRecord::Base
   belongs_to :person
+  
+  named_scope :all_for_reporting_year, lambda { |yr| { :conditions => ["reporting_year = ?", yr ] } }
 
   # Attributes from LatticeGrid/PubMed
   attr_accessor :endnote_citation, :authors, :full_authors, :is_first_author_investigator, :is_last_author_investigator
@@ -41,4 +57,18 @@ class Publication < ActiveRecord::Base
     self.publication_date = dt
   end
 
+  def pubmed_id
+    self.pmcid
+  end
+
+  # TODO: determine attribute to base cited on :citation_cnt OR :citation_last_get_at OR ...
+  def citation_cnt=(cnt)
+    @citation_cnt = cnt
+    self.cited = cnt.to_i > 0
+  end
+  
+  def citation_cnt
+    @citation_cnt
+  end
+  
 end

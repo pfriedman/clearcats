@@ -33,4 +33,17 @@ class OrganizationalUnit < ActiveRecord::Base
     str.strip
   end
   
+  # TODO: City and State for CTSA reporting
+  def city
+    "Chicago"
+  end
+  
+  def us_state
+    "IL"
+  end
+  
+  def country_name
+    nil
+  end
+  
 end

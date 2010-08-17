@@ -58,7 +58,7 @@ describe Person do
   
     before(:each) do
       @investigator = Factory(:person, :training_type => nil)
-      @trainee      = Factory(:person, :training_type => Person::SCHOLAR, :appointed_trainee => true)
+      @trainee      = Factory(:person, :training_type => Person::SCHOLAR, :trainee_status => Person::APPOINTED)
     end
   
     it "should retrieve all investigators" do

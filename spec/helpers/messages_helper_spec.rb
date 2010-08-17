@@ -7,7 +7,10 @@ describe ReportMessageHelper do
     before(:each) do
       @grant_number  = "123456"
       @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil)
-      @trainee       = Factory(:person, :appointed_trainee => true, :training_type => Person::SCHOLAR)
+      @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR)
+      @publication   = Factory(:publication, :reporting_year => 2020, :cited => true)
+      @org           = Factory(:organizational_unit)
+      @organizations = [@org]
       @investigators = [@investigator]
       @trainees      = [@trainee]
     end
@@ -15,11 +18,13 @@ describe ReportMessageHelper do
     it "should instantiate an XML element for the CTSA APR with a root element of Progress_Report" do
       
       doc = REXML::Document.new
-      doc.add_element(ReportMessageHelper.new(@grant_number, @investigators, @trainees))
+      doc.add_element(ReportMessageHelper.new(@grant_number, 2020, @investigators, @trainees, @organizations))
       doc.write("",2)
       report = 
 "<sis:Progress_Report xsi:schemaLocation='http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:sis='http://sis.ncrr.nih.gov'>" +
-  "<sis:Grant_Info><sis:Six_Digit_Grant_Number>" + @grant_number + "</sis:Six_Digit_Grant_Number></sis:Grant_Info>" +
+  "<sis:Grant_Info>" +
+"<sis:Six_Digit_Grant_Number>" + @grant_number + "</sis:Six_Digit_Grant_Number>" +
+"</sis:Grant_Info>" +
   "<sis:Roster>"+
     "<sis:Investigator>" +
       "<sis:Commons_Username>"  + @investigator.era_commons_username.upcase + "</sis:Commons_Username>" +
@@ -37,13 +42,1254 @@ describe ReportMessageHelper do
 			"</sis:Scholar>" +
 		"</sis:Training>" + 
   "</sis:Roster>" +
+  "<sis:Publications>" + 
+    "<sis:Publication>" +
+      "<sis:Cited>Y</sis:Cited>" +
+      "<sis:PubMed_ID>" + @publication.pubmed_id + "</sis:PubMed_ID>" +
+    "</sis:Publication>" + 
+  "</sis:Publications>" + 
+  "<sis:Resource_Projections>" +
+		"<sis:Percent_Clinical_Trials>30</sis:Percent_Clinical_Trials>" +
+		"<sis:Percent_Pediatrics>15</sis:Percent_Pediatrics>" +
+		"<sis:Percent_AIDS>0</sis:Percent_AIDS>" +
+	"</sis:Resource_Projections>" +
+	"<sis:Program_Description>" + 
+		"<sis:Participating_Organization_or_Institution>" +
+			"<sis:Participant_Name>" + @org.abbreviation + "</sis:Participant_Name>" + 
+			"<sis:Participant_City>Chicago</sis:Participant_City>" + 
+			"<sis:Participant_US_State>IL</sis:Participant_US_State>" + 
+		"</sis:Participating_Organization_or_Institution>" +
+	"</sis:Program_Description>" +
+	"<sis:Characteristics>" +
+  applicant_trainee_characteristic_node + 
+  applicant_scholar_characteristic_node +
+  applicant_other_dev_characteristic_node + 
+  appointed_trainee_characteristic_node + 
+  appointed_scholar_characteristic_node +
+  appointed_other_dev_characteristic_node +
+	"</sis:Characteristics>" +
 "</sis:Progress_Report>"
 
       doc.to_s.should == report
     end
+    
+    it "should create an XML element for trainee characteristics" do
+      doc = REXML::Document.new
+      doc.add_element(CharacteristicMessageHelper.new([], "Trainee", "Applicant"))
+      doc.write("",2)
+  		doc.to_s.should == applicant_trainee_characteristic_node
+    end
+    
   end
   
+  private
+  
+    def applicant_trainee_characteristic_node
+      "<sis:Applicant_Trainee_Characts>" +
+        "<sis:Entire_Enrollment>" +
+          "<sis:Ethnic_Category>" +
+            "<sis:HispanicOrLatino>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:HispanicOrLatino>" +
+            "<sis:Non-Hispanic>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Non-Hispanic>" +
+            "<sis:Unknown>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Unknown>" +
+          "</sis:Ethnic_Category>" +
+          "<sis:Racial_Category>" +
+            "<sis:American_Indian_or_Alaska_Native>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:American_Indian_or_Alaska_Native>" +
+            "<sis:Asian>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Asian>" +
+            "<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+            "<sis:Black_Or_African_American>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Black_Or_African_American>" +
+            "<sis:White>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:White>" +
+            "<sis:More_Than_One_Race>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:More_Than_One_Race>" +
+            "<sis:Unknown>" +
+              "<sis:Accepted>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Accepted>" +
+              "<sis:Applied>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Applied>" +
+              "<sis:Interviewed>" +
+                "<sis:Females>0</sis:Females>" +
+                "<sis:Males>0</sis:Males>" +
+                "<sis:Not_Reported>0</sis:Not_Reported>" +
+              "</sis:Interviewed>" +
+            "</sis:Unknown>" +
+          "</sis:Racial_Category>" +
+        "</sis:Entire_Enrollment>" +
+        "<sis:Hispanic_Enrollment>" +
+          "<sis:American_Indian_or_Alaska_Native>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:American_Indian_or_Alaska_Native>" +
+          "<sis:Asian>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:Asian>" +
+          "<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+          "<sis:Black_Or_African_American>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:Black_Or_African_American>" +
+          "<sis:White>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:White>" +
+          "<sis:More_Than_One_Race>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:More_Than_One_Race>" +
+          "<sis:Unknown>" +
+            "<sis:Accepted>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Accepted>" +
+            "<sis:Applied>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Applied>" +
+            "<sis:Interviewed>" +
+              "<sis:Females>0</sis:Females>" +
+              "<sis:Males>0</sis:Males>" +
+              "<sis:Not_Reported>0</sis:Not_Reported>" +
+            "</sis:Interviewed>" +
+          "</sis:Unknown>" +
+        "</sis:Hispanic_Enrollment>" +
+      "</sis:Applicant_Trainee_Characts>"
+    end
+    
+
+  
+    def applicant_scholar_characteristic_node
+      "<sis:Applicant_Scholar_Characts>" +
+"<sis:Entire_Enrollment>" +
+"<sis:Ethnic_Category>" +
+"<sis:HispanicOrLatino>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:HispanicOrLatino>" +
+"<sis:Non-Hispanic>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Non-Hispanic>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Ethnic_Category>" +
+"<sis:Racial_Category>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Racial_Category>" +
+"</sis:Entire_Enrollment>" +
+"<sis:Hispanic_Enrollment>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Hispanic_Enrollment>" +
+"</sis:Applicant_Scholar_Characts>"
+    end
+    
+    def applicant_other_dev_characteristic_node
+      "<sis:Applicant_Other_Career_Dev_Characts>" +
+"<sis:Entire_Enrollment>" +
+"<sis:Ethnic_Category>" +
+"<sis:HispanicOrLatino>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:HispanicOrLatino>" +
+"<sis:Non-Hispanic>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Non-Hispanic>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Ethnic_Category>" +
+"<sis:Racial_Category>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Racial_Category>" +
+"</sis:Entire_Enrollment>" +
+"<sis:Hispanic_Enrollment>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Accepted>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Accepted>" +
+"<sis:Applied>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Applied>" +
+"<sis:Interviewed>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Interviewed>" +
+"</sis:Unknown>" +
+"</sis:Hispanic_Enrollment>" +
+"</sis:Applicant_Other_Career_Dev_Characts>"
+    end
   
   
-  
+    def appointed_trainee_characteristic_node
+      "<sis:Appointed_Trainee_Characts>" +
+"<sis:Entire_Enrollment>" +
+"<sis:Ethnic_Category>" +
+"<sis:HispanicOrLatino>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:HispanicOrLatino>" +
+"<sis:Non-Hispanic>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Non-Hispanic>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Ethnic_Category>" +
+"<sis:Racial_Category>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Racial_Category>" +
+"</sis:Entire_Enrollment>" +
+"<sis:Hispanic_Enrollment>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Hispanic_Enrollment>" +
+"<sis:Number_with_Disabilities>0</sis:Number_with_Disabilities>" +
+"<sis:Number_from_Disadvantaged_Backgrounds>0</sis:Number_from_Disadvantaged_Backgrounds>" +
+"</sis:Appointed_Trainee_Characts>"
+    end
+    
+    def appointed_scholar_characteristic_node
+      "<sis:Appointed_Scholar_Characts>" +
+"<sis:Entire_Enrollment>" +
+"<sis:Ethnic_Category>" +
+"<sis:HispanicOrLatino>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:HispanicOrLatino>" +
+"<sis:Non-Hispanic>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Non-Hispanic>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Ethnic_Category>" +
+"<sis:Racial_Category>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Racial_Category>" +
+"</sis:Entire_Enrollment>" +
+"<sis:Hispanic_Enrollment>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Hispanic_Enrollment>" +
+"<sis:Number_with_Disabilities>0</sis:Number_with_Disabilities>" +
+"<sis:Number_from_Disadvantaged_Backgrounds>0</sis:Number_from_Disadvantaged_Backgrounds>" +
+"</sis:Appointed_Scholar_Characts>"
+    end
+    
+    def appointed_other_dev_characteristic_node
+      "<sis:Appointed_Other_Career_Dev_Characts>" +
+"<sis:Entire_Enrollment>" +
+"<sis:Ethnic_Category>" +
+"<sis:HispanicOrLatino>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:HispanicOrLatino>" +
+"<sis:Non-Hispanic>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Non-Hispanic>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Ethnic_Category>" +
+"<sis:Racial_Category>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Racial_Category>" +
+"</sis:Entire_Enrollment>" +
+"<sis:Hispanic_Enrollment>" +
+"<sis:American_Indian_or_Alaska_Native>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:American_Indian_or_Alaska_Native>" +
+"<sis:Asian>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Asian>" +
+"<sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Native_Hawaiian_or_Other_Pacific_Islander>" +
+"<sis:Black_Or_African_American>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Black_Or_African_American>" +
+"<sis:White>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:White>" +
+"<sis:More_Than_One_Race>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:More_Than_One_Race>" +
+"<sis:Unknown>" +
+"<sis:Females>0</sis:Females>" +
+"<sis:Males>0</sis:Males>" +
+"<sis:Not_Reported>0</sis:Not_Reported>" +
+"</sis:Unknown>" +
+"</sis:Hispanic_Enrollment>" +
+"<sis:Number_with_Disabilities>0</sis:Number_with_Disabilities>" +
+"<sis:Number_from_Disadvantaged_Backgrounds>0</sis:Number_from_Disadvantaged_Backgrounds>" +
+"</sis:Appointed_Other_Career_Dev_Characts>"
+    end
 end
