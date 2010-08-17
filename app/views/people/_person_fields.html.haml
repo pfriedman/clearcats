@@ -34,6 +34,11 @@
   = f.text_field :last_four_of_ssn 
 
 %p
+  = f.label :gender, "Gender" 
+  %br
+  = f.select(:gender, Person::GENDERS.collect { |a| [ a.titleize, a ] }) 
+
+%p
   = f.label :degree_type_one_id, "Degree Type 1" 
   %br
   = f.select(:degree_type_one_id, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 1 --" }) 
@@ -51,6 +56,18 @@
       = check_box_tag "person[institution_position_ids][]", institution_position.id, f.object.institution_positions.include?(institution_position)
       = institution_position.to_s
 
+.trainee_section
+  %b Trainee Questions
+  %p
+    = f.label :training_type, "Training Type"
+    %br
+    = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
+
+  %p
+    = f.label :trainee_status, "Trainee Status"
+    %br
+    = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" }) 
+  
 %p
   = f.label :country_id, "Country" 
   %br
@@ -74,8 +91,17 @@
 %p
   Are you from a disadvantaged background? (Optional)
   %br
-  = f.radio_button :disadvantaged_background, true
-  = f.label "disadvantaged_background_true", "Yes"
+  = radio_button_tag "person[disadvantaged_background]", true, f.object.disadvantaged_background == true
+  = label_tag "person_disadvantaged_background_true", "Yes"
   %br
-  = f.radio_button :disadvantaged_background, false
-  = f.label "disadvantaged_background_false", "No"
+  = radio_button_tag "person[disadvantaged_background]", false, f.object.disadvantaged_background == false
+  = label_tag "person_disadvantaged_background_false", "No"
+
+%p
+  Do you have a disability? (Optional)
+  %br
+  = radio_button_tag "person[has_disability]", true, f.object.has_disability == true
+  = label_tag "person_has_disability_true", "Yes"
+  %br
+  = radio_button_tag "person[has_disability]", false, f.object.has_disability == false
+  = label_tag "person_has_disability_false", "No"

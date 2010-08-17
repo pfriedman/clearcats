@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
     :collection => { :choose_service_line => :get, :choose_person => :get }
   
 
+  map.connect 'reports/:action', :controller => "reports"
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 

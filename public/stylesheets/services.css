@@ -48,6 +48,14 @@ ul#service_menu li {
   width: 7.5em !important;
 }
 
+.trainee_section {
+  margin: 1em 0;
+}
+
+.trainee_section b {
+  text-decoration: underline;
+}
+
 .award_section {
   border: 1px solid #ddd;
   padding: 0.25em;

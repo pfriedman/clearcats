@@ -7,7 +7,6 @@ class AddTrainingTypeToPerson < ActiveRecord::Migration
 
   def self.down
     remove_column :people, :has_disability
-    
     remove_column :people, :trainee_status
     remove_column :people, :training_type
   end

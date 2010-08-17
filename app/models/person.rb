@@ -79,9 +79,13 @@ class Person < ActiveRecord::Base
   TRAINEE      = "trainee"
   APPLICANT    = "applicant"
   APPOINTED    = "appointed"
+  MALE         = "Male"
+  FEMALE       = "Female"
+  NOT_REPORTED = "Not_Reported"
   
   TRAINING_TYPES   = [TRAINEE, SCHOLAR, OTHER_CAREER]
   TRAINEE_STATUSES = [APPLICANT, APPOINTED]
+  GENDERS          = [NOT_REPORTED, MALE, FEMALE]
   
   belongs_to :department
 
@@ -100,8 +104,9 @@ class Person < ActiveRecord::Base
 
   validates_length_of :last_four_of_ssn, :is => 4, :if => proc { |obj| !obj.last_four_of_ssn.blank? }
   
-  validates_inclusion_of :training_type,  :in => TRAINING_TYPES,   :if => proc { |obj| !obj.training_type.nil? }
-  validates_inclusion_of :trainee_status, :in => TRAINEE_STATUSES, :if => proc { |obj| !obj.trainee_status.nil? }
+  validates_inclusion_of :training_type,  :in => TRAINING_TYPES,   :if => proc { |obj| !obj.training_type.blank? }
+  validates_inclusion_of :trainee_status, :in => TRAINEE_STATUSES, :if => proc { |obj| !obj.trainee_status.blank? }
+  validates_inclusion_of :gender,         :in => GENDERS,          :if => proc { |obj| !obj.gender.blank? }
   
   accepts_nested_attributes_for :awards, :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true
@@ -160,6 +165,14 @@ class Person < ActiveRecord::Base
   
   def degree_2
     self.degree_type_two.to_s    
+  end
+  
+  def ethnic_category
+    self.ethnic_type.to_s
+  end
+  
+  def racial_category
+    self.race_type.to_s
   end
   
   # TODO: determine the date_of_appointment reporting item

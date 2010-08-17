@@ -249,7 +249,7 @@ class CharacteristicMessageHelper < REXML::Element
   # status   - Applicant, Appointed
   def initialize(trainees, type, status)
     super "sis:#{status}_#{type[0,16]}_Characts"
-    @trainees = trainees.select {|trainee| trainee.trainee_status == status and trainee.training_type.downcase == type.downcase}
+    @trainees = trainees.select {|trainee| trainee.trainee_status.downcase == status.downcase and trainee.training_type.downcase == type.downcase}
     add_element(EntireEnrollmentMessageHelper.new(@trainees, status, type))
     add_element(HispanicEnrollmentMessageHelper.new(@trainees, status, type))
     if status == "Appointed"
@@ -281,7 +281,7 @@ class EthnicCategoriesMessageHelper < REXML::Element
     ["HispanicOrLatino", "Non-Hispanic", "Unknown"].each do |category|
       #non_nil_trainees = trainees.select{|trainee| not trainee.ethnic_category.nil?}
       @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? and trainee.ethnic_category.downcase == category.downcase}
-      add_element(EthnicCategoryMessageHelper.new(@trainees,status,category))
+      add_element(EthnicCategoryMessageHelper.new(@trainees, status, category))
     end
   end
 end
@@ -375,7 +375,7 @@ class ApplicantStatusMessageHelper < REXML::Element
   # status - Applied, Accepted, Interviewed
   def initialize(trainees, status)
     super "sis:#{status}"
-    case status.titleize
+    case status
     when "Applied"
       @trainees = trainees.select {|trainee| trainee.applied == true}
     when "Accepted"
