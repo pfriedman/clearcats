@@ -139,8 +139,12 @@ class FacultyWebService
       person = Person.find_by_netid(attributes["netid"])
       person = Person.new if person.nil?
 
-      attributes.each { |name, value| person.send(name.to_s + '=', value) }
-
+      attributes.each { |name, value| person.send("#{name.to_s}=", value) if person.respond_to?("#{name.to_s}=") }
+      
+      # use ldap over faculty db
+      ldap_entry = Ldap.new.retrieve_entry(attributes["netid"])
+      ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key]) if person.respond_to?(key) }
+      
       dept = Department.find_by_externalid(person.dept_id)
       person.department = dept if dept
       person.save!

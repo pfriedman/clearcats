@@ -5,6 +5,9 @@ class ReportsController < ApplicationController
   def index
   end
   
+  # This XML plus all attachments must be compressed into a zip file
+  # and then uploaded to the CTSA
+  # find the website on the wiki: (http://www.ctsawiki.org/wiki//x/ngCP)
   def ctsa_annual_report
     if request.post?
       grant_number = params[:grant_number]

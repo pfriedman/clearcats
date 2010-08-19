@@ -181,6 +181,9 @@ ActiveRecord::Schema.define(:version => 20100817202539) do
     t.string   "trainee_status"
     t.boolean  "has_disability"
     t.string   "gender"
+    t.string   "title"
+    t.string   "fax"
+    t.string   "address"
   end
 
   create_table "publications", :force => true do |t|

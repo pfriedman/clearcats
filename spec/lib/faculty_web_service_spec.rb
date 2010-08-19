@@ -100,6 +100,17 @@ describe FacultyWebService do
       
     end
 
+    context "using ldap" do
+      
+      it "should enter information missing from the faculty db" do
+        FacultyWebService.stub!(:make_request).and_return(netid_response)
+        results = FacultyWebService.locate({:netid => "wakibbe"})
+        result = results.first
+        result.middle_name.should == "A"
+      end
+      
+    end
+
   end
 end
 
