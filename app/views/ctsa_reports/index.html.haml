@@ -1,0 +1,21 @@
+- title "CTSA Reports"
+  
+- if @ctsa_reports.empty?
+  .no_records No CTSA reports were found.
+- else
+  %table{ :class => "records" }
+    %tr
+      %th Download
+      %th Reporting Year
+      %th Created By
+      %th Finalized
+      %th Has Errors
+    - @ctsa_reports.each do |rpt|
+      %tr{:class => cycle('even_record', 'odd_record')}
+        %td= link_to 'Download', download_ctsa_report_path(rpt)
+        %td= rpt.reporting_year
+        %td= rpt.created_by.to_s
+        %td= rpt.finalized? ? "True" : "False"
+        %td= rpt.has_errors? ? "True" : "False"
+
+  = will_paginate @ctsa_reports

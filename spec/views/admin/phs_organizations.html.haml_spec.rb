@@ -7,14 +7,7 @@ describe "/admin/phs_organizations.html.haml" do
       login(admin_login)
       assigns[:search] = PhsOrganization.search
       @phs_organization = Factory.create(:phs_organization)
-      arr = [@phs_organization]
-      assigns[:ctsa_data] = WillPaginate::Collection.create(1, 10) do |pager|
-        pager.replace(arr)
-        unless pager.total_entries
-          pager.total_entries = arr.size
-        end
-      end
-      
+      assigns[:ctsa_data] = will_paginate_collection([@phs_organization])
     end
     
     it "should render a list of phs_organizations" do

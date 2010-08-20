@@ -7,14 +7,7 @@ describe "/admin/specialties.html.haml" do
       login(admin_login)
       assigns[:search] = Specialty.search
       @specialty = Factory.create(:specialty)
-      arr = [@specialty]
-      assigns[:ctsa_data] = WillPaginate::Collection.create(1, 10) do |pager|
-        pager.replace(arr)
-        unless pager.total_entries
-          pager.total_entries = arr.size
-        end
-      end
-      
+      assigns[:ctsa_data] = will_paginate_collection([@specialty])
     end
     
     it "should render a list of specialties" do

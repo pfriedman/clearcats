@@ -24,6 +24,12 @@
 
 class User < ActiveRecord::Base
   include Bcsec
-
-
+  
+  def to_s
+    full_name
+  end
+  
+  def full_name
+    [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
+  end
 end

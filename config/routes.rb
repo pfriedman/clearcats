@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -14,6 +15,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :activity_types
   map.resources :awards, :except => [ :index, :destroy ]
+  map.resources :ctsa_reports, :except => [ :show ],
+    :member => { :download => :get }
   map.resources :publications, :only => [ :edit, :update ]
   map.resources :organizational_units
   map.resources :service_lines

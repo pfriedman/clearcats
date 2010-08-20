@@ -17,16 +17,7 @@ class Ldap
     # See: /config/ldap_config.yml file for configuration
     #
     def get_connnection
-      if LDAP_CONFIG['username'].blank?
-        return Net::LDAP.new({:host => LDAP_CONFIG['server'], :port => LDAP_CONFIG['port']})
-      else
-        return Net::LDAP.new({:host => LDAP_CONFIG['server'], 
-                       :port => LDAP_CONFIG['port'],
-                       :encryption => :simple_tls,
-                       :auth => { :method => :simple, 
-                                  :username => LDAP_CONFIG['username'], 
-                                  :password => LDAP_CONFIG['password'] }} )
-      end
+      Net::LDAP.new({:host => LDAP_CONFIG['server'], :port => LDAP_CONFIG['port']})
     end
   
     def process_entry(user_filter)

@@ -1,0 +1,24 @@
+- form_for @ctsa_report do |f|
+  
+  %p
+    = f.label :grant_number, "Grant Number"
+    %br
+    = f.text_field :grant_number
+  
+  %p
+    = f.label :reporting_year, "Reporting Year"
+    %br
+    = f.text_field :reporting_year
+  
+  %p
+    = f.check_box :finalized
+    = f.label :finalized, "Finalized?"
+    
+  %p
+    = f.check_box :has_errors
+    = f.label :has_errors, "Has Errors?"
+  
+  .buttons
+    = submit_tag "Generate Report"
+    
+/ <% selections = "Highlights_Milestones_Challenges_Attachment","Report_Self_Evaluation_Attachment","External_Advisory_Committee_Report_Attachment","Report_CTSA_Components_Attachment","IRB_Approval_Report_Attachment","Career_Dev_Ind_Progress_Report_Attachment","Technology_Transfer_Report_Attachment" %>

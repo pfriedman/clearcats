@@ -120,10 +120,35 @@ Factory.define :publication do |pub|
 end
 
 Factory.define :approval do |a|
-  a.tracking_number "tracking_number"
-  a.approval_type "Other"
-  a.project_title "project_title"
-  a.approval_date Time.now
-  a.nucats_assisted false
-  a.principal_investigator "principal_investigator"
+  a.tracking_number         "tracking_number"
+  a.approval_type           "Other"
+  a.project_title           "project_title"
+  a.approval_date           Time.now
+  a.nucats_assisted         false
+  a.principal_investigator  "principal_investigator"
+end
+
+Factory.define :ctsa_report do |r|
+  r.created_by      { |a| a.association(:user) }
+  r.reporting_year  Time.now.year
+  r.grant_number    "123456"
+  r.finalized       false
+  r.has_errors      false
+end
+
+Factory.define :user do |u|
+  u.first_name     "first_name"
+  u.middle_name    "middle_name"
+  u.last_name      "last_name"
+  u.title          "title"
+  u.business_phone "business_phone"
+  u.fax            "fax"
+  u.email          "email"
+  u.username       "username"
+  u.nu_employeeid  "nu_employeeid"
+  u.personnelid    "personnelid"
+  u.address        "address"
+  u.city           "city"
+  u.state          "state"
+  u.country        "country"
 end

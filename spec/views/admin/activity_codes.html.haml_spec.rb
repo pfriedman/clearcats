@@ -7,14 +7,7 @@ describe "/admin/activity_codes.html.haml" do
       login(admin_login)
       assigns[:search] = ActivityCode.search
       @activity_code = Factory.create(:activity_code)
-      arr = [@activity_code]
-      assigns[:ctsa_data] = WillPaginate::Collection.create(1, 10) do |pager|
-        pager.replace(arr)
-        unless pager.total_entries
-          pager.total_entries = arr.size
-        end
-      end
-      
+      assigns[:ctsa_data] = will_paginate_collection([@activity_code])
     end
     
     it "should render a list of activity_codes" do

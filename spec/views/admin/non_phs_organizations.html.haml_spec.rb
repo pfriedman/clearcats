@@ -7,14 +7,7 @@ describe "/admin/non_phs_organizations.html.haml" do
       login(admin_login)
       assigns[:search] = NonPhsOrganization.search
       @non_phs_organization = Factory.create(:non_phs_organization)
-      arr = [@non_phs_organization]
-      assigns[:ctsa_data] = WillPaginate::Collection.create(1, 10) do |pager|
-        pager.replace(arr)
-        unless pager.total_entries
-          pager.total_entries = arr.size
-        end
-      end
-      
+      assigns[:ctsa_data] = will_paginate_collection([@non_phs_organization])
     end
     
     it "should render a list of non_phs_organizations" do
