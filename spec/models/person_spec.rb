@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100817202539
+# Schema version: 20100820144259
 #
 # Table name: people
 #
@@ -32,6 +32,9 @@
 #  trainee_status                                :string(255)
 #  has_disability                                :boolean
 #  gender                                        :string(255)
+#  title                                         :string(255)
+#  fax                                           :string(255)
+#  address                                       :string(255)
 #
 
 require 'spec_helper'

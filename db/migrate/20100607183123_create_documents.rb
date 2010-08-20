@@ -1,7 +1,8 @@
 class CreateDocuments < ActiveRecord::Migration
   def self.up
     create_table :documents do |t|
-      t.string :name
+      t.string  :name
+      t.integer :reporting_year
       t.references :documentable, :polymorphic => true
 
       t.timestamps

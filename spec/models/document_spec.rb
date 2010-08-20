@@ -1,10 +1,11 @@
 # == Schema Information
-# Schema version: 20100817202539
+# Schema version: 20100820144259
 #
 # Table name: documents
 #
 #  id                :integer         not null, primary key
 #  name              :string(255)
+#  reporting_year    :integer
 #  documentable_id   :integer
 #  documentable_type :string(255)
 #  created_at        :datetime

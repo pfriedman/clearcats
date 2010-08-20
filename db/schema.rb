@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
 
   create_table "documents", :force => true do |t|
     t.string   "name"
+    t.integer  "reporting_year"
     t.integer  "documentable_id"
     t.string   "documentable_type"
     t.datetime "created_at"
