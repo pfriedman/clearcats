@@ -8,3 +8,6 @@ coverage/*
 coverage.data
 *.tmproj
 to_haml.rb
+doc/ldap_notes.txt
+doc/metrics.txt
+doc/questions.txt
