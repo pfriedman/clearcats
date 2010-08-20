@@ -1,4 +1,4 @@
-- form_for @ctsa_report do |f|
+- form_for @ctsa_report, :html => { :multipart => true } do |f|
   
   %p
     = f.label :grant_number, "Grant Number"
@@ -18,7 +18,23 @@
     = f.check_box :has_errors
     = f.label :has_errors, "Has Errors?"
   
+    %table{ :class => "records documents" }
+      %thead
+        %tr
+          %th
+            Document Name
+          %th
+            Reporting Year
+          %th
+            File Upload
+          %th
+      %tbody{ :class => "nested_records" }
+        - f.fields_for :documents do |document_form|
+          = render 'document_fields', :f => document_form
+      %tfoot
+        %tr
+          %td{ :colspan => '3' }
+            = link_to_add_fields "Add", f, :documents
+  
   .buttons
     = submit_tag "Generate Report"
-    
-/ <% selections = "Highlights_Milestones_Challenges_Attachment","Report_Self_Evaluation_Attachment","External_Advisory_Committee_Report_Attachment","Report_CTSA_Components_Attachment","IRB_Approval_Report_Attachment","Career_Dev_Ind_Progress_Report_Attachment","Technology_Transfer_Report_Attachment" %>

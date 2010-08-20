@@ -1,0 +1,9 @@
+%tr.document.fields
+  %td
+    = f.select(:name, Document::CTSA_ATTACHMENTS.map { |name| [ name.titleize, name ] }, { :include_blank => "-- Select Attachment Name --" })
+  %td
+    = f.text_field :reporting_year
+  %td
+    = f.file_field :data
+  %td
+    = link_to_remove_fields 'Remove', f

@@ -18,6 +18,11 @@
 
 class Document < ActiveRecord::Base
   
+  CTSA_ATTACHMENTS = ["Highlights_Milestones_Challenges_Attachment", "Report_Self_Evaluation_Attachment",
+                      "External_Advisory_Committee_Report_Attachment", "Report_CTSA_Components_Attachment",
+                      "IRB_Approval_Report_Attachment", "Career_Dev_Ind_Progress_Report_Attachment", 
+                      "Technology_Transfer_Report_Attachment"]
+  
   belongs_to :documentable, :polymorphic => true
   
   has_attached_file :data
