@@ -32,22 +32,22 @@ describe AdminController do
         response.should redirect_to(:controller => :admin, :action => :index)
       end
       
-      it "should save the uploaded document" do
+      it "should save the uploaded attachment" do
         file_name = File.expand_path(File.dirname(__FILE__) + '/../data/2010 CTSA XML Schema.xsd')
         data = mock(Object, :path => file_name)
-        document = mock_model(Document, :save => true, :data => data)
+        attachment = mock_model(Attachment, :save => true, :data => data)
         
-        Document.should_receive(:new).and_return(document)
-        post :process_ctsa_upload, { "id" => "1", "document" => document }
+        Attachment.should_receive(:new).and_return(attachment)
+        post :process_ctsa_upload, { "id" => "1", "attachment" => attachment }
       
         flash[:notice].should == "CTSA data processed successfully"
         response.should redirect_to(:controller => :admin, :action => :view_ctsa_data)
       end
       
-      it "should alert the user if the document could not be saved" do
-        document = mock_model(Document, :save => false)
+      it "should alert the user if the attachment could not be saved" do
+        attachment = mock_model(Attachment, :save => false)
         
-        Document.should_receive(:new).and_return(document)
+        Attachment.should_receive(:new).and_return(attachment)
         post :process_ctsa_upload
         flash[:warning].should == "Could not process CTSA Upload"
         response.should render_template('upload_ctsa_data')

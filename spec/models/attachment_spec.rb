@@ -1,13 +1,13 @@
 # == Schema Information
 # Schema version: 20100820144259
 #
-# Table name: documents
+# Table name: attachments
 #
 #  id                :integer         not null, primary key
 #  name              :string(255)
 #  reporting_year    :integer
-#  documentable_id   :integer
-#  documentable_type :string(255)
+#  attachable_id   :integer
+#  attachable_type :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
 #  data_file_name    :string(255)
@@ -18,7 +18,7 @@
 
 require 'spec_helper'
 
-describe Document do
+describe Attachment do
 
   it { should have_attached_file(:data) }
   it { should validate_attachment_presence(:data) }

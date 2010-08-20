@@ -5,17 +5,17 @@ class AdminController < ApplicationController
   end
   
   def upload_ctsa_data
-    @document = Document.new
+    @attachment = Attachment.new
   end
   
   def process_ctsa_upload
     action = "index"
     if request.post?
-      @document = Document.new(params[:document])
+      @attachment = Attachment.new(params[:attachment])
       
-      if @document.save
-        # process the document file
-        ctsa_schema_reader = CtsaSchemaReader.new(@document.data.path)
+      if @attachment.save
+        # process the attachment file
+        ctsa_schema_reader = CtsaSchemaReader.new(@attachment.data.path)
         ctsa_schema_reader.process
 
         flash[:notice] = "CTSA data processed successfully"

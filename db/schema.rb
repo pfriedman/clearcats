@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
     t.datetime "updated_at"
   end
 
+  create_table "attachments", :force => true do |t|
+    t.string   "name"
+    t.integer  "reporting_year"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
+
   create_table "awards", :force => true do |t|
     t.string   "grant_number"
     t.string   "years_of_award"
@@ -106,19 +119,6 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
     t.string   "school"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "documents", :force => true do |t|
-    t.string   "name"
-    t.integer  "reporting_year"
-    t.integer  "documentable_id"
-    t.string   "documentable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
   end
 
   create_table "ethnic_types", :force => true do |t|

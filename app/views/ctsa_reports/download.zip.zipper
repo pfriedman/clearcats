@@ -1,0 +1,6 @@
+
+zip["ctsa_report.xml"] = File.open(@ctsa_report_xml_file_path)
+
+@ctsa_report.attachments.each do |doc|
+  zip[doc.data_file_name] = File.open(doc.data.path)
+end

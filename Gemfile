@@ -19,6 +19,7 @@ gem "paperclip"
 gem "pg"
 gem "searchlogic"
 gem "will_paginate"
+gem "zippy"
 
 group :test do
   # rspec

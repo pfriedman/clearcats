@@ -18,7 +18,7 @@
     = f.check_box :has_errors
     = f.label :has_errors, "Has Errors?"
   
-    %table{ :class => "records documents" }
+    %table{ :class => "records attachments" }
       %thead
         %tr
           %th
@@ -29,12 +29,12 @@
             File Upload
           %th
       %tbody{ :class => "nested_records" }
-        - f.fields_for :documents do |document_form|
-          = render 'document_fields', :f => document_form
+        - f.fields_for :attachments do |attachment_form|
+          = render 'attachment_fields', :f => attachment_form
       %tfoot
         %tr
           %td{ :colspan => '3' }
-            = link_to_add_fields "Add", f, :documents
+            = link_to_add_fields "Add", f, :attachments
   
   .buttons
     = submit_tag "Generate Report"

@@ -1,10 +1,12 @@
+require 'message_helpers'
 class CtsaReportsController < ApplicationController
   permit :Admin, :User
   
   # GET /ctsa_reports
   # GET /ctsa_reports.xml
   def index
-    @ctsa_reports = CtsaReport.all
+    @search = CtsaReport.search(params[:search])
+    @ctsa_reports = @search.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,7 +37,7 @@ class CtsaReportsController < ApplicationController
 
     respond_to do |format|
       if @ctsa_report.save
-        format.html { redirect_to(@ctsa_report, :notice => 'CtsaReport was successfully created.') }
+        format.html { redirect_to(ctsa_reports_url, :notice => 'CtsaReport was successfully created.') }
         format.xml  { render :xml => @ctsa_report, :status => :created, :location => @ctsa_report }
       else
         format.html { render :action => "new" }
@@ -51,7 +53,7 @@ class CtsaReportsController < ApplicationController
 
     respond_to do |format|
       if @ctsa_report.update_attributes(params[:ctsa_report])
-        format.html { redirect_to(@ctsa_report, :notice => 'CtsaReport was successfully updated.') }
+        format.html { redirect_to(ctsa_reports_url, :notice => 'CtsaReport was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,20 +74,39 @@ class CtsaReportsController < ApplicationController
     end
   end
   
+  # The CTSA report XML plus all attachments must be compressed into a zip file
+  # and then uploaded to the CTSA
+  # find the website on the wiki: (http://www.ctsawiki.org/wiki//x/ngCP)  
+  def download
+    @ctsa_report = CtsaReport.find(params[:id])
+    dir = "#{Rails.root}/tmp/ctsa_reports/"
+    @ctsa_report_xml_file_path = create_xml_report(@ctsa_report, dir)
+
+    respond_to do |format|
+      # format.html
+      format.zip
+    end
+    # zip_file = Zippy.create 'ctsa.zip' do |zip|
+    #   zip["ctsa_report.xml"] = File.open(file_path)
+    #   @ctsa_report.attachments.each do |doc|
+    #     zip[doc.data_file_name] = File.open(doc.data.path)
+    #   end
+    # end
+    # send_data(zip_file.data, :type => "application/zip", :filename => "ctsa_annual_report.zip")
+  end
+  
   private
   
-    # This XML plus all attachments must be compressed into a zip file
-    # and then uploaded to the CTSA
-    # find the website on the wiki: (http://www.ctsawiki.org/wiki//x/ngCP)
-    def create_xml_report(ctsa_report)
-      # TODO: check for valid form
+    # Creates the xml for the ctsa report
+    def create_xml_report(ctsa_report, dir)
+      # TODO: check for valid ctsa report data
+      file_path = "#{dir}/#{Time.now.to_i}.xml"
       org = OrganizationalUnit.find_by_abbreviation("NUCATS")
-
       doc = REXML::Document.new
       doc.add_element(ReportMessageHelper.new(ctsa_report.grant_number, ctsa_report.reporting_year, 
                       Person.all_investigators, Person.all_trainees, [org]))
       doc.write("",2)
-      # TODO: create report - zip up directory with all attachments and xml below
-      # send_data(doc.to_s, :type => "text/xml",:filename => "ctsa_annual_report.xml")
+      File.open(file_path, 'w') {|f| f.write(doc.to_s) }
+      file_path
     end
 end

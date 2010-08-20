@@ -12,7 +12,7 @@
       %th Has Errors
     - @ctsa_reports.each do |rpt|
       %tr{:class => cycle('even_record', 'odd_record')}
-        %td= link_to 'Download', download_ctsa_report_path(rpt)
+        %td= link_to 'Download', download_ctsa_report_path(rpt, :format => "zip")
         %td= rpt.reporting_year
         %td= rpt.created_by.to_s
         %td= rpt.finalized? ? "True" : "False"

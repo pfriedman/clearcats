@@ -1,5 +1,5 @@
 %h3 Upload CTSA Data File
-- form_for(@document, :url => { :action => "process_ctsa_upload" }, :html => { :multipart => true }) do |f|
+- form_for(@attachment, :url => { :action => "process_ctsa_upload" }, :html => { :multipart => true }) do |f|
   %b= f.label :data, "CTSA schema"
   %br
   = f.file_field :data

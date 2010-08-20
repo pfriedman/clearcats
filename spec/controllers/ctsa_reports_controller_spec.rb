@@ -13,7 +13,7 @@ describe CtsaReportsController do
 
     describe "GET index" do
       it "assigns all ctsa_reports as @ctsa_reports" do
-        CtsaReport.stub(:find).with(:all).and_return([mock_ctsa_report])
+        CtsaReport.stub(:search).and_return([mock_ctsa_report])
         get :index
         assigns[:ctsa_reports].should == [mock_ctsa_report]
       end
@@ -47,7 +47,7 @@ describe CtsaReportsController do
         it "redirects to the created ctsa_report" do
           CtsaReport.stub(:new).and_return(mock_ctsa_report(:save => true))
           post :create, :ctsa_report => {}
-          response.should redirect_to(ctsa_report_url(mock_ctsa_report))
+          response.should redirect_to(ctsa_reports_url)
         end
       end
 
@@ -85,7 +85,7 @@ describe CtsaReportsController do
         it "redirects to the ctsa_report" do
           CtsaReport.stub(:find).and_return(mock_ctsa_report(:update_attributes => true))
           put :update, :id => "1"
-          response.should redirect_to(ctsa_report_url(mock_ctsa_report))
+          response.should redirect_to(ctsa_reports_url)
         end
       end
 

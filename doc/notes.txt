@@ -168,7 +168,7 @@ Person/User: (App)
   belongs_to :protections_training
   
   has_many :responses (from surveyor)
-  has_many :documents
+  has_many :attachments
   
   
 Address: (App)
@@ -207,7 +207,7 @@ Activity: (App)
   belongs_to :milestone
   has_many :identified_contacts
   has_many :unidentified_contacts
-  has_many :documents
+  has_many :attachments
   
 
 TimeEntry: (App)
