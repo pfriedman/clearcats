@@ -156,8 +156,15 @@ class Person < ActiveRecord::Base
   def awards_for_ctsa_award_type(ctsa_award_type)
     self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
   end
+
+
+  ###
+  #    For CTSA reporting
+  ###
   
-  # for CTSA reporting
+  def middle_initial=(mi)
+    self.middle_name = mi
+  end
   
   def commons_username
     self.era_commons_username.to_s
@@ -198,7 +205,10 @@ class Person < ActiveRecord::Base
     ""
   end
 
-  # For LDAP  
+  ###
+  #    For LDAP
+  ###
+  
   def mail=(mail)
     self.email = mail
   end
@@ -237,7 +247,31 @@ class Person < ActiveRecord::Base
     self.middle_name = (parts[2] && parts[1])
   end
 
-  # Support for exporting to csv
+
+  ###
+  #    Parsing data from CSV
+  ###
+
+  def self.import_data(file)
+    FasterCSV.parse(file, :headers => :first_row, :write_headers=>false, :return_headers => false, :header_converters => :symbol) do |row|
+      if !row[:commons_username].blank?
+        pers = Person.find_or_create_by_era_commons_username(row[:commons_username])
+        specialty = Specialty.find_by_code(row[:area_of_expertise])
+        pers.specialty = specialty unless specialty.nil?
+        [:first_name, :last_name, :middle_initial].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+        pers.save
+      end
+    end
+  end
+
+  def import_row(row)
+    
+  end
+
+  ###
+  #    Support for exporting to CSV
+  ###
+  
   comma do
     last_name
     first_name

@@ -138,4 +138,20 @@ describe Person do
     
   end
   
+  context "uploading csv data" do
+    
+    describe "processing a valid csv document" do
+      
+      it "should create Person records from the data" do
+        Person.count.should == 0
+        
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')))
+        
+        Person.count.should == 2
+      end
+      
+    end
+    
+  end
+  
 end

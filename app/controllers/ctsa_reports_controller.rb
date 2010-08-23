@@ -80,7 +80,7 @@ class CtsaReportsController < ApplicationController
     @ctsa_report = CtsaReport.find(params[:id])
     @ctsa_report_xml_file_path = @ctsa_report.create_xml_report("#{Rails.root}/tmp/ctsa_reports/")
     
-    zip_file = Zippy.create 'ctsa.zip' do |zip|
+    zip_file = Zippy.create "#{Rails.root}/tmp/ctsa_reports/ctsa.zip" do |zip|
       @ctsa_report.attachments.each do |doc|
         zip[doc.name] = File.open(doc.data.path)
       end
