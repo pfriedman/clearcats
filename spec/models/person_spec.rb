@@ -62,6 +62,16 @@ describe Person do
     p.school_affiliation.should == "dept school"
   end
   
+  it "should set attributes from ldap" do
+    netid = "wakibbe"
+    pers = Factory(:person, :netid => netid, :phone => "")
+    pers.phone.should be_blank
+    
+    ldap_entry = Ldap.new.retrieve_entry(netid)
+    ldap_entry.attribute_names.each { |key| pers.send("#{key}=", ldap_entry[key]) if pers.respond_to?("#{key}=") }
+    pers.phone.should_not be_blank
+  end
+  
   context "finding people of a particular reporting type" do
   
     before(:each) do

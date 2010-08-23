@@ -220,30 +220,21 @@ class Person < ActiveRecord::Base
   end
   
   def postaladdress=(addr)
-    parts  = addr.split('$')
-    campus = case parts.last
-             when /^EV|Evanston/; "Evanston";
-             when /^CH|Chicago/; "Chicago";
-             end
-    parts.delete_at(-1) if campus
-    self.address = parts.join("\n")
+    if !addr.nil?
+      parts  = addr.split('$')
+      campus = case parts.last
+               when /^EV|Evanston/; "Evanston";
+               when /^CH|Chicago/; "Chicago";
+               end
+      parts.delete_at(-1) if campus
+      self.address = parts.join("\n")
+    end
   end
   
   def displayname=(name)
     # guess middle name - this'll be tricky if the displayname has more than three parts
     parts = name.split(/\s+/)
     self.middle_name = (parts[2] && parts[1])
-  end
-
-  def extract_address_elements(ldap_address)
-    return nil, nil unless ldap_address
-    parts = ldap_address.split('$')
-    city = case parts.last
-           when /^EV|Evanston/; "Evanston";
-           when /^CH|Chicago/; "Chicago";
-           end
-    parts.delete_at(-1) if city
-    [city, parts.join("\n")]
   end
 
   # Support for exporting to csv
