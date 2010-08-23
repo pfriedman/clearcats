@@ -23,6 +23,21 @@ describe CtsaReport do
   end
   
   it { should belong_to(:created_by) }
-  # it { should have_many(:attachments) }
+  it { should have_many(:attachments) }
+  
+  context "associating xml file with ctsa_report" do
+    
+    it "should build the xml and add as attachment to the report" do
+      rpt = Factory(:ctsa_report)
+      rpt.attachments.should be_empty
+      
+      rpt.create_xml_report("#{Rails.root}/tmp/ctsa_reports/")
+      
+      rpt = CtsaReport.find(rpt.id)
+      rpt.attachments.should_not be_empty
+      rpt.attachments.first.name.should == "ctsa_report.xml"
+    end
+    
+  end
   
 end

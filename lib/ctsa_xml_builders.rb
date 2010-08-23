@@ -3,10 +3,10 @@ include REXML
 
 # Pulled from TurboCATS
 #
-# The ReportMessageHelper builds an XML document for the XML schema definition
+# The ReportBuilder builds an XML document for the XML schema definition
 # available at http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd.
 # Given the grant number, investigators, trainees, publications, organizations, and attachments
-# the ReportMessageHelper builds the XML required by the NIH.
+# the ReportBuilder builds the XML required by the NIH.
 # 
 # <sis:Progress_Report 
 #     xsi:schemaLocation="http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd"
@@ -15,18 +15,18 @@ include REXML
 # ...
 # </sis:Progress_Report>
 
-class ReportMessageHelper < REXML::Element
+class ReportBuilder < REXML::Element
   def initialize(grant_number, reporting_year, investigators, trainees, orgs)
     super "sis:Progress_Report"
     add_attribute("xmlns:sis", "http://sis.ncrr.nih.gov")
     add_attribute("xsi:schemaLocation", "http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd")
     add_attribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
-    add_element(GrantMessageHelper.new(grant_number))
-    add_element(RosterMessageHelper.new(investigators, trainees))
-    add_element(PublicationsMessageHelper.new(Publication.all_for_reporting_year(reporting_year)))
-    add_element(ResourceProjectionsMessageHelper.new)
-    add_element(ProgramDescriptionMessageHelper.new(orgs))
-    add_element(CharacteristicsMessageHelper.new(trainees))
+    add_element(GrantBuilder.new(grant_number))
+    add_element(RosterBuilder.new(investigators, trainees))
+    add_element(PublicationsBuilder.new(Publication.all_for_reporting_year(reporting_year)))
+    add_element(ResourceProjectionsBuilder.new)
+    add_element(ProgramDescriptionBuilder.new(orgs))
+    add_element(CharacteristicsBuilder.new(trainees))
   end
 end
 
@@ -37,7 +37,7 @@ end
 #   <sis:Six_Digit_Grant_Number> - 123456 - </sis:Six_Digit_Grant_Number>
 # </sis:Grant_Info>
 
-class GrantMessageHelper < REXML::Element
+class GrantBuilder < REXML::Element
   def initialize(grant_number)
     super "sis:Grant_Info"
     add_element("sis:Six_Digit_Grant_Number").add_text(grant_number)
@@ -51,13 +51,13 @@ end
 # ...
 # </sis:Roster>
 
-class RosterMessageHelper < REXML::Element
+class RosterBuilder < REXML::Element
   def initialize(investigators, trainees)
     super "sis:Roster"
     investigators.each do |investigator|
-      add_element(InvestigatorMessageHelper.new(investigator))
+      add_element(InvestigatorBuilder.new(investigator))
     end
-    add_element(TrainingMessageHelper.new(trainees))
+    add_element(TrainingBuilder.new(trainees))
   end
 end
 
@@ -67,7 +67,7 @@ end
 #   <sis:Area_of_Expertise> - specialty.code - </sis:Area_of_Expertise>
 # </sis:Investigator>
 
-class InvestigatorMessageHelper < REXML::Element
+class InvestigatorBuilder < REXML::Element
   def initialize(investigator)
     super 'sis:Investigator'
     add_element("sis:Commons_Username").add_text(investigator.commons_username.upcase.strip)
@@ -80,11 +80,11 @@ end
 # ...
 # </sis:Training>
 
-class TrainingMessageHelper < REXML::Element
+class TrainingBuilder < REXML::Element
   def initialize(trainees)
     super "sis:Training"
     (Person.scholars + Person.other_careers + Person.trainees).each do |trainee|
-      add_element(TraineeMessageHelper.new(trainee))
+      add_element(TraineeBuilder.new(trainee))
     end
   end
 end
@@ -98,7 +98,7 @@ end
 #     <sis:End_Date> </sis:End_Date>
 #     <sis:Mentor_Commons_Username> </sis:Mentor_Commons_Username>
 #   </sis:Scholar>
-class TraineeMessageHelper < REXML::Element
+class TraineeBuilder < REXML::Element
   
   def initialize(trainee)
     type = ""
@@ -132,14 +132,14 @@ end
 # <sis:Publications>
 # ...
 # </sis:Publications>
-class PublicationsMessageHelper < REXML::Element
+class PublicationsBuilder < REXML::Element
   
   def initialize(publications)
     super "sis:Publications"
     processed_pubmed_ids =[]
     publications.each do |publication|
       if not processed_pubmed_ids.detect{ |id| id == publication.pubmed_id }
-        add_element(PublicationMessageHelper.new(publication))
+        add_element(PublicationBuilder.new(publication))
         processed_pubmed_ids.push(publication.pubmed_id)
       end
     end
@@ -152,7 +152,7 @@ end
 #     <sis:PubMed_ID> </sis:PubMed_ID>
 #     <sis:Missing_PCMCID_Reason> </sis:Missing_PCMCID_Reason> (optional)
 #   </sis:Publication>
-class PublicationMessageHelper < REXML::Element
+class PublicationBuilder < REXML::Element
  
   def initialize(publication)
     @publication = publication
@@ -174,7 +174,7 @@ end
 #   <sis:Percent_Pediatrics>15</sis:Percent_Pediatrics>
 #   <sis:Percent_AIDS>0</sis:Percent_AIDS>
 # </sis:Resource_Projections>
-class ResourceProjectionsMessageHelper < REXML::Element
+class ResourceProjectionsBuilder < REXML::Element
   
   def initialize()
     super "sis:Resource_Projections"
@@ -195,25 +195,27 @@ end
 #     <sis:Participant_US_State></sis:Participant_US_State>
 #   </sis:Participating_Organization_or_Institution>
 # </sis:Program_Description>
-class ProgramDescriptionMessageHelper < REXML::Element
+class ProgramDescriptionBuilder < REXML::Element
   
   def initialize(orgs)
     super "sis:Program_Description"
     orgs.each do |org|
-      add_element(ParticipatingOrganizationsMessageHelper.new(org))
+      add_element(ParticipatingOrganizationsBuilder.new(org))
     end
   end
   
 end
 
-class ParticipatingOrganizationsMessageHelper < REXML::Element
+class ParticipatingOrganizationsBuilder < REXML::Element
   
   def initialize(org)
     super "sis:Participating_Organization_or_Institution"
-    add_element("sis:Participant_Name").add_text(org.abbreviation)
-    add_element("sis:Participant_City").add_text(org.city)
-    add_element("sis:Participant_US_State").add_text(org.us_state) if org.us_state
-    add_element("sis:Participant_Non_US_Country").add_text(org.country_name) if org.country_name and org.us_state.blank?
+    if org
+      add_element("sis:Participant_Name").add_text(org.abbreviation) 
+      add_element("sis:Participant_City").add_text(org.city)
+      add_element("sis:Participant_US_State").add_text(org.us_state) if org.us_state
+      add_element("sis:Participant_Non_US_Country").add_text(org.country_name) if org.country_name and org.us_state.blank?
+    end
   end
   
 end
@@ -225,12 +227,12 @@ end
 # <sis:Characteristics>
 # ...
 # </sis:Characteristics>
-class CharacteristicsMessageHelper < REXML::Element
+class CharacteristicsBuilder < REXML::Element
   def initialize(trainees)
     super "sis:Characteristics"
     Person::TRAINEE_STATUSES.each  do |status|
       Person::TRAINING_TYPES.each do |type|
-        add_element(CharacteristicMessageHelper.new(trainees, nodify(type), nodify(status)))
+        add_element(CharacteristicBuilder.new(trainees, nodify(type), nodify(status)))
       end
     end
   end
@@ -243,18 +245,18 @@ end
 # <sis:#{status}__#{type[0,16]}_Characts>
 # ...
 # </sis:#{status}__#{type[0,16]}_Characts>
-class CharacteristicMessageHelper < REXML::Element
+class CharacteristicBuilder < REXML::Element
   # trainees - a collection of trainees (person)
   # type     - Trainee, Scholar, Other_Career_Development
   # status   - Applicant, Appointed
   def initialize(trainees, type, status)
     super "sis:#{status}_#{type[0,16]}_Characts"
     @trainees = trainees.select {|trainee| trainee.trainee_status.downcase == status.downcase and trainee.training_type.downcase == type.downcase}
-    add_element(EntireEnrollmentMessageHelper.new(@trainees, status, type))
-    add_element(HispanicEnrollmentMessageHelper.new(@trainees, status, type))
+    add_element(EntireEnrollmentBuilder.new(@trainees, status, type))
+    add_element(HispanicEnrollmentBuilder.new(@trainees, status, type))
     if status == "Appointed"
-      add_element(DisabilityMessageHelper.new(@trainees))
-      add_element(DisadvantagedMessageHelper.new(@trainees))
+      add_element(DisabilityBuilder.new(@trainees))
+      add_element(DisadvantagedBuilder.new(@trainees))
     end
   end
 end
@@ -263,11 +265,11 @@ end
 # <sis:Entire_Enrollment>
 # ...
 # </sis:Entire_Enrollment>
-class EntireEnrollmentMessageHelper < REXML::Element
+class EntireEnrollmentBuilder < REXML::Element
   def initialize(trainees, status, type)
     super "sis:Entire_Enrollment"
-    add_element(EthnicCategoriesMessageHelper.new(trainees, status))
-    add_element(RacialCategoriesMessageHelper.new(trainees, status))
+    add_element(EthnicCategoriesBuilder.new(trainees, status))
+    add_element(RacialCategoriesBuilder.new(trainees, status))
   end    
 end
 
@@ -275,13 +277,13 @@ end
 # <sis:Ethnic_Category>
 # ...
 # </sis:Ethnic_Category>
-class EthnicCategoriesMessageHelper < REXML::Element  
+class EthnicCategoriesBuilder < REXML::Element  
   def initialize (trainees, status)
     super "sis:Ethnic_Category"
     ["HispanicOrLatino", "Non-Hispanic", "Unknown"].each do |category|
       #non_nil_trainees = trainees.select{|trainee| not trainee.ethnic_category.nil?}
       @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? and trainee.ethnic_category.downcase == category.downcase}
-      add_element(EthnicCategoryMessageHelper.new(@trainees, status, category))
+      add_element(EthnicCategoryBuilder.new(@trainees, status, category))
     end
   end
 end
@@ -290,7 +292,7 @@ end
 # <sis:#{category}>
 # ...
 # </sis:#{category}>
-class EthnicCategoryMessageHelper < REXML::Element
+class EthnicCategoryBuilder < REXML::Element
   
   # category - HispanicOrLatino, Non-Hispanic, Unknown
   # status   - appointed, applicant
@@ -299,11 +301,11 @@ class EthnicCategoryMessageHelper < REXML::Element
     @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? and trainee.ethnic_category.downcase == category.downcase}
     if status.downcase == "appointed"
       ["Females", "Males", "Not_Reported"].each do |gender|
-        add_element(GenderCountMessageHelper.new(@trainees, gender))
+        add_element(GenderCountBuilder.new(@trainees, gender))
       end
     elsif status.downcase == "applicant"
       ["Accepted", "Applied", "Interviewed"].each do |status|
-        add_element(ApplicantStatusMessageHelper.new(@trainees, status))
+        add_element(ApplicantStatusBuilder.new(@trainees, status))
       end
     end
   end
@@ -313,14 +315,14 @@ end
 # <sis:Hispanic_Enrollment>
 # ...
 # </sis:Hispanic_Enrollment>
-class HispanicEnrollmentMessageHelper < REXML::Element
+class HispanicEnrollmentBuilder < REXML::Element
   def initialize(trainees, status, type)
     super "sis:Hispanic_Enrollment"
       @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? and trainee.ethnic_category.downcase == "HispanicOrLatino".downcase}
       @races = ["American_Indian_or_Alaska_Native", "Asian", "Native_Hawaiian_or_Other_Pacific_Islander", 
                 "Black_Or_African_American", "White", "More_Than_One_Race", "Unknown"]
       @races.each do |race|
-        add_element(RacialCategoryMessageHelper.new(@trainees, race, status))
+        add_element(RacialCategoryBuilder.new(@trainees, race, status))
       end       
   end
 end
@@ -329,14 +331,14 @@ end
 # <sis:Racial_Category>
 # ...
 # </sis:Racial_Category>
-class RacialCategoriesMessageHelper < REXML::Element
+class RacialCategoriesBuilder < REXML::Element
   
   def initialize(trainees, status)
     super "sis:Racial_Category"
     @races = ["American_Indian_or_Alaska_Native", "Asian", "Native_Hawaiian_or_Other_Pacific_Islander", 
               "Black_Or_African_American", "White", "More_Than_One_Race", "Unknown"]
     @races.each do |race|
-      add_element(RacialCategoryMessageHelper.new(trainees, race, status))
+      add_element(RacialCategoryBuilder.new(trainees, race, status))
     end    
   end 
 end
@@ -345,7 +347,7 @@ end
 # <sis:#{race}>
 # ...
 # </sis:#{race}>
-class RacialCategoryMessageHelper < REXML::Element
+class RacialCategoryBuilder < REXML::Element
   
   # race - American_Indian_or_Alaska_Native, Asian, Native_Hawaiian_or_Other_Pacific_Islander,
   #        Black_Or_African_American, White, More_Than_One_Race, Unknown
@@ -356,11 +358,11 @@ class RacialCategoryMessageHelper < REXML::Element
     
     if status == "Applicant"
       ["Accepted", "Applied", "Interviewed"].each do |applicant_status|
-        add_element(ApplicantStatusMessageHelper.new(@trainees, applicant_status))
+        add_element(ApplicantStatusBuilder.new(@trainees, applicant_status))
       end
     else
       ["Females", "Males", "Not_Reported"].each do |gender|
-        add_element(GenderCountMessageHelper.new(@trainees, gender))
+        add_element(GenderCountBuilder.new(@trainees, gender))
       end
     end
   end
@@ -370,7 +372,7 @@ end
 # <sis:#{status}>
 # ...
 # </sis:#{status}>
-class ApplicantStatusMessageHelper < REXML::Element
+class ApplicantStatusBuilder < REXML::Element
   
   # status - Applied, Accepted, Interviewed
   def initialize(trainees, status)
@@ -384,7 +386,7 @@ class ApplicantStatusMessageHelper < REXML::Element
       @trainees = trainees.select {|trainee| trainee.interviewed == true}
     end
     ["Females", "Males", "Not_Reported"].each do |gender|
-      add_element(GenderCountMessageHelper.new(@trainees, gender))
+      add_element(GenderCountBuilder.new(@trainees, gender))
     end
   end
 end
@@ -393,7 +395,7 @@ end
 # <sis:#{gender}>
 # ...
 # </sis:#{gender}>
-class GenderCountMessageHelper < REXML::Element
+class GenderCountBuilder < REXML::Element
   
   # gender - Females, Males, Not_Reported
   def initialize(trainees, gender)
@@ -408,7 +410,7 @@ end
 # <sis:Number_with_Disabilities>
 # ...
 # </sis:Number_with_Disabilities>
-class DisabilityMessageHelper < REXML::Element
+class DisabilityBuilder < REXML::Element
   def initialize(trainees)
     super "sis:Number_with_Disabilities"
     @trainees = trainees.select {|trainee| trainee.has_disability == true}
@@ -420,7 +422,7 @@ end
 # <sis:Number_from_Disadvantaged_Backgrounds>
 # ...
 # </sis:Number_from_Disadvantaged_Backgrounds>
-class DisadvantagedMessageHelper <REXML::Element
+class DisadvantagedBuilder <REXML::Element
   def initialize(trainees)
     super "sis:Number_from_Disadvantaged_Backgrounds"
     @trainees = trainees.select {|trainee| trainee.disadvantaged_background == true}

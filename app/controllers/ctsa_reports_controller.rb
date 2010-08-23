@@ -1,4 +1,3 @@
-require 'message_helpers'
 class CtsaReportsController < ApplicationController
   permit :Admin, :User
   
@@ -79,34 +78,14 @@ class CtsaReportsController < ApplicationController
   # find the website on the wiki: (http://www.ctsawiki.org/wiki//x/ngCP)  
   def download
     @ctsa_report = CtsaReport.find(params[:id])
-    dir = "#{Rails.root}/tmp/ctsa_reports/"
-    @ctsa_report_xml_file_path = create_xml_report(@ctsa_report, dir)
-
-    respond_to do |format|
-      # format.html
-      format.zip
+    @ctsa_report_xml_file_path = @ctsa_report.create_xml_report("#{Rails.root}/tmp/ctsa_reports/")
+    
+    zip_file = Zippy.create 'ctsa.zip' do |zip|
+      @ctsa_report.attachments.each do |doc|
+        zip[doc.name] = File.open(doc.data.path)
+      end
     end
-    # zip_file = Zippy.create 'ctsa.zip' do |zip|
-    #   zip["ctsa_report.xml"] = File.open(file_path)
-    #   @ctsa_report.attachments.each do |doc|
-    #     zip[doc.data_file_name] = File.open(doc.data.path)
-    #   end
-    # end
-    # send_data(zip_file.data, :type => "application/zip", :filename => "ctsa_annual_report.zip")
+    send_data(zip_file.data, :type => "application/zip", :filename => "ctsa_annual_report.zip")
   end
-  
-  private
-  
-    # Creates the xml for the ctsa report
-    def create_xml_report(ctsa_report, dir)
-      # TODO: check for valid ctsa report data
-      file_path = "#{dir}/#{Time.now.to_i}.xml"
-      org = OrganizationalUnit.find_by_abbreviation("NUCATS")
-      doc = REXML::Document.new
-      doc.add_element(ReportMessageHelper.new(ctsa_report.grant_number, ctsa_report.reporting_year, 
-                      Person.all_investigators, Person.all_trainees, [org]))
-      doc.write("",2)
-      File.open(file_path, 'w') {|f| f.write(doc.to_s) }
-      file_path
-    end
+
 end

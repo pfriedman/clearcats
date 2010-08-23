@@ -1,4 +1,3 @@
-require 'message_helpers'
 class ReportsController < ApplicationController
   permit :Admin
   

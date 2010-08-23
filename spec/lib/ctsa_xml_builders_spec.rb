@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ReportMessageHelper do
+describe ReportBuilder do
 
   context "CTSA Progress Report" do
     
@@ -18,7 +18,7 @@ describe ReportMessageHelper do
     it "should instantiate an XML element for the CTSA APR with a root element of Progress_Report" do
       
       doc = REXML::Document.new
-      doc.add_element(ReportMessageHelper.new(@grant_number, 2020, @investigators, @trainees, @organizations))
+      doc.add_element(ReportBuilder.new(@grant_number, 2020, @investigators, @trainees, @organizations))
       doc.write("",2)
       report = 
 "<sis:Progress_Report xsi:schemaLocation='http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:sis='http://sis.ncrr.nih.gov'>" +
@@ -75,7 +75,7 @@ describe ReportMessageHelper do
     
     it "should create an XML element for trainee characteristics" do
       doc = REXML::Document.new
-      doc.add_element(CharacteristicMessageHelper.new([], "Trainee", "Applicant"))
+      doc.add_element(CharacteristicBuilder.new([], "Trainee", "Applicant"))
       doc.write("",2)
   		doc.to_s.should == applicant_trainee_characteristic_node
     end
