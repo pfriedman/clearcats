@@ -1,13 +1,13 @@
 # == Schema Information
 # Schema version: 20100820144259
 #
-# Table name: documents
+# Table name: attachments
 #
 #  id                :integer         not null, primary key
 #  name              :string(255)
 #  reporting_year    :integer
-#  attachable_id   :integer
-#  attachable_type :string(255)
+#  attachable_id     :integer
+#  attachable_type   :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
 #  data_file_name    :string(255)

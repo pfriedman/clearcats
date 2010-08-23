@@ -19,3 +19,6 @@
         %td= rpt.has_errors? ? "True" : "False"
 
   = will_paginate @ctsa_reports
+  
+.links
+  = link_to 'New CTSA Report', new_ctsa_report_path, :class => "add_link icon_link"
