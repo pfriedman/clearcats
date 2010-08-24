@@ -11,6 +11,29 @@ class PeopleController < ApplicationController
     end
   end
   
+  # GET /people/1/edit
+  def edit
+    @person = Person.find(params[:id])
+  end
+  
+  # PUT /people/1
+  # PUT /people/1.xml
+  def update
+    @person = Person.find(params[:id])
+
+    respond_to do |format|
+      if @person.update_attributes(params[:person])
+        flash[:notice] = 'Person was successfully updated.'
+        format.html { redirect_to(people_path) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  
   def upload
     Person.import_data(params[:file].open)
     redirect_to people_path

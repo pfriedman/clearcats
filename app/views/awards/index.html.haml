@@ -1,0 +1,10 @@
+- stylesheet "awards", "services"
+- javascript "jquery.blockUI", "modal_form"
+- title "Awards for #{@person}"
+
+:javascript
+  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+
+= render '/awards/list', :awards => @awards, :person => @person, :search => @search_params, :service => nil
+
+#modal_window

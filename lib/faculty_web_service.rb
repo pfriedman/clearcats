@@ -70,7 +70,6 @@ class FacultyWebService
 
       person = Person.find_by_employeeid(params[:employeeid])
       results.each do |r|
-        
         r.person = person
         r.save!
       end

@@ -1,0 +1,21 @@
+%table.records
+  %tr
+    %th Select
+    %th NUCATS Assisted
+    %th Award Code
+    %th Sponsor
+    %th Sponsor Award Number
+    %th Grant Title
+    %th Budget Number
+    %th Project Start Date
+  - @awards.each do |award|
+    %tr{ :class => cycle('even_record', 'odd_record') }
+      %td 
+        = link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :search => params[:search], :person_id => @person.id }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+      %td= h award.nucats_assisted? ? "Yes" : "No"
+      %td.ctsa_award= h award.ctsa_award_type.to_s
+      %td= h award.sponsor
+      %td= h award.sponsor_award_number
+      %td= h truncate(award.grant_title)
+      %td= h award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.project_period_start_date

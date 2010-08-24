@@ -1,54 +1,80 @@
 require 'spec_helper'
 
-describe LatticeGridWebService do
+describe PublicationsController do
 
-  context "calling lattice grid" do
-    
-    context "to discover investigators" do
-    
-      it "should return faculty members who match a mesh term" do
-        person = Factory(:person)
-        FacultyWebService.stub!(:locate_one).and_return(person)
-        LatticeGridWebService.stub!(:make_request).and_return(investigators_response)
-        results = LatticeGridWebService.investigators_search('genetics')
-        results.size.should == 3
-        results.first.class.should == Person
+  def mock_publication(stubs={})
+    @mock_publication ||= mock_model(Publication, stubs)
+  end
+  
+  context "with an authenticated user" do
+    before(:each) do
+      login(user_login)
+    end
+
+    describe "GET index" do
+      
+      it "should redirect to the people index page if no person identified" do
+        get :index
+        response.should redirect_to people_path
       end
       
-      it "should catch any exception and return no results" do
-        LatticeGridWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
-        results = LatticeGridWebService.investigators_search('genetics')
-        results.should be_empty
+      it "assigns all publications for the requested person as @publications" do
+        person = mock_model(Person, :netid => "wakibbe")
+        Publication.should_receive(:search).with("person_id" => person.id.to_s, "order" => "ascend_by_publication_date").and_return([mock_publication])
+        LatticeGridWebService.stub!(:make_request).and_return(publications_response)
+        Person.should_receive(:find).with(person.id.to_s).and_return(person)
+        get :index, :person_id => person.id
+        assigns[:publications].should_not be_empty
       end
       
     end
 
-    context "to discover publications" do
+    describe "GET edit" do
+      it "assigns the requested publication as @publication" do
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+        Publication.stub(:find).with("37").and_return(mock_publication)
+        get :edit, :id => "37", :service_id => "99"
+        assigns[:publication].should equal(mock_publication)
+      end
+    end
 
-      it "should return publication information for an investigator" do
-        person = Factory(:person)
-        FacultyWebService.stub!(:locate_one).and_return(person)
-        LatticeGridWebService.stub!(:make_request).and_return(publications_response)
-        results = LatticeGridWebService.investigator_publications_search('wakibbe')
-        results.size.should == 2
-        results.first.class.should == Publication
-        results.first.pmid.should == "20180973"
+    describe "PUT update" do
+    
+      describe "with valid params" do
+        it "updates the requested publication" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Publication.should_receive(:find).with("37").and_return(mock_publication)
+          mock_publication.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => "37", :publication => {:these => 'params'}, :service_id => "99"
+        end
       end
-      
-      it "should catch any exception and return no results" do
-        LatticeGridWebService.stub!(:make_request).and_raise(Exception.new("test web service exception"))
-        results = LatticeGridWebService.investigator_publications_search('jdoe')
-        results.should be_empty
+
+      describe "with invalid params" do
+        it "updates the requested publication" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Publication.should_receive(:find).with("37").and_return(mock_publication)
+          mock_publication.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => "37", :publication => {:these => 'params'}, :service_id => "99"
+        end
+    
+        it "assigns the publication as @publication" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Publication.stub(:find).and_return(mock_publication(:update_attributes => false))
+          put :update, :id => "1", :service_id => "99"
+          assigns[:publication].should equal(mock_publication)
+        end
+    
+        it "re-renders the 'edit' template" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Publication.stub(:find).and_return(mock_publication(:update_attributes => false))
+          put :update, :id => "1", :service_id => "99"
+          response.should render_template('edit')
+        end
       end
-      
+    
     end
 
   end
-
-end
-
-def investigators_response
-  create_response('[{"investigator":{"updated_ip":null,"start_date":null,"last_login_failure":null,"end_date":null,"degrees":"MD","city":null,"address1":null,"updated_at":"2010-06-28T02:44:47Z","pubmed_limit_to_institution":false,"postal_code":null,"deleted_id":null,"appointment_basis":"FT","address2":null,"title":"Professor","last_successful_login":null,"deleted_ip":null,"ssn":null,"password_changed_id":null,"num_last_pubs_last_five_years":13,"nu_start_date":null,"deleted_at":null,"weekly_hours_min":35,"username":"mabecass","total_pubs_last_five_years":43,"password_changed_ip":null,"country":null,"business_phone":null,"appointment_type":"Regular","appointment_track":"Investigator-Clinician","num_intraunit_collaborators":9,"id":1,"employee_id":1021673,"total_pubs":87,"sex":null,"password_changed_at":null,"num_last_pubs":20,"pubmed_search_name":null,"pager":null,"home_phone":null,"fax":null,"created_id":null,"birth_date":null,"num_first_pubs":1,"mailcode":null,"last_pubmed_search":null,"home_department_id":107,"first_name":"Michael","created_ip":null,"updated_id":null,"password":null,"num_extraunit_collaborators":81,"last_name":"Abecassis","consecutive_login_failures":0,"campus":"Chicago","suffix":null,"state":null,"num_intraunit_collaborators_last_five_years":7,"num_first_pubs_last_five_years":1,"num_extraunit_collaborators_last_five_years":58,"middle_name":"M I","lab_phone":null,"email":"mabecass@nmh.org","created_at":"2010-06-03T15:38:49Z"}},{"investigator":{"updated_ip":null,"start_date":null,"last_login_failure":null,"end_date":null,"degrees":"PhD","city":null,"address1":null,"updated_at":"2010-06-28T02:44:55Z","pubmed_limit_to_institution":false,"postal_code":null,"deleted_id":null,"appointment_basis":"FT","address2":null,"title":"Professor","last_successful_login":null,"deleted_ip":null,"ssn":null,"password_changed_id":null,"num_last_pubs_last_five_years":14,"nu_start_date":null,"deleted_at":null,"weekly_hours_min":35,"username":"ciancio","total_pubs_last_five_years":21,"password_changed_ip":null,"country":null,"business_phone":null,"appointment_type":"Regular","appointment_track":"Investigator","num_intraunit_collaborators":1,"id":61,"employee_id":1001653,"total_pubs":77,"sex":null,"password_changed_at":null,"num_last_pubs":24,"pubmed_search_name":null,"pager":null,"home_phone":null,"fax":null,"created_id":null,"birth_date":null,"num_first_pubs":4,"mailcode":null,"last_pubmed_search":null,"home_department_id":30,"first_name":"Nicholas","created_ip":null,"updated_id":null,"password":null,"num_extraunit_collaborators":6,"last_name":"Cianciotto","consecutive_login_failures":0,"campus":"Chicago","suffix":null,"state":null,"num_intraunit_collaborators_last_five_years":0,"num_first_pubs_last_five_years":3,"num_extraunit_collaborators_last_five_years":0,"middle_name":null,"lab_phone":null,"email":null,"created_at":"2010-06-03T15:38:50Z"}},{"investigator":{"updated_ip":null,"start_date":null,"last_login_failure":null,"end_date":null,"degrees":"MD","city":null,"address1":null,"updated_at":"2010-06-28T02:44:58Z","pubmed_limit_to_institution":false,"postal_code":null,"deleted_id":null,"appointment_basis":"EM","address2":null,"title":"Professor, Emer","last_successful_login":null,"deleted_ip":null,"ssn":null,"password_changed_id":null,"num_last_pubs_last_five_years":0,"nu_start_date":null,"deleted_at":null,"weekly_hours_min":35,"username":"mdalcant","total_pubs_last_five_years":8,"password_changed_ip":null,"country":null,"business_phone":null,"appointment_type":"Emeritus","appointment_track":"N/A","num_intraunit_collaborators":12,"id":77,"employee_id":1002042,"total_pubs":57,"sex":null,"password_changed_at":null,"num_last_pubs":0,"pubmed_search_name":null,"pager":null,"home_phone":null,"fax":null,"created_id":null,"birth_date":null,"num_first_pubs":1,"mailcode":null,"last_pubmed_search":null,"home_department_id":56,"first_name":"Mauro","created_ip":null,"updated_id":null,"password":null,"num_extraunit_collaborators":8,"last_name":"Dal Canto","consecutive_login_failures":0,"campus":"Off","suffix":null,"state":null,"num_intraunit_collaborators_last_five_years":5,"num_first_pubs_last_five_years":0,"num_extraunit_collaborators_last_five_years":3,"middle_name":"C","lab_phone":null,"email":null,"created_at":"2010-06-03T15:38:50Z"}}]')
 end
 
 def publications_response

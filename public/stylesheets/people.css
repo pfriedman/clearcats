@@ -1,3 +1,4 @@
+
 #people_search_form {
   padding: 0.5em;
 }
@@ -6,11 +7,26 @@
   width: 18em;
 }
 
-.span-6 select {
+.span-6 select,
+.span-7 select,
+.span-8 select {
   width: 20em;
 }
 
 select#search_service_rendered,
 select#search_disadvantaged_background {
   width: 5em;
+}
+
+.trainee_section {
+  margin-top: 1em;
+  border-top: 1px solid #EEE;
+}
+
+.trainee_section h4 {
+  margin: 0.5em 0;
+}
+
+h4.section_header {
+  margin: 0.5em 0;
 }

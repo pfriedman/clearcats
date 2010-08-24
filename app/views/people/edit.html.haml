@@ -1,0 +1,9 @@
+- stylesheet "people"
+- title "Edit Person"
+
+= render 'form'
+
+.links
+  = link_to 'List', people_path, :class => "list_link icon_link"
+  = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"
+  = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link"

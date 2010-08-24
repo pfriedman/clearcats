@@ -101,6 +101,8 @@
   %table{ :class => "records" }
     %tr
       %th
+        Select
+      %th
         = order @search, :by => :first_name, :as => "First Name"
       %th
         = order @search, :by => :last_name, :as => "Last Name"
@@ -123,6 +125,8 @@
 
     - @people.each do |person|
       %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = link_to 'Edit', edit_person_path(person), :class => "edit_link icon_link"
         %td
           = h person.first_name
         %td

@@ -10,7 +10,7 @@
 %p
   = @service.person.employeeid
   
-= render '/awards/list', :service => @service, :awards => @awards, :person => @service.person, :search_params => @search_params
+= render '/awards/list', :service => @service, :awards => @awards, :person => @service.person, :search => @search_params
 
 - form_for @service do |f|
   = hidden_field_tag "service[state]", "choose_publications"

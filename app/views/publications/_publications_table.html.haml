@@ -10,7 +10,7 @@
   - publications.each do |pub|
     %tr{ :class => cycle('even_record', 'odd_record') }
       %td 
-        = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub }, { :class => "edit_link icon_link" }
+        = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :person_id => @person.id, :search => params[:search] }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
       %td= h pub.nucats_assisted? ? "Yes" : "No"
       %td= h pub.pmcid
       %td= h pub.pmid
