@@ -36,6 +36,7 @@ describe CtsaReport do
       rpt = CtsaReport.find(rpt.id)
       rpt.attachments.should_not be_empty
       rpt.attachments.first.name.should == "ctsa_report.xml"
+      rpt.attachments.first.reporting_year.should == rpt.reporting_year
     end
     
   end

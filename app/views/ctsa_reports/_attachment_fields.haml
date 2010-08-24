@@ -4,6 +4,8 @@
   %td
     = f.text_field :reporting_year
   %td
+    %em= f.object.data_file_name
+  %td
     = f.file_field :data
   %td
     = link_to_remove_fields 'Remove', f

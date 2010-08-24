@@ -1,40 +1,47 @@
-- form_for @ctsa_report, :html => { :multipart => true } do |f|
+- stylesheet "ctsa_reports"
+
+- form_for @ctsa_report, :html => { :multipart => true, :class => "ctsa_report_form" } do |f|
   
-  %p
-    = f.label :grant_number, "Grant Number"
-    %br
-    = f.text_field :grant_number
-  
-  %p
-    = f.label :reporting_year, "Reporting Year"
-    %br
-    = f.text_field :reporting_year
-  
-  %p
-    = f.check_box :finalized
-    = f.label :finalized, "Finalized?"
+  .container.span-24
+    .span-8
+      %p
+        = f.label :grant_number, "Grant Number"
+        = f.text_field :grant_number, :size => 10
+
+      %p
+        = f.label :finalized, "Finalized?"
+        = f.check_box :finalized
     
-  %p
-    = f.check_box :has_errors
-    = f.label :has_errors, "Has Errors?"
+    .span-8
+      %p
+        = f.label :reporting_year, "Reporting Year"
+        = f.text_field :reporting_year, :size => 5
+      
+      %p
+        = f.label :has_errors, "Has Errors?"
+        = f.check_box :has_errors
   
-    %table{ :class => "records attachments" }
-      %thead
-        %tr
-          %th
-            Document Name
-          %th
-            Reporting Year
-          %th
-            File Upload
-          %th
-      %tbody{ :class => "nested_records" }
-        - f.fields_for :attachments do |attachment_form|
-          = render 'attachment_fields', :f => attachment_form
-      %tfoot
-        %tr
-          %td{ :colspan => '3' }
-            = link_to_add_fields "Add", f, :attachments
+  .clear
+  
+  %table{ :class => "records attachments" }
+    %thead
+      %tr
+        %th
+          Document Name
+        %th
+          Reporting Year
+        %th 
+          Current File
+        %th
+          File Upload
+        %th
+    %tbody{ :class => "nested_records" }
+      - f.fields_for :attachments do |attachment_form|
+        = render 'attachment_fields', :f => attachment_form
+    %tfoot
+      %tr
+        %td{ :colspan => '3' }
+          = link_to_add_fields "Add", f, :attachments
   
   .buttons
     = submit_tag "Generate Report"

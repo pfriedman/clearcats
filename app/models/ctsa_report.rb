@@ -38,7 +38,7 @@ class CtsaReport < ActiveRecord::Base
     def add_report_xml_to_attachments(file_path)
       unless attachments.map { |a| a.name }.include?("ctsa_report.xml")
         file = File.open(file_path)
-        attachment = ::Attachment.new(:name => "ctsa_report.xml")
+        attachment = ::Attachment.new(:name => "ctsa_report.xml", :reporting_year => self.reporting_year)
         paperclip  = Paperclip::Attachment.new(:data, attachment, {})
         paperclip.assign(file)
         attachment.save!

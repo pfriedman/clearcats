@@ -10,6 +10,11 @@ class PeopleController < ApplicationController
       format.csv { render :csv => @search.all }
     end
   end
+  
+  def upload
+    Person.import_data(params[:file].open)
+    redirect_to people_path
+  end
 
   # GET /people/search
   def search

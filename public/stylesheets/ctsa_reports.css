@@ -1,0 +1,12 @@
+
+.ctsa_report_form .container {
+  padding: 1em 0;
+}
+
+.ctsa_report_form input[type="checkbox"] {
+  top: 0;
+}
+
+.ctsa_report_form tfoot tr td{
+  padding-top: 0.5em;
+}

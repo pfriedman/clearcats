@@ -19,13 +19,15 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :download => :get }
   map.resources :publications, :only => [ :edit, :update ]
   map.resources :organizational_units
+  map.resources :people, :only => [:index], 
+    :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post] }
   map.resources :service_lines
   map.resources :services, 
     :member     => { :choose_service_line => :get, :choose_person => :get, :update_person => :put, :update_approvals => :put, 
                      :continue => [:get, :put], :identified => [:get, :put],
                      :choose_awards => :get, :choose_organizational_units => :get, :choose_publications => :get, :choose_approvals => :get }, 
     :collection => { :choose_service_line => :get, :choose_person => :get }
-  
+
 
   map.connect 'reports/:action', :controller => "reports"
   # Sample resource route with options:
