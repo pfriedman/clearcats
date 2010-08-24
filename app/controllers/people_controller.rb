@@ -33,6 +33,9 @@ class PeopleController < ApplicationController
     end
   end
   
+  def directory
+    @people = FacultyWebService.locate(params[:search]) unless params[:search].blank?
+  end
   
   def upload
     Person.import_data(params[:file].open)

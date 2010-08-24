@@ -1,0 +1,45 @@
+- title "Directory Search"
+
+#directory_search
+- if @people
+
+  %table.records
+    %tr
+      %th Select
+      %th Last Name
+      %th First Name
+      %th Middle Name
+      %th Email
+      %th Net ID
+      %th NU Employee ID
+    - @people.each do |person|
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td= link_to 'Edit', edit_person_path(person), :class => "edit_link icon_link"
+        %td= h person.last_name
+        %td= h person.first_name
+        %td= h person.middle_name
+        %td= h person.email
+        %td= h person.netid
+        %td= h person.employeeid
+  %p
+    = link_to "New Search", directory_people_path, { :class => "search_link icon_link"  }
+
+- else
+
+  #select_person_form
+  - form_tag :controller => "people", :action => "directory" do
+
+    %p Search Faculty Members by Net ID or by Last Name.
+
+    %p
+      = label_tag "search[netid]", "Net ID"
+      %br
+      = text_field_tag "search[netid]"
+
+    %p
+      = label_tag "search[last_name]", "Last Name"
+      %br
+      = text_field_tag "search[last_name]"
+
+    .buttons
+      = submit_tag "Search"

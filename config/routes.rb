@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :publications, :only => [ :edit, :update ]
   map.resources :organizational_units
   map.resources :people, :only => [:index, :edit, :update], 
-    :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post] } do |people|
+    :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post] } do |people|
       people.resources :awards
       people.resources :publications
   end
