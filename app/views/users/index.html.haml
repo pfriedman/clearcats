@@ -1,0 +1,25 @@
+- title "Users"
+- if @users.blank?
+  %p.no_records
+    No users were found.
+- else
+  %table.records
+    %tr
+      %th= order @search, :by => :last_name, :as => "Last Name", :params => {:page => params[:page]}
+      %th= order @search, :by => :first_name, :as => "First Name", :params => {:page => params[:page]}
+      %th= order @search, :by => :username, :as => "Username", :params => {:page => params[:page]}
+      %th= order @search, :by => :title, :as => "Title", :params => {:page => params[:page]}
+      %th= order @search, :by => :email, :as => "Email", :params => {:page => params[:page]}
+      %th= order @search, :by => :organizational_unit_name, :as => "Org Unit", :params => {:page => params[:page]}
+      %th &nbsp;
+    - @users.each do |user|
+      %tr
+        %td= h user.last_name
+        %td= h user.first_name
+        %td= h user.username
+        %td= h user.title
+        %td= h user.email
+        %td= h user.organizational_unit
+        %td= link_to 'Edit', edit_user_path(user), :class => "edit_link icon_link"
+.links
+  = link_to 'New User', new_user_path, :class => "add_link icon_link"

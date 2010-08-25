@@ -1,8 +1,3 @@
-# == Schema Information
-# Schema version: 20100820144259
-#
-# Table name: users
-#
 #  id             :integer         not null, primary key
 #  first_name     :string(255)
 #  middle_name    :string(255)
@@ -20,20 +15,27 @@
 #  country        :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
-#
 
-class User < ActiveRecord::Base
-  include Bcsec
-  
-  belongs_to :organizational_unit
-  
-  validates_presence_of :username
-  
-  def to_s
-    full_name
-  end
-  
-  def full_name
-    [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
-  end
-end
+pfr957:
+  first_name: Paul
+  last_name: Friedman
+  title: System Administrator
+  username: pfr957
+  email: p-friedman@northwestern.edu
+  organizational_unit_id: 1
+
+cc_admin:
+  first_name: CC
+  last_name: Admin
+  title: ClearCATS Administrator
+  username: cc_admin
+  email: cc_admin@dev.null
+  organizational_unit_id: 1
+
+cc_user:
+  first_name: CC
+  last_name: User
+  title: ClearCATS User
+  username: cc_user
+  email: cc_user@dev.null
+  organizational_unit_id: 1

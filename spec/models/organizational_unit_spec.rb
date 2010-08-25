@@ -21,6 +21,8 @@ describe OrganizationalUnit do
     ou.to_s.should == "#{ou.name} (#{ou.abbreviation})"
   end
   
+  it { should have_and_belong_to_many(:people) }
+  
   it { should belong_to(:parent) }
   it { should have_many(:children) }
   it { should have_many(:organizational_services) }

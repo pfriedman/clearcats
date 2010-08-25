@@ -10,11 +10,9 @@ class CreateOrganizationalUnits < ActiveRecord::Migration
       t.timestamps
     end
     
-    # add_column :users, :organizational_unit_id, :integer
   end
 
   def self.down
-    # remove_column :users, :organizational_unit_id
     drop_table :organizational_units
   end
 end

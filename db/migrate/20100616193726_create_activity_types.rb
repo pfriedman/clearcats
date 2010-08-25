@@ -6,12 +6,9 @@ class CreateActivityTypes < ActiveRecord::Migration
 
       t.timestamps
     end
-    
-    # add_column :activities, :activity_type_id, :integer
   end
 
   def self.down
-    # remove_column :activities, :activity_type_id
     drop_table :activity_types
   end
 end

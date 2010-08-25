@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
                      :continue => [:get, :put], :identified => [:get, :put],
                      :choose_awards => :get, :choose_organizational_units => :get, :choose_publications => :get, :choose_approvals => :get }, 
     :collection => { :choose_service_line => :get, :choose_person => :get }
-
+  map.resources :users, :except => [ :destroy, :show ]
 
   map.connect 'reports/:action', :controller => "reports"
   # Sample resource route with options:

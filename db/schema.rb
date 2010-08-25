@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
     t.integer "person_id"
   end
 
+  add_index "institution_positions_people", ["institution_position_id", "person_id"], :name => "institution_positions_people_idx"
+
   create_table "organizational_services", :force => true do |t|
     t.integer  "service_line_id"
     t.integer  "organizational_unit_id"
@@ -154,6 +156,13 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "organizational_units_people", :id => false, :force => true do |t|
+    t.integer "organizational_unit_id"
+    t.integer "person_id"
+  end
+
+  add_index "organizational_units_people", ["organizational_unit_id", "person_id"], :name => "organizational_units_people_idx"
 
   create_table "organizations", :force => true do |t|
     t.string   "type"
@@ -266,6 +275,7 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
     t.string   "city"
     t.string   "state"
     t.string   "country"
+    t.integer  "organizational_unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

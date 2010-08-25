@@ -16,6 +16,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :city
       t.string    :state
       t.string    :country
+      
+      t.integer   :organizational_unit_id
 
       t.timestamps
     end

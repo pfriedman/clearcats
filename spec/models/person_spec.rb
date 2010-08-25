@@ -51,8 +51,7 @@ describe Person do
   
   it "should output in a csv format" do
     p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
-    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", ""]
-  
+    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
   end
   
   it "should set affiliations based on department" do
@@ -107,6 +106,7 @@ describe Person do
   it { should belong_to(:race_type) }
   
   it { should have_and_belong_to_many(:institution_positions) }
+  it { should have_and_belong_to_many(:organizational_units) }
   
   it { should have_many(:awards) }
   it { should have_many(:publications) }
@@ -144,10 +144,20 @@ describe Person do
       
       it "should create Person records from the data" do
         Person.count.should == 0
-        
-        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')))
+        usr = Factory(:user)
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
         Person.count.should == 2
+      end
+      
+      it "should associate Person with organizational units of the uploader" do
+        Person.count.should == 0
+        org_unit = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
+        usr = Factory(:user, :organizational_unit => org_unit)
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
+        
+        Person.count.should == 2
+        Person.first.organizational_units.should == [org_unit]
       end
       
     end

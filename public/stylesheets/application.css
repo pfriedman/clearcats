@@ -14,6 +14,10 @@
   margin: 0.5em 0;
 }
 
+.required {
+  color: red;
+}
+
 /* Flash Messages */
 
 .message {
@@ -27,6 +31,15 @@
   border: 1px solid maroon;
   color: maroon;
   background-color: lavenderblush;
+}
+
+.fieldWithErrors {
+  display: inline;
+  color: red;
+}
+
+.fieldWithErrors input {
+  border: 1px solid red;
 }
 
 #notice,

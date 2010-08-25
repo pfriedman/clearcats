@@ -20,6 +20,8 @@ class OrganizationalUnit < ActiveRecord::Base
 
   has_many :organizational_services
   has_many :service_lines, :through => :organizational_services
+  
+  has_and_belongs_to_many :people
 
   # has_many :participating_organizational_units
   # has_many :intake_forms, :through => :participating_organizational_units

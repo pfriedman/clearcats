@@ -151,4 +151,5 @@ Factory.define :user do |u|
   u.city           "city"
   u.state          "state"
   u.country        "country"
+  u.organizational_unit { |a| a.association(:organizational_unit) }
 end

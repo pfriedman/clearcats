@@ -38,7 +38,7 @@ class PeopleController < ApplicationController
   end
   
   def upload
-    Person.import_data(params[:file].open)
+    Person.import_data(params[:file].open, find_or_create_user)
     redirect_to people_path
   end
 

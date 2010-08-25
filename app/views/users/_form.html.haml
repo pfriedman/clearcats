@@ -1,0 +1,33 @@
+- form_for(@user) do |f|
+  = f.error_messages
+  %p
+    = f.label :last_name
+    %br
+    = f.text_field :last_name
+  %p
+    = f.label :first_name
+    %br
+    = f.text_field :first_name
+  %p
+    = f.label :middle_name
+    %br
+    = f.text_field :middle_name
+  %p
+    = f.label :title
+    %br
+    = f.text_field :title
+  %p
+    = f.label :email
+    %br
+    = f.text_field :email
+  %p
+    = f.label :username
+    %span.required *
+    %br
+    = f.text_field :username
+  %p
+    = f.label :organizational_unit_id, "Organizational Unit"
+    %br
+    = f.select(:organizational_unit_id, OrganizationalUnit.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Org Unit --" })
+  %p
+    = f.submit "Save", :disable_with => 'Saving...'

@@ -79,9 +79,8 @@ describe PeopleController do
   
   describe "GET upload" do
     it "should process the upload file and redirect the user to the people index page" do
-      tmp = Tempfile.new("test")
-      Person.stub(:import_data).with(tmp).and_return(true)
-      get :upload, :file => tmp
+      Person.stub(:import_data).and_return(true)
+      get :upload, :file => Tempfile.new("test")
       response.should redirect_to people_path
     end
   end

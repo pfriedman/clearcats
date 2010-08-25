@@ -25,14 +25,25 @@ class CreatePeople < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-  
-  create_table :institution_positions_people, :id => false do |t|
-    t.integer :institution_position_id
-    t.integer :person_id
+    
+    create_table :institution_positions_people, :id => false do |t|
+      t.integer :institution_position_id
+      t.integer :person_id
+    end
+    
+    add_index(:institution_positions_people, [:institution_position_id, :person_id], :name => "institution_positions_people_idx")
+    
+    create_table :organizational_units_people, :id => false do |t|
+      t.integer :organizational_unit_id
+      t.integer :person_id
+    end
+    
+    add_index(:organizational_units_people, [:organizational_unit_id, :person_id], :name => "organizational_units_people_idx")
+    
   end
 
   def self.down
+    drop_table :organizational_units_people
     drop_table :institution_positions_people
     drop_table :people
   end

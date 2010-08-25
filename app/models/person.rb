@@ -102,6 +102,7 @@ class Person < ActiveRecord::Base
   has_many :publications
   has_many :approvals
   has_and_belongs_to_many :institution_positions
+  has_and_belongs_to_many :organizational_units
     
   belongs_to :country
   belongs_to :degree_type_one
@@ -123,6 +124,8 @@ class Person < ActiveRecord::Base
   named_scope :awards_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'", {:id => id} ]} }
   named_scope :awards_activity_code_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'", {:id => id} ]} }
   named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
+  
+  named_scope :organizational_units_organizational_unit_id_equals, lambda { |id| {:joins => :organizational_units, :conditions => ["organizational_units.id = :id", {:id => id} ]} }
   
   named_scope :all_investigators, :conditions => "training_type IS NULL AND trainee_status IS NULL"
   named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND trainee_status IS NOT NULL"]
@@ -252,13 +255,14 @@ class Person < ActiveRecord::Base
   #    Parsing data from CSV
   ###
 
-  def self.import_data(file)
+  def self.import_data(file, user)
     FasterCSV.parse(file, :headers => :first_row, :write_headers=>false, :return_headers => false, :header_converters => :symbol) do |row|
       if !row[:commons_username].blank?
         pers = Person.find_or_create_by_era_commons_username(row[:commons_username])
         specialty = Specialty.find_by_code(row[:area_of_expertise])
         pers.specialty = specialty unless specialty.nil?
         [:first_name, :last_name, :middle_initial].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+        pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
         pers.save
       end
     end
@@ -295,6 +299,7 @@ class Person < ActiveRecord::Base
     human_subject_protection_training_date
     institution_positions :to_sentence => "Position/Title"
     services :to_sentence => "Services"
+    organizational_units :to_sentence => "Organizational Units"
   end
 
   # # starts a Comma description block, generating 2 methods #to_comma and
