@@ -105,54 +105,31 @@
 
   %table{ :class => "records" }
     %tr
-      %th
-        Select
-      %th
-        = order @search, :by => :first_name, :as => "First Name"
-      %th
-        = order @search, :by => :last_name, :as => "Last Name"
-      %th
-        = order @search, :by => :netid, :as => "Net ID"
-      %th
-        = order @search, :by => :employeeid, :as => "Employee ID"
-      %th
-        = order @search, :by => :email, :as => "Email"
-      %th
-        = order @search, :by => :era_commons_username, :as => "ERA Commons"
-      %th
-        = order @search, :by => :degree_type_one_name, :as => "Degree Type One"
-      %th
-        = order @search, :by => :degree_type_two_name, :as => "Degree Type Two"
-      %th
-        = order @search, :by => :institution_positions_name, :as => "Position/Title"
-      %th
-        &nbsp;
+      %th Select
+      %th= order @search, :by => :first_name, :as => "First Name"
+      %th= order @search, :by => :last_name, :as => "Last Name"
+      %th= order @search, :by => :netid, :as => "Net ID"
+      %th= order @search, :by => :employeeid, :as => "Employee ID"
+      %th= order @search, :by => :email, :as => "Email"
+      %th= order @search, :by => :era_commons_username, :as => "ERA Commons"
+      %th= order @search, :by => :degree_type_one_name, :as => "Degree Type One"
+      %th= order @search, :by => :degree_type_two_name, :as => "Degree Type Two"
+      %th= order @search, :by => :institution_positions_name, :as => "Position/Title"
+      %th History
 
     - @people.each do |person|
       %tr{ :class => cycle('even_record', 'odd_record') }
-        %td
-          = link_to 'Edit', edit_person_path(person), :class => "edit_link icon_link"
-          = link_to 'Versions', versions_person_path(person), :class => "show_link icon_link"
-        %td
-          = h person.first_name
-        %td
-          = h person.last_name
-        %td
-          = h person.netid
-        %td
-          = h person.employeeid
-        %td
-          = h person.email
-        %td 
-          = h person.era_commons_username
-        %td
-          = h person.degree_type_one
-        %td
-          = h person.degree_type_two
-        %td
-          = h person.institution_positions.map{|p| p.name}.to_sentence
-        %td 
-          &nbsp;
+        %td= link_to 'Edit', edit_person_path(person), :class => "edit_link icon_link"
+        %td= h person.first_name
+        %td= h person.last_name
+        %td= h person.netid
+        %td= h person.employeeid
+        %td= h person.email
+        %td= h person.era_commons_username
+        %td= h person.degree_type_one
+        %td= h person.degree_type_two
+        %td= h person.institution_positions.map{|p| p.name}.to_sentence
+        %td= link_to 'View', versions_person_path(person), :class => "show_link icon_link"
 
 = will_paginate @people
 

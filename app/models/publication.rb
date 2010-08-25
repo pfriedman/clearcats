@@ -34,6 +34,8 @@
 #  validation_messages  :text
 
 class Publication < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :person
   
   named_scope :all_for_reporting_year, lambda { |yr| { :conditions => ["reporting_year = ?", yr ] } }

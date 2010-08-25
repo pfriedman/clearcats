@@ -41,6 +41,8 @@
 #
 
 class Award < ActiveRecord::Base
+  has_paper_trail
+  
   belongs_to :person
   belongs_to :ctsa_award_type, :polymorphic => true
   

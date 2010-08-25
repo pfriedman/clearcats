@@ -58,6 +58,10 @@ class PublicationsController < ApplicationController
     end
   end
   
+  def versions
+    @publication = Publication.find(params[:id])
+  end
+  
   private
   
     def populate_service_and_person

@@ -1,0 +1,58 @@
+- title "Versions - Publication"
+
+- if @publication.versions.blank?
+  .no_records No versions were found for #{@publication}.
+- else
+  %table{ :class => "records" }
+    %tr
+      %th When
+      %th Who
+      %th NUCATS Assisted
+      %th PMCID
+      %th PMID
+      %th NIHMS
+      %th Publication Date
+      %th Title
+      %th Cited
+      %th Reporting Year
+    - @publication.versions.each do |version|
+      - if version.object
+        - attrs = YAML::load version.object
+        %tr{ :class => cycle('even_record', 'odd_record') }
+          %td= version.created_at.to_s(:db)
+          %td= YAML::load(version.whodunnit).username
+          %td= attrs["nucats_assisted"]
+          %td= attrs["pmcid"]
+          %td= attrs["pmid"]
+          %td= attrs["nihms_number"]
+          %td= attrs["publication_date"]
+          %td= attrs["title"]
+          %td= attrs["cited"]
+          %td= attrs["reporting_year"]
+    %tr{ :class => 'current_record' }
+      %td Current Version
+      %td &nbsp;
+      %td= h @publication.nucats_assisted
+      %td= h @publication.pmcid
+      %td= h @publication.pmid
+      %td= h @publication.nihms_number
+      %td= h @publication.publication_date
+      %td= h @publication.title
+      %td= h @publication.cited
+      %td= h @publication.reporting_year
+.links
+  = link_to 'List', person_publications_path(@publication.person), :class => "list_link icon_link"
+  
+/ #  pmcid                :string(255)
+/ #  pmid                 :string(255)
+/ #  nihms_number         :string(255)
+/ #  publication_date     :date
+/ #  person_id            :integer
+/ #  abstract             :text
+/ #  title                :string(1000)
+/ #  nucats_assisted      :boolean
+/ #  created_at           :datetime
+/ #  updated_at           :datetime
+/ #  cited                :boolean
+/ #  missing_pmcid_reason :string(255)
+/ #  reporting_year       :integer

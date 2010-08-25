@@ -1,0 +1,73 @@
+- title "Versions - Award"
+
+- if @award.versions.blank?
+  .no_records No versions were found for #{@award}.
+- else
+  %table{ :class => "records" }
+    %tr
+      %th When
+      %th Who
+      %th NUCATS Assisted
+      %th Sponsor
+      %th Sponsor Award Number
+      %th Grant Title
+      %th Budget Number
+      %th Project Start Date
+    - @award.versions.each do |version|
+      - if version.object
+        - attrs = YAML::load version.object
+        %tr{ :class => cycle('even_record', 'odd_record') }
+          %td= version.created_at.to_s(:db)
+          %td= YAML::load(version.whodunnit).username
+          %td= attrs["nucats_assisted"]
+          %td= Sponsor.find_by_id(attrs["sponsor_id"]).to_s
+          %td= attrs["sponsor_award_number"]
+          %td= attrs["grant_title"]
+          %td= attrs["budget_number"]
+          %td= attrs["project_period_start_date"]
+    %tr{ :class => 'current_record' }
+      %td Current Version
+      %td &nbsp;
+      %td= h @award.nucats_assisted
+      %td= h @award.sponsor
+      %td= h @award.sponsor_award_number
+      %td= h @award.grant_title
+      %td= h @award.budget_number
+      %td= h @award.project_period_start_date
+.links
+  = link_to 'List', person_awards_path(@award.person), :class => "list_link icon_link"
+  
+  / #  grant_number                           :string(255)
+  / #  years_of_award                         :string(255)
+  / #  grant_title                            :string(2500)
+  / #  grant_amount                           :float
+  / #  person_id                              :integer
+  / #  investigator_id                        :integer
+  / #  role                                   :string(255)
+  / #  parent_institution_number              :string(255)
+  / #  institution_number                     :string(255)
+  / #  subproject_number                      :string(255)
+  / #  ctsa_award_type_award_number           :string(255)
+  / #  budget_period                          :string(255)
+  / #  budget_period_start_date               :date
+  / #  budget_period_end_date                 :date
+  / #  budget_period_direct_cost              :float
+  / #  budget_period_direct_and_indirect_cost :float
+  / #  project_period_start_date              :date
+  / #  project_period_end_date                :date
+  / #  project_period_total_cost              :float
+  / #  total_project_cost                     :float
+  / #  ctsa_award_type_id                     :integer
+  / #  ctsa_award_type_type                   :string(255)
+  / #  proposal_status                        :string(255)
+  / #  award_status                           :string(255)
+  / #  sponsor_award_number                   :string(255)
+  / #  budget_number                          :string(255)
+  / #  direct_amount                          :float
+  / #  indirect_amount                        :float
+  / #  total_amount                           :float
+  / #  nucats_assisted                        :boolean
+  / #  created_at                             :datetime
+  / #  updated_at                             :datetime
+  / #  sponsor_id                             :integer
+  / #  originating_sponsor_id                 :integer

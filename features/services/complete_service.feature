@@ -50,7 +50,7 @@ Feature: Creating a new service
     # Then I should be on the service choose publications page
     # And I should see "asdf"
     # And I should see "Yes"
-    Then I should be on the publications edit page
-    And the "publication_pmcid" field should contain "asdf"
+    # Then I should be on the publications edit page
+    # And the "publication_pmcid" field should contain "asdf"
     
     

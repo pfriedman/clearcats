@@ -14,10 +14,12 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products
 
   map.resources :activity_types
-  map.resources :awards, :except => [ :destroy ]
+  map.resources :awards, :except => [ :destroy ],
+    :member => { :versions => :get }
   map.resources :ctsa_reports, :except => [ :show ],
     :member => { :download => :get }
-  map.resources :publications, :only => [ :edit, :update ]
+  map.resources :publications, :only => [ :edit, :update ],
+    :member => { :versions => :get }
   map.resources :organizational_units
   map.resources :people, :only => [:index, :edit, :update], 
     :member     => { :versions => :get },

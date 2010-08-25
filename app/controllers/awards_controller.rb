@@ -52,7 +52,7 @@ class AwardsController < ApplicationController
   # POST /awards
   def update
     populate_service_and_person
-    @award          = Award.find(params[:id])
+    @award = Award.find(params[:id])
     respond_to do |format|
       if @award.update_attributes(params[:award])
         format.html { redirect_to edit_award_url(@award) }
@@ -67,6 +67,10 @@ class AwardsController < ApplicationController
         format.html { render :action => "edit" }
       end
     end
+  end
+  
+  def versions
+    @award = Award.find(params[:id])
   end
   
   private
