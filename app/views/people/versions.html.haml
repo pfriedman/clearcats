@@ -1,0 +1,71 @@
+- title "Versions - Person"
+
+- if @person.versions.blank?
+  .no_records No versions were found for #{@person}.
+- else
+  %p.version
+    Below are the changes for #{@person}.
+  %table{ :class => "records" }
+    %tr
+      %th
+        When
+      %th
+        Who
+      %th
+        First Name
+      %th
+        Last Name
+      %th
+        Net ID
+      %th
+        Employee ID
+      %th
+        Email
+      %th 
+        ERA Commons Username
+      %th
+        SSN (last four)
+    - @person.versions.each do |version|
+      - attrs = YAML::load version.object
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = version.created_at.to_s(:db)
+        %td
+          = YAML::load(version.whodunnit).username
+        %td
+          = h attrs["first_name"]
+        %td
+          = h attrs["last_name"]
+        %td
+          = h attrs["netid"]
+        %td
+          = h attrs["employeeid"]
+        %td
+          = h attrs["email"]
+        %td 
+          = h attrs["era_commons_username"]
+        %td
+          = h attrs["last_four_of_ssn"]
+
+    %tr{ :class => 'current_record' }
+      %td
+        Current Version
+      %td
+        &nbsp;
+      %td
+        = h @person.first_name
+      %td
+        = h @person.last_name
+      %td
+        = h @person.netid
+      %td
+        = h @person.employeeid
+      %td
+        = h @person.email
+      %td 
+        = h @person.era_commons_username
+      %td
+        = h @person.last_four_of_ssn
+
+.links
+  = link_to 'List', people_path, :class => "list_link icon_link"

@@ -38,4 +38,6 @@ config.after_initialize do
   #   authorities :cas, :pers
   #   central '/etc/nubic/bcsec-local.yml'
   # end
+
+  PaperTrail.enabled = true
 end

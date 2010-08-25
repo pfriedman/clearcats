@@ -232,6 +232,10 @@ table.records tr.odd_record {
   background-color: white;
 }
 
+table.records tr.current_record {
+  background-color: aliceblue;
+}
+
 table.nested {
   width: 50%;
   margin-top: 1em;

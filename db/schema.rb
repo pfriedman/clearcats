@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100820144259) do
+ActiveRecord::Schema.define(:version => 20100825194150) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -281,5 +281,16 @@ ActiveRecord::Schema.define(:version => 20100820144259) do
   end
 
   add_index "users", ["username"], :name => "users_username_idx", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.text     "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
 end

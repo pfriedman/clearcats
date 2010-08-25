@@ -81,6 +81,7 @@
 
 require 'comma'
 class Person < ActiveRecord::Base
+  has_paper_trail
   
   SCHOLAR      = "scholar"
   OTHER_CAREER = "other_career_development"

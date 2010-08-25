@@ -132,6 +132,7 @@
       %tr{ :class => cycle('even_record', 'odd_record') }
         %td
           = link_to 'Edit', edit_person_path(person), :class => "edit_link icon_link"
+          = link_to 'Versions', versions_person_path(person), :class => "show_link icon_link"
         %td
           = h person.first_name
         %td

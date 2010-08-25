@@ -37,4 +37,6 @@ config.after_initialize do
 
     authority Bcsec::Authorities::Static.from_file(login_config)
   end
+
+  PaperTrail.enabled = false
 end

@@ -53,5 +53,10 @@ class PeopleController < ApplicationController
     @redirect_action = params[:redirect_action]
     @people = FacultyWebService.locate(params)
   end
+
+  def versions
+    @person = Person.find(params[:id])
+  end
+  
   
 end
