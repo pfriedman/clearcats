@@ -45,6 +45,7 @@
       %td= h @publication.reporting_year
 .links
   = link_to 'List', person_publications_path(@publication.person), :class => "list_link icon_link"
+  = link_to 'Export CSV', versions_publication_path(@publication, :export => "true"), :class => "export_link icon_link"
   
 / #  pmcid                :string(255)
 / #  pmid                 :string(255)

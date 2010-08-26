@@ -81,6 +81,7 @@
 
 require 'comma'
 class Person < ActiveRecord::Base
+  include VersionExportable
   has_paper_trail
   
   SCHOLAR      = "scholar"

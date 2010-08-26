@@ -34,6 +34,7 @@
 #  validation_messages  :text
 
 class Publication < ActiveRecord::Base
+  include VersionExportable
   has_paper_trail
   
   belongs_to :person

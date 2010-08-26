@@ -39,6 +39,7 @@
       %td= h @award.project_period_start_date
 .links
   = link_to 'List', person_awards_path(@award.person), :class => "list_link icon_link"
+  = link_to 'Export CSV', versions_award_path(@award, :export => "true"), :class => "export_link icon_link"
   
   / #  grant_number                           :string(255)
   / #  years_of_award                         :string(255)

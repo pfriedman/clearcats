@@ -311,6 +311,10 @@ table.nested {
   background: url(/images/edit.png) 0 2px no-repeat !important;
 }
 
+.export_link, .export_link:hover {
+  background: url(/images/page_white_excel.png) 0 2px no-repeat !important;
+}
+
 .search_link, .search_link:hover {
   background: url(/images/find.png) 0 2px no-repeat !important;
 }

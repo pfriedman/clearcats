@@ -45,3 +45,4 @@
 
 .links
   = link_to 'List', people_path, :class => "list_link icon_link"
+  = link_to 'Export CSV', versions_person_path(@person, :export => "true"), :class => "export_link icon_link"

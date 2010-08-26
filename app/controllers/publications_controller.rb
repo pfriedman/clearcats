@@ -60,15 +60,13 @@ class PublicationsController < ApplicationController
   
   def versions
     @publication = Publication.find(params[:id])
+    if params[:export]
+      send_data(@publication.export_versions, :filename => "publication_#{@publication.id}_versions.csv")
+    end
   end
   
   def revert
-    pub     = Publication.find(params[:id])
-    version = pub.versions.find(params[:version_id])
-    pub     = version.reify
-    pub.save!
-    flash[:notice] = 'Publication was successfully reverted.'
-    redirect_to versions_publication_path(pub)
+    revertit(Publication)
   end
   
   private

@@ -56,15 +56,13 @@ class PeopleController < ApplicationController
 
   def versions
     @person = Person.find(params[:id])
+    if params[:export]
+      send_data(@person.export_versions, :filename => "#{@person.to_s.downcase.gsub(' ', '_')}_versions.csv")
+    end
   end
   
   def revert
-    person  = Person.find(params[:id])
-    version = person.versions.find(params[:version_id])
-    person  = version.reify
-    person.save!
-    flash[:notice] = 'Person was successfully reverted.'
-    redirect_to versions_person_path(person)
+    revertit(Person)
   end
   
 end

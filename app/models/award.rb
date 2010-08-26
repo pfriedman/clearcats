@@ -41,6 +41,7 @@
 #
 
 class Award < ActiveRecord::Base
+  include VersionExportable
   has_paper_trail
   
   belongs_to :person
