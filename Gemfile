@@ -4,7 +4,6 @@ source 'http://gems.github.com'
 
 gem "rails", "2.3.8", :require => nil
 
-gem "aasm"
 gem "bcdatabase"
 gem "bcsec-rails", "2.0.0.pre3"
 gem "ruby-oci8"
@@ -18,6 +17,7 @@ gem "nokogiri"
 gem "paperclip"
 gem "pg"
 gem "searchlogic"
+gem "state_machine"
 gem "will_paginate"
 gem "zippy"
 

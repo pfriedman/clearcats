@@ -106,18 +106,19 @@ describe Service do
     end
     
     it "should know all the possible states" do
-      Service.aasm_states.size.should == 9
-      Service.aasm_states.include?(:new).should be_true
-      Service.aasm_states.include?(:choose_person).should be_true
-      Service.aasm_states.include?(:choose_service_line).should be_true
-      Service.aasm_states.include?(:initiated).should be_true
-      Service.aasm_states.include?(:identified).should be_true
-      Service.aasm_states.include?(:choose_awards).should be_true
-      Service.aasm_states.include?(:choose_publications).should be_true
-      Service.aasm_states.include?(:choose_approvals).should be_true
-      Service.aasm_states.include?(:choose_organizational_units).should be_true
+      Service.state_machine.states.length.should == 9
+      states = Service.state_machine.states.keys
+      states.include?(:new).should be_true
+      states.include?(:choose_person).should be_true
+      states.include?(:choose_service_line).should be_true
+      states.include?(:initiated).should be_true
+      states.include?(:identified).should be_true
+      states.include?(:choose_awards).should be_true
+      states.include?(:choose_publications).should be_true
+      states.include?(:choose_approvals).should be_true
+      states.include?(:choose_organizational_units).should be_true
       
-      Service.aasm_states.include?(:asdf).should_not be_true
+      states.include?(:asdf).should_not be_true
     end
     
     

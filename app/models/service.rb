@@ -13,43 +13,45 @@
 #  updated_at      :datetime
 #
 
-require "aasm"
+require "state_machine"
 class Service < ActiveRecord::Base
-  include AASM
   
   belongs_to :service_line
   belongs_to :person
   belongs_to :created_by, :class_name => "User", :foreign_key => :created_by_id
   
-  aasm_column :state
-  
-  aasm_initial_state :new
-  
-  aasm_state :new
-  aasm_state :choose_person
-  aasm_state :choose_service_line
-  aasm_state :initiated
-  aasm_state :identified
-  aasm_state :choose_awards
-  aasm_state :choose_publications
-  aasm_state :choose_approvals
-  aasm_state :choose_organizational_units
-  
-  aasm_event :set_service_line do
-    transitions :to => :choose_person, :from => [:new, :choose_service_line]
+  state_machine :state, :initial => :new do
+    event :set_service_line do
+      transition [:new, :choose_service_line] => :choose_person
+    end
+
+    event :identify do
+      transition [:new, :choose_person] => :choose_service_line
+    end
+
+    event :initiate do
+      transition [:choose_service_line, :choose_person] => :initiated
+    end
+
+    event :project_approvals_chosen do
+      transition [:choose_approvals] => :choose_organizational_units
+    end
+    
+    state :new
+    state :choose_person
+    state :choose_service_line
+    state :initiated
+    state :identified
+    state :choose_awards
+    state :choose_publications
+    state :choose_approvals
+    state :choose_organizational_units
   end
   
-  aasm_event :identify do
-    transitions :to => :choose_service_line, :from => [:new, :choose_person]
+  def initialize(attributes = nil)
+    super(attributes) # NOTE: This *must* be called, otherwise states won't get initialized
   end
   
-  aasm_event :initiate do
-    transitions :to => :initiated, :from => [:choose_service_line, :choose_person]
-  end
-  
-  aasm_event :project_approvals_chosen do
-    transitions :to => :choose_organizational_units, :from => [:choose_approvals]
-  end
   
   def person=(person)
     self.person_id = person.id if person
