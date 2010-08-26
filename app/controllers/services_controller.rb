@@ -19,7 +19,9 @@ class ServicesController < ApplicationController
   
   def choose_person
     if !params[:search].blank?
-      @people = FacultyWebService.locate(params[:search])
+      faculty = FacultyWebService.locate(params[:search])
+      people  = Person.search(params[:search]).all
+      @people = faculty + people
     end
     get_service
   end
