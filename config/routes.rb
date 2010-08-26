@@ -15,14 +15,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :activity_types
   map.resources :awards, :except => [ :destroy ],
-    :member => { :versions => :get }
+    :member => { :versions => :get, :revert => :post }
   map.resources :ctsa_reports, :except => [ :show ],
     :member => { :download => :get }
   map.resources :publications, :only => [ :edit, :update ],
-    :member => { :versions => :get }
+    :member => { :versions => :get, :revert => :post }
   map.resources :organizational_units
   map.resources :people, :only => [:index, :edit, :update], 
-    :member     => { :versions => :get },
+    :member     => { :versions => :get, :revert => :post },
     :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post] } do |people|
       people.resources :awards
       people.resources :publications

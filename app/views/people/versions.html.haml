@@ -7,6 +7,7 @@
     Below are the changes for #{@person}.
   %table{ :class => "records" }
     %tr
+      %th Revert
       %th When
       %th Who
       %th First Name
@@ -20,6 +21,7 @@
       - if version.object
         - attrs = YAML::load version.object
         %tr{ :class => cycle('even_record', 'odd_record') }
+          %td= link_to 'Revert', revert_person_path(@person, :version_id => version.id), :class => "edit_link icon_link", :method => :post
           %td= version.created_at.to_s(:db)
           %td= YAML::load(version.whodunnit).username
           %td= h attrs["first_name"]
@@ -30,6 +32,7 @@
           %td= h attrs["era_commons_username"]
           %td= h attrs["last_four_of_ssn"]
     %tr{ :class => 'current_record' }
+      %td= link_to 'Edit', edit_person_path(@person), :class => "edit_link icon_link"
       %td Current Version
       %td &nbsp;
       %td= h @person.first_name

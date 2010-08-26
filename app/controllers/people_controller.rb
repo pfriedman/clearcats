@@ -58,5 +58,13 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
   
+  def revert
+    person  = Person.find(params[:id])
+    version = person.versions.find(params[:version_id])
+    person  = version.reify
+    person.save!
+    flash[:notice] = 'Person was successfully reverted.'
+    redirect_to versions_person_path(person)
+  end
   
 end

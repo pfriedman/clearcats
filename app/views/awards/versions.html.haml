@@ -5,6 +5,7 @@
 - else
   %table{ :class => "records" }
     %tr
+      %th Revert
       %th When
       %th Who
       %th NUCATS Assisted
@@ -17,6 +18,7 @@
       - if version.object
         - attrs = YAML::load version.object
         %tr{ :class => cycle('even_record', 'odd_record') }
+          %td= link_to 'Revert', revert_award_path(@award, :version_id => version.id), :class => "edit_link icon_link", :method => :post
           %td= version.created_at.to_s(:db)
           %td= YAML::load(version.whodunnit).username
           %td= attrs["nucats_assisted"]
@@ -26,6 +28,7 @@
           %td= attrs["budget_number"]
           %td= attrs["project_period_start_date"]
     %tr{ :class => 'current_record' }
+      %td
       %td Current Version
       %td &nbsp;
       %td= h @award.nucats_assisted

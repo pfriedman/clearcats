@@ -62,6 +62,15 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
   end
   
+  def revert
+    pub     = Publication.find(params[:id])
+    version = pub.versions.find(params[:version_id])
+    pub     = version.reify
+    pub.save!
+    flash[:notice] = 'Publication was successfully reverted.'
+    redirect_to versions_publication_path(pub)
+  end
+  
   private
   
     def populate_service_and_person

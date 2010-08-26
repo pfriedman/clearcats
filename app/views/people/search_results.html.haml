@@ -1,8 +1,8 @@
-- title "Faculty Search Results"
+- title "Person Search Results"
 
 - if @people.blank?
   .no_records
-    No faculty members were found. 
+    No one was found. 
 - else
   %table.records
     %tr
@@ -15,8 +15,7 @@
       %th NU Employee ID
     - @people.each do |person|
       %tr{ :class => cycle('even_record', 'odd_record') }
-        %td
-          = link_to "Select", { :controller => :intake_forms, :action => :new, :person_id => person.id, :organizational_unit_id => @organizational_unit_id }, { :class => "add_person_link icon_link" }
+        %td= link_to "Edit", edit_person_path(person), :class => "edit_link icon_link"
         %td= h person.last_name
         %td= h person.first_name
         %td= h person.middle_name
@@ -25,4 +24,4 @@
         %td= h person.employeeid
 
 .links
-  = link_to "New Search", {:controller => "people", :action => "search", :organizational_unit_id => @organizational_unit_id}, { :class => "search_link icon_link"  }
+  = link_to "New Search", {:controller => "people", :action => "search"}, { :class => "search_link icon_link"  }

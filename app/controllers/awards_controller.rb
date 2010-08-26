@@ -73,6 +73,15 @@ class AwardsController < ApplicationController
     @award = Award.find(params[:id])
   end
   
+  def revert
+    award   = Award.find(params[:id])
+    version = award.versions.find(params[:version_id])
+    award  = version.reify
+    award.save!
+    flash[:notice] = 'Award was successfully reverted.'
+    redirect_to versions_award_path(award)
+  end
+  
   private
   
     def populate_common
