@@ -165,14 +165,13 @@ class FacultyWebService
             sponsor ||= Sponsor.new
             sponsor.send(name.to_s + '=', value)
           else
-            award.send(name.to_s + '=', value) # if award.send(name.to_s) != value
+            award.send(name.to_s + '=', value)
           end
         end
-        award.sponsor = sponsor # if award.sponsor != sponsor
+        award.sponsor = sponsor unless sponsor.nil?
 
         dept = Department.find_or_create_by_name(attributes["department"])
-        award.department = dept if dept # and award.department != dept
-        award.save! # if award.changed? or award.new_record?
+        award.department = dept if dept
 
         Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
 

@@ -18,6 +18,7 @@ module VersionExportable
   
     def add_version_values(csv)
       self.versions.each do |v|
+        next if v.object.nil?
         vals = []
         vals << v.created_at.to_s(:db)
         vals << YAML::load(v.whodunnit).username
