@@ -9,9 +9,11 @@ class CreateCtsaReports < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :ctsa_reports, :created_by_id
   end
 
   def self.down
+    remove_index :ctsa_reports, :created_by_id
     drop_table :ctsa_reports
   end
 end

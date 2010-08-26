@@ -8,10 +8,13 @@ class CreateDepartments < ActiveRecord::Migration
 
       t.timestamps
     end
-
+    add_index(:departments, :name)
+    add_index(:departments, :externalid)
   end
 
   def self.down
+    remove_index(:departments, :name)
+    remove_index(:departments, :externalid)
     drop_table :departments
   end
 end

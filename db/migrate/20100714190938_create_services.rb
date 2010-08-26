@@ -9,9 +9,15 @@ class CreateServices < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :services, :service_line_id
+    add_index :services, :person_id
+    add_index :services, :created_by_id
   end
 
   def self.down
+    remove_index :services, :created_by_id
+    remove_index :services, :person_id
+    remove_index :services, :service_line_id
     drop_table :services
   end
 end

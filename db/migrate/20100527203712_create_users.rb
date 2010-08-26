@@ -23,11 +23,13 @@ class CreateUsers < ActiveRecord::Migration
     end
     
     # adding username index
-    add_index(:users, :username, :unique => true, :name => 'users_username_idx' )
+    add_index(:users, :username, :unique => true, :name => 'users_username_idx')
+    add_index(:users, :organizational_unit_id)
   end
 
   def self.down
     remove_index(:users, :name => 'users_username_idx')
+    remove_index(:users, :organizational_unit_id)
     drop_table :users
   end
 end

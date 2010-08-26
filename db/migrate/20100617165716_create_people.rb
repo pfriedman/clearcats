@@ -26,6 +26,18 @@ class CreatePeople < ActiveRecord::Migration
       t.timestamps
     end
     
+    add_index(:people, :department_id)
+    add_index(:people, :netid)
+    add_index(:people, :era_commons_username)
+    add_index(:people, :employeeid)
+    add_index(:people, :degree_type_one_id)
+    add_index(:people, :degree_type_two_id)
+    add_index(:people, :specialty_id)
+    add_index(:people, :country_id)
+    add_index(:people, :ethnic_type_id)
+    add_index(:people, :race_type_id)
+    
+    
     create_table :institution_positions_people, :id => false do |t|
       t.integer :institution_position_id
       t.integer :person_id
@@ -43,6 +55,18 @@ class CreatePeople < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index(:people, :department_id)
+    remove_index(:people, :netid)
+    remove_index(:people, :era_commons_username)
+    remove_index(:people, :employeeid)
+    remove_index(:people, :degree_type_one_id)
+    remove_index(:people, :degree_type_two_id)
+    remove_index(:people, :specialty_id)
+    remove_index(:people, :country_id)
+    remove_index(:people, :ethnic_type_id)
+    remove_index(:people, :race_type_id)
+    remove_index(:institution_positions_people, :name => "institution_positions_people_idx")
+    remove_index(:organizational_units_people, :name => "organizational_units_people_idx")
     drop_table :organizational_units_people
     drop_table :institution_positions_people
     drop_table :people

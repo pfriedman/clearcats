@@ -5,9 +5,11 @@ class CreateRaceTypes < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:race_types, :name)
   end
 
   def self.down
+    remove_index(:race_types, :name)
     drop_table :race_types
   end
 end

@@ -41,9 +41,18 @@ class CreateAwards < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index(:awards, :budget_number)
+    add_index(:awards, :person_id)
+    add_index(:awards, :investigator_id)
+    add_index(:awards, [:ctsa_award_type_type, :ctsa_award_type_id])
   end
 
   def self.down
+    remove_index(:awards, :budget_number)
+    remove_index(:awards, :person_id)
+    remove_index(:awards, :investigator_id)
+    remove_index(:awards, [:ctsa_award_type_type, :ctsa_award_type_id])
     drop_table :awards
   end
 end

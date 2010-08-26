@@ -5,9 +5,11 @@ class CreateInstitutionPositions < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:institution_positions, :name)
   end
 
   def self.down
+    remove_index(:institution_positions, :name)
     drop_table :institution_positions
   end
 end

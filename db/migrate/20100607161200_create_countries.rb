@@ -5,9 +5,11 @@ class CreateCountries < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:countries, :name)
   end
 
   def self.down
+    remove_index(:countries, :name)
     drop_table :countries
   end
 end

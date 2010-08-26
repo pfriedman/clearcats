@@ -9,10 +9,14 @@ class CreateOrganizationalUnits < ActiveRecord::Migration
       
       t.timestamps
     end
-    
+
+    add_index(:organizational_units, :parent_id)
+    add_index(:organizational_units, :name)
   end
 
   def self.down
+    remove_index(:organizational_units, :name)
+    remove_index(:organizational_units, :parent_id)
     drop_table :organizational_units
   end
 end

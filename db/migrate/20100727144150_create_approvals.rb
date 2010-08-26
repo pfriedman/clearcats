@@ -12,9 +12,11 @@ class CreateApprovals < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :approvals, :person_id
   end
 
   def self.down
+    remove_index :approvals, :person_id
     drop_table :approvals
   end
 end

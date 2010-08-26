@@ -18,12 +18,18 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "activity_codes", ["code"], :name => "index_activity_codes_on_code"
+  add_index "activity_codes", ["name"], :name => "index_activity_codes_on_name"
+
   create_table "activity_types", :force => true do |t|
     t.string   "name"
     t.integer  "service_line_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activity_types", ["name"], :name => "index_activity_types_on_name"
+  add_index "activity_types", ["service_line_id"], :name => "index_activity_types_on_service_line_id"
 
   create_table "approvals", :force => true do |t|
     t.string   "tracking_number"
@@ -37,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "approvals", ["person_id"], :name => "index_approvals_on_person_id"
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -88,11 +96,20 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.integer  "originating_sponsor_id"
   end
 
+  add_index "awards", ["budget_number"], :name => "index_awards_on_budget_number"
+  add_index "awards", ["ctsa_award_type_type", "ctsa_award_type_id"], :name => "index_awards_on_ctsa_award_type_type_and_ctsa_award_type_id"
+  add_index "awards", ["investigator_id"], :name => "index_awards_on_investigator_id"
+  add_index "awards", ["originating_sponsor_id"], :name => "index_awards_on_originating_sponsor_id"
+  add_index "awards", ["person_id"], :name => "index_awards_on_person_id"
+  add_index "awards", ["sponsor_id"], :name => "index_awards_on_sponsor_id"
+
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "countries", ["name"], :name => "index_countries_on_name"
 
   create_table "ctsa_reports", :force => true do |t|
     t.integer  "created_by_id"
@@ -104,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "ctsa_reports", ["created_by_id"], :name => "index_ctsa_reports_on_created_by_id"
+
   create_table "degree_types", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -111,6 +130,9 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "degree_types", ["name"], :name => "index_degree_types_on_name"
+  add_index "degree_types", ["type"], :name => "index_degree_types_on_type"
 
   create_table "departments", :force => true do |t|
     t.string   "name"
@@ -121,17 +143,24 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "departments", ["externalid"], :name => "index_departments_on_externalid"
+  add_index "departments", ["name"], :name => "index_departments_on_name"
+
   create_table "ethnic_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "ethnic_types", ["name"], :name => "index_ethnic_types_on_name"
+
   create_table "institution_positions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "institution_positions", ["name"], :name => "index_institution_positions_on_name"
 
   create_table "institution_positions_people", :id => false, :force => true do |t|
     t.integer "institution_position_id"
@@ -147,6 +176,9 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "organizational_services", ["organizational_unit_id"], :name => "index_organizational_services_on_organizational_unit_id"
+  add_index "organizational_services", ["service_line_id"], :name => "index_organizational_services_on_service_line_id"
+
   create_table "organizational_units", :force => true do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -156,6 +188,9 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "organizational_units", ["name"], :name => "index_organizational_units_on_name"
+  add_index "organizational_units", ["parent_id"], :name => "index_organizational_units_on_parent_id"
 
   create_table "organizational_units_people", :id => false, :force => true do |t|
     t.integer "organizational_unit_id"
@@ -171,6 +206,10 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "organizations", ["code"], :name => "index_organizations_on_code"
+  add_index "organizations", ["name"], :name => "index_organizations_on_name"
+  add_index "organizations", ["type"], :name => "index_organizations_on_type"
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -206,6 +245,17 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.string   "address"
   end
 
+  add_index "people", ["country_id"], :name => "index_people_on_country_id"
+  add_index "people", ["degree_type_one_id"], :name => "index_people_on_degree_type_one_id"
+  add_index "people", ["degree_type_two_id"], :name => "index_people_on_degree_type_two_id"
+  add_index "people", ["department_id"], :name => "index_people_on_department_id"
+  add_index "people", ["employeeid"], :name => "index_people_on_employeeid"
+  add_index "people", ["era_commons_username"], :name => "index_people_on_era_commons_username"
+  add_index "people", ["ethnic_type_id"], :name => "index_people_on_ethnic_type_id"
+  add_index "people", ["netid"], :name => "index_people_on_netid"
+  add_index "people", ["race_type_id"], :name => "index_people_on_race_type_id"
+  add_index "people", ["specialty_id"], :name => "index_people_on_specialty_id"
+
   create_table "publications", :force => true do |t|
     t.string   "pmcid"
     t.string   "pmid"
@@ -222,17 +272,23 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.integer  "reporting_year"
   end
 
+  add_index "publications", ["person_id"], :name => "index_publications_on_person_id"
+
   create_table "race_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "race_types", ["name"], :name => "index_race_types_on_name"
+
   create_table "service_lines", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "service_lines", ["name"], :name => "index_service_lines_on_name"
 
   create_table "services", :force => true do |t|
     t.integer  "service_line_id"
@@ -244,12 +300,19 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "services", ["created_by_id"], :name => "index_services_on_created_by_id"
+  add_index "services", ["person_id"], :name => "index_services_on_person_id"
+  add_index "services", ["service_line_id"], :name => "index_services_on_service_line_id"
+
   create_table "specialties", :force => true do |t|
     t.string   "code"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "specialties", ["code"], :name => "index_specialties_on_code"
+  add_index "specialties", ["name"], :name => "index_specialties_on_name"
 
   create_table "sponsors", :force => true do |t|
     t.string   "name"
@@ -259,6 +322,9 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sponsors", ["code"], :name => "index_sponsors_on_code"
+  add_index "sponsors", ["name"], :name => "index_sponsors_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -280,6 +346,7 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["organizational_unit_id"], :name => "index_users_on_organizational_unit_id"
   add_index "users", ["username"], :name => "users_username_idx", :unique => true
 
   create_table "versions", :force => true do |t|

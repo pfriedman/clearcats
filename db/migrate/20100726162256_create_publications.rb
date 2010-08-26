@@ -12,9 +12,11 @@ class CreatePublications < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :publications, :person_id
   end
 
   def self.down
+    remove_index :publications, :person_id
     drop_table :publications
   end
 end

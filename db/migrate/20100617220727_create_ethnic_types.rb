@@ -5,9 +5,12 @@ class CreateEthnicTypes < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index(:ethnic_types, :name)
   end
 
   def self.down
+    remove_index(:ethnic_types, :name)
     drop_table :ethnic_types
   end
 end
