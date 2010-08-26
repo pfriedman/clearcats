@@ -15,6 +15,12 @@
       = f.label :middle_name, "Middle Initial" 
       %br
       = f.text_field :middle_name 
+      
+    - if f.object.netid.blank?
+      %p
+        = f.label :netid, "Net ID"
+        %br
+        = f.text_field :netid
 
     %p
       = f.label :era_commons_username, "eRA Commons Username" 
