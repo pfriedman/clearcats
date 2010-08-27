@@ -51,11 +51,21 @@ module NavigationHelpers
     when /the publications edit page/
       edit_publication_path(Publication.first(:order => "updated_at desc"))
       
+    when /the publication versions page for "(.*)"/
+      versions_publication_path(Publication.find_by_pmid($1))
+      
     ### AWARDS ###
 
     when /the awards edit page/
       edit_award_path(Award.first(:order => "updated_at desc"))
     
+    when /the award versions page for "(.*)"/
+      versions_award_path(Award.find_by_budget_number($1))
+    
+    ### PEOPLE ###
+    
+    when /the person versions page for "(.*)"/
+      versions_person_path(Person.find_by_netid($1))
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

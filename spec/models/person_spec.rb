@@ -164,4 +164,25 @@ describe Person do
     
   end
   
+  context "audit history" do
+    
+    it "should output all versioning history" do
+      person = Factory(:person)
+      version_attributes = {"created_at"=> Time.now, 
+                            "whodunnit"=>"--- !ruby/object:Bcsec::User \naddress: \nbusiness_phone: \ncity: \ncountry: \ndefault_portal: :ClearCATS\nemail: \nfax: \nfirst_name: CC\ngms: \n  :ClearCATS: !seq:Bcsec::GroupMemberships \n    - !ruby/object:Bcsec::GroupMembership \n      affiliate_ids: \n      - 555.0\n      group: !ruby/object:Bcsec::Group \n        children: []\n\n        childrenHash: {}\n\n        content: \n        name: Admin\n        parent: \nlast_name: Administrator\nmiddle_name: \nnu_employee_id: \npersonnel_id: 62113.0\nportals: \n- :ClearCATS\nstate: \ntitle: \nusername: cc_admin\n", 
+                            "event"=>"update", 
+                            "object"=>'--- \nrace_type_id: \naddress: |-\n  RUBLOFF 750 N Lake Shore Dr\n  11th Floor\ncreated_at: 2010-08-26 21:28:06.515240 Z\ntrainee_status: ""\ntitle: Associate Professor\nservice_rendered: false\nera_commons_username: ""\nemployeeid: "1010101"\ndegree_type_two_id: \nupdated_at: 2010-08-26 21:28:06.515240 Z\nhas_disability: \nlast_four_of_ssn: \ncountry_id: \nid: 1\ngender: \ndepartment_affiliation: ""\nnetid: netid\nschool_affiliation: ""\nphone: +1 312 503 5033\nlast_name: Guy\nfax: \nspecialty_id: \ndegree_type_one_id: \ntraining_type: ""\nhuman_subject_protection_training_institution: \nhuman_subject_protection_training_date: \nethnic_type_id: \nmiddle_name: X\nfirst_name: Some\nemail: someguy@northwestern.edu\ndisadvantaged_background: \ndepartment_id: \n', 
+                            "item_id"=>person.id, "item_type"=>"Person"}
+      person.versions << Version.create(version_attributes)
+      
+      csv = person.export_versions
+      csv.should_not be_blank
+      arr_of_arrs = FasterCSV.parse(csv)
+      arr_of_arrs[0][0].should == "When"
+      arr_of_arrs[0][1].should == "Who"
+      arr_of_arrs[1][1].should == "cc_admin"
+    end
+    
+  end
+  
 end
