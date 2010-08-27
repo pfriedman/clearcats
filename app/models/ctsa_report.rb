@@ -32,6 +32,16 @@ class CtsaReport < ActiveRecord::Base
     add_report_xml_to_attachments(file_path)
     file_path
   end
+  
+  def create_zip_file
+    zip_file = Zippy.create "#{Rails.root}/tmp/ctsa_reports/ctsa.zip" do |zip|
+      attachments.each do |doc|
+        #TODO: set other document type extensions
+        zip["#{doc.name}.pdf"] = File.open(doc.data.path)
+      end
+    end
+    zip_file
+  end
 
   private
    
