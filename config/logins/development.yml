@@ -11,3 +11,5 @@ users:
         - Admin
   wakibbe:
     password: wakibbe
+  pgreenld:
+    password: pgreenld

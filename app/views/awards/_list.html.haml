@@ -17,6 +17,6 @@
       = render :partial => '/awards/awards_table'
       
     .links
-      = link_to 'List', people_path, :class => "list_link icon_link"
+      = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
       = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"
       = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link"

@@ -1,5 +1,6 @@
 class AwardsController < ApplicationController
-  permit :Admin, :User
+  before_filter :permit_user,  :only => [:new, :create, :versions]
+  before_filter :permit_admin, :only => [:revert]
   layout proc { |controller| controller.request.xhr? ? nil : 'application'  } 
 
   def index
@@ -94,7 +95,7 @@ class AwardsController < ApplicationController
         @service = Service.find(params[:service_id])
         @person  = @service.person
       elsif params[:person_id]
-        @person  = Person.find(params[:person_id])
+        determine_person(:person_id)
       end
     end
   

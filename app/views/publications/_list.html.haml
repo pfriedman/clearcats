@@ -9,6 +9,6 @@
     - else
       = render 'publications/publications_table', :publications => @publications
       .links
-        = link_to 'List', people_path, :class => "list_link icon_link"
+        = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
         = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"
         = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"

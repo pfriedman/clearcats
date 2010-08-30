@@ -348,3 +348,10 @@ textarea {
 .container p {
   margin-bottom: .25em;
 }
+
+input[type="checkbox"], 
+input[type="radio"], 
+input.checkbox, 
+input.radio {
+  top: 0;
+}

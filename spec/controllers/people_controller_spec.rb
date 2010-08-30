@@ -43,13 +43,13 @@ describe PeopleController do
       end
 
       it "assigns the requested person as @person" do
-        Person.stub(:find).and_return(mock_person(:update_attributes => true))
+        Person.stub(:find).and_return(mock_person(:update_attributes => true, :netid => "asdf"))
         put :update, :id => "1"
         assigns[:person].should equal(mock_person)
       end
 
       it "redirects to the person" do
-        Person.stub(:find).and_return(mock_person(:update_attributes => true))
+        Person.stub(:find).and_return(mock_person(:update_attributes => true, :netid => "asdf"))
         put :update, :id => "1"
         response.should redirect_to(people_url)
       end

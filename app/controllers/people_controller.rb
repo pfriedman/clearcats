@@ -24,8 +24,9 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
+        redirect_path = (@person.netid == current_user.username) ? edit_person_path(@person) : people_path
         flash[:notice] = 'Person was successfully updated.'
-        format.html { redirect_to(people_path) }
+        format.html { redirect_to(redirect_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -66,29 +67,5 @@ class PeopleController < ApplicationController
   def revert
     revertit(Person)
   end
-  
-  private
-  
-    def permit_user
-      if !current_user.permit?(:Admin, :User)
-        flash[:warning] = "You do not have access to the resource you requested."
-        redirect_to :controller => "welcome", :action => "index"
-      end
-    end
-    
-    def permit_admin
-      if !current_user.permit?(:Admin)
-        flash[:warning] = "You do not have access to the resource you requested."
-        redirect_to :controller => "welcome", :action => "index"
-      end
-    end
-    
-    def determine_person
-      if current_user.permit?(:Admin, :User)
-        @person = Person.find(params[:id])
-      else
-        @person = Person.find_by_netid(current_user.username)
-      end
-    end
   
 end
