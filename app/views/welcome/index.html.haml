@@ -3,8 +3,14 @@
 %p
   %h1 Welcome to ClearCATS!
 
-  %h3 User Actions
-  %ul
-    %li= link_to "Initiate Service", :controller => "services", :action => "new"
+  - if current_user
+    - if current_user.permit?(:Admin, :User)
+      %h3 User Actions
+      %ul
+        %li= link_to "Initiate Service", :controller => "services", :action => "new"
 
-  = render "/admin/admin_list" if current_user and current_user.permit?(:Admin)
+    = render "/admin/admin_list" if current_user.permit?(:Admin)
+  
+  - if @person
+    = link_to 'Edit Profile', edit_person_path(@person), :class => "edit_link icon_link"
+      

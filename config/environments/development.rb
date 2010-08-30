@@ -25,8 +25,10 @@ config.after_initialize do
   
   # look at db/user-setup.sql for user and group security settings when developing in a local environment
   Bcsec.configure do
+    login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
+    
     ui_mode :form
-    authorities :pers
+    authorities :automatic_access, Bcsec::Authorities::Static.from_file(login_config), :pers
     central '/etc/nubic/bcsec-local.yml'
   end
 

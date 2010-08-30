@@ -9,3 +9,5 @@ users:
     portals:
       - ClearCATS:
         - Admin
+  wakibbe:
+    password: wakibbe

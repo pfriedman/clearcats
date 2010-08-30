@@ -5,6 +5,7 @@ source 'http://gems.github.com'
 gem "rails", "2.3.8", :require => nil
 
 gem "bcdatabase"
+gem "bcsec", "~> 2.0.1"
 gem "bcsec-rails"
 gem "ruby-oci8"
 gem "activerecord-oracle_enhanced-adapter", "1.2.3"

@@ -1,5 +1,5 @@
 class ActivityTypesController < ApplicationController
-  permit :Admin, :User
+  permit :Admin, :User #, {:portal => :ClearCATS}
   
   # GET /activity_types
   # GET /activity_types.xml

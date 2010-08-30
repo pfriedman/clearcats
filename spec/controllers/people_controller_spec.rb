@@ -6,7 +6,7 @@ describe PeopleController do
   end
 
   before(:each) do
-    login(user_login)
+    login(admin_login)
   end
 
   describe "GET index" do

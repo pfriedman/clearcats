@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
-  permit :Admin, :User
+  before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions]
+  before_filter :permit_admin, :only => [:upload, :revert]
 
   def index
     params[:search] ||= {}
@@ -13,13 +14,13 @@ class PeopleController < ApplicationController
   
   # GET /people/1/edit
   def edit
-    @person = Person.find(params[:id])
+    determine_person
   end
   
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    @person = Person.find(params[:id])
+    determine_person
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
@@ -31,6 +32,7 @@ class PeopleController < ApplicationController
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end
+
   end
   
   def directory
@@ -64,5 +66,29 @@ class PeopleController < ApplicationController
   def revert
     revertit(Person)
   end
+  
+  private
+  
+    def permit_user
+      if !current_user.permit?(:Admin, :User)
+        flash[:warning] = "You do not have access to the resource you requested."
+        redirect_to :controller => "welcome", :action => "index"
+      end
+    end
+    
+    def permit_admin
+      if !current_user.permit?(:Admin)
+        flash[:warning] = "You do not have access to the resource you requested."
+        redirect_to :controller => "welcome", :action => "index"
+      end
+    end
+    
+    def determine_person
+      if current_user.permit?(:Admin, :User)
+        @person = Person.find(params[:id])
+      else
+        @person = Person.find_by_netid(current_user.username)
+      end
+    end
   
 end
