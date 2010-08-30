@@ -20,7 +20,7 @@
         %tr{ :class => cycle('even_record', 'odd_record') }
           %td= link_to 'Revert', revert_award_path(@award, :version_id => version.id), :class => "edit_link icon_link", :method => :post
           %td= version.created_at.to_s(:db)
-          %td= YAML::load(version.whodunnit).username
+          %td= version.whodunnit
           %td= attrs["nucats_assisted"]
           %td= Sponsor.find_by_id(attrs["sponsor_id"]).to_s
           %td= attrs["sponsor_award_number"]

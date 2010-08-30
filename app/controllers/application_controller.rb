@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-
+  
+  # Only save the current_user [Bcsec::User] username for auditing
+  def user_for_paper_trail
+    current_user.nil? ? 'n/a' : current_user.username
+  end
+  
   private
     
     def find_or_create_user
@@ -23,6 +28,28 @@ class ApplicationController < ActionController::Base
       obj.save!
       flash[:notice] = "#{cls} was successfully reverted."
       redirect_to :controller => "#{cls.to_s.tableize}", :action => "versions", :id => obj
+    end
+    
+    def permit_user
+      if !current_user.permit?(:Admin, :User)
+        flash[:warning] = "You do not have access to the resource you requested."
+        redirect_to :controller => "welcome", :action => "index"
+      end
+    end
+    
+    def permit_admin
+      if !current_user.permit?(:Admin)
+        flash[:warning] = "You do not have access to the resource you requested."
+        redirect_to :controller => "welcome", :action => "index"
+      end
+    end
+    
+    def determine_person(param_key = :id)
+      if current_user.permit?(:Admin, :User)
+        @person = Person.find(params[param_key])
+      else
+        @person = Person.find_by_netid(current_user.username)
+      end
     end
 
 end

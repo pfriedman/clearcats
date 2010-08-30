@@ -21,7 +21,7 @@ module VersionExportable
         next if v.object.nil?
         vals = []
         vals << v.created_at.to_s(:db)
-        vals << YAML::load(v.whodunnit).username
+        vals << v.whodunnit
         get_attribute_names.each { |a| vals << get_value(v, a) }
         csv << vals
       end
