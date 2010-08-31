@@ -5,7 +5,7 @@ describe ResponseSet do
   it { should belong_to(:user) }
   it { should belong_to(:survey) }
   
-  it { should belong_to(:person) }
+  # it { should belong_to(:person) }
   
   it "should assign survey to response set" do
     rs = ResponseSet.new
