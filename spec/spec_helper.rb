@@ -11,9 +11,10 @@ require 'factory_girl'
 Factory.find_definitions
 
 # Paperclip matchers
-require "paperclip/matchers"
+require 'paperclip/matchers'
 
-require "surveyor"
+require 'surveyor'
+require 'shoulda'
 
 module TestLogins
   def user_login
