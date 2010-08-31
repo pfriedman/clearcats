@@ -161,7 +161,7 @@ class PublicationBuilder < REXML::Element
     add_element("sis:Cited").add_text(cited)
     add_element("sis:PubMed_ID").add_text(@publication.pubmed_id.to_s)
     unless @publication.missing_pmcid_reason.blank?
-      add_element("sis:Missing_PCMCID_Reason").add_text(@publication.missing_pmcid_reason.to_s)
+      add_element("sis:Missing_PMCID_Reason").add_text(@publication.missing_pmcid_reason.to_s)
     end
   end
   

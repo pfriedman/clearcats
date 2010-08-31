@@ -80,9 +80,25 @@ describe ReportBuilder do
   		doc.to_s.should == applicant_trainee_characteristic_node
     end
     
+    it "should create an XML element for the publication" do
+      pub = Factory(:publication, :cited => true, :pmcid => 1234, :missing_pmcid_reason => "huh?")
+      doc = REXML::Document.new
+      doc.add_element(PublicationBuilder.new(pub))
+      doc.write("",2)
+  		doc.to_s.should == publication_node
+    end
+
   end
-  
+
   private
+
+    def publication_node
+      "<sis:Publication>" +
+        "<sis:Cited>Y</sis:Cited>" +
+        "<sis:PubMed_ID>1234</sis:PubMed_ID>" +
+        "<sis:Missing_PMCID_Reason>huh?</sis:Missing_PMCID_Reason>" +
+      "</sis:Publication>"
+    end
   
     def applicant_trainee_characteristic_node
       "<sis:Applicant_Trainee_Characts>" +
