@@ -124,5 +124,14 @@ describe CtsaReportsController do
         response.should redirect_to(ctsa_reports_url)
       end
     end
+    
+    describe "GET download" do
+      it "sends the data file to the user" do
+        mock_zip = mock("zip_file", :data => mock("data", :bytesize => 1024))
+        CtsaReport.stub(:find).and_return(mock_ctsa_report(:create_xml_report => true, :create_zip_file => mock_zip))
+        get :download, :id => "1"
+        response.should be_success
+      end
+    end
   end
 end

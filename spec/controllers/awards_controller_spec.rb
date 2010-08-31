@@ -92,6 +92,19 @@ describe AwardsController do
           mock_award.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, :id => "37", :award => {:these => 'params'}, :service_id => "99"
         end
+        
+        it "updates the requested award - ajax" do
+
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Award.should_receive(:find).with("37").and_return(mock_award(:update_attributes => true))
+          
+          format = mock("format")
+          controller.should_receive(:respond_to).and_yield(format)
+          format.should_receive(:js).and_return("asdf")
+          format.stub!(:html)       
+          
+          put :update, :id => "37", :award => {:these => 'params'}, :service_id => "99", :format => "js"
+        end
 
         # it "assigns the requested award as @award" do
         #   Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))

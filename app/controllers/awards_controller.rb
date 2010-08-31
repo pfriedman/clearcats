@@ -62,8 +62,7 @@ class AwardsController < ApplicationController
           render :update do |page|
             page.replace "awards", :partial => "/awards/list", :locals => { :search => params[:search] }
           end
-        end
-        
+        end        
       else
         format.html { render :action => "edit" }
       end
