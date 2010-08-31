@@ -34,8 +34,7 @@ config.gem "factory_girl", :version => "= 1.2.4"
 config.after_initialize do
   Bcsec.configure do
     login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
-
-    authority Bcsec::Authorities::Static.from_file(login_config)
+    authorities :automatic_access, Bcsec::Authorities::Static.from_file(login_config)
   end
 
   PaperTrail.enabled = false

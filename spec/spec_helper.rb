@@ -21,6 +21,10 @@ module TestLogins
   def admin_login
     Bcsec.authority.valid_credentials?(:user, 'admin', 'admin')
   end
+  
+  def faculty_login
+    Bcsec.authority.valid_credentials?(:user, 'wakibbe', 'wakibbe')    
+  end
 
   def login(as)
     request.env['bcsec'] = Bcsec::Rack::Facade.new(Bcsec.configuration, as)
