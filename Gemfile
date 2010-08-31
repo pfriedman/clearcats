@@ -57,4 +57,5 @@ group :test do
   # mocking web services
   # gem "fakeweb"
   
+  gem "ci_reporter"
 end
