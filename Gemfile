@@ -9,7 +9,7 @@ gem "bcsec", "~> 2.0.1"
 gem "bcsec-rails"
 gem "ruby-oci8"
 gem "activerecord-oracle_enhanced-adapter", "1.2.3"
-gem "bundler", "~> 0.9"
+gem "bundler"
 # gem "crafterm-comma" - cf. plugin dir
 gem "facets"
 gem "fastercsv"
