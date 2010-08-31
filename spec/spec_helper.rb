@@ -13,6 +13,8 @@ Factory.find_definitions
 # Paperclip matchers
 require "paperclip/matchers"
 
+require "surveyor"
+
 module TestLogins
   def user_login
     Bcsec.authority.valid_credentials?(:user, 'user', 'user')
