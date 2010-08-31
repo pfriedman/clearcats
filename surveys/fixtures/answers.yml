@@ -1,0 +1,600 @@
+20100830163016_answer_1:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_1
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_2:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_1
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_3:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_1
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_4:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_1
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_5:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_1
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_6:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_2
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_7:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_2
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_8:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_2
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_9:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_2
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_10:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_2
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_11:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_3
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_12:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_3
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_13:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_3
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_14:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_3
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_15:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_3
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_16:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_4
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_17:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_4
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_18:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_4
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_19:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_4
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_20:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_4
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_21:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_5
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_22:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_5
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_23:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_5
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_24:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_5
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_25:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_5
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_26:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_6
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_27:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_6
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_28:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_6
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_29:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_6
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_30:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_6
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_31:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_7
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_32:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_7
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_33:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_7
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_34:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_7
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_35:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_7
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_36:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_8
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_37:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_8
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_38:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_8
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_39:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_8
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_40:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_8
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_41:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_9
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_42:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_9
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_43:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_9
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_44:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_9
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_45:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_9
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_46:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_10
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_47:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_10
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_48:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_10
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_49:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_10
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_50:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_10
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_51:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_11
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_52:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_11
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_53:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_11
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_54:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_11
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_55:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_11
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"
+20100830163016_answer_56:
+  data_export_identifier: "1"
+  display_order: 1
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_12
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "1"
+  text: "1"
+20100830163016_answer_57:
+  data_export_identifier: "2"
+  display_order: 2
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_12
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "2"
+  text: "2"
+20100830163016_answer_58:
+  data_export_identifier: "3"
+  display_order: 3
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_12
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "3"
+  text: "3"
+20100830163016_answer_59:
+  data_export_identifier: "4"
+  display_order: 4
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_12
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "4"
+  text: "4"
+20100830163016_answer_60:
+  data_export_identifier: "5"
+  display_order: 5
+  hide_label: false
+  is_exclusive: false
+  question: 20100830163016_question_12
+  reference_identifier: 
+  response_class: "answer"
+  short_text: "5"
+  text: "5"

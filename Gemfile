@@ -19,6 +19,7 @@ gem "paperclip"
 gem "pg"
 gem "searchlogic"
 gem "state_machine"
+gem "surveyor"
 gem "will_paginate"
 gem "zippy"
 

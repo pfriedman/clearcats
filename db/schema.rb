@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100825194150) do
+ActiveRecord::Schema.define(:version => 20100830214306) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
 
   add_index "activity_types", ["name"], :name => "index_activity_types_on_name"
   add_index "activity_types", ["service_line_id"], :name => "index_activity_types_on_service_line_id"
+
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.text     "text"
+    t.text     "short_text"
+    t.text     "help_text"
+    t.integer  "weight"
+    t.string   "response_class"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.integer  "display_order"
+    t.boolean  "is_exclusive"
+    t.boolean  "hide_label"
+    t.integer  "display_length"
+    t.string   "custom_class"
+    t.string   "custom_renderer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "approvals", :force => true do |t|
     t.string   "tracking_number"
@@ -145,6 +166,31 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
 
   add_index "departments", ["externalid"], :name => "index_departments_on_externalid"
   add_index "departments", ["name"], :name => "index_departments_on_name"
+
+  create_table "dependencies", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "question_group_id"
+    t.string   "rule"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dependency_conditions", :force => true do |t|
+    t.integer  "dependency_id"
+    t.string   "rule_key"
+    t.integer  "question_id"
+    t.string   "operator"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ethnic_types", :force => true do |t|
     t.string   "name"
@@ -274,6 +320,42 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
 
   add_index "publications", ["person_id"], :name => "index_publications_on_person_id"
 
+  create_table "question_groups", :force => true do |t|
+    t.text     "text"
+    t.text     "help_text"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.string   "display_type"
+    t.string   "custom_class"
+    t.string   "custom_renderer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "survey_section_id"
+    t.integer  "question_group_id"
+    t.text     "text"
+    t.text     "short_text"
+    t.text     "help_text"
+    t.string   "pick"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.integer  "display_order"
+    t.string   "display_type"
+    t.boolean  "is_mandatory"
+    t.integer  "display_width"
+    t.string   "custom_class"
+    t.string   "custom_renderer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "correct_answer_id"
+  end
+
   create_table "race_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -281,6 +363,39 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
   end
 
   add_index "race_types", ["name"], :name => "index_race_types_on_name"
+
+  create_table "response_sets", :force => true do |t|
+    t.integer  "user_id",         :limit => 8
+    t.integer  "survey_id",       :limit => 8
+    t.string   "access_code"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
+    t.integer  "service_line_id"
+  end
+
+  add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
+
+  create_table "responses", :force => true do |t|
+    t.integer  "response_set_id"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.string   "response_group"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "survey_section_id"
+  end
+
+  add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
 
   create_table "service_lines", :force => true do |t|
     t.string   "name"
@@ -326,6 +441,39 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
   add_index "sponsors", ["code"], :name => "index_sponsors_on_code"
   add_index "sponsors", ["name"], :name => "index_sponsors_on_name"
 
+  create_table "survey_sections", :force => true do |t|
+    t.integer  "survey_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.integer  "display_order"
+    t.string   "custom_class"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "access_code"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.datetime "active_at"
+    t.datetime "inactive_at"
+    t.string   "css_url"
+    t.string   "custom_class"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "display_order"
+  end
+
+  add_index "surveys", ["access_code"], :name => "surveys_ac_idx", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "middle_name"
@@ -348,6 +496,32 @@ ActiveRecord::Schema.define(:version => 20100825194150) do
 
   add_index "users", ["organizational_unit_id"], :name => "index_users_on_organizational_unit_id"
   add_index "users", ["username"], :name => "users_username_idx", :unique => true
+
+  create_table "validation_conditions", :force => true do |t|
+    t.integer  "validation_id"
+    t.string   "rule_key"
+    t.string   "operator"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.string   "regexp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "validations", :force => true do |t|
+    t.integer  "answer_id"
+    t.string   "rule"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "versions", :force => true do |t|
     t.string   "item_type",  :null => false

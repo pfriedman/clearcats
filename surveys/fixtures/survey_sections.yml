@@ -1,0 +1,24 @@
+20100830163016_survey_section_1:
+  data_export_identifier: "kl2_and_tl1_awards"
+  display_order: 1
+  reference_identifier: 
+  survey: 20100830163016_survey_1
+  title: "kl2_and_tl1_awards"
+20100830163016_survey_section_2:
+  data_export_identifier: "master_of_science_in_clinical_investigation"
+  display_order: 2
+  reference_identifier: 
+  survey: 20100830163016_survey_1
+  title: "master_of_science_in_clinical_investigation"
+20100830163016_survey_section_3:
+  data_export_identifier: "crc_basic_training"
+  display_order: 3
+  reference_identifier: 
+  survey: 20100830163016_survey_1
+  title: "crc_basic_training"
+20100830163016_survey_section_4:
+  data_export_identifier: "responsible_conduct_of_research"
+  display_order: 4
+  reference_identifier: 
+  survey: 20100830163016_survey_1
+  title: "responsible_conduct_of_research"

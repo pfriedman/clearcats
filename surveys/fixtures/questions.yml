@@ -1,0 +1,132 @@
+20100830163016_question_1:
+  data_export_identifier: "5_with_1_and_5"
+  display_order: 1
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+  survey_section: 20100830163016_survey_section_1
+  text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+20100830163016_question_2:
+  data_export_identifier: "this_program_1_and_5"
+  display_order: 2
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+  survey_section: 20100830163016_survey_section_1
+  text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+20100830163016_question_3:
+  data_export_identifier: "institute_future_1_and_5"
+  display_order: 3
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+  survey_section: 20100830163016_survey_section_1
+  text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+20100830163016_question_4:
+  data_export_identifier: "5_with_1_and_5"
+  display_order: 4
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+  survey_section: 20100830163016_survey_section_2
+  text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+20100830163016_question_5:
+  data_export_identifier: "this_program_1_and_5"
+  display_order: 5
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+  survey_section: 20100830163016_survey_section_2
+  text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+20100830163016_question_6:
+  data_export_identifier: "institute_future_1_and_5"
+  display_order: 6
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+  survey_section: 20100830163016_survey_section_2
+  text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+20100830163016_question_7:
+  data_export_identifier: "5_with_1_and_5"
+  display_order: 7
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+  survey_section: 20100830163016_survey_section_3
+  text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+20100830163016_question_8:
+  data_export_identifier: "this_program_1_and_5"
+  display_order: 8
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+  survey_section: 20100830163016_survey_section_3
+  text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+20100830163016_question_9:
+  data_export_identifier: "institute_future_1_and_5"
+  display_order: 9
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+  survey_section: 20100830163016_survey_section_3
+  text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+20100830163016_question_10:
+  data_export_identifier: "5_with_1_and_5"
+  display_order: 10
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+  survey_section: 20100830163016_survey_section_4
+  text: "Please rate your satisfaction with the quality and content of this program on a scale of 1 to 5 with 1 (poor quality and content) and 5 (excellent quality and content)."
+20100830163016_question_11:
+  data_export_identifier: "this_program_1_and_5"
+  display_order: 11
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+  survey_section: 20100830163016_survey_section_4
+  text: "Please rate your satisfaction with the customer service provided by the NUCATS Institute personnel (faculty and staff) associated with this program. 1 (poor customer service) and 5 (excellent customer service)."
+20100830163016_question_12:
+  data_export_identifier: "institute_future_1_and_5"
+  display_order: 12
+  display_type: slider
+  is_mandatory: true
+  pick: one
+  question_group: 
+  reference_identifier: 
+  short_text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
+  survey_section: 20100830163016_survey_section_4
+  text: "Please rate your interest in applying for another award or attending additional programs associated with the NUCATS Institute in the future. 1 (not interested at all) and 5 (very interested)."
