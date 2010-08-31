@@ -1,5 +1,6 @@
 require 'rexml/document'
-include REXML 
+require 'rexml/element'
+# include REXML 
 
 # Pulled from TurboCATS
 #

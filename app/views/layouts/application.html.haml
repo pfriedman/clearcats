@@ -12,6 +12,7 @@
     = yield :stylesheet
     = javascript_include_tag("application", "ddsmoothmenu", "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min", "jrails", "jquery.livequery")
     = yield :javascript
+    = surveyor_includes if controller_name == "surveyor"
     = yield(:head)
     = render "shared/menu_init_script"
   %body
