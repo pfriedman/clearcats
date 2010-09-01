@@ -120,25 +120,26 @@ class Person < ActiveRecord::Base
   validates_inclusion_of :gender,         :in => GENDERS,          :if => proc { |obj| !obj.gender.blank? }
   
   # Person record must have either netid or era_commons_username
-  validates_presence_of :netid, :if => proc { |obj| obj.era_commons_username.blank? }
-  validates_presence_of :era_commons_username, :if => proc { |obj| obj.netid.blank? }
+  validates_presence_of :netid,                :if => proc { |obj| obj.era_commons_username.blank? and !obj.imported? }
+  validates_presence_of :era_commons_username, :if => proc { |obj| obj.netid.blank? and !obj.imported? }
   
-  validates_presence_of :last_name
-  validates_presence_of :first_name
-  validates_presence_of :email
+  validates_presence_of :last_name,  :if => proc { |obj| !obj.imported? }
+  validates_presence_of :first_name, :if => proc { |obj| !obj.imported? }
+  validates_presence_of :email,      :if => proc { |obj| !obj.imported? }
   
-  accepts_nested_attributes_for :awards, :allow_destroy => true
+  accepts_nested_attributes_for :awards,       :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true
-  accepts_nested_attributes_for :approvals, :allow_destroy => true
+  accepts_nested_attributes_for :approvals,    :allow_destroy => true
   
-  named_scope :awards_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'", {:id => id} ]} }
-  named_scope :awards_activity_code_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'", {:id => id} ]} }
+  named_scope :awards_phs_organization_id_equals,     lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'",    {:id => id} ]} }
+  named_scope :awards_activity_code_id_equals,        lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'",       {:id => id} ]} }
   named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
   
   named_scope :organizational_units_organizational_unit_id_equals, lambda { |id| {:joins => :organizational_units, :conditions => ["organizational_units.id = :id", {:id => id} ]} }
   
   named_scope :all_investigators, :conditions => "training_type IS NULL AND trainee_status IS NULL"
   named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND trainee_status IS NOT NULL"]
+  
   named_scope :scholars,      :conditions => { :training_type => SCHOLAR }
   named_scope :other_careers, :conditions => { :training_type => OTHER_CAREER }
   named_scope :trainees,      :conditions => { :training_type => TRAINEE }

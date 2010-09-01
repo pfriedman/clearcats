@@ -29,7 +29,7 @@ describe PeopleController do
   
     describe "GET edit" do
       it "assigns the requested person as @person" do
-        Person.stub(:find).with("37").and_return(mock_person)
+        Person.stub(:find).with("37").and_return(mock_person(:imported= => true))
         get :edit, :id => "37"
         assigns[:person].should equal(mock_person)
       end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100830214306) do
+ActiveRecord::Schema.define(:version => 20100901201341) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -289,6 +289,8 @@ ActiveRecord::Schema.define(:version => 20100830214306) do
     t.string   "title"
     t.string   "fax"
     t.string   "address"
+    t.boolean  "edited"
+    t.boolean  "imported"
   end
 
   add_index "people", ["country_id"], :name => "index_people_on_country_id"

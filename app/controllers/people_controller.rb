@@ -15,6 +15,7 @@ class PeopleController < ApplicationController
   # GET /people/1/edit
   def edit
     determine_person
+    @person.imported = false
   end
   
   # PUT /people/1

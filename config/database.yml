@@ -11,6 +11,24 @@
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 
+turbo_ctsa_development:
+  adapter: postgresql
+  database: turbo_ctsa_development
+  username: turbo_ctsa
+  password: pwd
+  encoding: unicode
+  pool: 5
+  host: localhost
+  
+turbo_ctsa_test:
+  adapter: postgresql
+  database: turbo_ctsa_development
+  username: turbo_ctsa
+  password: pwd
+  encoding: unicode
+  pool: 5
+  host: localhost
+  
 test: &test
   adapter: postgresql
   encoding: unicode
