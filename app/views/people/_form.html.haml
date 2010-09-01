@@ -1,5 +1,6 @@
 - form_for @person do |f|
-
+  = f.error_messages
+  
   = render '/people/person_fields', :f => f
 
   .buttons

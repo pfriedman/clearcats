@@ -51,7 +51,7 @@ describe Person do
   
   it "should output in a csv format" do
     p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
-    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
+    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "netid", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
   end
   
   it "should set affiliations based on department" do
@@ -112,6 +112,26 @@ describe Person do
   it { should have_many(:publications) }
   it { should have_many(:approvals) }
   it { should have_many(:services) }
+  
+  it { should validate_presence_of(:last_name) }
+  it { should validate_presence_of(:first_name) }
+  it { should validate_presence_of(:email) }
+  
+  describe "a person who does not have a netid" do 
+    before(:each) do
+      @subject = Factory(:person, :netid => nil, :era_commons_username => "asdf")
+    end
+
+    it { should validate_presence_of(:era_commons_username) }
+  end
+  
+  describe "a person who does not have an era commons username" do 
+    before(:each) do
+      @subject = Factory(:person, :era_commons_username => nil, :netid => "asdf")
+    end
+
+    it { should validate_presence_of(:netid) }
+  end
   
   context "with awards" do
     

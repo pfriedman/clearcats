@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :publications, :only => [ :edit, :update ],
     :member => { :versions => :get, :revert => :post }
   map.resources :organizational_units
-  map.resources :people, :only => [:index, :edit, :update], 
+  map.resources :people, :only => [:index, :edit, :update, :new, :create], 
     :member     => { :versions => :get, :revert => :post },
     :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post] } do |people|
       people.resources :awards

@@ -3,6 +3,8 @@
 - if @people.blank?
   .no_records
     No one was found. 
+    .links
+      = link_to "New Person", {:controller => "people", :action => "new"}, { :class => "add_link icon_link"  }
 - else
   %table.records
     %tr

@@ -79,6 +79,7 @@ Factory.define :person do |p|
   p.department_affiliation "dept"
   p.school_affiliation     "school"
   p.era_commons_username   "era_commons"
+  p.netid                  "netid"
   p.training_type          nil
   p.trainee_status         nil
 

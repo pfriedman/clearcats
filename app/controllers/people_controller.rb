@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions]
+  before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions, :new, :create]
   before_filter :permit_admin, :only => [:upload, :revert]
 
   def index
@@ -35,6 +35,36 @@ class PeopleController < ApplicationController
     end
 
   end
+
+
+  # GET /people/new
+  # GET /people/new.xml
+  def new
+    @person = Person.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @person }
+    end
+  end
+
+  # POST /people
+  # POST /people.xml
+  def create
+    @person = Person.new(params[:person])
+
+    respond_to do |format|
+      if @person.save
+        flash[:notice] = 'Person was successfully created.'
+        format.html { redirect_to(people_path) }
+        format.xml  { render :xml => @person, :status => :created, :location => @person }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   
   def directory
     @people = FacultyWebService.locate(params[:search]) unless params[:search].blank?

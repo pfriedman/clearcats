@@ -119,6 +119,14 @@ class Person < ActiveRecord::Base
   validates_inclusion_of :trainee_status, :in => TRAINEE_STATUSES, :if => proc { |obj| !obj.trainee_status.blank? }
   validates_inclusion_of :gender,         :in => GENDERS,          :if => proc { |obj| !obj.gender.blank? }
   
+  # Person record must have either netid or era_commons_username
+  validates_presence_of :netid, :if => proc { |obj| obj.era_commons_username.blank? }
+  validates_presence_of :era_commons_username, :if => proc { |obj| obj.netid.blank? }
+  
+  validates_presence_of :last_name
+  validates_presence_of :first_name
+  validates_presence_of :email
+  
   accepts_nested_attributes_for :awards, :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true
   accepts_nested_attributes_for :approvals, :allow_destroy => true
@@ -263,7 +271,7 @@ class Person < ActiveRecord::Base
         pers = Person.find_or_create_by_era_commons_username(row[:commons_username])
         specialty = Specialty.find_by_code(row[:area_of_expertise])
         pers.specialty = specialty unless specialty.nil?
-        [:first_name, :last_name, :middle_initial].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+        [:first_name, :last_name, :middle_initial, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
         pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
         pers.save
       end

@@ -1,0 +1,7 @@
+- stylesheet "people"
+- title "New Person"
+
+= render 'form'
+
+.links
+  = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
