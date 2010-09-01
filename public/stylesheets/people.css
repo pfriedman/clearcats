@@ -1,6 +1,20 @@
 
+#investigator_upload {
+  margin: 1em 2em;
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+
+#investigator_upload #search {
+  float: right;
+}
+
 #people_search_form {
   padding: 0.5em;
+}
+
+form.faculty_search {
+  margin: 2em 1em;
 }
 
 .span-5 select {
