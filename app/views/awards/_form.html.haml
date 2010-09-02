@@ -77,17 +77,17 @@
         %br
         = f.text_field :ctsa_award_type_award_number
       %p
-        = f.label :phs_organization, "PHS Organization"
+        = f.label :phs_organization_id, "PHS Organization"
         %br
-        = f.select(:phs_organization, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
+        = f.select(:phs_organization_id, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
       %p
         = f.label :activity_code_id, "Activity Code"
         %br
         = f.select(:activity_code_id, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
       %p
-        = f.label :non_phs_organization, "Non PHS Organization"
+        = f.label :non_phs_organization_id, "Non PHS Organization"
         %br
-        = f.select(:non_phs_organization, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
+        = f.select(:non_phs_organization_id, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
 
     .award_section
       %p

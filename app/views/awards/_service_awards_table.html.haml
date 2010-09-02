@@ -25,5 +25,5 @@
       %td= h award.sponsor
       %td= h award.sponsor_award_number
       %td= h truncate(award.grant_title)
-      %td= h award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
       %td= h award.project_period_start_date
