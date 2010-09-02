@@ -5,11 +5,18 @@ class Turbocats::Person < Turbocats::Base
   set_primary_key 'id'
   
   acts_as_importable
+  
+  def to_s
+    "[#{self.id}] #{self.last_name}, #{self.first_name}"
+  end
 
-  # mentor_commons_username, interviewed, 
-  # invalid, reporting_year, id, 
-  # type, updated_by, validation_messages, 
-  # end_date, accepted, date_of_appointment
+  # TurboCats
+  # mentor_commons_username, interviewed, invalid, reporting_year, id, type, updated_by, validation_messages, end_date, accepted, date_of_appointment
+  #
+  # ClearCats
+  #  netid, email, department_affiliation, school_affiliation, last_four_of_ssn, phone, employeeid
+  #  department_id, country_id, human_subject_protection_training_institution, human_subject_protection_training_date 
+  #  service_rendered, title, fax, address
   def to_model
     ::Person.new do |p|
       p.imported = true
@@ -27,28 +34,11 @@ class Turbocats::Person < Turbocats::Base
       p.trainee_status            = ::Person::APPLICANT                                 if self.applied
       p.trainee_status            = ::Person::APPOINTED                                 if self.appointed
     
-    
       p.specialty                 = Specialty.find_by_code(self.area_of_expertise_code) unless self.area_of_expertise_code.blank?
       p.race_type                 = RaceType.find_by_name(self.racial_category)         unless self.racial_category.blank?
       p.ethnic_type               = EthnicType.find_by_name(self.ethnic_category)       unless self.ethnic_category.blank?
       p.degree_type_one           = DegreeTypeOne.find_by_name(self.degree_1)           unless self.degree_1.blank?
       p.degree_type_two           = DegreeTypeTwo.find_by_name(self.degree_2)           unless self.degree_2.blank?
-    
-      #  netid                                         :string(255)
-      #  email                                         :string(255)
-      #  department_affiliation                        :string(255)
-      #  school_affiliation                            :string(255)
-      #  last_four_of_ssn                              :string(255)
-      #  phone                                         :string(255)
-      #  employeeid                                    :string(255)
-      #  department_id                                 :integer
-      #  country_id                                    :integer
-      #  human_subject_protection_training_institution :string(255)
-      #  human_subject_protection_training_date        :date
-      #  service_rendered                              :boolean
-      #  title                                         :string(255)
-      #  fax                                           :string(255)
-      #  address                                       :string(255)
     end
   end
 end

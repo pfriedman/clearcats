@@ -49,7 +49,8 @@ describe Award do
   end
   
   it { should belong_to(:person) }
-  it { should belong_to(:ctsa_award_type) }
+  it { should belong_to(:organization) }
+  it { should belong_to(:activity_code) }
   it { should belong_to(:sponsor) }
   
   context "the award sponsor" do
@@ -76,26 +77,23 @@ describe Award do
     
   end
   
-  context "the ctsa award types" do
+  context "the organizations" do
     
     before(:each) do
       @phs_org       = Factory(:phs_organization)
       @non_phs_org   = Factory(:non_phs_organization)
-      @activity_code = Factory(:activity_code)
     end
     
-    it "should set the ctsa award type by type" do
-      award = Factory(:award, :ctsa_award_type => nil)
-      award.ctsa_award_type.should be_nil
+    it "should set the organization by type" do
+      award = Factory(:award, :organization => nil)
+      award.organization.should be_nil
       
-      award.phs_organization = @phs_org.id
-      award.ctsa_award_type.should == award.phs_organization
+      award.phs_organization = @phs_org.id.to_s
+      award.organization.should == award.phs_organization
 
-      award.non_phs_organization = @non_phs_org.id
-      award.ctsa_award_type.should == award.non_phs_organization
-
-      award.activity_code = @activity_code.id
-      award.ctsa_award_type.should == award.activity_code
+      @non_phs_org.id.to_s.should_not be_blank
+      award.non_phs_organization = @non_phs_org.id.to_s
+      award.organization.should == award.non_phs_organization
     end
     
   end

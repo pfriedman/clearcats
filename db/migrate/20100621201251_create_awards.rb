@@ -25,8 +25,10 @@ class CreateAwards < ActiveRecord::Migration
       t.float :project_period_total_cost
       t.float :total_project_cost
       
-      t.integer :ctsa_award_type_id
-      t.string  :ctsa_award_type_type
+      t.integer :organization_id
+      t.string  :organization_type
+      
+      t.integer :activity_code_id
       
       t.string :proposal_status
       t.string :award_status
@@ -45,14 +47,16 @@ class CreateAwards < ActiveRecord::Migration
     add_index(:awards, :budget_number)
     add_index(:awards, :person_id)
     add_index(:awards, :investigator_id)
-    add_index(:awards, [:ctsa_award_type_type, :ctsa_award_type_id])
+    add_index(:awards, :activity_code_id)
+    add_index(:awards, [:organization_type, :organization_id])
   end
 
   def self.down
     remove_index(:awards, :budget_number)
     remove_index(:awards, :person_id)
     remove_index(:awards, :investigator_id)
-    remove_index(:awards, [:ctsa_award_type_type, :ctsa_award_type_id])
+    remove_index(:awards, :activity_code_id)
+    remove_index(:awards, [:organization_type, :organization_id])
     drop_table :awards
   end
 end

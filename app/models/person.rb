@@ -131,9 +131,9 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :publications, :allow_destroy => true
   accepts_nested_attributes_for :approvals,    :allow_destroy => true
   
-  named_scope :awards_phs_organization_id_equals,     lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'PhsOrganization'",    {:id => id} ]} }
-  named_scope :awards_activity_code_id_equals,        lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'ActivityCode'",       {:id => id} ]} }
-  named_scope :awards_non_phs_organization_id_equals, lambda { |id| {:joins => :awards, :conditions => ["awards.ctsa_award_type_id = :id and awards.ctsa_award_type_type = 'NonPhsOrganization'", {:id => id} ]} }
+  named_scope :awards_phs_organization_id_equals,     lambda { |id|  {:joins => :awards, :conditions => ["awards.organization_id  = :id and awards.organization_type = 'PhsOrganization'",    {:id => id} ]} }
+  named_scope :awards_activity_code_id_equals,        lambda { |id|  {:joins => :awards, :conditions => ["awards.activity_code_id = :id",       {:id => id} ]} }
+  named_scope :awards_non_phs_organization_id_equals, lambda { |id|  {:joins => :awards, :conditions => ["awards.organization_id  = :id and awards.organization_type = 'NonPhsOrganization'", {:id => id} ]} }
   
   named_scope :organizational_units_organizational_unit_id_equals, lambda { |id| {:joins => :organizational_units, :conditions => ["organizational_units.id = :id", {:id => id} ]} }
   
@@ -167,8 +167,9 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def awards_for_ctsa_award_type(ctsa_award_type)
-    self.awards.all(:conditions => { :ctsa_award_type_id => ctsa_award_type.id, :ctsa_award_type_type =>  ctsa_award_type.class.to_s })
+  def awards_for_organization(org)
+    results = self.awards.select {|a| a.organization == org}
+    results
   end
 
 

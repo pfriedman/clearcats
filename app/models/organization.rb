@@ -16,7 +16,7 @@ class Organization < ActiveRecord::Base
   validates_presence_of :code
   validates_presence_of :name
   
-  has_many :awards, :as => :ctsa_award_type
+  has_many :awards
   
   def to_s
     return "#{self.code} #{self.name}".strip

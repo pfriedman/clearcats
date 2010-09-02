@@ -81,9 +81,9 @@
         %br
         = f.select(:phs_organization, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
       %p
-        = f.label :activity_code, "Activity Code"
+        = f.label :activity_code_id, "Activity Code"
         %br
-        = f.select(:activity_code, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
+        = f.select(:activity_code_id, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
       %p
         = f.label :non_phs_organization, "Non PHS Organization"
         %br

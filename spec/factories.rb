@@ -96,7 +96,8 @@ end
 
 Factory.define :award do |a|
   a.person            { |a| a.association(:person) }
-  a.ctsa_award_type   { |a| a.association(:phs_organization) }
+  a.organization      { |a| a.association(:phs_organization) }
+  a.activity_code     { |a| a.association(:activity_code) }
   a.grant_number      "grant number"
   a.grant_title       "grant title"
   a.grant_amount      11.00

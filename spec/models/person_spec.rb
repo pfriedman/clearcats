@@ -135,25 +135,21 @@ describe Person do
   
   context "with awards" do
     
-    it "should find awards for a particular ctsa_award_type" do
+    it "should find awards for a particular organization" do
       person      = Factory(:person)
+      activity    = Factory(:activity_code)
       phs_org     = Factory(:phs_organization)
       non_phs_org = Factory(:non_phs_organization)
-      activity    = Factory(:activity_code) 
-      award       = Factory(:award, :ctsa_award_type => activity, :person => person)
+      award       = Factory(:award, :organization => phs_org, :person => person, :activity_code => activity)
       
       person.awards.should_not be_empty
+      person.awards.size.should == 1
       person.awards.first.should == award
       
-      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(non_phs_org)
-      award_for_ctsa_award_type.should be_empty
+      person.awards_for_organization(non_phs_org).should be_empty
+      person.awards_for_organization(phs_org).should_not be_empty
       
-      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(phs_org)
-      award_for_ctsa_award_type.should be_empty
-      
-      award_for_ctsa_award_type = person.awards_for_ctsa_award_type(activity)
-      award_for_ctsa_award_type.should_not be_empty
-      
+      Person.awards_activity_code_id_equals(activity.id).should_not be_empty
     end
     
   end

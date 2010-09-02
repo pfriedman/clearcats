@@ -45,7 +45,8 @@ class Award < ActiveRecord::Base
   has_paper_trail
   
   belongs_to :person
-  belongs_to :ctsa_award_type, :polymorphic => true
+  belongs_to :organization
+  belongs_to :activity_code
   
   belongs_to :sponsor
 
@@ -97,37 +98,20 @@ class Award < ActiveRecord::Base
   
   # CTSA award type 
   
-  def phs_organization=(id)
-    if !id.blank?
-      self.ctsa_award_type_id = id.to_i
-      self.ctsa_award_type_type = "PhsOrganization"
-    end
+  def phs_organization=(org_id)
+    self.organization = PhsOrganization.find(org_id) unless org_id.blank?
   end
   
-  def non_phs_organization=(id)
-    if !id.blank?
-      self.ctsa_award_type_id = id.to_i
-      self.ctsa_award_type_type = "NonPhsOrganization"
-    end
-  end
-  
-  def activity_code=(id)
-    if !id.blank?
-      self.ctsa_award_type_id = id.to_i
-      self.ctsa_award_type_type = "ActivityCode"
-    end
+  def non_phs_organization=(org_id)
+    self.organization = NonPhsOrganization.find(org_id) unless org_id.blank?
   end
   
   def phs_organization
-    ctsa_award_type if ctsa_award_type and ctsa_award_type.type == "PhsOrganization"
+    organization if organization and organization.type == "PhsOrganization"
   end
   
   def non_phs_organization
-    ctsa_award_type if ctsa_award_type and ctsa_award_type.type == "NonPhsOrganization"
-  end
-  
-  def activity_code
-    ctsa_award_type if ctsa_award_type and ctsa_award_type.type == "ActivityCode"
+    organization if organization and organization.type == "NonPhsOrganization"
   end
   
   # formatted date fields

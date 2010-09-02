@@ -101,8 +101,9 @@ ActiveRecord::Schema.define(:version => 20100901201341) do
     t.date     "project_period_end_date"
     t.float    "project_period_total_cost"
     t.float    "total_project_cost"
-    t.integer  "ctsa_award_type_id"
-    t.string   "ctsa_award_type_type"
+    t.integer  "organization_id"
+    t.string   "organization_type"
+    t.integer  "activity_code_id"
     t.string   "proposal_status"
     t.string   "award_status"
     t.string   "sponsor_award_number"
@@ -117,9 +118,10 @@ ActiveRecord::Schema.define(:version => 20100901201341) do
     t.integer  "originating_sponsor_id"
   end
 
+  add_index "awards", ["activity_code_id"], :name => "index_awards_on_activity_code_id"
   add_index "awards", ["budget_number"], :name => "index_awards_on_budget_number"
-  add_index "awards", ["ctsa_award_type_type", "ctsa_award_type_id"], :name => "index_awards_on_ctsa_award_type_type_and_ctsa_award_type_id"
   add_index "awards", ["investigator_id"], :name => "index_awards_on_investigator_id"
+  add_index "awards", ["organization_type", "organization_id"], :name => "index_awards_on_organization_type_and_organization_id"
   add_index "awards", ["originating_sponsor_id"], :name => "index_awards_on_originating_sponsor_id"
   add_index "awards", ["person_id"], :name => "index_awards_on_person_id"
   add_index "awards", ["sponsor_id"], :name => "index_awards_on_sponsor_id"
