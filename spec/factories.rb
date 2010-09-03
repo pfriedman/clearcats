@@ -26,6 +26,11 @@ Factory.define :country do |c|
   c.name "country name"
 end
 
+Factory.define :us_state do |s|
+  s.name "state"
+  s.abbreviation "st"
+end
+
 Factory.define :degree_type_one, :class => "DegreeTypeOne" do |dt|
   dt.name "dt1 name"
 end

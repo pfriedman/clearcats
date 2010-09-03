@@ -99,7 +99,7 @@ class Award < ActiveRecord::Base
   # CTSA award type 
   
   def phs_organization=(org_id)
-    self.phs_organization_id(org_id)
+    self.phs_organization_id = org_id
   end
   
   def phs_organization_id=(org_id)
@@ -107,7 +107,7 @@ class Award < ActiveRecord::Base
   end
   
   def non_phs_organization=(org_id)
-    self.non_phs_organization_id(org_id)
+    self.non_phs_organization_id = org_id
   end
   
   def non_phs_organization_id=(org_id)

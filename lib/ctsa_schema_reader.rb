@@ -36,6 +36,16 @@ class CtsaSchemaReader
     end
   end
   
+  def process_us_states
+    @xml_schema.root.elements["xs:simpleType[@name='state_code']/xs:restriction/xs:annotation"].children.each do |a|
+      if a.kind_of? REXML::Element
+        abbr = a.text.split()[0]
+        name = a.text.sub(abbr, '').strip
+        UsState.find_or_create_by_name_and_abbreviation(name, abbr)
+      end
+    end
+  end
+  
   def process_specialties
     process_model("specialty_list", "-", Specialty)
   end
@@ -62,6 +72,7 @@ class CtsaSchemaReader
     process_non_phs_organizations
     process_phs_organizations
     process_countries
+    process_us_states
     process_specialties
     process_degree_type_ones
     process_degree_type_twos
@@ -89,6 +100,18 @@ class CtsaSchemaReader
   def output_country_list
     @xml_schema.root.elements[node_path("country_list", :child_node_path => "restriction")].children.each do |a| 
       puts %Q("#{a.attributes['value']}" => "#{a.attributes['value']}",) if a.kind_of? REXML::Element and a.attributes['value']
+    end
+    return
+  end
+  
+  def output_us_state_codes
+    @xml_schema.root.elements["xs:simpleType[@name='state_code']/xs:restriction/xs:annotation"].children.each do |a|
+      if a.kind_of? REXML::Element
+        txt = a.text
+        abbr = a.text.split()[0]
+        name = txt.sub(abbr, '').strip
+        puts %Q("#{abbr}" => "#{name}",")
+      end
     end
     return
   end

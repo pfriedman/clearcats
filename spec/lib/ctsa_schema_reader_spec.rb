@@ -56,6 +56,17 @@ describe CtsaSchemaReader do
       countries.first.name.should == "AFGHANISTAN"
     end
     
+    it "should create US states" do
+      UsState.count.should == 0
+      @reader.process_us_states
+      UsState.count.should_not == 0
+
+      us_states = UsState.all(:order => :name)
+
+      us_states.first.name.should == "ALASKA"
+      us_states.first.abbreviation.should == "AK"
+    end
+    
     it "should create specialties" do
       Specialty.count.should == 0
       @reader.process_specialties
@@ -137,6 +148,10 @@ describe CtsaSchemaReader do
     
     it "should list countries" do
       @reader.output_country_list
+    end
+    
+    it "should list us_states" do
+      @reader.output_us_state_codes
     end
     
     it "should list specialties" do
