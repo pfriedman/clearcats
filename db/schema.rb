@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100903143155) do
+ActiveRecord::Schema.define(:version => 20100903173011) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -258,6 +258,16 @@ ActiveRecord::Schema.define(:version => 20100903143155) do
   add_index "organizations", ["code"], :name => "index_organizations_on_code"
   add_index "organizations", ["name"], :name => "index_organizations_on_name"
   add_index "organizations", ["type"], :name => "index_organizations_on_type"
+
+  create_table "participating_organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "city"
+    t.integer  "country_id"
+    t.integer  "us_state_id"
+    t.integer  "reporting_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "people", :force => true do |t|
     t.string   "first_name"

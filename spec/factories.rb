@@ -143,6 +143,14 @@ Factory.define :ctsa_report do |r|
   r.has_errors      false
 end
 
+Factory.define :participating_organization do |po|
+  po.name "name"
+  po.city "Chicago"
+  po.country  { |c| c.association(:country) }
+  po.us_state { |s| s.association(:us_state) }
+  po.reporting_year 2525
+end
+
 Factory.define :user do |u|
   u.first_name     "first_name"
   u.middle_name    "middle_name"

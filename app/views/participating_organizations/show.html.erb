@@ -1,0 +1,28 @@
+<p>
+  <b>Name:</b>
+  <%=h @participating_organization.name %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @participating_organization.city %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @participating_organization.country_id %>
+</p>
+
+<p>
+  <b>Us state is:</b>
+  <%=h @participating_organization.us_state_id %>
+</p>
+
+<p>
+  <b>Reporting year:</b>
+  <%=h @participating_organization.reporting_year %>
+</p>
+
+
+<%= link_to 'Edit', edit_participating_organization_path(@participating_organization) %> |
+<%= link_to 'Back', participating_organizations_path %>

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100825194150
+# Schema version: 20100903173011
 #
 # Table name: people
 #
@@ -35,6 +35,8 @@
 #  title                                         :string(255)
 #  fax                                           :string(255)
 #  address                                       :string(255)
+#  edited                                        :boolean
+#  imported                                      :boolean
 #
 
 require 'spec_helper'

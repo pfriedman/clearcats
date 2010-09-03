@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100825194150
+# Schema version: 20100903173011
 #
 # Table name: organizations
 #

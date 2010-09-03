@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100825194150
+# Schema version: 20100903173011
 #
 # Table name: awards
 #
@@ -24,8 +24,9 @@
 #  project_period_end_date                :date
 #  project_period_total_cost              :float
 #  total_project_cost                     :float
-#  ctsa_award_type_id                     :integer
-#  ctsa_award_type_type                   :string(255)
+#  organization_id                        :integer
+#  organization_type                      :string(255)
+#  activity_code_id                       :integer
 #  proposal_status                        :string(255)
 #  award_status                           :string(255)
 #  sponsor_award_number                   :string(255)
