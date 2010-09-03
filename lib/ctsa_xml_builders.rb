@@ -212,10 +212,10 @@ class ParticipatingOrganizationsBuilder < REXML::Element
   def initialize(org)
     super "sis:Participating_Organization_or_Institution"
     if org
-      add_element("sis:Participant_Name").add_text(org.abbreviation) 
+      add_element("sis:Participant_Name").add_text(org.name) 
       add_element("sis:Participant_City").add_text(org.city)
-      add_element("sis:Participant_US_State").add_text(org.us_state) if org.us_state
-      add_element("sis:Participant_Non_US_Country").add_text(org.country_name) if org.country_name and org.us_state.blank?
+      add_element("sis:Participant_US_State").add_text(org.us_state.to_s) if org.us_state
+      add_element("sis:Participant_Non_US_Country").add_text(org.country.to_s) if org.country and org.us_state.blank?
     end
   end
   

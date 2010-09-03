@@ -13,4 +13,8 @@
 class UsState < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :abbreviation
+  
+  def to_s
+    self.abbreviation
+  end
 end

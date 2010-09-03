@@ -23,10 +23,9 @@ class CtsaReport < ActiveRecord::Base
   def create_xml_report(directory)
     # TODO: check for valid ctsa report data
     file_path = "#{directory}/#{Time.now.to_i}.xml"
-    org = OrganizationalUnit.find_by_abbreviation("NUCATS")
     doc = REXML::Document.new
     doc.add_element(ReportBuilder.new(grant_number, reporting_year, 
-                    Person.all_investigators, Person.all_trainees, [org]))
+                    Person.all_investigators, Person.all_trainees, ParticipatingOrganization.all))
     doc.write("",2)
     File.open(file_path, 'w') { |f| f.write(doc.to_s) }
     add_report_xml_to_attachments(file_path)

@@ -9,7 +9,7 @@ describe ReportBuilder do
       @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil)
       @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR)
       @publication   = Factory(:publication, :reporting_year => 2020, :cited => true)
-      @org           = Factory(:organizational_unit)
+      @org           = Factory(:participating_organization)
       @organizations = [@org]
       @investigators = [@investigator]
       @trainees      = [@trainee]
@@ -55,9 +55,9 @@ describe ReportBuilder do
 	"</sis:Resource_Projections>" +
 	"<sis:Program_Description>" + 
 		"<sis:Participating_Organization_or_Institution>" +
-			"<sis:Participant_Name>" + @org.abbreviation + "</sis:Participant_Name>" + 
-			"<sis:Participant_City>Chicago</sis:Participant_City>" + 
-			"<sis:Participant_US_State>IL</sis:Participant_US_State>" + 
+			"<sis:Participant_Name>" + @org.name + "</sis:Participant_Name>" + 
+			"<sis:Participant_City>" + @org.city + "</sis:Participant_City>" + 
+			"<sis:Participant_US_State>" + @org.us_state.to_s + "</sis:Participant_US_State>" + 
 		"</sis:Participating_Organization_or_Institution>" +
 	"</sis:Program_Description>" +
 	"<sis:Characteristics>" +
