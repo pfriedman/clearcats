@@ -11,13 +11,11 @@
 
 class ServiceLine < ActiveRecord::Base
   
-  has_many :organizational_services
-  has_many :organizational_units, :through => :organizational_services
+  belongs_to :organizational_unit
   has_many :activity_types
   has_many :services
   
   accepts_nested_attributes_for :activity_types, :allow_destroy => true
-  accepts_nested_attributes_for :organizational_services, :allow_destroy => true
   
   def to_s
     name

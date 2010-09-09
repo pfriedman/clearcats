@@ -20,6 +20,8 @@ class Service < ActiveRecord::Base
   belongs_to :person
   belongs_to :created_by, :class_name => "User", :foreign_key => :created_by_id
   
+  delegate :organizational_unit, :to => :service_line
+  
   state_machine :state, :initial => :new do
     event :set_service_line do
       transition [:new, :choose_service_line] => :choose_person
@@ -99,7 +101,7 @@ class Service < ActiveRecord::Base
   end
   
   def to_s
-    "#{self.service_line.organizational_units.to_sentence} #{self.service_line}".strip #  [#{self.updated_at}]
+    "#{self.service_line.organizational_unit.to_s} #{self.service_line}".strip #  [#{self.updated_at}]
   end
 
 end

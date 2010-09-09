@@ -217,16 +217,6 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
 
   add_index "institution_positions_people", ["institution_position_id", "person_id"], :name => "institution_positions_people_idx"
 
-  create_table "organizational_services", :force => true do |t|
-    t.integer  "service_line_id"
-    t.integer  "organizational_unit_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "organizational_services", ["organizational_unit_id"], :name => "index_organizational_services_on_organizational_unit_id"
-  add_index "organizational_services", ["service_line_id"], :name => "index_organizational_services_on_service_line_id"
-
   create_table "organizational_units", :force => true do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -413,6 +403,7 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
 
   create_table "service_lines", :force => true do |t|
     t.string   "name"
+    t.integer  "organizational_unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

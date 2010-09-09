@@ -54,6 +54,7 @@ end
 
 Factory.define :service_line do |sl|
   sl.name "service line name"
+  sl.organizational_unit { |a| a.association(:organizational_unit) }
 end
 
 Factory.define :department do |dept|
@@ -62,11 +63,6 @@ end
 
 Factory.define :institution_position do |p|
   p.name "position name"
-end
-
-Factory.define :organizational_service do |org_svc|
-  org_svc.organizational_unit { |a| a.association(:organizational_unit) }
-  org_svc.service_line        { |a| a.association(:service_line) }
 end
 
 Factory.define :activity_type do |t|

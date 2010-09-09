@@ -6,13 +6,13 @@
 - else
   %table.records
     %tr
-      %th Name
-      %th Organizational Unit
+      %th= order @search, :by => :name, :as => "Name"
+      %th= order @search, :by => :organizational_unit_name, :as => "Organizational Unit"
       %th{ :colspan => '3' }
     - @service_lines.each do |service_line|
       %tr{ :class => cycle('even_record', 'odd_record') }
         %td= h service_line.name
-        %td= h service_line.organizational_units.collect {|ou| ou.to_s }.to_sentence
+        %td= h service_line.organizational_unit
         %td= link_to 'Show', service_line, :class => "show_link icon_link"
         %td= link_to 'Edit', edit_service_line_path(service_line), :class => "edit_link icon_link"
         %td= link_to 'Destroy', service_line, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"

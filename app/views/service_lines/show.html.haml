@@ -3,14 +3,9 @@
   %b Name:
   = h @service_line.name
 %p
-  %b Organizational Units:
-  - if @service_line.organizational_units.empty?
-    %p
-      No organizational units for service line.
-  - else
-    %ul
-      - @service_line.organizational_units.each do |ou|
-        %li= h ou.to_s
+  %b Organizational Unit:
+  = @service_line.organizational_unit.to_s
+  
 - if !@service_line.activity_types.empty?
   %p
     %b Activity Types for Service Line

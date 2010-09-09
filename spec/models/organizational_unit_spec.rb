@@ -25,7 +25,6 @@ describe OrganizationalUnit do
   
   it { should belong_to(:parent) }
   it { should have_many(:children) }
-  it { should have_many(:organizational_services) }
   it { should have_many(:service_lines) }
   # it { should have_many(:users) }
   # it { should have_many(:milestones) }

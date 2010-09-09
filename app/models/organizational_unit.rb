@@ -18,8 +18,7 @@ class OrganizationalUnit < ActiveRecord::Base
   # has_many :milestones
   # has_many :projects
 
-  has_many :organizational_services
-  has_many :service_lines, :through => :organizational_services
+  has_many :service_lines
   
   has_and_belongs_to_many :people
 

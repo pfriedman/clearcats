@@ -23,7 +23,7 @@ describe Service do
   
   it "should describe itself in human readable format" do
     svc = Factory(:service)
-    svc.to_s.should == "service line name"
+    svc.to_s.should == "#{svc.organizational_unit.to_s} service line name"
   end
     
   it { should belong_to(:created_by) }

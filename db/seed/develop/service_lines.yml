@@ -4,51 +4,67 @@
 summer_series:
   id: 1
   name: Clinical and Translational Research Summer Seminar Series
+  organizational_unit_id: 3
 tl1:
   id: 2
   name: TL1 Multidiscplinary Clinical and Translational Pre-Doctoral Training Program
+  organizational_unit_id: 3
 master_clin:
   id: 3
   name: Master of Science in Clinical Investigation
+  organizational_unit_id: 3
 phy_train:
   id: 4
   name: Physician Scientist Training Program
+  organizational_unit_id: 3
 resp_conduct:
   id: 5
   name: Responsible Conduct of Research
+  organizational_unit_id: 3
 kl2:
   id: 6
   name: KL2 Multidisciplinary Clinical and Translational Scholar Program
+  organizational_unit_id: 3
 navig:
   id: 7
   name: Navigating the Translational Research Enterprise
+  organizational_unit_id: 3
 evolv:
   id: 8
   name: Evolving the Translational Research Career seminar
+  organizational_unit_id: 3
 grant_writing:
   id: 9
   name: Grant Writing Collaborative
+  organizational_unit_id: 3
 trip:
   id: 10
   name: Translational Research Incubator Program (TRIP)
+  organizational_unit_id: 3
 crc_basic:
   id: 11
   name: CRC Basic Training
+  organizational_unit_id: 3
 k_award:
   id: 12
   name: How to write a K Award 
+  organizational_unit_id: 3
 compl_train:
   id: 13
   name: Clinical Research Compliance Training
+  organizational_unit_id: 3
 mcrra:
   id: 14
   name: Master of Science in Clinical Research and Regulatory Administration (MCRRA)
+  organizational_unit_id: 3
 mini_sabb:
   id: 15
   name: Engineering into Medicine Faculty Mini-Sabbatical
+  organizational_unit_id: 3
 eng_to_med:
   id: 16
   name: Engineering into Medicine, Post Doctoral Fellowship
+  organizational_unit_id: 3
 
 
 #
@@ -57,27 +73,35 @@ eng_to_med:
 research_facilities:
   id: 17
   name: Clinical Research Facilities
+  organizational_unit_id: 2
 research_nursing:
   id: 18
   name: Research Nursing
+  organizational_unit_id: 2
 laboratory:
   id: 19
   name: Laboratory
+  organizational_unit_id: 2
 bionutrition:
   id: 20
   name: Bionutrition
+  organizational_unit_id: 2
 study_recruitment:
   id: 21
   name: Study Recruitment
+  organizational_unit_id: 2
 budget_and_financial_mgmt:
   id: 22
   name: Study Budget and Financial Management
+  organizational_unit_id: 2
 qa:
   id: 23
   name: Quality Assurance/Investigator Advocacy
+  organizational_unit_id: 2
 coord_svcs:
   id: 24
   name: Coordinator Services
+  organizational_unit_id: 2
   
 
 #
@@ -86,21 +110,27 @@ coord_svcs:
 pilot_grants:
   id: 25
   name: Pilot Grants
+  organizational_unit_id: 4
 dixon_awards:
   id: 26
   name: Dixon Awards
+  organizational_unit_id: 4
 frb:
   id: 27
   name: Faculty Resource Bank
+  organizational_unit_id: 4
 invo:
   id: 28
   name: INVO
+  organizational_unit_id: 4
 inno2comm:
   id: 29
   name: Innovation to Commercialization
+  organizational_unit_id: 4
 tipi:
   id: 30
   name: Translational Investigator Pathway Initiative
+  organizational_unit_id: 4
 
 
 #
@@ -109,33 +139,43 @@ tipi:
 cross_discipline:
   id: 31
   name: Cross-disciplinary research
+  organizational_unit_id: 7
 research_teams:
   id: 32
   name: Research Teams
+  organizational_unit_id: 7
 grantsmanship:
   id: 33
   name: Grantsmanship
+  organizational_unit_id: 7
 praxis:
   id: 34
   name: Praxis of Team Science
+  organizational_unit_id: 7
 collab_research:
   id: 35
   name: Collaboration Research
+  organizational_unit_id: 7
 collab_research_funding:
   id: 36
   name: Collaboration Research Funding Mechanisms
+  organizational_unit_id: 7
 team_science:
   id: 37
   name: Team Science Training
+  organizational_unit_id: 7
 catalytic_research:
   id: 38
   name: Catalytic Research Events
+  organizational_unit_id: 7
 supported_team:
   id: 39
   name: Supported Team Science Research
+  organizational_unit_id: 7
 team_science_conf:
   id: 40
   name: Science of Team Science Conference
+  organizational_unit_id: 7
 
 
 #
@@ -144,42 +184,56 @@ team_science_conf:
 alliance_for_research:
   id: 41
   name: Alliance for Research In Chicagoland Communities
+  organizational_unit_id: 5
 seed_grants:
   id: 42
   name: Seed Grants
+  organizational_unit_id: 5
 capacity_bldg:
   id: 43
   name: Capacity Building and Training
+  organizational_unit_id: 5
 partner_facilitation:
   id: 44
   name: Partnership Facilitation
+  organizational_unit_id: 5
 proposal_prep:
   id: 45
   name: Proposal Preparation
+  organizational_unit_id: 5
 reach_net:
   id: 46
   name: Reach Network
+  organizational_unit_id: 5
 seed_grants:
   id: 47
   name: Seed Grants
+  organizational_unit_id: 5
 comm_practice:
   id: 48
   name: Community Practice Resources
+  organizational_unit_id: 5
 comm_health:
   id: 49
   name: Community Health Training and Education
+  organizational_unit_id: 5
 practice_based:
   id: 50
   name: Practice-Based Research
+  organizational_unit_id: 5
 edu_and_net:
   id: 51
   name: Education and Networking
+  organizational_unit_id: 5
 wkshops:
   id: 52
   name: Workshops
+  organizational_unit_id: 5
 resource_ref:
   id: 53
   name: Resource Referral
+  organizational_unit_id: 5
 mini_grants:
   id: 54
   name: Mini-grants for Geospacial analysis
+  organizational_unit_id: 5

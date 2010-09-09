@@ -18,8 +18,7 @@ describe ServiceLine do
     line.to_s.should == line.name
   end
   
-  it { should have_many(:organizational_services) }
-  it { should have_many(:organizational_units) }
+  it { should belong_to(:organizational_unit) }
   it { should have_many(:services) }
   
 end

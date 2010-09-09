@@ -4,7 +4,9 @@ class ServiceLinesController < ApplicationController
   # GET /service_lines
   # GET /service_lines.xml
   def index
-    @service_lines = ServiceLine.all
+    params[:search] ||= {}
+    @search = ServiceLine.search(params[:search])
+    @service_lines = @search.all
 
     respond_to do |format|
       format.html # index.html.erb
