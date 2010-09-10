@@ -47,13 +47,13 @@ describe Person do
   end
   
   it "should override to_s to show a user friendly representation" do
-    p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
-    p.to_s.should == "Thomas Jefferson"
+    p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas", :middle_name => "A")
+    p.to_s.should == "Thomas A Jefferson"
   end
   
   it "should output in a csv format" do
     p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
-    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "netid", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
+    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "#{p.netid}", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
   end
   
   it "should set affiliations based on department" do
@@ -76,8 +76,8 @@ describe Person do
   context "finding people of a particular reporting type" do
   
     before(:each) do
-      @investigator = Factory(:person, :training_type => nil)
-      @trainee      = Factory(:person, :training_type => Person::SCHOLAR, :trainee_status => Person::APPOINTED)
+      @investigator = Factory(:person, :training_type => nil, :netid => "netid_i")
+      @trainee      = Factory(:person, :training_type => Person::SCHOLAR, :trainee_status => Person::APPOINTED, :netid => "netid_t")
     end
   
     it "should retrieve all investigators" do
@@ -165,7 +165,8 @@ describe Person do
         usr = Factory(:user)
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
-        Person.count.should == 2
+        Person.count.should == 3
+        User.count.should   == 1
       end
       
       it "should associate Person with organizational units of the uploader" do
@@ -174,8 +175,9 @@ describe Person do
         usr = Factory(:user, :organizational_unit => org_unit)
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
-        Person.count.should == 2
-        Person.first.organizational_units.should == [org_unit]
+        Person.count.should == 3
+        User.count.should   == 1
+        Person.last.organizational_units.should == [org_unit]
       end
       
     end

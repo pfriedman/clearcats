@@ -27,6 +27,8 @@ ActionController::Routing::Routes.draw do |map|
       people.resources :awards
       people.resources :publications
   end
+  map.resources :clients, :controller => "people"
+  
   map.resources :participating_organizations
   map.resources :service_lines
   map.resources :services, 

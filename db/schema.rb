@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
   end
 
   create_table "people", :force => true do |t|
+    t.string   "type"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
@@ -272,6 +273,11 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
     t.string   "era_commons_username"
     t.string   "employeeid"
     t.integer  "department_id"
+    t.string   "personnelid"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "organizational_unit_id"
     t.integer  "degree_type_one_id"
     t.integer  "degree_type_two_id"
     t.integer  "specialty_id"
@@ -290,7 +296,6 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
     t.string   "gender"
     t.string   "title"
     t.string   "fax"
-    t.string   "address"
     t.boolean  "edited"
     t.boolean  "imported"
   end
@@ -302,7 +307,8 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
   add_index "people", ["employeeid"], :name => "index_people_on_employeeid"
   add_index "people", ["era_commons_username"], :name => "index_people_on_era_commons_username"
   add_index "people", ["ethnic_type_id"], :name => "index_people_on_ethnic_type_id"
-  add_index "people", ["netid"], :name => "index_people_on_netid"
+  add_index "people", ["netid"], :name => "people_netid_idx", :unique => true
+  add_index "people", ["organizational_unit_id"], :name => "index_people_on_organizational_unit_id"
   add_index "people", ["race_type_id"], :name => "index_people_on_race_type_id"
   add_index "people", ["specialty_id"], :name => "index_people_on_specialty_id"
 
@@ -485,29 +491,6 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "title"
-    t.string   "business_phone"
-    t.string   "fax"
-    t.string   "email"
-    t.string   "username"
-    t.string   "nu_employeeid"
-    t.string   "personnelid"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.integer  "organizational_unit_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users", ["organizational_unit_id"], :name => "index_users_on_organizational_unit_id"
-  add_index "users", ["username"], :name => "users_username_idx", :unique => true
 
   create_table "validation_conditions", :force => true do |t|
     t.integer  "validation_id"

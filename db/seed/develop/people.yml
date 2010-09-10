@@ -7,7 +7,7 @@
 #  fax            :string(255)
 #  email          :string(255)
 #  username       :string(255)
-#  nu_employeeid  :string(255)
+#  employeeid  :string(255)
 #  personnelid    :string(255)
 #  address        :string(255)
 #  city           :string(255)
@@ -17,25 +17,28 @@
 #  updated_at     :datetime
 
 pfr957:
+  type: User
   first_name: Paul
   last_name: Friedman
   title: System Administrator
-  username: pfr957
+  netid: pfr957
   email: p-friedman@northwestern.edu
   organizational_unit_id: 1
 
 cc_admin:
+  type: User
   first_name: CC
   last_name: Admin
   title: ClearCATS Administrator
-  username: cc_admin
+  netid: cc_admin
   email: cc_admin@dev.null
   organizational_unit_id: 1
 
 cc_user:
+  type: User
   first_name: CC
   last_name: User
   title: ClearCATS User
-  username: cc_user
+  netid: cc_user
   email: cc_user@dev.null
   organizational_unit_id: 1

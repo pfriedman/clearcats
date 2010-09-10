@@ -77,7 +77,7 @@
       .span-5
         = f.label :services_service_line_id_equals, "Service Line"
       .span-17
-        = f.select(:services_service_line_id_equals, ServiceLine.all.collect { |a| [ "#{a.organizational_units.to_sentence} - #{a.to_s}", a.id ] }.sort!, { :include_blank => "-- Select Service Line --" })
+        = f.select(:services_service_line_id_equals, ServiceLine.all.collect { |a| [ "#{a.organizational_unit.to_s} - #{a.to_s}", a.id ] }.sort!, { :include_blank => "-- Select Service Line --" })
     .span-24
       .span-5
         = f.label :organizational_units_organizational_unit_id_equals, "Organizational Unit"

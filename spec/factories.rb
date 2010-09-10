@@ -70,6 +70,11 @@ Factory.define :activity_type do |t|
   t.service_line { |a| a.association(:service_line) }
 end
 
+
+Factory.sequence :netid do |n|
+  "netid_#{n}"
+end
+
 Factory.define :person do |p|
   p.first_name             "first_name"
   p.middle_name            "middle_name"
@@ -80,7 +85,7 @@ Factory.define :person do |p|
   p.department_affiliation "dept"
   p.school_affiliation     "school"
   p.era_commons_username   "era_commons"
-  p.netid                  "netid"
+  p.netid                  { Factory.next(:netid) }
   p.training_type          nil
   p.trainee_status         nil
 
@@ -89,6 +94,7 @@ Factory.define :person do |p|
   p.degree_type_two     { |a| a.association(:degree_type_two) }
   p.specialty           { |a| a.association(:specialty) }
 end
+
 
 Factory.define :service do |svc|
   svc.service_line { |a| a.association(:service_line) }
@@ -156,11 +162,11 @@ Factory.define :user do |u|
   u.fax            "fax"
   u.email          "email"
   u.username       "username"
-  u.nu_employeeid  "nu_employeeid"
+  u.employeeid  "employeeid"
   u.personnelid    "personnelid"
   u.address        "address"
   u.city           "city"
   u.state          "state"
-  u.country        "country"
+  u.country             { |a| a.association(:country) }
   u.organizational_unit { |a| a.association(:organizational_unit) }
 end

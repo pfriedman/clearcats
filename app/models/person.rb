@@ -157,7 +157,11 @@ class Person < ActiveRecord::Base
   end
   
   def to_s
-    return "#{first_name} #{last_name}".strip
+    full_name
+  end
+  
+  def full_name
+    [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
   end
   
   before_save :set_affiliations
@@ -175,6 +179,22 @@ class Person < ActiveRecord::Base
   end
 
 
+  def business_phone=(phone_number)
+    self.phone = phone_number
+  end
+  
+  def business_phone
+    self.phone
+  end
+  
+  def username=(uname)
+    self.netid = uname
+  end
+  
+  def username
+    self.netid
+  end
+  
   ###
   #    For CTSA reporting
   ###
@@ -272,7 +292,7 @@ class Person < ActiveRecord::Base
   def self.import_data(file, user)
     FasterCSV.parse(file, :headers => :first_row, :write_headers=>false, :return_headers => false, :header_converters => :symbol) do |row|
       if !row[:commons_username].blank?
-        pers = Person.find_or_create_by_era_commons_username(row[:commons_username])
+        pers = Client.find_or_create_by_era_commons_username(row[:commons_username])
         specialty = Specialty.find_by_code(row[:area_of_expertise])
         pers.specialty = specialty unless specialty.nil?
         [:first_name, :last_name, :middle_initial, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }

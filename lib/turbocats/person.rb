@@ -18,7 +18,7 @@ class Turbocats::Person < Turbocats::Base
   #  department_id, country_id, human_subject_protection_training_institution, human_subject_protection_training_date 
   #  service_rendered, title, fax, address
   def to_model
-    ::Person.new do |p|
+    ::Client.new do |p|
       p.imported = true
     
       p.first_name                = self.first_name                                     unless self.first_name.blank?

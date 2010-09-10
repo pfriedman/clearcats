@@ -12,7 +12,7 @@
 #  fax                    :string(255)
 #  email                  :string(255)
 #  username               :string(255)
-#  nu_employeeid          :string(255)
+#  employeeid          :string(255)
 #  personnelid            :string(255)
 #  address                :string(255)
 #  city                   :string(255)
@@ -29,6 +29,6 @@ describe User do
 
   it { should belong_to(:organizational_unit) }
 
-  it { should validate_presence_of(:username) }
+  it { should validate_presence_of(:netid) }
 
 end

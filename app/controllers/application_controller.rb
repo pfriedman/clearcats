@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   private
     
     def find_or_create_user
-      User.find_or_create_by_username(current_user.username)
+      User.find_or_create_by_netid(current_user.username)
     end
 
     def revertit(cls)

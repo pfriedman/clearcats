@@ -15,7 +15,7 @@ Feature: Editing an existing service
     And a service "CRC Basic Training" for person "pgreenld" having been initiated by the logged in user
     And I am on the new service page
     Then I should see "Services In Process"
-    And I should see "Warren Kibbe"
+    And I should see "Kibbe"
     And I should see "How to write a K Award"
-    And I should see "Philip Greenland"
+    And I should see "Greenland"
     And I should see "CRC Basic Training"

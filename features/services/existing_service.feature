@@ -14,5 +14,3 @@ Feature: Editing an existing service
     Then I should be on the edit service page for person "wakibbe" and service line "CRC Basic Training"
     And the "person_last_name" field should contain "Kibbe"
     And the "person_first_name" field should contain "Warren"
-    
-    

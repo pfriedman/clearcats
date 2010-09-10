@@ -1,9 +1,13 @@
 - stylesheet "services"
 - title "New Service - Choose Service Line"
 
+
 - form_for @service do |f|
   #projects
-    %h3 Choose Service Line
+    - person = @service.person.nil? ? nil : @service.person
+    %h3 
+      - for_person = " for #{person}" if person
+      = h "Choose Service Line#{for_person.to_s}"
     %ul.service_lines
       - OrganizationalUnit.all(:order => :name).each do |ou|
         %li

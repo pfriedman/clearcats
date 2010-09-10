@@ -3,10 +3,11 @@
 #
 # Table name: service_lines
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  organizational_unit_id :integer
+#  created_at             :datetime
+#  updated_at             :datetime
 #
 
 require 'spec_helper'

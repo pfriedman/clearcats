@@ -14,4 +14,4 @@ module Bcsec::Authorities
 end
 # ATTRIBUTES = :username, :first_name, :middle_name, :last_name,
 #   :title, :business_phone, :fax, :email, :address, :city, :state, :country,
-#   :nu_employee_id, :personnel_id
+#   :employee_id, :personnel_id

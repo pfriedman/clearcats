@@ -136,7 +136,7 @@ class FacultyWebService
 
     def self.instantiate_person(attributes)
       person = Person.find_by_netid(attributes["netid"])
-      person = Person.new if person.nil?
+      person = Client.new if person.nil?
 
       attributes.each { |name, value| person.send("#{name.to_s}=", value) if person.respond_to?("#{name.to_s}=") }
       

@@ -1,6 +1,7 @@
 class CreatePeople < ActiveRecord::Migration
   def self.up
     create_table :people do |t|
+      t.string :type
       t.string :first_name
       t.string :middle_name
       t.string :last_name
@@ -13,6 +14,14 @@ class CreatePeople < ActiveRecord::Migration
       t.string :era_commons_username
       t.string :employeeid
       t.integer :department_id
+      
+      # From Users
+      t.string :personnelid
+      t.string :address
+      t.string :city
+      t.string :state
+      
+      t.integer :organizational_unit_id
 
       # Personal background information for CTSA reporting
       t.integer :degree_type_one_id
@@ -27,7 +36,6 @@ class CreatePeople < ActiveRecord::Migration
     end
     
     add_index(:people, :department_id)
-    add_index(:people, :netid)
     add_index(:people, :era_commons_username)
     add_index(:people, :employeeid)
     add_index(:people, :degree_type_one_id)
@@ -36,6 +44,9 @@ class CreatePeople < ActiveRecord::Migration
     add_index(:people, :country_id)
     add_index(:people, :ethnic_type_id)
     add_index(:people, :race_type_id)
+    
+    add_index(:people, :netid, :unique => true, :name => 'people_netid_idx')
+    add_index(:people, :organizational_unit_id)
     
     
     create_table :institution_positions_people, :id => false do |t|
@@ -65,6 +76,7 @@ class CreatePeople < ActiveRecord::Migration
     remove_index(:people, :country_id)
     remove_index(:people, :ethnic_type_id)
     remove_index(:people, :race_type_id)
+    remove_index(:people, :organizational_unit_id)
     remove_index(:institution_positions_people, :name => "institution_positions_people_idx")
     remove_index(:organizational_units_people, :name => "organizational_units_people_idx")
     drop_table :organizational_units_people

@@ -1,5 +1,5 @@
 Given /^an authenticated admin user/ do
-  @current_user = User.find_or_create_by_username("cc_admin")
+  @current_user = User.find_or_create_by_netid("cc_admin")
   steps %Q{
     Given I am on login
     And I fill in "username" with "cc_admin"
@@ -9,7 +9,7 @@ Given /^an authenticated admin user/ do
 end
 
 Given /^an authenticated user$/ do
-  @current_user = User.find_or_create_by_username("cc_user")
+  @current_user = User.find_or_create_by_netid("cc_user")
   steps %Q{
     Given I am on login
     And I fill in "username" with "cc_user"

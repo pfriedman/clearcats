@@ -12,7 +12,7 @@
 #  fax                    :string(255)
 #  email                  :string(255)
 #  username               :string(255)
-#  nu_employeeid          :string(255)
+#  employeeid          :string(255)
 #  personnelid            :string(255)
 #  address                :string(255)
 #  city                   :string(255)
@@ -23,18 +23,11 @@
 #  updated_at             :datetime
 #
 
-class User < ActiveRecord::Base
+class User < Person
   include Bcsec
   
   belongs_to :organizational_unit
   
-  validates_presence_of :username
-  
-  def to_s
-    full_name
-  end
-  
-  def full_name
-    [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
-  end
+  validates_presence_of :netid
+
 end
