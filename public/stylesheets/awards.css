@@ -6,3 +6,9 @@
 #awards h3 {
   padding: 0.5em 0;
 }
+
+.notice {
+  color: maroon;
+  font-size: 1.125em;
+  margin: 0.5em 0;
+}

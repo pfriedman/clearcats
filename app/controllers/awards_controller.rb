@@ -11,7 +11,7 @@ class AwardsController < ApplicationController
       params[:search][:order]   ||= "ascend_by_project_period_start_date"
       
       populate_service_and_person
-      FacultyWebService.awards_for_employee({:employeeid => @person.employeeid})
+      FacultyWebService.awards_for_employee({:employeeid => @person.employeeid}) unless @person.employeeid.blank?
       @awards = Award.search(@search_params)
     else
       flash[:notice] = "Awards can be viewed only in the context of a person."

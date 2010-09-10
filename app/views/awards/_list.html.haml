@@ -1,8 +1,13 @@
+- if @person.employeeid.blank?
+  .notice
+    Awards are culled from InfoED by the employee id. #{@person} is missing an employee id.
+    = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
+
 - if @service
   #awards
     = link_to "Add New Award", { :controller => "/awards", :action => "new", :service_id => @service.id, :search => @search_params }, { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
 
-    %h3 Awards for #{@person}
+    %h3 Awards for #{@person} employeeid [#{@person.employeeid}]
 
     - if @awards
       = render :partial => '/awards/service_awards_table'

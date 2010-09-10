@@ -1,3 +1,8 @@
+- if @person.netid.blank?
+  .notice
+    Publications are culled from Lattice Grid by the netid. #{@person} is missing a netid.
+    = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
+
 #publications
   
   %h3 Publications for #{@person}

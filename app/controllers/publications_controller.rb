@@ -10,7 +10,7 @@ class PublicationsController < ApplicationController
       params[:search][:order]   ||= "ascend_by_publication_date"
       
       populate_service_and_person  
-      LatticeGridWebService.investigator_publications_search(@person.netid)
+      LatticeGridWebService.investigator_publications_search(@person.netid) unless @person.netid.blank?
 
       @publications = Publication.search(@search_params)
     else
