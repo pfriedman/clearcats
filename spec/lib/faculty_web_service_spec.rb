@@ -10,7 +10,7 @@ describe FacultyWebService do
         results.should_not be_nil
         results.size.should == 1
         result = results.first
-        result.class.should == Person
+        result.class.should == Client
         result.first_name.should == "Warren"
         result.interests.class.should == Array
         result.interests.first.should == "Bioinformatics"
@@ -19,7 +19,7 @@ describe FacultyWebService do
       it "should return a single person" do
         FacultyWebService.stub!(:make_request).and_return(netid_response)
         result = FacultyWebService.locate_one({:netid => "wakibbe"})
-        result.class.should == Person
+        result.class.should == Client
         result.first_name.should == "Warren"
         result.interests.class.should == Array
         result.interests.first.should == "Bioinformatics"
