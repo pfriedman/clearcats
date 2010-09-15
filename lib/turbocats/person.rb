@@ -18,6 +18,11 @@ class Turbocats::Person < Turbocats::Base
   #  department_id, country_id, human_subject_protection_training_institution, human_subject_protection_training_date 
   #  service_rendered, title, fax, address
   def to_model
+    commons_name_employee_id_map = Hash.new
+    FasterCSV.foreach("#{Rails.root}/lib/turbocats/commons_ids.csv") do |row|
+      commons_name_employee_id_map[row[0]] = row[1]
+    end
+    
     ::Client.new do |p|
       p.imported = true
     
@@ -39,6 +44,7 @@ class Turbocats::Person < Turbocats::Base
       p.ethnic_type               = EthnicType.find_by_name(self.ethnic_category)       unless self.ethnic_category.blank?
       p.degree_type_one           = DegreeTypeOne.find_by_name(self.degree_1)           unless self.degree_1.blank?
       p.degree_type_two           = DegreeTypeTwo.find_by_name(self.degree_2)           unless self.degree_2.blank?
+      p.employeeid                = commons_name_employee_id_map[self.commons_username]
     end
   end
 end

@@ -116,6 +116,7 @@ class ServicesController < ApplicationController
       else
         @service = Service.new
       end
+      @person = @service.person
     end
     
     def update_service

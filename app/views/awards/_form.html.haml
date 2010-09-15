@@ -41,9 +41,9 @@
         %br
         = f.text_field :grant_amount
       %p
-        = f.label :years_of_award, "Years Of Award"
+        = f.label :ctsa_reporting_years, "CTSA Reporting Years"
         %br
-        = f.text_field :years_of_award
+        =h f.object.ctsa_reporting_years.join(",")
       %p
         = f.label :role, "Role"
         %br

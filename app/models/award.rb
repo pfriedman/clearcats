@@ -43,6 +43,8 @@
 
 class Award < ActiveRecord::Base
   include VersionExportable
+  include CtsaReportable
+  
   has_paper_trail
   
   belongs_to :person

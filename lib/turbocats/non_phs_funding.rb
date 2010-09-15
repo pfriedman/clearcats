@@ -28,7 +28,11 @@ class Turbocats::NonPhsFunding < Turbocats::Base
       a.grant_number    = self.grant_contract_number
       a.grant_title     = self.grant_title
       a.total_amount    = self.total_dollars
-      a.years_of_award  = self.reporting_year.to_s             # TODO: confirm this attribute
+      a.ctsa_reporting_years = self.ctsa_reporting_year             # TODO: confirm this attribute
     end
+  end
+  
+  def ctsa_reporting_year
+    self.reporting_year.blank? ? [2009] : [self.reporting_year.to_i]
   end
 end

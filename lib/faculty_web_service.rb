@@ -12,8 +12,8 @@ class FacultyWebService
   #
   # /faculty/search?last_name=:lname
   #
-  def self.locate(params)
-
+  def self.locate(params, importing = false)
+    @importing = importing
     results = []
 
     uri, req = create_faculty_request(params)
@@ -108,7 +108,9 @@ class FacultyWebService
       path = "/faculty/"
 
       if !params[:netid].blank?
-        path += "show/#{URI::escape(params[:netid])}"
+        path += "find_by_netid/#{URI::escape(params[:netid])}"
+      elsif !params[:employeeid].blank?
+        path += "find_by_employeeid/#{URI::escape(params[:employeeid])}"
       elsif !params[:last_name].blank?
         path += "search"
         query = "last_name=#{URI::escape(params[:last_name])}"
@@ -135,21 +137,24 @@ class FacultyWebService
     end
 
     def self.instantiate_person(attributes)
-      person = Person.find_by_netid(attributes["netid"])
-      person = Client.new if person.nil?
+      person = determine_person_to_instantiate(attributes)
 
       attributes.each { |name, value| person.send("#{name.to_s}=", value) if person.respond_to?("#{name.to_s}=") }
       
       # use ldap over faculty db
-      ldap_entry = Ldap.new.retrieve_entry(attributes["netid"])
-      ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key]) if person.respond_to?("#{key}=") }
+      begin
+        ldap_entry = Ldap.new.retrieve_entry(attributes["netid"])
+        ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key]) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
       
-      dept = Department.find_by_externalid(person.dept_id)
-      person.department = dept if dept
-      person.save!
-
-      Rails.logger.info("FacultyWebService.instantiate_person - [#{person.netid}] #{person.to_s}")
-
+        dept = Department.find_by_externalid(person.dept_id)
+        person.department = dept if dept
+        if person.valid?
+          person.save!
+          Rails.logger.info("FacultyWebService.instantiate_person - [#{person.netid}] #{person.to_s}")
+        end
+      rescue
+        # NOOP
+      end
       return person
     end
     
@@ -189,7 +194,7 @@ class FacultyWebService
       elsif value.is_a?(Hash)
         results << instantiate_person(value)
       end
-      results
+      results.compact
     end
     
     def self.parse_award_response(body)
@@ -200,6 +205,27 @@ class FacultyWebService
         results << award if award
       end
       results
+    end
+
+    def self.determine_person_to_instantiate(attributes)
+      if @importing
+        # when importing - attempt to match by loose criteria
+        person = Person.find_by_last_name(attributes["last_name"])
+        if person and person.first_name.strip != attributes["first_name"].strip
+          person = find_person_by_identifier(attributes)
+        end
+      else
+        person = find_person_by_identifier(attributes)
+      end
+      person
+    end
+    
+    def self.find_person_by_identifier(attributes)
+      person = nil
+      person = Person.find_by_employeeid(attributes["employee_id"]) if person.nil? and !attributes["employee_id"].blank?
+      person = Person.find_by_netid(attributes["netid"]) if person.nil? and !attributes["netid"].blank?
+      person = Client.new if person.nil?
+      person
     end
 
 end

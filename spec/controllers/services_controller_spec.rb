@@ -21,13 +21,13 @@ describe ServicesController do
     
     describe "GET choose_person" do
       it "assigns a new service as @service if no id given" do
-        Service.stub(:new).and_return(mock_service)
+        Service.stub(:new).and_return(mock_service(:person => mock_model(Person)))
         get :choose_person
         assigns[:service].should equal(mock_service)
       end
       
       it "assigns the given service as @service" do
-        Service.stub(:find).with("37").and_return(mock_service)
+        Service.stub(:find).with("37").and_return(mock_service(:person => mock_model(Person)))
         get :choose_person, :id => "37"
         assigns[:service].should equal(mock_service)
       end

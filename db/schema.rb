@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100903173011) do
+ActiveRecord::Schema.define(:version => 20100915163558) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
 
   create_table "awards", :force => true do |t|
     t.string   "grant_number"
-    t.string   "years_of_award"
     t.string   "grant_title",                            :limit => 2500
     t.float    "grant_amount"
     t.integer  "person_id"
@@ -116,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20100903173011) do
     t.datetime "updated_at"
     t.integer  "sponsor_id"
     t.integer  "originating_sponsor_id"
+    t.integer  "ctsa_reporting_years_mask"
   end
 
   add_index "awards", ["activity_code_id"], :name => "index_awards_on_activity_code_id"

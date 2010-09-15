@@ -51,7 +51,7 @@ describe AwardsController do
 
       describe "with valid params" do
         it "assigns a newly created award as @award" do
-          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person, :employeeid => "1")))
           Award.stub(:new).with({'these' => 'params'}).and_return(mock_award(:save => true))
           post :create, :award => {:these => 'params'}, :service_id => "99"
           assigns[:award].should equal(mock_award)

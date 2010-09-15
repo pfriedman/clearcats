@@ -26,7 +26,11 @@ class Turbocats::PhsFunding < Turbocats::Base
       a.organization    = PhsOrganization.find_by_code(self.phs_organization_code)
       a.activity_code   = ActivityCode.find_by_code(self.activity_code)
       a.grant_number    = self.six_digit_grant_number
-      a.years_of_award  = self.reporting_year.to_s             # TODO: confirm this attribute
+      a.ctsa_reporting_years = self.ctsa_reporting_year             # TODO: confirm this attribute
     end
+  end
+
+  def ctsa_reporting_year
+    self.reporting_year.blank? ? [2009] : [self.reporting_year.to_i]
   end
 end

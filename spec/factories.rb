@@ -108,7 +108,6 @@ Factory.define :award do |a|
   a.grant_number      "grant number"
   a.grant_title       "grant title"
   a.grant_amount      11.00
-  a.years_of_award    "2010"
 end
 
 Factory.define :sponsor do |sponsor|
