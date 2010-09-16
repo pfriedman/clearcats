@@ -1,9 +1,10 @@
 # == Schema Information
-# Schema version: 20100903173011
+# Schema version: 20100915163558
 #
 # Table name: people
 #
 #  id                                            :integer         not null, primary key
+#  type                                          :string(255)
 #  first_name                                    :string(255)
 #  middle_name                                   :string(255)
 #  last_name                                     :string(255)
@@ -16,6 +17,11 @@
 #  era_commons_username                          :string(255)
 #  employeeid                                    :string(255)
 #  department_id                                 :integer
+#  personnelid                                   :string(255)
+#  address                                       :string(255)
+#  city                                          :string(255)
+#  state                                         :string(255)
+#  organizational_unit_id                        :integer
 #  degree_type_one_id                            :integer
 #  degree_type_two_id                            :integer
 #  specialty_id                                  :integer
@@ -34,7 +40,6 @@
 #  gender                                        :string(255)
 #  title                                         :string(255)
 #  fax                                           :string(255)
-#  address                                       :string(255)
 #  edited                                        :boolean
 #  imported                                      :boolean
 #

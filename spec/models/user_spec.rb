@@ -1,26 +1,47 @@
 # == Schema Information
-# Schema version: 20100903173011
+# Schema version: 20100915163558
 #
-# Table name: users
+# Table name: people
 #
-#  id                     :integer         not null, primary key
-#  first_name             :string(255)
-#  middle_name            :string(255)
-#  last_name              :string(255)
-#  title                  :string(255)
-#  business_phone         :string(255)
-#  fax                    :string(255)
-#  email                  :string(255)
-#  username               :string(255)
-#  employeeid          :string(255)
-#  personnelid            :string(255)
-#  address                :string(255)
-#  city                   :string(255)
-#  state                  :string(255)
-#  country                :string(255)
-#  organizational_unit_id :integer
-#  created_at             :datetime
-#  updated_at             :datetime
+#  id                                            :integer         not null, primary key
+#  type                                          :string(255)
+#  first_name                                    :string(255)
+#  middle_name                                   :string(255)
+#  last_name                                     :string(255)
+#  netid                                         :string(255)
+#  email                                         :string(255)
+#  department_affiliation                        :string(255)
+#  school_affiliation                            :string(255)
+#  last_four_of_ssn                              :string(255)
+#  phone                                         :string(255)
+#  era_commons_username                          :string(255)
+#  employeeid                                    :string(255)
+#  department_id                                 :integer
+#  personnelid                                   :string(255)
+#  address                                       :string(255)
+#  city                                          :string(255)
+#  state                                         :string(255)
+#  organizational_unit_id                        :integer
+#  degree_type_one_id                            :integer
+#  degree_type_two_id                            :integer
+#  specialty_id                                  :integer
+#  country_id                                    :integer
+#  ethnic_type_id                                :integer
+#  race_type_id                                  :integer
+#  disadvantaged_background                      :boolean
+#  created_at                                    :datetime
+#  updated_at                                    :datetime
+#  human_subject_protection_training_institution :string(255)
+#  human_subject_protection_training_date        :date
+#  service_rendered                              :boolean
+#  training_type                                 :string(255)
+#  trainee_status                                :string(255)
+#  has_disability                                :boolean
+#  gender                                        :string(255)
+#  title                                         :string(255)
+#  fax                                           :string(255)
+#  edited                                        :boolean
+#  imported                                      :boolean
 #
 
 require 'spec_helper'

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100903173011
+# Schema version: 20100915163558
 #
 # Table name: ethnic_types
 #

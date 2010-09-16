@@ -1,11 +1,10 @@
 # == Schema Information
-# Schema version: 20100903173011
+# Schema version: 20100915163558
 #
 # Table name: awards
 #
 #  id                                     :integer         not null, primary key
 #  grant_number                           :string(255)
-#  years_of_award                         :string(255)
 #  grant_title                            :string(2500)
 #  grant_amount                           :float
 #  person_id                              :integer
@@ -39,6 +38,7 @@
 #  updated_at                             :datetime
 #  sponsor_id                             :integer
 #  originating_sponsor_id                 :integer
+#  ctsa_reporting_years_mask              :integer
 #
 
 require 'spec_helper'
