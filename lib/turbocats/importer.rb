@@ -8,6 +8,11 @@ class Turbocats::Importer
       FacultyWebService.locate({:employeeid => client.employeeid}, true) unless client.employeeid.blank?
     end
     
+    Client.all.each do |client| 
+      FacultyWebService.awards_for_employee({:employeeid => client.employeeid}) unless client.employeeid.blank?
+      LatticeGridWebService.investigator_publications_search(client.netid) unless client.netid.blank?
+    end
+    
     Turbocats::PhsFunding.import_all
     Turbocats::NonPhsFunding.import_all
     Turbocats::ParticipatingOrganization.import_all

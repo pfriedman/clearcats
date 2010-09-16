@@ -164,22 +164,26 @@ class FacultyWebService
         award = Award.find_by_budget_number(attributes["budget_number"])
         award = Award.new if award.nil?
 
-        sponsor = nil
-        attributes.each do |name, value|
-          if name.include?("sponsor") and name != "sponsor_award_number"
-            sponsor ||= Sponsor.new
-            sponsor.send(name.to_s + '=', value)
-          else
-            award.send(name.to_s + '=', value)
+        if award.versions.empty?
+          sponsor = nil
+          attributes.each do |name, value|
+            if name.include?("sponsor") and name != "sponsor_award_number"
+              sponsor ||= Sponsor.new
+              sponsor.send(name.to_s + '=', value)
+            else
+              award.send(name.to_s + '=', value)
+            end
           end
+          award.sponsor = sponsor unless sponsor.nil?
         end
-        award.sponsor = sponsor unless sponsor.nil?
-
-        dept = Department.find_or_create_by_name(attributes["department"])
-        award.department = dept if dept
+        
+        if award.department.blank?
+          dept = Department.find_or_create_by_name(attributes["department"])
+          award.department = dept if dept
+        end
 
         Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
-
+        
         return award
       rescue Exception => e
         Rails.logger.error("FacultyWebService.instantiate_award - Error occurred #{e} \n #{e.backtrace.join('\n')}")

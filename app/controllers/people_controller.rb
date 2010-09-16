@@ -5,11 +5,24 @@ class PeopleController < ApplicationController
   def index
     params[:search] ||= {}
     @search = Client.search(params[:search])
-    @people = @search.paginate(:page => params[:page], :per_page => 10)
+    @people = @search.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html # index.html.erb
       format.csv { render :csv => @search.all }
     end
+  end
+  
+  def incomplete
+    params[:search] ||= {}
+    case params[:criteria]
+    when "netid"
+      params[:search][:netid_equals] = nil
+    when "employeeid"
+      params[:search][:employeeid_equals] = nil
+    when "ctsa"
+    end
+    @search = Client.search(params[:search])
+    @people = @search.paginate(:page => params[:page], :per_page => 20)
   end
   
   # GET /people/1/edit
@@ -72,8 +85,10 @@ class PeopleController < ApplicationController
   end
   
   def upload
-    Person.import_data(params[:file].open, find_or_create_user)
-    redirect_to people_path
+    if request.post?
+      Person.import_data(params[:file].open, find_or_create_user)
+      redirect_to people_path
+    end
   end
 
   # GET /people/search

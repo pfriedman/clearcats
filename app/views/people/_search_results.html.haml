@@ -5,15 +5,15 @@
   %table{ :class => "records" }
     %tr
       %th Select
-      %th= order @search, :by => :first_name, :as => "First Name"
-      %th= order @search, :by => :last_name, :as => "Last Name"
-      %th= order @search, :by => :netid, :as => "Net ID"
-      %th= order @search, :by => :employeeid, :as => "Employee ID"
-      %th= order @search, :by => :email, :as => "Email"
-      %th= order @search, :by => :era_commons_username, :as => "ERA Commons"
-      %th= order @search, :by => :degree_type_one_name, :as => "Degree Type One"
-      %th= order @search, :by => :degree_type_two_name, :as => "Degree Type Two"
-      %th= order @search, :by => :institution_positions_name, :as => "Position/Title"
+      %th= order @search, :by => :first_name, :as => "First Name", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :last_name, :as => "Last Name", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :netid, :as => "Net ID", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :employeeid, :as => "Employee ID", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :email, :as => "Email", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :era_commons_username, :as => "ERA Commons", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :degree_type_one_name, :as => "Degree Type One", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :degree_type_two_name, :as => "Degree Type Two", :params => {:criteria => params[:criteria]}
+      %th= order @search, :by => :institution_positions_name, :as => "Position/Title", :params => {:criteria => params[:criteria]}
       %th History
 
     - @people.each do |person|

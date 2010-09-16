@@ -7,7 +7,13 @@
         %a{ :href => "#" }
           Administrative Actions
         %ul
-          %li= link_to "Clients",              :controller => "people",               :action => "index"
+          %li
+            = link_to "Clients", people_path
+            %ul
+              %li= link_to "Upload Investigators", upload_people_path
+              %li= link_to "Missing Employee ID", :controller => "people", :action => "incomplete", :criteria => "employeeid"
+              %li= link_to "Missing Net ID",      :controller => "people", :action => "incomplete", :criteria => "netid"
+              %li= link_to "Invalid for CTSA",    :controller => "people", :action => "incomplete", :criteria => "ctsa"
           %li= link_to "Users",                :controller => "users",                :action => "index"
           %li= link_to "Organizational Units", :controller => "organizational_units", :action => "index"
           %li= link_to "Service Lines",        :controller => "service_lines",        :action => "index"

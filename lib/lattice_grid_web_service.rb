@@ -92,7 +92,7 @@ class LatticeGridWebService
       if pub.nil?
         pub = Publication.new(attributes)
       else
-        pub.update_attributes(attributes)
+        pub.update_attributes(attributes) if pub.versions.empty?
       end
       pub
     end

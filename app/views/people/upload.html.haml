@@ -1,0 +1,14 @@
+- stylesheet "people"
+- title "Clients - Upload Investigators"
+
+.instructions
+  Please upload a comma-separated values (csv) file with the following fields:
+  %ul
+    %li Last Name
+    %li First Name
+    %li ERA Commons Name
+    %li Netid
+    %li Employee Id
+    %li= link_to "Service Line", :controller => "service_lines", :action => "index"
+
+= render :partial => 'upload_form'

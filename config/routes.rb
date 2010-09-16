@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :organizational_units
   map.resources :people, :only => [:index, :edit, :update, :new, :create], 
     :member     => { :versions => :get, :revert => :post },
-    :collection => { :upload => :post, :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post] } do |people|
+    :collection => { :upload => [:get, :post], :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post], :incomplete => :get } do |people|
       people.resources :awards
       people.resources :publications
   end
