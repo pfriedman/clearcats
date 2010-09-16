@@ -47,12 +47,15 @@ class Award < ActiveRecord::Base
   
   has_paper_trail
   
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_s)} > 0 "} }
+  named_scope :invalid_for_ctsa, :conditions => "organization_id IS NULL OR activity_code_id IS NULL OR grant_number IS NULL"
+  
   belongs_to :person
   belongs_to :organization
   belongs_to :activity_code
   
   belongs_to :sponsor
-
+  
   # attributes from faculty_web_service that are not persisted
   attr_accessor :nu_employee_id, :first_name, :last_name, :middle_name
   attr_accessor :proposal_flag, :modified_date, :cufs_fund, :cufs_area, :cufs_org, :restricted_budget_amount
@@ -164,6 +167,14 @@ class Award < ActiveRecord::Base
   
   def formatted_project_period_end_date=(dt)
     self.project_period_end_date = dt
+  end
+  
+  def ctsa_missing_fields
+    result = []
+    result << "Activity Code" if self.activity_code_id.blank?
+    result << "Grant Number"  if self.grant_number.blank?
+    result << "Organization"  if self.organization_id.blank?
+    result.join(", ")
   end
   
 end

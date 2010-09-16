@@ -17,9 +17,9 @@
       = f.check_box :nucats_assisted
       = f.label :nucats_assisted, "NUCATS Assisted"
     %p
-      = f.label :reporting_year, "Reporting Year"
+      = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
-      = f.text_field :reporting_year, :size => 5
+      =h f.object.ctsa_reporting_years.join(",")
     %p
       = f.label :pmid, "PMID"
       %br

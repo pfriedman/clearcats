@@ -18,5 +18,10 @@
           %li= link_to "Organizational Units", :controller => "organizational_units", :action => "index"
           %li= link_to "Service Lines",        :controller => "service_lines",        :action => "index"
           %li= link_to "CTSA Data",            :controller => "admin",                :action => "view_ctsa_data"
-          %li= link_to "Reports",              :controller => "reports",              :action => "index"
+          %li
+            = link_to "Reports",              :controller => "reports",              :action => "index"
+            %ul
+              %li= link_to "CTSA Report", ctsa_reports_path
+              %li= link_to "Incomplete Awards", incomplete_awards_path
+              %li= link_to "Incomplete Publications", incomplete_publications_path
     %li= link_to "Logout", "/logout"

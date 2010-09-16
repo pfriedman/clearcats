@@ -1,0 +1,28 @@
+- stylesheet "awards", "services"
+- title "Incomplete Awards"
+
+.instructions
+  The following records are ineligible for CTSA Reporting. They are missing either the Grant Number, Activity Code, or Organization
+
+%table.records
+  %tr
+    %th Edit
+    %th 
+      = order @search, :by => :person_last_name, :as => "Person", :params => { :controller => "awards", :action => "incomplete" }
+    %th
+      = order @search, :by => :grant_title, :as => "Grant Title", :params => { :controller => "awards", :action => "incomplete" }
+    %th
+      = order @search, :by => :budget_number, :as => "Budget Number", :params => { :controller => "awards", :action => "incomplete" }
+    %th
+      = order @search, :by => :project_period_start_date, :as => "Project Start Date", :params => { :controller => "awards", :action => "incomplete" }
+    %th Missing
+  - @awards.each do |award|
+    %tr{ :class => cycle('even_record', 'odd_record') }
+      %td= link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :search => params[:search], :person_id => award.person.id }, { :class => "edit_link icon_link" }
+      %td= h award.person
+      %td= h truncate(award.grant_title)
+      %td= h h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.project_period_start_date
+      %td= h award.ctsa_missing_fields
+
+= will_paginate @awards

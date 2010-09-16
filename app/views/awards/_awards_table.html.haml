@@ -1,24 +1,34 @@
 %table.records
   %tr
     %th Edit
-    %th NUCATS Assisted
+    %th
+      = order @search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => ordering_params
+    %th Reporting Years
     %th Organization
     %th Activity Code
-    %th Sponsor
-    %th Sponsor Award Number
-    %th Grant Title
-    %th Budget Number
-    %th Project Start Date
+    %th
+      = order @search, :by => :sponsor_name, :as => "Sponsor", :params => ordering_params
+    %th
+      = order @search, :by => :sponsor_award_number, :as => "Sponsor Award Number", :params => ordering_params
+    %th
+      = order @search, :by => :grant_title, :as => "Grant Title", :params => ordering_params
+    %th
+      = order @search, :by => :budget_number, :as => "Budget Number", :params => ordering_params
+    %th
+      = order @search, :by => :project_period_start_date, :as => "Project Start Date", :params => ordering_params
     %th History
   - @awards.each do |award|
+    - edit_link_params = { :controller => "/awards", :action => "edit", :id => award, :search => params[:search] }.merge(award_association)
     %tr{ :class => cycle('even_record', 'odd_record') }
-      %td= link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :search => params[:search], :person_id => @person.id }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+      %td
+        = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
       %td= h award.nucats_assisted? ? "Yes" : "No"
+      %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
       %td.ctsa_award= h award.organization.to_s
       %td.ctsa_award= h award.activity_code.to_s
       %td= h award.sponsor
       %td= h award.sponsor_award_number
       %td= h truncate(award.grant_title)
-      %td= h h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
       %td= h award.project_period_start_date
       %td= link_to 'View', versions_award_path(award), :class => "show_link icon_link"

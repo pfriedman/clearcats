@@ -12,3 +12,12 @@
   font-size: 1.125em;
   margin: 0.5em 0;
 }
+
+.instructions {
+  margin: 1em 0;
+}
+
+.award_form {
+  height: 80em;
+  padding-bottom: 1em;
+}

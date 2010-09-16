@@ -1,5 +1,5 @@
 .container.span-24
-  .span-7.colborder
+  .span-6.colborder
     %h4{ :class => "section_header" } Basic Information
     
     = f.hidden_field :imported
@@ -59,7 +59,7 @@
       %br
       = f.select(:country_id, Country.all(:order => :name).collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Country --" }) 
       
-  .span-8.colborder
+  .span-7.colborder
     %h4{ :class => "section_header" } Scholarly Information
 
     %p
@@ -101,7 +101,7 @@
         %br
         = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" }) 
 
-  .span-8.last
+  .span-6.last
     %h4{ :class => "section_header" } Optional Information
     %p
       = f.label :ethnic_type_id, "Please indicate your ethnic background." 

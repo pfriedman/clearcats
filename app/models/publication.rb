@@ -35,11 +35,13 @@
 
 class Publication < ActiveRecord::Base
   include VersionExportable
+  include CtsaReportable
+  
   has_paper_trail
   
   belongs_to :person
   
-  named_scope :all_for_reporting_year, lambda { |yr| { :conditions => ["reporting_year = ?", yr ] } }
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**Publication::REPORTING_YEARS.index(yr)} > 0 "} }
 
   # Attributes from LatticeGrid/PubMed
   attr_accessor :endnote_citation, :authors, :full_authors, :is_first_author_investigator, :is_last_author_investigator
@@ -75,6 +77,10 @@ class Publication < ActiveRecord::Base
   
   def citation_cnt
     @citation_cnt
+  end
+  
+  def self.reporting_years(reporting_years_mask)
+    REPORTING_YEARS.reject { |yr| ((reporting_years_mask || 0) & 2**REPORTING_YEARS.index(yr)).zero? }  
   end
   
 end

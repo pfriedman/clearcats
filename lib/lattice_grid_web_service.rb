@@ -89,6 +89,7 @@ class LatticeGridWebService
     
     def self.instantiate_publication(attributes)
       pub = Publication.find_by_pmid(attributes["pubmed"])
+      
       if pub.nil?
         pub = Publication.new(attributes)
       else

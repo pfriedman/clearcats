@@ -80,7 +80,8 @@ class ServicesController < ApplicationController
     params[:search][:person_id] = @service.person.id
     params[:search][:order] ||= "ascend_by_publication_date"
     @search_params = params[:search]
-    @publications = Publication.search(@search_params)
+    @search = Publication.search(@search_params)
+    @publications = @search.all
   end
   
   def choose_awards
@@ -90,7 +91,8 @@ class ServicesController < ApplicationController
     params[:search][:person_id] = @service.person.id
     params[:search][:order] ||= "ascend_by_project_period_start_date"
     @search_params = params[:search]
-    @awards = Award.search(@search_params)
+    @search = Award.search(@search_params)
+    @awards = @search.all
   end
   
   def choose_approvals

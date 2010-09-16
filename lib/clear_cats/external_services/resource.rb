@@ -1,6 +1,10 @@
 module ClearCats
   module ExternalServices
     class Resource
+      
+      attr_accessor :host
+      attr_accessor :path
+      
       def initialize(service, identifier)
         services = YAML.load_file(SERVICES_CONFIG_FILE)[ENV['RAILS_ENV']]
         host = services[service][:host]

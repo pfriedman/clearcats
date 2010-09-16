@@ -20,7 +20,8 @@ describe PublicationsController do
       
       it "assigns all publications for the requested person as @publications" do
         person = mock_model(Person, :netid => "wakibbe")
-        Publication.should_receive(:search).with("person_id" => person.id.to_s, "order" => "ascend_by_publication_date").and_return([mock_publication])
+        arr = mock_model(Array, :all => [mock_publication])
+        Publication.should_receive(:search).with("person_id" => person.id.to_s, "order" => "ascend_by_publication_date").and_return(arr)
         LatticeGridWebService.stub!(:make_request).and_return(publications_response)
         Person.should_receive(:find).with(person.id.to_s).and_return(person)
         get :index, :person_id => person.id

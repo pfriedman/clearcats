@@ -1,4 +1,16 @@
 - stylesheet "people"
-- title "Clients - Invalid"
+- title "Clients - Incomplete"
+
+- case params[:criteria]
+- when "ctsa"
+  .instructions
+    The following records are missing an era commons username or a specialty, both of which are required for CTSA reporting.
+- when "netid"
+  .instructions
+    The following records are missing a netid. The netid is used to gather publication data from lattice grid.
+    %a{ :href => ClearCats::ExternalServices::Resource.new(:lattice_grid, :nil).to_s } Lattice Grid
+- when "employeeid"
+  .instructions
+    The following records are missing an employee id. The employee id is used to gather award data from Info Ed (via NU web service).
 
 = render :partial => 'search_results'

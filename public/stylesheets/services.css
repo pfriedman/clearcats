@@ -1,3 +1,4 @@
+
 .awards select {
   width: 25em;
 }
@@ -6,6 +7,15 @@
   display: none;
   height: 55em;
   overflow: auto;
+}
+
+.blockMsg {
+  width: 800px !important;
+  margin-left: -400px !important;
+}
+
+#modal_edit_form {
+  margin-top: 2em;
 }
 
 #modal_window .header_option {
@@ -22,7 +32,7 @@
 
 #award_form select,
 #award_form input[type="text"] {
-  width: 35em;
+  width: 30em;
 }
 
 #awards .edit_modal_form_add_link {
@@ -60,7 +70,7 @@ ul#service_menu li {
   border: 1px solid #ddd;
   padding: 0.25em;
   margin: 0.25em 0;
-  width: 34em;
+  width: 345px;
 }
 
 .award_section p b {

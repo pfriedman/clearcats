@@ -123,8 +123,8 @@ Factory.define :publication do |pub|
   pub.abstract          "boogadeehoo"
   pub.title             "title"
   pub.cited             true
-  pub.reporting_year    2010
   pub.missing_pmcid_reason ""
+  pub.ctsa_reporting_years_mask 1
 end
 
 Factory.define :approval do |a|

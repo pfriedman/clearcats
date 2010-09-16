@@ -1,5 +1,5 @@
 module CtsaReportable
-  
+
   REPORTING_YEARS = (2000..2025).to_a
   
   def ctsa_reporting_years=(yrs)  

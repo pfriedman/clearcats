@@ -1,1 +1,8 @@
-= render 'form'
+- stylesheet "services"
+- title "Award for #{@award.person}"
+
+:javascript
+  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+
+.award_form
+  = render 'form'

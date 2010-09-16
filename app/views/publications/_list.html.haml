@@ -10,9 +10,9 @@
   - if @publications
   
     - if @service
-      = render 'publications/service_publications_table', :publications => @publications, :service => @service
+      = render 'publications/service_publications_table', :publications => @publications, :search => @search, :service => @service
     - else
-      = render 'publications/publications_table', :publications => @publications
+      = render 'publications/publications_table', :publications => @publications, :search => @search
       .links
         = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
         = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"

@@ -7,7 +7,7 @@
 %p
   Publications PMCIDs that resulted from support from this program.
   
-= render '/publications/list', :service => @service, :publications => @publications, :person => @service.person, :search => @search_params
+= render '/publications/list', :service => @service, :publications => @publications, :search => @search, :person => @service.person, :search => @search_params
 
 - form_for @service do |f|
   = hidden_field_tag "service[state]", "choose_approvals"

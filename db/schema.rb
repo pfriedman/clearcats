@@ -319,13 +319,13 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.date     "publication_date"
     t.integer  "person_id"
     t.text     "abstract"
-    t.string   "title",                :limit => 1000
+    t.string   "title",                     :limit => 1000
     t.boolean  "nucats_assisted"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "cited"
     t.string   "missing_pmcid_reason"
-    t.integer  "reporting_year"
+    t.integer  "ctsa_reporting_years_mask"
   end
 
   add_index "publications", ["person_id"], :name => "index_publications_on_person_id"

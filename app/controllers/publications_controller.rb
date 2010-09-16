@@ -12,7 +12,8 @@ class PublicationsController < ApplicationController
       populate_service_and_person  
       LatticeGridWebService.investigator_publications_search(@person.netid) unless @person.netid.blank?
 
-      @publications = Publication.search(@search_params)
+      @search = Publication.search(@search_params)
+      @publications = @search.all
     else
       flash[:notice] = "Publications can be viewed only in the context of a person."
       redirect_to people_path

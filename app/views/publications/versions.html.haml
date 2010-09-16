@@ -15,7 +15,7 @@
       %th Publication Date
       %th Title
       %th Cited
-      %th Reporting Year
+      %th Reporting Year(s)
     - @publication.versions.each do |version|
       - if version.object
         - attrs = YAML::load version.object
@@ -30,7 +30,7 @@
           %td= attrs["publication_date"]
           %td= attrs["title"]
           %td= attrs["cited"]
-          %td= attrs["reporting_year"]
+          %td= Publication.reporting_years(attrs["reporting_year"].to_i).join(",")
     %tr{ :class => 'current_record' }
       %td
       %td Current Version
@@ -42,7 +42,7 @@
       %td= h @publication.publication_date
       %td= h @publication.title
       %td= h @publication.cited
-      %td= h @publication.reporting_year
+      %td= h @publication.ctsa_reporting_years.empty? ? "n/a" : @publication.ctsa_reporting_years.join(",")
 .links
   = link_to 'List', person_publications_path(@publication.person), :class => "list_link icon_link"
   = link_to 'Export CSV', versions_publication_path(@publication, :export => "true"), :class => "export_link icon_link"
