@@ -30,10 +30,6 @@
       %br
       = f.text_field :grant_amount
     %p
-      = f.label :ctsa_reporting_years, "CTSA Reporting Years"
-      %br
-      =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
-    %p
       = f.label :role, "Role"
       %br
       = f.text_field :role
@@ -61,7 +57,11 @@
 .span-9    
   .award_section
     %p
-      %b CTSA Award Type
+      %b CTSA Award Information
+    %p
+      = f.label :ctsa_reporting_years, "CTSA Reporting Years"
+      %br
+      =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
     %p
       = f.label :ctsa_award_type_award_number, "CTSA Award Number"
       %br
