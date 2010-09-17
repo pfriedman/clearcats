@@ -21,3 +21,11 @@
   height: 80em;
   padding-bottom: 1em;
 }
+
+#award_details {
+  margin-top: 2em;
+}
+
+#award_details table {
+  margin-top: 1em;
+}

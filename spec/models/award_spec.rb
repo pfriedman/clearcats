@@ -3,42 +3,34 @@
 #
 # Table name: awards
 #
-#  id                                     :integer         not null, primary key
-#  grant_number                           :string(255)
-#  grant_title                            :string(2500)
-#  grant_amount                           :float
-#  person_id                              :integer
-#  investigator_id                        :integer
-#  role                                   :string(255)
-#  parent_institution_number              :string(255)
-#  institution_number                     :string(255)
-#  subproject_number                      :string(255)
-#  ctsa_award_type_award_number           :string(255)
-#  budget_period                          :string(255)
-#  budget_period_start_date               :date
-#  budget_period_end_date                 :date
-#  budget_period_direct_cost              :float
-#  budget_period_direct_and_indirect_cost :float
-#  project_period_start_date              :date
-#  project_period_end_date                :date
-#  project_period_total_cost              :float
-#  total_project_cost                     :float
-#  organization_id                        :integer
-#  organization_type                      :string(255)
-#  activity_code_id                       :integer
-#  proposal_status                        :string(255)
-#  award_status                           :string(255)
-#  sponsor_award_number                   :string(255)
-#  budget_number                          :string(255)
-#  direct_amount                          :float
-#  indirect_amount                        :float
-#  total_amount                           :float
-#  nucats_assisted                        :boolean
-#  created_at                             :datetime
-#  updated_at                             :datetime
-#  sponsor_id                             :integer
-#  originating_sponsor_id                 :integer
-#  ctsa_reporting_years_mask              :integer
+#  id                           :integer         not null, primary key
+#  grant_number                 :string(255)
+#  grant_title                  :string(2500)
+#  grant_amount                 :float
+#  person_id                    :integer
+#  investigator_id              :integer
+#  role                         :string(255)
+#  parent_institution_number    :string(255)
+#  institution_number           :string(255)
+#  subproject_number            :string(255)
+#  ctsa_award_type_award_number :string(255)
+#  project_period_start_date    :date
+#  project_period_end_date      :date
+#  project_period_total_cost    :float
+#  total_project_cost           :float
+#  organization_id              :integer
+#  organization_type            :string(255)
+#  activity_code_id             :integer
+#  proposal_status              :string(255)
+#  award_status                 :string(255)
+#  sponsor_award_number         :string(255)
+#  nucats_assisted              :boolean
+#  budget_identifier            :string(255)
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  sponsor_id                   :integer
+#  originating_sponsor_id       :integer
+#  ctsa_reporting_years_mask    :integer
 #
 
 require 'spec_helper'
@@ -53,6 +45,8 @@ describe Award do
   it { should belong_to(:organization) }
   it { should belong_to(:activity_code) }
   it { should belong_to(:sponsor) }
+  it { should have_many(:award_details) }
+  it { should validate_presence_of(:budget_identifier) }
   
   context "the award sponsor" do
     

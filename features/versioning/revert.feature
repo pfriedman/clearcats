@@ -12,7 +12,7 @@ Feature: Reverting an altered record
     
   Scenario: Reverting an award record to a previous version
     Given an authenticated admin user
-    And an Award with a grant title "The Grant" which was changed from "My Grant" and budget_number "xxx"
+    And an Award with a grant title "The Grant" which was changed from "My Grant" and budget_identifier "xxx"
     When I am on the award versions page for "xxx"
     Then I should see "The Grant"
     And I should see "My Grant"

@@ -25,7 +25,7 @@
           %td= Sponsor.find_by_id(attrs["sponsor_id"]).to_s
           %td= attrs["sponsor_award_number"]
           %td= attrs["grant_title"]
-          %td= attrs["budget_number"]
+          %td= attrs["budget_identifier"]
           %td= attrs["project_period_start_date"]
     %tr{ :class => 'current_record' }
       %td
@@ -35,7 +35,7 @@
       %td= h @award.sponsor
       %td= h @award.sponsor_award_number
       %td= h @award.grant_title
-      %td= h @award.budget_number
+      %td= h @award.budget_identifier
       %td= h @award.project_period_start_date
 .links
   = link_to 'List', person_awards_path(@award.person), :class => "list_link icon_link"

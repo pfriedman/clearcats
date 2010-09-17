@@ -59,9 +59,9 @@ class FacultyWebService
   end
   
   def self.awards_for_employee(params)
-
+    @seen_awards = Hash.new
     results = []
-
+    
     uri, req = create_award_request(params)
 
     begin
@@ -159,35 +159,67 @@ class FacultyWebService
     end
     
     def self.instantiate_award(attributes)
-      
       begin
-        award = Award.find_by_budget_number(attributes["budget_number"])
-        award = Award.new if award.nil?
+        budget_number     = attributes["budget_number"]
+        budget_identifier = budget_number[0,24]
+        
+        award = get_award(budget_identifier)
+        sponsor_attributes, award_attributes, award_detail_attributes = extract_attributes(attributes)
 
-        if award.versions.empty?
-          sponsor = nil
-          attributes.each do |name, value|
-            if name.include?("sponsor") and name != "sponsor_award_number"
-              sponsor ||= Sponsor.new
-              sponsor.send(name.to_s + '=', value)
-            else
-              award.send(name.to_s + '=', value)
-            end
-          end
+        if !award.edited_by_user?
+          sponsor = award.sponsor.blank? ? Sponsor.new : award.sponsor
+          sponsor_attributes.each { |name, value| sponsor.send(name.to_s + '=', value) }
           award.sponsor = sponsor unless sponsor.nil?
+          
+          award_attributes.each { |name, value| award.send(name.to_s + '=', value) }
+
+          if award.department.blank?
+            dept = Department.find_or_create_by_name(attributes["department"])
+            award.department = dept if dept
+          end
         end
         
-        if award.department.blank?
-          dept = Department.find_or_create_by_name(attributes["department"])
-          award.department = dept if dept
-        end
-
+        award_detail = award.award_details.select { |detail| detail.budget_number == budget_number }.first
+        award_detail = AwardDetail.new(:award => award) if award_detail.nil?
+        
+        award_detail_attributes.each { |name, value| award_detail.send(name.to_s + '=', value) }
+        award.award_details << award_detail
+        
         Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
+        
+        @seen_awards[budget_identifier] = award
         
         return award
       rescue Exception => e
         Rails.logger.error("FacultyWebService.instantiate_award - Error occurred #{e} \n #{e.backtrace.join('\n')}")
       end
+    end
+
+    def self.get_award(budget_identifier)
+      award = @seen_awards[budget_identifier] if @seen_awards.has_key?(budget_identifier)
+      award = Award.find_by_budget_identifier(budget_identifier) if award.nil?
+      award = Award.new(:budget_identifier => budget_identifier) if award.nil?
+      award
+    end
+
+    def self.extract_attributes(attributes)
+      award_detail_fields = ["budget_period", "budget_period_start_date", "budget_period_end_date", "budget_period_direct_cost", "award_end_date", "award_begin_date",
+                             "budget_period_direct_and_indirect_cost", "budget_number", "direct_amount", "indirect_amount", "total_amount" ]
+
+      sponsor_attributes      = Hash.new
+      award_attributes        = Hash.new
+      award_detail_attributes = Hash.new
+
+      attributes.each do |name, value|
+        if name.include?("sponsor") and name != "sponsor_award_number"
+          sponsor_attributes[name] = value
+        elsif award_detail_fields.include?(name)
+          award_detail_attributes[name] = value
+        else
+          award_attributes[name] = value
+        end
+      end
+      [sponsor_attributes, award_attributes, award_detail_attributes]
     end
 
     def self.parse_faculty_response(body)
@@ -206,7 +238,7 @@ class FacultyWebService
       value = ActiveSupport::JSON.decode(body)
       value.each do |attributes|
         award = instantiate_award(attributes) 
-        results << award if award
+        results << award if award and !results.include?(award)
       end
       results
     end

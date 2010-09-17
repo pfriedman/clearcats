@@ -4,8 +4,8 @@ Given /^a Person with a first name "(.*)" who was changed from "(.*)" and netid 
   person.save!
 end
 
-Given /^an Award with a grant title "(.*)" which was changed from "(.*)" and budget_number "(.*)"$/ do |current_grant_title, previous_grant_title, budget_number|
-  award = Factory(:award, :grant_title => previous_grant_title, :budget_number => budget_number)
+Given /^an Award with a grant title "(.*)" which was changed from "(.*)" and budget_identifier "(.*)"$/ do |current_grant_title, previous_grant_title, budget_identifier|
+  award = Factory(:award, :grant_title => previous_grant_title, :budget_identifier => budget_identifier)
   award.grant_title = current_grant_title
   award.save!
 end

@@ -1,7 +1,7 @@
 .span-9
   .award_section
     %p
-      %b Award Details
+      %b Award Information
     %p
       = f.check_box :nucats_assisted
       = f.label :nucats_assisted, "NUCATS Assisted"
@@ -18,9 +18,9 @@
       %br
       = f.text_field :grant_title
     %p
-      = f.label :budget_number, "Budget Number"
+      = f.label :budget_identifier, "Budget Number"
       %br
-      = f.text_field :budget_number
+      = f.object.budget_identifier
     %p
       = f.label :grant_number, "Grant Number"
       %br
@@ -32,7 +32,7 @@
     %p
       = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
-      =h f.object.ctsa_reporting_years.join(",")
+      =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
     %p
       = f.label :role, "Role"
       %br
@@ -81,30 +81,6 @@
 
   .award_section
     %p
-      %b Budget Information
-    %p
-      = f.label :budget_period, "Budget Period"
-      %br
-      = f.text_field :budget_period
-    %p
-      = f.label :formatted_budget_period_start_date, "Budget Period Start Date"
-      %br
-      = f.text_field :formatted_budget_period_start_date, :class => "datepicker"
-    %p
-      = f.label :formatted_budget_period_end_date, "Budget Period End Date"
-      %br
-      = f.text_field :formatted_budget_period_end_date, :class => "datepicker"
-    %p
-      = f.label :budget_period_direct_cost, "Budget Period Direct Cost"
-      %br
-      = f.text_field :budget_period_direct_cost
-    %p
-      = f.label :budget_period_direct_and_indirect_cost, "Budget Period Direct And Indirect Cost"
-      %br
-      = f.text_field :budget_period_direct_and_indirect_cost
-
-  .award_section
-    %p
       %b Project Information
     %p
       = f.label :formatted_project_period_start_date, "Project Period Start Date"
@@ -122,18 +98,6 @@
       = f.label :total_project_cost, "Total Project Cost"
       %br
       = f.text_field :total_project_cost
-    %p
-      = f.label :direct_amount, "Direct Amount"
-      %br
-      = f.text_field :direct_amount
-    %p
-      = f.label :indirect_amount, "Indirect Amount"
-      %br
-      = f.text_field :indirect_amount
-    %p
-      = f.label :total_amount, "Total Amount"
-      %br
-      = f.text_field :total_amount
 
 .buttons
   = hidden_field_tag :service_id, @service.id if @service

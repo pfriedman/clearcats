@@ -13,7 +13,7 @@
     %th
       = order @search, :by => :grant_title, :as => "Grant Title", :params => ordering_params
     %th
-      = order @search, :by => :budget_number, :as => "Budget Number", :params => ordering_params
+      = order @search, :by => :budget_identifier, :as => "Budget Number", :params => ordering_params
     %th
       = order @search, :by => :project_period_start_date, :as => "Project Start Date", :params => ordering_params
     %th History
@@ -21,7 +21,9 @@
     - edit_link_params = { :controller => "/awards", :action => "edit", :id => award, :search => params[:search] }.merge(award_association)
     %tr{ :class => cycle('even_record', 'odd_record') }
       %td
-        = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+        = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
+        %br
+        = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" }
       %td= h award.nucats_assisted? ? "Yes" : "No"
       %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
       %td.ctsa_award= h award.organization.to_s
@@ -29,6 +31,6 @@
       %td= h award.sponsor
       %td= h award.sponsor_award_number
       %td= h truncate(award.grant_title)
-      %td= h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.budget_identifier
       %td= h award.project_period_start_date
       %td= link_to 'View', versions_award_path(award), :class => "show_link icon_link"

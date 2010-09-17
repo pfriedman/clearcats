@@ -60,7 +60,7 @@ module NavigationHelpers
       edit_award_path(Award.first(:order => "updated_at desc"))
     
     when /the award versions page for "(.*)"/
-      versions_award_path(Award.find_by_budget_number($1))
+      versions_award_path(Award.find_by_budget_identifier($1))
     
     ### PEOPLE ###
     

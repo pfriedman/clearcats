@@ -1,9 +1,9 @@
 %table.records
   %tr
     %th Select
-    %th Reporting Years
     %th
       = order search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
+    %th Reporting Years
     %th
       = order search, :by => :pmcid, :as => "PMCID", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
     %th
@@ -14,6 +14,7 @@
       = order search, :by => :publication_date, :as => "Publication Date", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
     %th
       = order search, :by => :title, :as => "Title", :params => { :controller => "services", :action => "choose_publications", :id => service.id }
+    %th History
   - publications.each do |pub|
     %tr{ :class => cycle('even_record', 'odd_record') }
       %td 
@@ -25,3 +26,4 @@
       %td= h pub.nihms_number
       %td= h pub.publication_date
       %td= h pub.title
+      %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link"

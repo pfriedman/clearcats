@@ -108,6 +108,12 @@ Factory.define :award do |a|
   a.grant_number      "grant number"
   a.grant_title       "grant title"
   a.grant_amount      11.00
+  a.budget_identifier "NORTHWESTU00000039703000"
+end
+
+Factory.define :award_detail do |a|
+  a.award { |a| a.association(:award) }
+  a.budget_number "NORTHWESTU0000003970300060001"
 end
 
 Factory.define :sponsor do |sponsor|

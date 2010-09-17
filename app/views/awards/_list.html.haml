@@ -1,24 +1,25 @@
-- if @person.employeeid.blank?
-  .notice
-    Awards are culled from InfoED by the employee id. #{@person} is missing an employee id.
-    = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
-
-- if @service
-  - ordering_params   = { :controller => "services", :action => "choose_awards", :id => @service.id }
-  - award_association = { :service_id => @service.id }
-- else 
-  - ordering_params   = { :controller => "awards", :action => "index", :person_id => @person.id }
-  - award_association = { :person_id => @person.id }
-
 #awards
-  = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+  - if @person.employeeid.blank?
+    .notice
+      Awards are culled from InfoED by the employee id. #{@person} is missing an employee id.
+      = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
 
-  %h3= link_to "Awards for #{@person}", person_awards_path(@person)
+  - if @service
+    - ordering_params   = { :controller => "services", :action => "choose_awards", :id => @service.id }
+    - award_association = { :service_id => @service.id }
+  - else 
+    - ordering_params   = { :controller => "awards", :action => "index", :person_id => @person.id }
+    - award_association = { :person_id => @person.id }
 
-  - if @awards
-    = render :partial => '/awards/awards_table', :locals => { :ordering_params => ordering_params, :award_association => award_association }
+  .awards_body
+    = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+
+    %h3= link_to "Awards for #{@person}", person_awards_path(@person)
+
+    - if @awards
+      = render :partial => '/awards/awards_table', :locals => { :ordering_params => ordering_params, :award_association => award_association }
       
-  .links
-    = link_to 'List People', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User) unless @service
-    = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
-    = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service
+    .links
+      = link_to 'List People', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User) unless @service
+      = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
+      = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service

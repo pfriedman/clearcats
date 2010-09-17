@@ -80,9 +80,26 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.datetime "data_updated_at"
   end
 
+  create_table "award_details", :force => true do |t|
+    t.integer  "award_id"
+    t.string   "budget_period"
+    t.date     "budget_period_start_date"
+    t.date     "budget_period_end_date"
+    t.float    "budget_period_direct_cost"
+    t.float    "budget_period_direct_and_indirect_cost"
+    t.string   "budget_number"
+    t.float    "direct_amount"
+    t.float    "indirect_amount"
+    t.float    "total_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "award_details", ["budget_number"], :name => "index_award_details_on_budget_number"
+
   create_table "awards", :force => true do |t|
     t.string   "grant_number"
-    t.string   "grant_title",                            :limit => 2500
+    t.string   "grant_title",                  :limit => 2500
     t.float    "grant_amount"
     t.integer  "person_id"
     t.integer  "investigator_id"
@@ -91,11 +108,6 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.string   "institution_number"
     t.string   "subproject_number"
     t.string   "ctsa_award_type_award_number"
-    t.string   "budget_period"
-    t.date     "budget_period_start_date"
-    t.date     "budget_period_end_date"
-    t.float    "budget_period_direct_cost"
-    t.float    "budget_period_direct_and_indirect_cost"
     t.date     "project_period_start_date"
     t.date     "project_period_end_date"
     t.float    "project_period_total_cost"
@@ -106,11 +118,9 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.string   "proposal_status"
     t.string   "award_status"
     t.string   "sponsor_award_number"
-    t.string   "budget_number"
-    t.float    "direct_amount"
-    t.float    "indirect_amount"
-    t.float    "total_amount"
     t.boolean  "nucats_assisted"
+    t.string   "budget_identifier"
+    t.boolean  "edited_by_user"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sponsor_id"
@@ -119,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
   end
 
   add_index "awards", ["activity_code_id"], :name => "index_awards_on_activity_code_id"
-  add_index "awards", ["budget_number"], :name => "index_awards_on_budget_number"
+  add_index "awards", ["budget_identifier"], :name => "index_awards_on_budget_identifier"
   add_index "awards", ["investigator_id"], :name => "index_awards_on_investigator_id"
   add_index "awards", ["organization_type", "organization_id"], :name => "index_awards_on_organization_type_and_organization_id"
   add_index "awards", ["originating_sponsor_id"], :name => "index_awards_on_originating_sponsor_id"

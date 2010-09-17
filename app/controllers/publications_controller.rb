@@ -19,12 +19,53 @@ class PublicationsController < ApplicationController
       redirect_to people_path
     end
   end
+  
+  def new
+    params[:search] ||= Hash.new
+    populate_service_and_person
+    @publication = Publication.new(:person_id => @person.id)
+    respond_to do |format|
+      format.js do
+        @show_close_button = true
+        render 'new'
+      end
+      format.html do
+        @show_close_button = false
+        render 'new' 
+      end
+    end
+  end
+  
+  def create
+    @search_params  = params[:search_params]
+    @publication    = Publication.new(params[:publication])
+    populate_service_and_person
+
+    respond_to do |format|
+      if @publication.save
+        format.js do
+          @search = Publication.search(params[:search])
+          @publications = @search.all
+          render :update do |page|
+            page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search] }
+          end
+        end
+        format.html do 
+          flash[:notice] = "Publication was successfully created."
+          redirect_to edit_publication_url(@publication)
+          return
+        end
+      else
+        format.html { render :action => "new" }
+      end
+    end
+  end
 
   # GET /publications/edit
   def edit
     params[:search] ||= Hash.new
     populate_service_and_person
-    @publication    = Publication.find(params[:id])
+    @publication = Publication.find(params[:id])
     respond_to do |format|
       format.js do
         @show_close_button = true

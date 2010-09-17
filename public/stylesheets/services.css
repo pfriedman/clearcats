@@ -18,12 +18,19 @@
   margin-top: 2em;
 }
 
-#modal_window .header_option {
+.header_option {
   top: 0;
   right: 0;
-  padding-top: .25em;
-  padding-right: 2em;
+
+  margin-top: .25em;
+  margin-right: 1em;
+  padding: 0.25em;
   position: absolute;
+  border: 1px solid #ccc;
+}
+
+.header_option:hover {
+  background-color: aliceblue;
 }
 
 #modal_window p {
@@ -35,7 +42,7 @@
   width: 30em;
 }
 
-#awards .edit_modal_form_add_link {
+.edit_modal_form_add_link {
   float: right;
 }
 

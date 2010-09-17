@@ -17,7 +17,8 @@
     %th History
   - publications.each do |pub|
     %tr{ :class => cycle('even_record', 'odd_record') }
-      %td= link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :person_id => @person.id, :search => params[:search] }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+      %td
+        = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :person_id => @person.id, :search => params[:search] }, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
       %td= h pub.nucats_assisted? ? "Yes" : "No"
       %td= h pub.ctsa_reporting_years.blank? ? "n/a" : pub.ctsa_reporting_years.join(",")
       %td= h pub.pmcid

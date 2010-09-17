@@ -20,6 +20,10 @@ class AwardsController < ApplicationController
     end
   end
 
+  def details
+    @award = Award.find(params[:id])
+  end
+
   def new
     populate_common
     @award = Award.new(:person_id => @person.id)

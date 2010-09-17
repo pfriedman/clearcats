@@ -1,0 +1,79 @@
+- stylesheet "awards", "services"
+
+.header_option
+  = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+
+#award_details
+  %h3
+    Award for #{@award.person}
+  
+  %p
+    Sponsor: #{@award.sponsor_name}
+    %br
+    Sponsor Award Number: #{@award.sponsor_award_number}
+    %br
+    Grant Title: #{@award.grant_title}
+
+  - if @award.award_details.blank?
+    %p.no_records
+      No detail records for award were found.
+  - else
+    %table.records
+      %tr
+        %th Budget Period
+        %th Budget Number
+        %th Start Date
+        %th End Date
+        %th Direct Cost
+        %th Direct And Indirect Cost
+        %th Direct Amount
+        %th Indirect Amount
+        %th Total Amount
+      - @award.award_details.sort_by { |e| [e.budget_period, e.budget_number] }.each do |detail|
+        %tr
+          %td= h detail.budget_period
+          %td= h detail.budget_number
+          %td= h detail.formatted_budget_period_start_date
+          %td= h detail.formatted_budget_period_end_date
+          %td= h detail.budget_period_direct_cost
+          %td= h detail.budget_period_direct_and_indirect_cost
+          %td= h detail.direct_amount
+          %td= h detail.indirect_amount
+          %td= h detail.total_amount
+    
+
+/   %p
+/     %b Budget Information
+/   %p
+/     = f.label :budget_period, "Budget Period"
+/     %br
+/     = f.text_field :budget_period
+/   %p
+/     = f.label :formatted_budget_period_start_date, "Budget Period Start Date"
+/     %br
+/     = f.text_field :formatted_budget_period_start_date, :class => "datepicker"
+/   %p
+/     = f.label :formatted_budget_period_end_date, "Budget Period End Date"
+/     %br
+/     = f.text_field :formatted_budget_period_end_date, :class => "datepicker"
+/   %p
+/     = f.label :budget_period_direct_cost, "Budget Period Direct Cost"
+/     %br
+/     = f.text_field :budget_period_direct_cost
+/   %p
+/     = f.label :budget_period_direct_and_indirect_cost, "Budget Period Direct And Indirect Cost"
+/     %br
+/     = f.text_field :budget_period_direct_and_indirect_cost
+/ %p
+/   = f.label :direct_amount, "Direct Amount"
+/   %br
+/   = f.text_field :direct_amount
+/ %p
+/   = f.label :indirect_amount, "Indirect Amount"
+/   %br
+/   = f.text_field :indirect_amount
+/ %p
+/   = f.label :total_amount, "Total Amount"
+/   %br
+/   = f.text_field :total_amount
+/

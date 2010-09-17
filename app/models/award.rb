@@ -3,42 +3,34 @@
 #
 # Table name: awards
 #
-#  id                                     :integer         not null, primary key
-#  grant_number                           :string(255)
-#  grant_title                            :string(2500)
-#  grant_amount                           :float
-#  person_id                              :integer
-#  investigator_id                        :integer
-#  role                                   :string(255)
-#  parent_institution_number              :string(255)
-#  institution_number                     :string(255)
-#  subproject_number                      :string(255)
-#  ctsa_award_type_award_number           :string(255)
-#  budget_period                          :string(255)
-#  budget_period_start_date               :date
-#  budget_period_end_date                 :date
-#  budget_period_direct_cost              :float
-#  budget_period_direct_and_indirect_cost :float
-#  project_period_start_date              :date
-#  project_period_end_date                :date
-#  project_period_total_cost              :float
-#  total_project_cost                     :float
-#  organization_id                        :integer
-#  organization_type                      :string(255)
-#  activity_code_id                       :integer
-#  proposal_status                        :string(255)
-#  award_status                           :string(255)
-#  sponsor_award_number                   :string(255)
-#  budget_number                          :string(255)
-#  direct_amount                          :float
-#  indirect_amount                        :float
-#  total_amount                           :float
-#  nucats_assisted                        :boolean
-#  created_at                             :datetime
-#  updated_at                             :datetime
-#  sponsor_id                             :integer
-#  originating_sponsor_id                 :integer
-#  ctsa_reporting_years_mask              :integer
+#  id                           :integer         not null, primary key
+#  grant_number                 :string(255)
+#  grant_title                  :string(2500)
+#  grant_amount                 :float
+#  person_id                    :integer
+#  investigator_id              :integer
+#  role                         :string(255)
+#  parent_institution_number    :string(255)
+#  institution_number           :string(255)
+#  subproject_number            :string(255)
+#  ctsa_award_type_award_number :string(255)
+#  project_period_start_date    :date
+#  project_period_end_date      :date
+#  project_period_total_cost    :float
+#  total_project_cost           :float
+#  organization_id              :integer
+#  organization_type            :string(255)
+#  activity_code_id             :integer
+#  proposal_status              :string(255)
+#  award_status                 :string(255)
+#  sponsor_award_number         :string(255)
+#  nucats_assisted              :boolean
+#  budget_identifier            :string(255)
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  sponsor_id                   :integer
+#  originating_sponsor_id       :integer
+#  ctsa_reporting_years_mask    :integer
 #
 
 class Award < ActiveRecord::Base
@@ -53,8 +45,10 @@ class Award < ActiveRecord::Base
   belongs_to :person
   belongs_to :organization
   belongs_to :activity_code
-  
   belongs_to :sponsor
+  has_many :award_details
+    
+  validates_presence_of :budget_identifier
   
   # attributes from faculty_web_service that are not persisted
   attr_accessor :nu_employee_id, :first_name, :last_name, :middle_name
@@ -70,14 +64,6 @@ class Award < ActiveRecord::Base
   
   def project_end_date=(dt)
     self.project_period_end_date = dt
-  end
-  
-  def award_begin_date=(dt)
-    self.budget_period_start_date = dt
-  end
-  
-  def award_end_date=(dt)
-    self.budget_period_end_date = dt
   end
   
   def proposal_title=(title)
@@ -102,7 +88,11 @@ class Award < ActiveRecord::Base
     self.sponsor = Sponsor.find_or_create_by_name(sponsor_name)
   end
   
-  # CTSA award type 
+  def to_s
+    "#{sponsor_name} - #{sponsor_award_number} [#{grant_title}]"
+  end
+  
+  # CTSA award organization 
   
   def phs_organization=(org_id)
     self.phs_organization_id = org_id
@@ -136,23 +126,7 @@ class Award < ActiveRecord::Base
     organization.id if organization
   end
   
-  # formatted date fields
-  def formatted_budget_period_start_date
-    self.budget_period_start_date.strftime("%m/%d/%Y") unless self.budget_period_start_date.nil?
-  end
-  
-  def formatted_budget_period_start_date=(dt)
-    self.budget_period_start_date = dt
-  end
-
-  def formatted_budget_period_end_date
-    self.budget_period_end_date.strftime("%m/%d/%Y") unless self.budget_period_end_date.nil?
-  end
-  
-  def formatted_budget_period_end_date=(dt)
-    self.budget_period_end_date = dt
-  end
-  
+  # formatted date fields  
   def formatted_project_period_start_date
     self.project_period_start_date.strftime("%m/%d/%Y") unless self.project_period_start_date.nil?
   end

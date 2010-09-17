@@ -1,19 +1,21 @@
-- if @person.netid.blank?
-  .notice
-    Publications are culled from Lattice Grid by the netid. #{@person} is missing a netid.
-    = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
-
 #publications
+  - if @person.netid.blank?
+    .notice
+      Publications are culled from Lattice Grid by the netid. #{@person} is missing a netid.
+      = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
+
+  .publications_body
+    = link_to "Add New Publication", { :controller => "/publications", :action => "new", :search => @search_params, :person_id => @person.id }, { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
   
-  %h3 Publications for #{@person}
+    %h3 Publications for #{@person}
   
-  - if @publications
+    - if @publications
   
-    - if @service
-      = render 'publications/service_publications_table', :publications => @publications, :search => @search, :service => @service
-    - else
-      = render 'publications/publications_table', :publications => @publications, :search => @search
-      .links
-        = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
-        = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"
-        = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"
+      - if @service
+        = render 'publications/service_publications_table', :publications => @publications, :search => @search, :service => @service
+      - else
+        = render 'publications/publications_table', :publications => @publications, :search => @search
+        .links
+          = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
+          = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"
+          = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"

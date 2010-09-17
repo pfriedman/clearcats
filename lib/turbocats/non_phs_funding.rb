@@ -22,13 +22,14 @@ class Turbocats::NonPhsFunding < Turbocats::Base
     return nil if tcp.blank?
     ::Award.new do |a|
       # import the person association
-      a.nucats_assisted = true
-      a.person          = ::Person.find_by_era_commons_username(tcp.commons_username)
-      a.organization    = NonPhsOrganization.find_by_code(self.non_phs_organization_code)
-      a.grant_number    = self.grant_contract_number
-      a.grant_title     = self.grant_title
-      a.total_amount    = self.total_dollars
-      a.ctsa_reporting_years = self.ctsa_reporting_year             # TODO: confirm this attribute
+      a.nucats_assisted      = true
+      a.person               = ::Person.find_by_era_commons_username(tcp.commons_username)
+      a.organization         = NonPhsOrganization.find_by_code(self.non_phs_organization_code)
+      a.grant_number         = self.grant_contract_number
+      a.budget_identifier    = "turbocats_import_#{self.ctsa_reporting_year.first}_#{self.grant_contract_number}"
+      a.grant_title          = self.grant_title
+      a.total_project_cost   = self.total_dollars
+      a.ctsa_reporting_years = self.ctsa_reporting_year
     end
   end
   
