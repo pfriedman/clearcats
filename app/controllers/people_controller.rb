@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions, :new, :create]
+  before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions, :new, :create, :update_ctsa_reporting_year]
   before_filter :permit_admin, :only => [:upload, :revert]
 
   def index
@@ -49,7 +49,30 @@ class PeopleController < ApplicationController
         format.xml  { render :xml => @person.errors, :status => :unprocessable_entity }
       end
     end
-
+  end
+  
+  # POST /update_ctsa_reporting_year
+  def update_ctsa_reporting_year
+    current_year = Time.now.year
+    
+    @search = Client.search(params[:search])
+    @people = @search.paginate(:page => params[:page], :per_page => 20)
+    
+    @people.each do |person|
+      reporting_years = person.ctsa_reporting_years
+      if params["people_ids"].include?(person.id.to_s)
+        if !reporting_years.include?(current_year)
+          person.ctsa_reporting_years = (reporting_years << current_year) 
+          person.save
+        end
+      elsif reporting_years.include?(current_year)
+        reporting_years.delete(current_year)
+        person.ctsa_reporting_years = reporting_years
+        person.save
+      end
+    end
+    flash[:notice] = "People were updated successfully"
+    redirect_to people_path(:page => params[:page], :search => params[:search])
   end
 
 

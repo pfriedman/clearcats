@@ -211,7 +211,7 @@ class FacultyWebService
       award_detail_attributes = Hash.new
 
       attributes.each do |name, value|
-        if name.include?("sponsor") and name != "sponsor_award_number"
+        if name != "sponsor_award_number" and name.include?("sponsor")
           sponsor_attributes[name] = value
         elsif award_detail_fields.include?(name)
           award_detail_attributes[name] = value

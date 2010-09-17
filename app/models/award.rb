@@ -26,6 +26,7 @@
 #  sponsor_award_number         :string(255)
 #  nucats_assisted              :boolean
 #  budget_identifier            :string(255)
+#  edited_by_user               :boolean
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  sponsor_id                   :integer
@@ -37,7 +38,7 @@ class Award < ActiveRecord::Base
   include VersionExportable
   include CtsaReportable
   
-  has_paper_trail
+  has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
   named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_s)} > 0 "} }
   named_scope :invalid_for_ctsa, :conditions => "organization_id IS NULL OR activity_code_id IS NULL OR grant_number IS NULL"

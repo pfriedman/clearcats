@@ -37,7 +37,7 @@ class Publication < ActiveRecord::Base
   include VersionExportable
   include CtsaReportable
   
-  has_paper_trail
+  has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
   belongs_to :person
   

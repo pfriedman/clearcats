@@ -42,6 +42,7 @@
 #  fax                                           :string(255)
 #  edited                                        :boolean
 #  imported                                      :boolean
+#  ctsa_reporting_years_mask                     :integer
 #
 
 require 'spec_helper'
@@ -184,6 +185,8 @@ describe Person do
         User.count.should   == 1
         Person.last.organizational_units.should == [org_unit]
       end
+      
+      # "service line name"
       
     end
     

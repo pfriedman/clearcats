@@ -4,17 +4,21 @@
       Publications are culled from Lattice Grid by the netid. #{@person} is missing a netid.
       = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
 
+  - if @service
+    - ordering_params = { :controller => "services", :action => "choose_publications", :id => @service.id }
+    - pub_association = { :service_id => @service.id }
+  - else 
+    - ordering_params = { :controller => "publications", :action => "index", :person_id => @person.id }
+    - pub_association = { :person_id => @person.id }
+
   .publications_body
     = link_to "Add New Publication", { :controller => "/publications", :action => "new", :search => @search_params, :person_id => @person.id }, { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
   
     %h3 Publications for #{@person}
   
     - if @publications
-  
-      - if @service
-        = render 'publications/service_publications_table', :publications => @publications, :search => @search, :service => @service
-      - else
-        = render 'publications/publications_table', :publications => @publications, :search => @search
+      = render 'publications/publications_table', { :ordering_params => ordering_params, :pub_association => pub_association }
+      - unless @service
         .links
           = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
           = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"

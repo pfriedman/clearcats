@@ -17,9 +17,9 @@
     %h3= link_to "Awards for #{@person}", person_awards_path(@person)
 
     - if @awards
-      = render :partial => '/awards/awards_table', :locals => { :ordering_params => ordering_params, :award_association => award_association }
-      
-    .links
-      = link_to 'List People', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User) unless @service
-      = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
-      = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service
+      = render '/awards/awards_table', { :ordering_params => ordering_params, :award_association => award_association }
+    - unless @service
+      .links
+        = link_to 'List People', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User) unless @service
+        = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
+        = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service

@@ -42,6 +42,7 @@
 #  fax                                           :string(255)
 #  edited                                        :boolean
 #  imported                                      :boolean
+#  ctsa_reporting_years_mask                     :integer
 #
 
 require 'spec_helper'

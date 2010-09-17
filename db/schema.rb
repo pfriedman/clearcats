@@ -308,6 +308,7 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.string   "fax"
     t.boolean  "edited"
     t.boolean  "imported"
+    t.integer  "ctsa_reporting_years_mask"
   end
 
   add_index "people", ["country_id"], :name => "index_people_on_country_id"

@@ -1,5 +1,5 @@
 class AwardsController < ApplicationController
-  before_filter :permit_user,  :only => [:new, :create, :versions]
+  before_filter :permit_user,  :only => [:new, :create, :versions, :update_ctsa_reporting_year]
   before_filter :permit_admin, :only => [:revert]
   layout proc { |controller| controller.request.xhr? ? nil : 'application'  } 
 
@@ -82,6 +82,27 @@ class AwardsController < ApplicationController
         format.html { render :action => "edit" }
       end
     end
+  end
+  
+  # POST /update_ctsa_reporting_year
+  def update_ctsa_reporting_year
+    populate_service_and_person
+    current_year = Time.now.year
+    @person.awards.each do |award|
+      reporting_years = award.ctsa_reporting_years
+      if params["award_ids"].include?(award.id.to_s)
+        if !reporting_years.include?(current_year)
+          award.ctsa_reporting_years = (reporting_years << current_year) 
+          award.save
+        end
+      elsif reporting_years.include?(current_year)
+        reporting_years.delete(current_year)
+        award.ctsa_reporting_years = reporting_years
+        award.save
+      end
+    end
+    flash[:notice] = "Awards were updated successfully"
+    redirect_to person_awards_path(@person) # TODO: determine if there was a service and redirect appropriately
   end
   
   def versions

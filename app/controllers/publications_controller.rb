@@ -82,7 +82,7 @@ class PublicationsController < ApplicationController
   def update
     params[:search] ||= Hash.new
     populate_service_and_person
-    @publication    = Publication.find(params[:id])
+    @publication = Publication.find(params[:id])
     respond_to do |format|
       if @publication.update_attributes(params[:publication])
         format.html do
@@ -90,7 +90,8 @@ class PublicationsController < ApplicationController
           redirect_to edit_publication_path(@publication)
         end
         format.js do
-          @publications = Publication.search(params[:search])
+          @search = Publication.search(params[:search])
+          @publications = @search.all
           render :update do |page|
             page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search] }
           end
@@ -99,6 +100,27 @@ class PublicationsController < ApplicationController
         format.html { render :action => "edit" }
       end
     end
+  end
+  
+  # POST /update_ctsa_reporting_year
+  def update_ctsa_reporting_year
+    populate_service_and_person
+    current_year = Time.now.year
+    @person.publications.each do |pub|
+      reporting_years = pub.ctsa_reporting_years
+      if params["publication_ids"].include?(pub.id.to_s)
+        if !reporting_years.include?(current_year)
+          pub.ctsa_reporting_years = (reporting_years << current_year) 
+          pub.save
+        end
+      elsif reporting_years.include?(current_year)
+        reporting_years.delete(current_year)
+        pub.ctsa_reporting_years = reporting_years
+        pub.save
+      end
+    end
+    flash[:notice] = "Publications were updated successfully"
+    redirect_to person_publications_path(@person) # TODO: determine if there was a service and redirect appropriately
   end
   
   def versions

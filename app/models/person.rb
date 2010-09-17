@@ -42,6 +42,7 @@
 #  fax                                           :string(255)
 #  edited                                        :boolean
 #  imported                                      :boolean
+#  ctsa_reporting_years_mask                     :integer
 #
 
 # TurboCATS                 ClearCATS
@@ -89,7 +90,9 @@
 require 'comma'
 class Person < ActiveRecord::Base
   include VersionExportable
-  has_paper_trail
+  include CtsaReportable
+  
+  has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
   SCHOLAR      = "scholar"
   OTHER_CAREER = "other_career_development"
@@ -297,14 +300,20 @@ class Person < ActiveRecord::Base
   ###
 
   def self.import_data(file, user)
-    FasterCSV.parse(file, :headers => :first_row, :write_headers=>false, :return_headers => false, :header_converters => :symbol) do |row|
-      if !row[:commons_username].blank?
-        pers = Client.find_or_create_by_era_commons_username(row[:commons_username])
-        specialty = Specialty.find_by_code(row[:area_of_expertise])
-        pers.specialty = specialty unless specialty.nil?
-        [:first_name, :last_name, :middle_initial, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+    FasterCSV.parse(file, :headers => :first_row, :write_headers => false, :return_headers => false, :header_converters => :symbol) do |row|
+      if !row[:era_commons_username].blank?
+        pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
+        if !row[:area_of_expertise].blank?
+          specialty = Specialty.find_by_code(row[:area_of_expertise])
+          pers.specialty = specialty unless specialty.nil?
+        end
+        [:first_name, :last_name, :middle_name, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
         pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
         pers.save
+        
+        
+        # TODO: handle service lines
+        # initiated
       end
     end
   end

@@ -26,6 +26,7 @@
 #  sponsor_award_number         :string(255)
 #  nucats_assisted              :boolean
 #  budget_identifier            :string(255)
+#  edited_by_user               :boolean
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  sponsor_id                   :integer
