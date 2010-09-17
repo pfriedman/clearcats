@@ -12,7 +12,7 @@
     %th
       = order @search, :by => :grant_title, :as => "Grant Title", :params => { :controller => "awards", :action => "incomplete" }
     %th
-      = order @search, :by => :budget_number, :as => "Budget Number", :params => { :controller => "awards", :action => "incomplete" }
+      = order @search, :by => :budget_identifier, :as => "Budget Number", :params => { :controller => "awards", :action => "incomplete" }
     %th
       = order @search, :by => :project_period_start_date, :as => "Project Start Date", :params => { :controller => "awards", :action => "incomplete" }
     %th Missing
@@ -21,7 +21,7 @@
       %td= link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :search => params[:search], :person_id => award.person.id }, { :class => "edit_link icon_link" }
       %td= h award.person
       %td= h truncate(award.grant_title)
-      %td= h h award.budget_number.blank? ? "" : award.budget_number.sub("NORTHWESTU00000", "")
+      %td= h award.budget_identifier
       %td= h award.project_period_start_date
       %td= h award.ctsa_missing_fields
 

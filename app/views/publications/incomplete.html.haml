@@ -1,0 +1,32 @@
+- stylesheet "publications", "services"
+- title "Incomplete Publications"
+
+.instructions
+  The following records are ineligible for CTSA Reporting. They are missing either the PMCID.
+
+%table.records
+  %tr
+    %th Edit
+    %th 
+      = order @search, :by => :person_last_name, :as => "Person", :params => { :controller => "publications", :action => "incomplete" }
+    %th 
+      = order @search, :by => :publication_date, :as => "Publication Date", :params => { :controller => "publications", :action => "incomplete" }
+    %th
+      = order @search, :by => :title, :as => "Title", :params => { :controller => "publications", :action => "incomplete" }
+    %th
+      = order @search, :by => :pmid, :as => "PMID", :params => { :controller => "publications", :action => "incomplete" }
+    %th
+      = order @search, :by => :nihms_number, :as => "NIHMS Number", :params => { :controller => "publications", :action => "incomplete" }
+    %th
+      = order @search, :by => :cited, :as => "Cited", :params => { :controller => "publications", :action => "incomplete" }
+  - @publications.each do |pub|
+    %tr{ :class => cycle('even_record', 'odd_record') }
+      %td= link_to "Edit", { :controller => "publications", :action => "edit", :id => pub, :search => params[:search], :person_id => pub.person.id }, { :class => "edit_link icon_link" }
+      %td= h pub.person
+      %td= h pub.publication_date
+      %td= h truncate(pub.title, :length => 50)
+      %td= h pub.pmid
+      %td= h pub.nihms_number
+      %td= h pub.cited? ? "Yes" : "No"
+
+= will_paginate @publications

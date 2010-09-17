@@ -12,6 +12,7 @@
 #  abstract                  :text
 #  title                     :string(1000)
 #  nucats_assisted           :boolean
+#  edited_by_user            :boolean
 #  created_at                :datetime
 #  updated_at                :datetime
 #  cited                     :boolean

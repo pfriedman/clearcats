@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.text     "abstract"
     t.string   "title",                     :limit => 1000
     t.boolean  "nucats_assisted"
+    t.boolean  "edited_by_user"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "cited"

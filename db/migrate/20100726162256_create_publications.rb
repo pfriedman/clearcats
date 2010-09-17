@@ -9,7 +9,8 @@ class CreatePublications < ActiveRecord::Migration
       t.text :abstract
       t.string :title, :limit => 1000
       t.boolean :nucats_assisted
-
+      t.boolean :edited_by_user
+      
       t.timestamps
     end
     add_index :publications, :person_id

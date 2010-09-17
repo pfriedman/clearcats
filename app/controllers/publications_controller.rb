@@ -26,12 +26,10 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(:person_id => @person.id)
     respond_to do |format|
       format.js do
-        @show_close_button = true
         render 'new'
       end
       format.html do
-        @show_close_button = false
-        render 'new' 
+        render 'new'
       end
     end
   end
@@ -134,9 +132,17 @@ class PublicationsController < ApplicationController
     revertit(Publication)
   end
   
+  def incomplete
+    params[:search] ||= {}
+    params[:search][:pmcid_equals] = nil
+    @search = Publication.search(params[:search])
+    @publications = @search.paginate(:page => params[:page], :per_page => 20)
+  end
+  
   private
   
     def populate_service_and_person
+      @show_header    = request.xhr?
       @search_params  = params[:search]
       if params[:service_id]
         @service = Service.find(params[:service_id])

@@ -1,0 +1,42 @@
+%p
+  = f.check_box :nucats_assisted
+  = f.label :nucats_assisted, "NUCATS Assisted"
+%p
+  = f.label :ctsa_reporting_years, "CTSA Reporting Years"
+  %br
+  =h f.object.ctsa_reporting_years.join(",")
+%p
+  = f.label :pmid, "PMID"
+  %br
+  = f.text_field :pmid
+  = link_to "PMCID to PMID Converter", "http://www.ncbi.nlm.nih.gov/sites/pmctopmid", :popup => true
+%p
+  = f.label :pmcid, "PMCID"
+  %br
+  = f.text_field :pmcid
+%p
+  = f.label :nihms_number, "NIHMS Number"
+  %br
+  = f.text_field :nihms_number
+%p
+  = f.label :missing_pmcid_reason, "Missing PMCID Reason"
+  %br
+  = f.text_field :missing_pmcid_reason
+%p
+  = f.check_box :cited
+  = f.label :cited, "Cited"
+%p
+  = f.label :publication_date, "Publication Date"
+  %br
+  = f.text_field :publication_date, :class => "datepicker"
+%p 
+  = f.label :title, "Title"
+  %br
+  = f.text_area :title
+%p 
+  = f.label :abstract, "Abstract"
+  %br
+  = f.text_area :abstract
+
+.buttons
+  = f.submit "Save", :class => "close"
