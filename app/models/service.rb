@@ -22,6 +22,8 @@ class Service < ActiveRecord::Base
   
   delegate :organizational_unit, :to => :service_line
   
+  named_scope :organizational_unit_id_equals, lambda { |id|  {:joins => :service_line, :conditions => ["service_lines.organizational_unit_id = :id", {:id => id} ]} }
+  
   state_machine :state, :initial => :new do
     event :set_service_line do
       transition [:new, :choose_service_line] => :choose_person

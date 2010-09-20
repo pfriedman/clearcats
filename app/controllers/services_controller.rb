@@ -6,6 +6,21 @@ class ServicesController < ApplicationController
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end
 
+  def view_all
+    params[:search] ||= Hash.new
+    @person = find_or_create_user
+    if request.get?
+      @organizational_unit = @person.organizational_unit
+      params[:search][:organizational_unit_id_equals] = @organizational_unit.id
+    end
+    if request.post? 
+      @organizational_unit = @person.organizational_unit
+      params[:search][:organizational_unit_id_equals] = params[:organizational_unit_id]
+    end
+    @search = Service.search(params[:search])
+    @services = @search.paginate(:page => params[:page], :per_page => 10)
+  end
+
   def new
     @service = Service.new
     @search  = Service.search(:created_by_id_equals => find_or_create_user.id, :state_does_not_equal => "complete")
