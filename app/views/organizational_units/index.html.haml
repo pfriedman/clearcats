@@ -8,12 +8,14 @@
       %th= order @search, :by => :name, :as => "Name"
       %th= order @search, :by => :abbreviation, :as => "Abbreviation"
       %th Parent
+      %th Number of Service Lines
       %th{:colspan => "3"}     
     - @organizational_units.each do |organizational_unit|
       %tr{:class => cycle('even_record', 'odd_record')}
         %td= h organizational_unit.name
         %td= h organizational_unit.abbreviation
         %td= h organizational_unit.parent
+        %td= h organizational_unit.service_lines.size
         %td= link_to 'Show', organizational_unit, :class => "show_link icon_link"
         %td= link_to 'Edit', edit_organizational_unit_path(organizational_unit), :class => "edit_link icon_link"
         %td= link_to 'Destroy', organizational_unit, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"

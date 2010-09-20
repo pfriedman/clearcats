@@ -12,5 +12,7 @@
     = f.label :parent_id, "Parent"
     %br
     = f.select :parent_id, nested_set_options(OrganizationalUnit, @organizational_unit) { |i| "#{'-' * i.level} #{i.name} (#{i.abbreviation})" }
+    
+  = render 'org_unit_service_lines'
   %p
     = f.submit 'Save'

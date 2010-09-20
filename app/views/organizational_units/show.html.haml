@@ -2,6 +2,10 @@
 %p
   %b Name:
   = h @organizational_unit.name
+  
+  = render 'org_unit_service_lines'
+
+  
 .links
   = link_to 'Edit', edit_organizational_unit_path(@organizational_unit), :class => "edit_link icon_link"
   |
