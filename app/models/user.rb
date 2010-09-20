@@ -21,6 +21,7 @@
 #  address                                       :string(255)
 #  city                                          :string(255)
 #  state                                         :string(255)
+#  edited_by_user                                :boolean
 #  organizational_unit_id                        :integer
 #  degree_type_one_id                            :integer
 #  degree_type_two_id                            :integer
