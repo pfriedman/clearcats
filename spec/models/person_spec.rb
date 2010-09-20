@@ -172,7 +172,7 @@ describe Person do
         usr = Factory(:user)
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
-        Person.count.should == 3
+        Person.count.should == 4
         User.count.should   == 1
       end
       
@@ -182,7 +182,7 @@ describe Person do
         usr = Factory(:user, :organizational_unit => org_unit)
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
-        Person.count.should == 3
+        Person.count.should == 4
         User.count.should   == 1
         Person.last.organizational_units.should == [org_unit]
       end

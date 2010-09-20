@@ -311,12 +311,10 @@ class Person < ActiveRecord::Base
         end
         
         [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
-        pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
+        pers.organizational_units << user.organizational_unit if !user.organizational_unit.nil? and !pers.organizational_units.include?(user.organizational_unit)
         
         reporting_years = pers.ctsa_reporting_years
-        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year) 
-        
-        pers.save!
+        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)         
         
         if !row[:service_lines].blank?
           service_lines = row[:service_lines].split(",")
@@ -325,11 +323,16 @@ class Person < ActiveRecord::Base
             if !service_line.blank?
               svc = Service.create(:person => pers, :service_line => service_line) # , :created_bu => user ?
               svc.update_state
+              
+              pers.organizational_units << service_line.organizational_unit if !service_line.organizational_unit.blank? and !pers.organizational_units.include?(service_line.organizational_unit)
             end
           end
         end
         # TODO: handle service lines
         # initiated
+        
+        pers.save
+
       end
     end
   end

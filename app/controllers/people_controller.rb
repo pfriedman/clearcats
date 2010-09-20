@@ -3,7 +3,8 @@ class PeopleController < ApplicationController
   before_filter :permit_admin, :only => [:upload, :revert]
 
   def index
-    params[:search] ||= {}
+    params[:search]         ||= Hash.new
+    params[:search][:order] ||= "ascend_by_last_name"
     @search = Client.search(params[:search])
     @people = @search.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
@@ -13,7 +14,7 @@ class PeopleController < ApplicationController
   end
   
   def incomplete
-    params[:search] ||= {}
+    params[:search] ||= Hash.new
     case params[:criteria]
     when "netid"
       params[:search][:netid_equals] = nil

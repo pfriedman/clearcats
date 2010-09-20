@@ -1,6 +1,10 @@
 - stylesheet "people"
 - title "Edit Person"
 
+- unless @person.organizational_units.blank?
+  .organizational_units
+    #{@person} has worked with #{@person.organizational_units.to_sentence}.
+
 = render 'form'
 
 .links

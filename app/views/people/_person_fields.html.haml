@@ -26,6 +26,11 @@
       = f.label :netid, "Net ID"
       %br
       = f.text_field :netid
+      
+    %p
+      = f.label :employeeid, "Employee ID"
+      %br
+      = f.text_field :employeeid
 
     %p
       = f.label :era_commons_username, "eRA Commons Username" 
@@ -92,44 +97,48 @@
       %br
       = f.select(:specialty_id, Specialty.all(:order => :code).collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Area of Expertise --" })            
 
-    .trainee_section
-      %h4 Trainee Questions
-      %p
-        = f.label :training_type, "Training Type"
-        %br
-        = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
+    
 
-      %p
-        = f.label :trainee_status, "Trainee Status"
-        %br
-        = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" }) 
 
   .span-6.last
-    %h4{ :class => "section_header" } Optional Information
+    %h4{ :class => "section_header" } Trainee Questions
     %p
-      = f.label :ethnic_type_id, "Please indicate your ethnic background." 
+      = f.label :training_type, "Training Type"
       %br
-      = f.select(:ethnic_type_id, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
+      = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
 
     %p
-      = f.label :race_type_id, "Please indicate your racial background." 
+      = f.label :trainee_status, "Trainee Status"
       %br
-      = f.select(:race_type_id, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" }) 
+      = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" })
+    
+    .trainee_section
+  
+      %h4{ :class => "section_header" } Optional Information
+      %p
+        = f.label :ethnic_type_id, "Please indicate your ethnic background." 
+        %br
+        = f.select(:ethnic_type_id, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
 
-    %p
-      Are you from a disadvantaged background?
-      %br
-      = radio_button_tag "person[disadvantaged_background]", true, f.object.disadvantaged_background == true
-      = label_tag "person_disadvantaged_background_true", "Yes"
-      %br
-      = radio_button_tag "person[disadvantaged_background]", false, f.object.disadvantaged_background == false
-      = label_tag "person_disadvantaged_background_false", "No"
+      %p
+        = f.label :race_type_id, "Please indicate your racial background." 
+        %br
+        = f.select(:race_type_id, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" }) 
 
-    %p
-      Do you have a disability?
-      %br
-      = radio_button_tag "person[has_disability]", true, f.object.has_disability == true
-      = label_tag "person_has_disability_true", "Yes"
-      %br
-      = radio_button_tag "person[has_disability]", false, f.object.has_disability == false
-      = label_tag "person_has_disability_false", "No"
+      %p
+        Are you from a disadvantaged background?
+        %br
+        = radio_button_tag "person[disadvantaged_background]", true, f.object.disadvantaged_background == true
+        = label_tag "person_disadvantaged_background_true", "Yes"
+        %br
+        = radio_button_tag "person[disadvantaged_background]", false, f.object.disadvantaged_background == false
+        = label_tag "person_disadvantaged_background_false", "No"
+
+      %p
+        Do you have a disability?
+        %br
+        = radio_button_tag "person[has_disability]", true, f.object.has_disability == true
+        = label_tag "person_has_disability_true", "Yes"
+        %br
+        = radio_button_tag "person[has_disability]", false, f.object.has_disability == false
+        = label_tag "person_has_disability_false", "No"

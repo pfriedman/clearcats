@@ -22,6 +22,8 @@ class Service < ActiveRecord::Base
   
   delegate :organizational_unit, :to => :service_line
   
+  before_save :add_organizational_unit_to_person
+  
   named_scope :organizational_unit_id_equals, lambda { |id|  {:joins => :service_line, :conditions => ["service_lines.organizational_unit_id = :id", {:id => id} ]} }
   
   state_machine :state, :initial => :new do
@@ -95,7 +97,7 @@ class Service < ActiveRecord::Base
     when "choose_service_line"
       if !self.service_line_id.blank?
         self.initiate!
-        self.person.update_attribute(:service_rendered, true) unless person.service_rendered?
+        self.person.update_attribute(:service_rendered, true) if person and !person.service_rendered?
       end
     when "choose_approvals"
       self.project_approvals_chosen!
@@ -104,6 +106,13 @@ class Service < ActiveRecord::Base
   
   def to_s
     "#{self.service_line.organizational_unit.to_s} #{self.service_line}".strip #  [#{self.updated_at}]
+  end
+  
+  def add_organizational_unit_to_person
+    if self.person and self.service_line and !service_line.organizational_unit.blank? and !self.person.organizational_units.include?(self.service_line.organizational_unit)
+      self.person.organizational_units << self.service_line.organizational_unit 
+      self.person.save!
+    end
   end
 
 end

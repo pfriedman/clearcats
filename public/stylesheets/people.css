@@ -48,3 +48,9 @@ select#search_disadvantaged_background {
 h4.section_header {
   margin: 0.5em 0;
 }
+
+.organizational_units {
+  padding: 1em 0;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #EEE;
+}
