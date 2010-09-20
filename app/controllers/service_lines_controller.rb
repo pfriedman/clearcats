@@ -29,7 +29,6 @@ class ServiceLinesController < ApplicationController
   # GET /service_lines/new.xml
   def new
     @service_line = ServiceLine.new
-    @service_line.organizational_services.build
 
     respond_to do |format|
       format.html # new.html.erb
