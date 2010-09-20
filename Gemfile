@@ -23,6 +23,10 @@ gem "surveyor", ">= 0.14.4"
 gem "will_paginate"
 gem "zippy"
 
+group :development do
+  gem 'capistrano'
+end
+
 group :test do
   # rspec
   gem "rspec", ">= 1.3.0"
