@@ -21,6 +21,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :city
       t.string :state
       
+      t.boolean :edited_by_user
       t.integer :organizational_unit_id
 
       # Personal background information for CTSA reporting

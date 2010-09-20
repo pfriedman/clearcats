@@ -1,8 +1,11 @@
+- f.object.edited_by_user = true
+
 .container.span-24
   .span-6.colborder
     %h4{ :class => "section_header" } Basic Information
     
     = f.hidden_field :imported
+    = f.hidden_field :edited_by_user
     
     %p
       = f.label :last_name, "Last Name" 

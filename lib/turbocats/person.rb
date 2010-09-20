@@ -45,6 +45,12 @@ class Turbocats::Person < Turbocats::Base
       p.degree_type_one           = DegreeTypeOne.find_by_name(self.degree_1)           unless self.degree_1.blank?
       p.degree_type_two           = DegreeTypeTwo.find_by_name(self.degree_2)           unless self.degree_2.blank?
       p.employeeid                = commons_name_employee_id_map[self.commons_username]
+      p.ctsa_reporting_years      = self.ctsa_reporting_year
     end
   end
+  
+  def ctsa_reporting_year
+    self.reporting_year.blank? ? [2009] : [self.reporting_year.to_i]
+  end
 end
+

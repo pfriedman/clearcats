@@ -1,7 +1,12 @@
 #banner_menu.ddsmoothmenu
   %ul
     %li= link_to "Home", root_path
-    %li= link_to "Services", :controller => "services", :action => "new" if current_user.permit?(:Admin, :User)
+    - if current_user.permit?(:Admin, :User)
+      %li
+        = link_to "Services", :controller => "services", :action => "new" 
+        %ul
+          %li= link_to "My Services", :controller => "services", :action => "new" 
+          %li= link_to "View All", :controller => "services", :action => "view_all" 
     - if current_user and current_user.permit?(:Admin)
       %li
         %a{ :href => "#" }

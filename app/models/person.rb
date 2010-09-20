@@ -300,6 +300,7 @@ class Person < ActiveRecord::Base
   ###
 
   def self.import_data(file, user)
+    current_year = Date.today.year
     FasterCSV.parse(file, :headers => :first_row, :write_headers => false, :return_headers => false, :header_converters => :symbol) do |row|
       if !row[:era_commons_username].blank?
         pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
@@ -309,9 +310,22 @@ class Person < ActiveRecord::Base
         end
         [:first_name, :last_name, :middle_name, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
         pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
-        pers.save
         
+        reporting_years = pers.ctsa_reporting_years
+        pers.ctsa_reporting_years = (reporting_years << current_year) 
         
+        pers.save!
+        
+        if !row[:service_lines].blank?
+          service_lines = row[:service_lines].split(",")
+          service_lines.each do |name|
+            service_line = ServiceLine.find_by_name(name.strip)
+            if !service_line.blank?
+              svc = Service.create(:person => pers, :service_line => service_line) # , :created_bu => user ?
+              svc.update_state
+            end
+          end
+        end
         # TODO: handle service lines
         # initiated
       end

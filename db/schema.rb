@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.string   "address"
     t.string   "city"
     t.string   "state"
+    t.boolean  "edited_by_user"
     t.integer  "organizational_unit_id"
     t.integer  "degree_type_one_id"
     t.integer  "degree_type_two_id"
