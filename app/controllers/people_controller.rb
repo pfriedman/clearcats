@@ -53,7 +53,7 @@ class PeopleController < ApplicationController
   
   # POST /update_ctsa_reporting_year
   def update_ctsa_reporting_year
-    current_year = Time.now.year
+    current_year = current_ctsa_reporting_year
     
     @search = Client.search(params[:search])
     @people = @search.paginate(:page => params[:page], :per_page => 20)

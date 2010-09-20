@@ -2,7 +2,7 @@
   .no_records No clients were found.
 - else
   - form_tag(update_ctsa_reporting_year_people_path) do
-    - current_year = Date.today.year
+    - current_year = current_ctsa_reporting_year
     - if params[:page]
       = hidden_field_tag "page", params[:page]
     - if params[:search]

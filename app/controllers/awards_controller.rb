@@ -9,6 +9,7 @@ class AwardsController < ApplicationController
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
       params[:search][:order]   ||= "ascend_by_project_period_start_date"
+      params[:search][:project_period_end_date_after] = Date.new(CTSA_BASE_LINE_YEAR,1,1) if params[:view_all].blank?
       
       populate_service_and_person
       FacultyWebService.awards_for_employee({:employeeid => @person.employeeid}) unless @person.employeeid.blank?
@@ -87,7 +88,7 @@ class AwardsController < ApplicationController
   # POST /update_ctsa_reporting_year
   def update_ctsa_reporting_year
     populate_service_and_person
-    current_year = Time.now.year
+    current_year = current_ctsa_reporting_year
     @person.awards.each do |award|
       reporting_years = award.ctsa_reporting_years
       if params["award_ids"].include?(award.id.to_s)

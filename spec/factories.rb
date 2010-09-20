@@ -167,7 +167,7 @@ Factory.define :user do |u|
   u.fax            "fax"
   u.email          "email"
   u.username       "username"
-  u.employeeid  "employeeid"
+  u.employeeid     "employeeid"
   u.personnelid    "personnelid"
   u.address        "address"
   u.city           "city"

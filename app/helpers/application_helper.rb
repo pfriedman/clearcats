@@ -56,4 +56,8 @@ module ApplicationHelper
   def stylesheet(*files)
     content_for(:head) { stylesheet_link_tag(*files) }
   end
+  
+  def current_ctsa_reporting_year
+    Date.today.year
+  end
 end

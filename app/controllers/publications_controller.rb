@@ -8,6 +8,8 @@ class PublicationsController < ApplicationController
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
       params[:search][:order]   ||= "ascend_by_publication_date"
+      year = params[:view_all].blank? ? CTSA_BASE_LINE_YEAR : 1900
+      params[:search][:publication_date_after] = Date.new(year,1,1)
       
       populate_service_and_person  
       LatticeGridWebService.investigator_publications_search(@person.netid) unless @person.netid.blank?
@@ -103,7 +105,7 @@ class PublicationsController < ApplicationController
   # POST /update_ctsa_reporting_year
   def update_ctsa_reporting_year
     populate_service_and_person
-    current_year = Time.now.year
+    current_year = current_ctsa_reporting_year
     @person.publications.each do |pub|
       reporting_years = pub.ctsa_reporting_years
       if params["publication_ids"].include?(pub.id.to_s)

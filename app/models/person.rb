@@ -301,19 +301,20 @@ class Person < ActiveRecord::Base
   ###
 
   def self.import_data(file, user)
-    current_year = Date.today.year
     FasterCSV.parse(file, :headers => :first_row, :write_headers => false, :return_headers => false, :header_converters => :symbol) do |row|
       if !row[:era_commons_username].blank?
         pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
+        
         if !row[:area_of_expertise].blank?
           specialty = Specialty.find_by_code(row[:area_of_expertise])
           pers.specialty = specialty unless specialty.nil?
         end
-        [:first_name, :last_name, :middle_name, :email].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+        
+        [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
         pers.organizational_units << user.organizational_unit unless user.organizational_unit.nil?
         
         reporting_years = pers.ctsa_reporting_years
-        pers.ctsa_reporting_years = (reporting_years << current_year) 
+        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year) 
         
         pers.save!
         
@@ -335,6 +336,11 @@ class Person < ActiveRecord::Base
 
   def import_row(row)
     
+  end
+
+
+  def self.current_ctsa_reporting_year
+    Date.today.year
   end
 
   ###

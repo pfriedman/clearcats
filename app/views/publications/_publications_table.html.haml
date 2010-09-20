@@ -1,6 +1,6 @@
 - form_tag(update_ctsa_reporting_year_publications_path) do
   = hidden_field_tag "person_id", @person.id
-  - current_year = Date.today.year
+  - current_year = current_ctsa_reporting_year
   %table.records
     %tr
       - unless @service

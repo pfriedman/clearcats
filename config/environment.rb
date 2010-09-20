@@ -42,6 +42,8 @@ Rails::Initializer.run do |config|
 
   # Rack Middleware to handle authenication failures and render the appropriate page
   config.middleware.use "AuthenticationFailureHandler"
+  
+  CTSA_BASE_LINE_YEAR = 2008
 end
 
 require "will_paginate"

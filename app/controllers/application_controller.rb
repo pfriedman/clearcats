@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   include Bcsec::Rails::SecuredController
   
+  helper_method :current_ctsa_reporting_year
+  
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -16,6 +18,10 @@ class ApplicationController < ActionController::Base
   end
   
   private
+    
+    def current_ctsa_reporting_year
+      Date.today.year
+    end
     
     def find_or_create_user
       User.find_or_create_by_netid(current_user.username)

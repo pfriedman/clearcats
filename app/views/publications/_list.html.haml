@@ -23,3 +23,7 @@
           = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
           = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link"
           = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"
+          - if params[:view_all].blank?
+            = link_to 'All Publications', person_publications_path(@person, :view_all => true), :class => "list_link icon_link" 
+          - else
+            = link_to 'CTSA Reportable Publications', person_publications_path(@person), :class => "list_link icon_link" 
