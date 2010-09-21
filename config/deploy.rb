@@ -78,6 +78,13 @@ namespace :deploy do
   task :permissions do
     sudo "chmod -R g+w #{shared_path} #{current_path}"
   end
+  
+  desc "Remove certain files that should not be deployed - should find way to not deploy them in the first place" 
+  task :remove_files do
+    ["cucumber", "rcov"].each do |rake|
+      run "cd #{release_path} && rm lib/tasks/#{rake}.rake"
+    end
+  end
 end
 
 # Bundler
@@ -94,4 +101,5 @@ end
 
 after 'deploy:update_code', 'bundler:check_paths'
 after 'deploy:update_code', 'bundler:install'
+after 'deploy:update_code', 'deploy:remove_files'
 # after 'deploy:update_code', 'deploy:permissions'

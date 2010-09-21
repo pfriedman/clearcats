@@ -9,11 +9,11 @@ class Turbocats::Importer
     Turbocats::ParticipatingOrganization.import_all
     # Turbocats::Publication.import_all
     
-    Client.all.each do |client| 
+    ::Client.all.each do |client| 
       FacultyWebService.locate({:employeeid => client.employeeid}, true) unless client.employeeid.blank?
     end
     
-    Client.all.each do |client| 
+    ::Client.all.each do |client| 
       FacultyWebService.awards_for_employee({:employeeid => client.employeeid}) unless client.employeeid.blank?
       LatticeGridWebService.investigator_publications_search(client.netid) unless client.netid.blank?
     end
@@ -24,7 +24,7 @@ class Turbocats::Importer
       pmcid_map[row[1]] = {:cited => row[0], :reporting_year => row[2]}
     end
     
-    Publication.all.each do |pub|
+    ::Publication.all.each do |pub|
       if pmcid_map[pub.pmcid]
         pub.cited = pmcid_map[pub.pmcid][:cited]
         pub.ctsa_reporting_years = [pmcid_map[pub.pmcid][:reporting_year]]
