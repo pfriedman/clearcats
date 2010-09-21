@@ -39,7 +39,7 @@ config.after_initialize do
   
   Bcsec.configure do
     ui_mode :form
-    authorities :automatic_access, :pers
+    authorities :automatic_access, :netid, :pers
     central '/etc/nubic/bcsec-staging.yml'
   end
 end
