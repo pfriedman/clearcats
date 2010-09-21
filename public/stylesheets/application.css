@@ -300,35 +300,35 @@ table.nested {
 }
 
 .add_link, .add_link:hover {
-  background: url(/images/add.png) 0 2px no-repeat !important;
+  background: url(../images/add.png) 0 2px no-repeat !important;
 }
 
 .add_person_link, .add_person_link:hover {
-  background: url(/images/user_add.png) 0 2px no-repeat !important;
+  background: url(../images/user_add.png) 0 2px no-repeat !important;
 }
 
 .edit_link, .edit_link:hover {
-  background: url(/images/edit.png) 0 2px no-repeat !important;
+  background: url(../images/edit.png) 0 2px no-repeat !important;
 }
 
 .export_link, .export_link:hover {
-  background: url(/images/page_white_excel.png) 0 2px no-repeat !important;
+  background: url(../images/page_white_excel.png) 0 2px no-repeat !important;
 }
 
 .search_link, .search_link:hover {
-  background: url(/images/find.png) 0 2px no-repeat !important;
+  background: url(../images/find.png) 0 2px no-repeat !important;
 }
 
 .show_link, .show_link:hover {
-  background: url(/images/show.png) 0 2px no-repeat !important;
+  background: url(../images/show.png) 0 2px no-repeat !important;
 }
 
 .list_link, .list_link:hover {
-  background: url(/images/list.png) 0 2px no-repeat !important;
+  background: url(../images/list.png) 0 2px no-repeat !important;
 }
 
 .delete_link, .delete_link:hover {
-  background: url(/images/delete.png) 0 2px no-repeat !important;
+  background: url(../images/delete.png) 0 2px no-repeat !important;
 }
 
 /* Blueprint css overrides */
