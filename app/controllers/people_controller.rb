@@ -140,4 +140,9 @@ class PeopleController < ApplicationController
     revertit(Person)
   end
   
+  def version
+    @version = Person.find(params[:id]).versions.find(params[:version_id])
+    @person  = @version.reify
+  end
+  
 end

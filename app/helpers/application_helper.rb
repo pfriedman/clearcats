@@ -60,4 +60,11 @@ module ApplicationHelper
   def current_ctsa_reporting_year
     Date.today.year
   end
+  
+  #### VIEW HELPERS ####
+  
+  def null_safe(val, default = "n/a")
+    val.blank? ? default : h(val.to_s)
+  end
+  
 end
