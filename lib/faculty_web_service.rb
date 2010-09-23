@@ -6,11 +6,11 @@ class FacultyWebService
   DEFAULT_HOST_URL = "https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/"
   # url to faculty_ws on staging: https://clinical-rails-stg.nubic.northwestern.edu/ws-faculty/
   #
-  # /faculty/show/:netid
+  # /faculty/:netid
   #
-  # /faculty/list
+  # /faculty/
   #
-  # /faculty/search?last_name=:lname
+  # /faculty/?last_name=:lname
   #
   def self.locate(params, importing = false)
     @importing = importing
@@ -86,12 +86,12 @@ class FacultyWebService
 
     def self.create_award_request(params)
       url   = ClearCats::ExternalServices::Resource.new(:faculty_ws, :ws).to_s ||= DEFAULT_HOST_URL
-      path = "/award/"
+      path = "/awards/"
 
       if params.nil?
         path += "organizations"
       elsif !params[:employeeid].blank?
-        path += "list/#{URI::escape(params[:employeeid])}"
+        path += "#{URI::escape(params[:employeeid])}"
       end
 
       uri = URI.parse(url + path)
@@ -108,14 +108,11 @@ class FacultyWebService
       path = "/faculty/"
 
       if !params[:netid].blank?
-        path += "find_by_netid/#{URI::escape(params[:netid])}"
+        query = "netid=#{URI::escape(params[:netid])}"
       elsif !params[:employeeid].blank?
-        path += "find_by_employeeid/#{URI::escape(params[:employeeid])}"
+        query = "employeeid=#{URI::escape(params[:employeeid])}"
       elsif !params[:last_name].blank?
-        path += "search"
         query = "last_name=#{URI::escape(params[:last_name])}"
-      else
-        path += "list"
       end
 
       uri = URI.parse(url + path)
