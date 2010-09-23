@@ -1,7 +1,8 @@
 - stylesheet "people"
 - title "Faculty Search"
+- prefix = (Rails.env == "staging") ? "/clearcats" : ""
 
-- form_tag "/people/search_results", :class => "faculty_search" do
+- form_tag "#{prefix}/people/search_results", :class => "faculty_search" do
   
   %p Search Faculty Members by Net ID or by Last Name.
   
