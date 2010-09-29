@@ -103,6 +103,50 @@ describe Person do
   
   end
   
+  context "finding people of a particular reporting type" do
+  
+    before(:each) do
+      @investigator2020 = Factory(:person, :training_type => nil, :netid => "netid_i2020")
+      @investigator2020.ctsa_reporting_years = [2020]
+      @investigator2020.save!
+      @trainee2020      = Factory(:person, :training_type => Person::SCHOLAR, :trainee_status => Person::APPOINTED, :netid => "netid_t2020")
+      @trainee2020.ctsa_reporting_years = [2020]
+      @trainee2020.save!
+      
+      @investigator2001 = Factory(:person, :training_type => nil, :netid => "netid_i2001")
+      @investigator2001.ctsa_reporting_years = [2001]
+      @investigator2001.save!
+      @trainee2001      = Factory(:person, :training_type => Person::SCHOLAR, :trainee_status => Person::APPOINTED, :netid => "netid_t2001")
+      @trainee2001.ctsa_reporting_years = [2001]
+      @trainee2001.save!
+      
+    end
+    
+    it "should know it's reporting years" do
+      Person::REPORTING_YEARS.should_not be_empty
+      Person::REPORTING_YEARS.size.should == 26
+    end
+    
+    it "should get the index of the year" do
+      Person::REPORTING_YEARS.index(2001).should == 1
+    end
+  
+    it "should retrieve all investigators" do
+      investigators = Person.all_investigators.for_reporting_year("2020")
+      investigators.should_not be_empty
+      investigators.size.should == 1
+      investigators.first.should == @investigator2020
+    end
+  
+    it "should retrieve all trainees" do
+      trainees = Person.all_trainees.for_reporting_year("2001")
+      trainees.should_not be_empty
+      trainees.size.should == 1
+      trainees.first.should == @trainee2001
+    end
+  
+  end
+  
   it { should ensure_length_of(:last_four_of_ssn) }
   
   it { should belong_to(:department) }

@@ -17,16 +17,20 @@ require 'rexml/element'
 # </sis:Progress_Report>
 
 class ReportBuilder < REXML::Element
-  def initialize(grant_number, reporting_year, investigators, trainees, orgs)
+  def initialize(grant_number, reporting_year)
     super "sis:Progress_Report"
     add_attribute("xmlns:sis", "http://sis.ncrr.nih.gov")
     add_attribute("xsi:schemaLocation", "http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd")
     add_attribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
+    
+    trainees      = Person.all_trainees.for_reporting_year(reporting_year)
+    investigators = Person.all_investigators.for_reporting_year(reporting_year)
+    
     add_element(GrantBuilder.new(grant_number))
     add_element(RosterBuilder.new(investigators, trainees))
     add_element(PublicationsBuilder.new(Publication.all_for_reporting_year(reporting_year)))
     add_element(ResourceProjectionsBuilder.new)
-    add_element(ProgramDescriptionBuilder.new(orgs))
+    add_element(ProgramDescriptionBuilder.new(ParticipatingOrganization.all))
     add_element(CharacteristicsBuilder.new(trainees))
   end
 end

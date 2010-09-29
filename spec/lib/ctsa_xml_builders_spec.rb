@@ -6,19 +6,16 @@ describe ReportBuilder do
     
     before(:each) do
       @grant_number  = "123456"
-      @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil)
-      @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR)
+      @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil, :ctsa_reporting_years_mask => 1)
+      @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR, :ctsa_reporting_years_mask => 1)
       @publication   = Factory(:publication, :ctsa_reporting_years_mask => 1, :cited => true)
       @org           = Factory(:participating_organization)
-      @organizations = [@org]
-      @investigators = [@investigator]
-      @trainees      = [@trainee]
     end
     
     it "should instantiate an XML element for the CTSA APR with a root element of Progress_Report" do
       
       doc = REXML::Document.new
-      doc.add_element(ReportBuilder.new(@grant_number, 2000, @investigators, @trainees, @organizations))
+      doc.add_element(ReportBuilder.new(@grant_number, 2000))
       doc.write("",2)
       report = 
 "<sis:Progress_Report xsi:schemaLocation='http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:sis='http://sis.ncrr.nih.gov'>" +

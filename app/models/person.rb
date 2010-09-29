@@ -149,7 +149,9 @@ class Person < ActiveRecord::Base
   named_scope :organizational_units_organizational_unit_id_equals, lambda { |id| {:joins => :organizational_units, :conditions => ["organizational_units.id = :id", {:id => id} ]} }
   
   named_scope :all_investigators, :conditions => "training_type IS NULL AND trainee_status IS NULL"
-  named_scope :all_trainees,      :conditions => ["training_type IS NOT NULL AND trainee_status IS NOT NULL"]
+  named_scope :all_trainees,      :conditions => "training_type IS NOT NULL AND trainee_status IS NOT NULL"
+  
+  named_scope :for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**Person::REPORTING_YEARS.index(yr.to_i)} > 0"} }
   
   named_scope :scholars,      :conditions => { :training_type => SCHOLAR }
   named_scope :other_careers, :conditions => { :training_type => OTHER_CAREER }
