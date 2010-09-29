@@ -1,0 +1,69 @@
+--- NUBIC
+
+INSERT INTO T_INSTITUTIONAL_AFFILIATES
+(
+  AFFILIATE_ID
+, PARENT_ID
+, INSTITUTION_ID
+, PRU_ID
+, PRU_PARENT_ID
+, PRU_CAMPUS
+, NAME_FULL
+, NAME_SORT
+, NAME_ABBREV
+, PRU_STATUS
+, ENTERED_ID
+, ENTERED_IP
+, ENTERED_DATE
+)
+VALUES
+(
+  5001 -- 5001(stg) / 4635(prod)
+, 555
+, 1008
+, 5001
+, 555
+, 'Chicago'
+, 'Biomedical Informatics Center'
+, 'Medical Sch./NUCATS_NUBIC'
+, 'NUBIC'
+, 'Active'
+, 61823
+, '192.168.1.221'
+,  sysdate
+)
+
+--- CECD
+
+INSERT INTO T_INSTITUTIONAL_AFFILIATES
+(
+  AFFILIATE_ID
+, PARENT_ID
+, INSTITUTION_ID
+, PRU_ID
+, PRU_PARENT_ID
+, PRU_CAMPUS
+, NAME_FULL
+, NAME_SORT
+, NAME_ABBREV
+, PRU_STATUS
+, ENTERED_ID
+, ENTERED_IP
+, ENTERED_DATE
+)
+VALUES
+(
+  5002
+, 555
+, 1008
+, 5002
+, 555
+, 'Chicago'
+, 'Center for Education and Career Development'
+, 'Medical Sch./NUCATS_CECD'
+, 'CECD'
+, 'Active'
+, 61823
+, '192.168.1.221'
+,  sysdate
+)
