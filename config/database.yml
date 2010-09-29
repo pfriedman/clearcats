@@ -5,7 +5,7 @@
 
 <%= bcdb.development :local_postgresql, :clearcats_development %>
 <%= bcdb.staging :pstage, :clearcats_staging %>
-<%= bcdb.production :pprod, :clearcats %>
+<%= bcdb.production :pprod, :clearcats_production %>
 
 <%= bcdb.turbo_ctsa_staging :pstage, :turbo_ctsa %>
 <%= bcdb.turbo_ctsa_production :pprod, :turbo_ctsa %>
