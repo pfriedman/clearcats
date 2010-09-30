@@ -1,9 +1,18 @@
 - stylesheet "people"
 - title "Clients"
 
-.links
-  = link_to "Upload File to Import Investigators", upload_people_path
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+  
+= render 'search_form'
 
-= render :partial => 'search_form'
+%p{ :class => "container" }
+  = link_to "Upload File to Import Investigators", upload_people_path, { :class => "upload_link icon_link" }
+  %span{ :class => "help_icon" }
+    &nbsp;
+  = render "upload_import_file_tooltip"
+%hr
 
-= render :partial => 'search_results'
+= render 'search_results'

@@ -86,10 +86,9 @@
         
     .buttons
       = f.submit "Submit", :disable_with => 'Submitting...'
-      = link_to "Export All Results", :controller => "people", :action => "index", :format => "csv", :params => params
-      = link_to "Choose Fields to Export", "#", :onclick => "$('.export_fields_list').toggle();"
+      = link_to "Export All Results", { :controller => "people", :action => "index", :format => "csv", :params => params }, { :class => "export_link icon_link" }
 
-    .export_fields_list{ :style => "display:none;"}
-      Hi there!
-      
-%hr
+/   = link_to "Choose Fields to Export", "#", :onclick => "$('.export_fields_list').toggle();"
+/ 
+/ .export_fields_list{ :style => "display:none;"}
+/   Hi there!

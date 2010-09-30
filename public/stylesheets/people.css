@@ -18,7 +18,7 @@
 }
 
 form.faculty_search {
-  margin: 2em 1em;
+  margin: 1.5em 0;
 }
 
 .span-5 select {
@@ -53,4 +53,11 @@ h4.section_header {
   padding: 1em 0;
   margin-bottom: 1em;
   border-bottom: 1px solid #EEE;
+}
+
+#trainee_header {
+  margin: 0.5em 0;
+  color: crimson;
+  font-weight: bold;
+  font-size: 1.25em;
 }

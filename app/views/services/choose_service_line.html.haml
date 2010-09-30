@@ -9,7 +9,7 @@
       - for_person = " for #{person}" if person
       = h "Choose Service Line#{for_person.to_s}"
     %ul.service_lines
-      - OrganizationalUnit.all(:order => :name).each do |ou|
+      - @organizational_units.each do |ou|
         %li
           - if !ou.service_lines.blank?
             %a{ :href => "javascript:{}", :onclick => "$('##{ou.abbreviation.downcase}').toggle(); return false;" }

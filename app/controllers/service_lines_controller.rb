@@ -5,6 +5,13 @@ class ServiceLinesController < ApplicationController
   # GET /service_lines.xml
   def index
     params[:search] ||= {}
+    
+    ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
+    unless ids.blank?
+      @user_organizational_units = OrganizationalUnit.find_by_affiliate_ids(ids) 
+      params[:search][:organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id)
+    end
+    
     @search = ServiceLine.search(params[:search])
     @service_lines = @search.all
 

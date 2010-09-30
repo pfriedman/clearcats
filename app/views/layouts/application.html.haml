@@ -11,6 +11,7 @@
     = stylesheet_link_tag('ddsmoothmenu', 'ddsmoothmenu-v')
     = yield :stylesheet
     = javascript_include_tag("application", "ddsmoothmenu", "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min", "jrails", "jquery.livequery")
+    = javascript_include_tag "http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"
     = yield :javascript
     = surveyor_includes if controller_name == "surveyor"
     = yield(:head)

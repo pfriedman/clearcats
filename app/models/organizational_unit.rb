@@ -34,4 +34,11 @@ class OrganizationalUnit < ActiveRecord::Base
     str.strip
   end
   
+  def self.find_by_affiliate_ids(ids)
+    result = []
+    affiliates = Pers::Affiliate.find_all_by_affiliate_id(ids)
+    affiliates.each { |a| result << OrganizationalUnit.find_by_abbreviation(a.name_abbrev) }
+    result.compact
+  end
+  
 end

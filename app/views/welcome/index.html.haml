@@ -1,16 +1,28 @@
 - title "Welcome"
 
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
 %p
   %h1 Welcome to ClearCATS!
 
   - if current_user
+    - if current_user.permit?(:Admin)
+      = render "/admin/admin_list" 
+    
     - if current_user.permit?(:Admin, :User)
       %h3 User Actions
       %ul
-        %li= link_to "Initiate Service", :controller => "services", :action => "new"
-
-    = render "/admin/admin_list" if current_user.permit?(:Admin)
-  
-  - if @person
-    = link_to 'Edit Profile', edit_person_path(@person), :class => "edit_link icon_link"
-      
+        %li
+          = link_to "Initiate Service", :controller => "services", :action => "new"
+          %span{ :class => "help_icon" }
+            &nbsp;
+          = render "initiate_service_tooltip"
+        - if @person
+          %li
+            = link_to "Edit Profile for #{@person}", edit_person_path(@person)
+            %span{ :class => "help_icon" }
+              &nbsp;
+            = render "edit_profile_tooltip"

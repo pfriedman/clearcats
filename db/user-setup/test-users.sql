@@ -53,6 +53,8 @@ where username = 'cc_user'
 
 -- Add into logins for portal
 
+SELECT * FROM T_SECURITY_LOGINS WHERE PORTAL = 'ClearCATS'
+
 INSERT INTO T_SECURITY_LOGINS
 (
   USERNAME
@@ -96,6 +98,8 @@ VALUES
 )
 
 -- Add users into groups for portal
+
+SELECT * FROM T_SECURITY_GROUP_MEMBERS WHERE PORTAL = 'ClearCATS'
 
 INSERT INTO T_SECURITY_GROUP_MEMBERS
 (

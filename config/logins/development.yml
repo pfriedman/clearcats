@@ -9,6 +9,11 @@ users:
     portals:
       - ClearCATS:
         - Admin
+  cecd_user:
+    password: cecd_user
+    portals:
+      - ClearCATS:
+        - Admin: [5002]
   wakibbe:
     password: wakibbe
   pgreenld:

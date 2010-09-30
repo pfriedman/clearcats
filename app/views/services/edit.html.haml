@@ -1,6 +1,11 @@
 - stylesheet "services", "people"
 - title "New Service - Update Person"
 
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
 - form_for @service.person, :url => { :controller => "services", :action => "update_person", :id => @service.id } do |f|
 
   = hidden_field_tag "service[state]", "identified" if @service.initiated?

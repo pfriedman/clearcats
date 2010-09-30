@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  permit :Admin
+  permit :Admin, :User
   
   # GET /users
   # GET /users.xml

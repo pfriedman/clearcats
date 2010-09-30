@@ -34,7 +34,9 @@
 
     %p
       = f.label :era_commons_username, "eRA Commons Username" 
-      %br
+      %span{ :class => "help_icon" }
+        &nbsp;
+      = render "/people/era_commons_username_tooltip"
       = f.text_field :era_commons_username
       
     %p 
@@ -97,20 +99,20 @@
       %br
       = f.select(:specialty_id, Specialty.all(:order => :code).collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Area of Expertise --" })            
 
-    
-
 
   .span-6.last
-    %h4{ :class => "section_header" } Trainee Questions
-    %p
-      = f.label :training_type, "Training Type"
-      %br
-      = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
+    %h4{ :id => "trainee_header" } Trainees Only
+    .trainee_section
+      %h4{ :class => "section_header" } Trainee Questions
+      %p
+        = f.label :training_type, "Training Type"
+        %br
+        = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
 
-    %p
-      = f.label :trainee_status, "Trainee Status"
-      %br
-      = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" })
+      %p
+        = f.label :trainee_status, "Trainee Status"
+        %br
+        = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" })
     
     .trainee_section
   

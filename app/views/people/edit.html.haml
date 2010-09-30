@@ -1,6 +1,11 @@
 - stylesheet "people"
 - title "Edit Person"
 
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
 - unless @person.organizational_units.blank?
   .organizational_units
     #{@person} has worked with #{@person.organizational_units.to_sentence}.

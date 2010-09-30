@@ -43,6 +43,12 @@ class ServicesController < ApplicationController
   
   def choose_service_line
     get_service
+    ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
+    if ids.blank?
+      @organizational_units = OrganizationalUnit.all(:order => :name)
+    else
+      @organizational_units = OrganizationalUnit.find_by_affiliate_ids(ids).sort_by { |ou| ou.name }
+    end
   end
   
   # A service will be created after the user selects either the client or the service line

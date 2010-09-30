@@ -1,4 +1,7 @@
 -- Register Portal for Application
+
+SELECT * FROM T_SECURITY_APPLICATIONS WHERE PORTAL = 'ClearCATS';
+
 INSERT INTO T_SECURITY_APPLICATIONS
 (
   PORTAL
@@ -15,6 +18,8 @@ VALUES
 , null
 , null
 )
+
+SELECT * FROM T_SECURITY_GROUPS WHERE PORTAL = 'ClearCATS';
 
 -- Create Security Groups for Application
 INSERT INTO T_SECURITY_GROUPS
