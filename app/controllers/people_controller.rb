@@ -20,9 +20,10 @@ class PeopleController < ApplicationController
       params[:search][:netid_equals] = nil
     when "employeeid"
       params[:search][:employeeid_equals] = nil
-    when "ctsa"
-      params[:search][:specialty_id_equals] = nil
+    when "era_commons_username"
       params[:search][:era_commons_username_equals] = nil
+    when "specialty"
+      params[:search][:specialty_id_equals] = nil
     end
     @search = Client.search(params[:search])
     @people = @search.paginate(:page => params[:page], :per_page => 20)

@@ -95,6 +95,28 @@ Factory.define :person do |p|
   p.specialty           { |a| a.association(:specialty) }
 end
 
+Factory.define :client do |p|
+  p.first_name             "first_name"
+  p.middle_name            "middle_name"
+  p.last_name              "last_name"
+  p.phone                  "phone"
+  p.sequence(:email)       { |n| "email#{n}@dev.null" }
+  p.last_four_of_ssn       "four"
+  p.department_affiliation "dept"
+  p.school_affiliation     "school"
+  p.era_commons_username   "era_commons"
+  p.employeeid             "emplid"
+  p.netid                  { Factory.next(:netid) }
+  p.training_type          nil
+  p.trainee_status         nil
+  p.ctsa_reporting_years_mask 1
+  
+  p.country             { |a| a.association(:country) }
+  p.degree_type_one     { |a| a.association(:degree_type_one) }
+  p.degree_type_two     { |a| a.association(:degree_type_two) }
+  p.specialty           { |a| a.association(:specialty) }
+end
+
 
 Factory.define :service do |svc|
   svc.service_line { |a| a.association(:service_line) }
@@ -124,7 +146,7 @@ Factory.define :publication do |pub|
   pub.pmcid             "pmcid"
   pub.pmid              "pmid"
   pub.nihms_number      "nihms_number"
-  pub.publication_date  Time.now
+  pub.publication_date  Date.today
   pub.person            { |a| a.association(:person) }
   pub.abstract          "boogadeehoo"
   pub.title             "title"

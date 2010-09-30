@@ -30,6 +30,81 @@ describe PublicationsController do
       
     end
 
+    describe "GET new" do
+      it "assigns a new publication as @publication" do
+        person = mock_model(Person)
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        Publication.stub(:new).and_return(mock_publication(:person_id => person.id))
+        get :new, :service_id => "99"
+        assigns[:publication].should equal(mock_publication)
+      end
+    end
+    
+    describe "POST create" do
+      
+      it "assigns a newly created publication as @publication" do
+        person = mock_model(Person)
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        Publication.stub(:new).with({'these' => 'params'}).and_return(mock_publication(:save => true))
+        post :create, :publication => {:these => 'params'}, :service_id => "99"
+        assigns[:publication].should equal(mock_publication)
+      end
+
+      it "redirects to the created publication" do
+        person = mock_model(Person)
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        Publication.stub(:new).with({'these' => 'params'}).and_return(mock_publication(:save => true))
+        post :create, :publication => {:these => 'params'}, :service_id => "99"
+        response.should redirect_to(edit_publication_url(mock_publication))
+      end
+
+    end
+
+    
+    describe "POST update_ctsa_reporting_year" do
+      it "updates the reporting year of the person's publications to the current reporting year" do
+        person = Factory(:person)
+        pub = Factory(:publication, :person => person)
+        person.publications << pub
+        person.save!
+        
+        person = Person.find(person.id)
+        person.publications.size.should == 1
+        person.publications.first.ctsa_reporting_years.should == [2000]
+        
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        post :update_ctsa_reporting_year, "publication_ids" => [pub.id.to_s], :service_id => "99"
+        
+        person = Person.find(person.id)
+        person.publications.size.should == 1
+        person.publications.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        response.should redirect_to(person_publications_path(person))
+      end
+      
+      it "removes the current reporting year of the person's publications if not sent as a param" do
+        person = Factory(:person)
+        pub = Factory(:publication, :person => person)
+        pub.ctsa_reporting_years = (pub.ctsa_reporting_years << Time.now.year) 
+        person.publications << pub
+        person.save!
+        
+        person = Person.find(person.id)
+        person.publications.size.should == 1
+        person.publications.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        post :update_ctsa_reporting_year, "publication_ids" => [], :service_id => "99"
+        
+        person = Person.find(person.id)
+        person.publications.size.should == 1
+        person.publications.first.ctsa_reporting_years.should == [2000]
+        
+        response.should redirect_to(person_publications_path(person))
+      end
+    end
+    
+
     describe "GET edit" do
       it "assigns the requested publication as @publication" do
         Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
@@ -73,6 +148,15 @@ describe PublicationsController do
         end
       end
     
+    end
+
+    describe "GET incomplete" do
+      it "should return all publications that are incomplete" do
+        good = Factory(:publication, :pmcid => "pmcid")
+        bad  = Factory(:publication, :pmcid => nil)
+        get :incomplete
+        assigns[:publications].first.id.should equal(bad.id)
+      end
     end
 
   end

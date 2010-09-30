@@ -150,6 +150,82 @@ describe PeopleController do
         end
       end
     end
+    
+    describe "POST update_ctsa_reporting_year" do
+      it "updates the reporting year of the person to the current reporting year" do
+        client = Factory(:client)
+        client.ctsa_reporting_years.should == [2000]
+        
+        Client.should_receive(:search).and_return([client])
+        post :update_ctsa_reporting_year, "people_ids" => [client.id.to_s], :search => {}, :page => 1
+        
+        person = Client.find(client.id)
+        person.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        response.should redirect_to(people_path(:page => 1, :search => {}))
+      end
+      
+      it "removes the current reporting year of the person if not sent as a param" do
+        client = Factory(:client)
+        client.ctsa_reporting_years = (client.ctsa_reporting_years << Time.now.year) 
+        client.save!
+        
+        client.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        Client.should_receive(:search).and_return([client])
+        post :update_ctsa_reporting_year, "people_ids" => [], :search => {}, :page => 1
+        
+        person = Client.find(client.id)
+        person.ctsa_reporting_years.should == [2000]
+      end
+    end
+    
+    describe "GET incomplete" do
+      before(:each) do
+        @no_netid    = Factory(:client, :netid => nil)
+        @no_emplid   = Factory(:client, :employeeid => nil)
+        @no_era_name = Factory(:client, :era_commons_username => nil)
+        @no_specialty = Factory(:client, :specialty => nil)
+        @all = [@no_netid, @no_emplid, @no_era_name, @no_specialty]
+      end
+
+      it "should return all people that are incomplete" do
+        get :incomplete
+        @all.map(&:id).each { |id| assigns[:people].map(&:id).include?(id).should be_true }
+      end
+      
+      it "should return all people that are incomplete without netids" do
+        get :incomplete, :criteria => "netid"
+        people_ids = assigns[:people].map(&:id)
+        people_ids.include?(@no_netid.id).should be_true
+        people_ids.include?(@no_emplid.id).should_not be_true
+      end
+
+      it "should return all people that are incomplete without employeeids" do
+        get :incomplete, :criteria => "employeeid"
+        people_ids = assigns[:people].map(&:id)
+        people_ids.include?(@no_netid.id).should_not be_true
+        people_ids.include?(@no_emplid.id).should be_true
+      end
+
+      it "should return all people that are incomplete without era_commons_usernames" do
+        get :incomplete, :criteria => "era_commons_username"
+        people_ids = assigns[:people].map(&:id)
+        people_ids.include?(@no_netid.id).should_not be_true
+        people_ids.include?(@no_emplid.id).should_not be_true
+        people_ids.include?(@no_era_name.id).should be_true
+      end
+      
+      it "should return all people that are incomplete without a specialty" do
+        get :incomplete, :criteria => "specialty"
+        people_ids = assigns[:people].map(&:id)
+        people_ids.include?(@no_netid.id).should_not be_true
+        people_ids.include?(@no_emplid.id).should_not be_true
+        people_ids.include?(@no_specialty.id).should be_true
+      end
+      
+    end
+    
   end
   
   context "logged in as faculty" do

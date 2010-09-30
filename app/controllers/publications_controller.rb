@@ -27,10 +27,10 @@ class PublicationsController < ApplicationController
     populate_service_and_person
     @publication = Publication.new(:person_id => @person.id)
     respond_to do |format|
-      format.js do
+      format.html do
         render 'new'
       end
-      format.html do
+      format.js do
         render 'new'
       end
     end
@@ -43,17 +43,17 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
       if @publication.save
+        format.html do 
+          flash[:notice] = "Publication was successfully created."
+          redirect_to edit_publication_url(@publication)
+          return
+        end
         format.js do
           @search = Publication.search(params[:search])
           @publications = @search.all
           render :update do |page|
             page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search] }
           end
-        end
-        format.html do 
-          flash[:notice] = "Publication was successfully created."
-          redirect_to edit_publication_url(@publication)
-          return
         end
       else
         format.html { render :action => "new" }
@@ -67,13 +67,13 @@ class PublicationsController < ApplicationController
     populate_service_and_person
     @publication = Publication.find(params[:id])
     respond_to do |format|
-      format.js do
-        @show_close_button = true
-        render 'edit'
-      end
       format.html do
         @show_close_button = false
         render 'edit' 
+      end
+      format.js do
+        @show_close_button = true
+        render 'edit'
       end
     end
   end
