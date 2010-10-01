@@ -1,5 +1,12 @@
 - title "Service Lines"
 
+- if @user_organizational_units.blank?
+  %h3 
+    All Service Lines
+- else
+  %h3
+    Service Lines for #{@user_organizational_units.map(&:to_s).to_sentence}
+
 - if @service_lines.blank?
   %p.no_records
     No service lines were found.
