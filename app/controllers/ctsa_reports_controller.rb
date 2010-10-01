@@ -4,6 +4,7 @@ class CtsaReportsController < ApplicationController
   # GET /ctsa_reports
   # GET /ctsa_reports.xml
   def index
+    summary
     @search = CtsaReport.search(params[:search])
     @ctsa_reports = @search.paginate(:page => params[:page], :per_page => 10)
 
@@ -82,5 +83,16 @@ class CtsaReportsController < ApplicationController
     zip_file = @ctsa_report.create_zip_file
     send_data(zip_file.data, :type => "application/zip", :filename => "ctsa_annual_report.zip")
   end
+
+  private
+    # Quickly show to the user the number of People, Awards, and Publications that have been marked 
+    # as CTSA Reportable for this year (or the chosen year)
+    def summary
+      yr = current_ctsa_reporting_year
+      @investigators = Person.all_investigators.for_reporting_year(yr)
+      @trainees      = Person.all_trainees.for_reporting_year(yr)
+      @awards        = Award.all_for_reporting_year(yr)
+      @publications  = Publication.all_for_reporting_year(yr)
+    end
 
 end

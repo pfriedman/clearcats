@@ -73,6 +73,10 @@
         = f.label :service_rendered, "Service Rendered"
       .span-6
         = f.select :service_rendered, [["N/A", nil], ["Yes", true], ["No", false]]
+      .span-5
+        = f.label :for_reporting_year, "CTSA Reporting Year"
+      .span-6
+        = f.select :for_reporting_year, Person::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
     .span-24
       .span-5
         = f.label :services_service_line_id_equals, "Service Line"

@@ -8,8 +8,8 @@
     %tr
       %th Select
       %th Status
+      %th Person
       %th Service Line
-      %th Status
     - services.each do |svc|
       %tr{:class => cycle('even_record', 'odd_record')}
         %td= link_to "Select", :controller => "services", :action => "continue", :id => svc

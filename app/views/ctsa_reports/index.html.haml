@@ -1,7 +1,12 @@
+- stylesheet "reports"
 - title "CTSA Reports"
-  
+
+.summary
+  = render "summary"  
+
 - if @ctsa_reports.empty?
-  .no_records No CTSA reports were found.
+  %p
+    .no_records No CTSA reports were found.
 - else
   %table{ :class => "records" }
     %tr

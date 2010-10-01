@@ -5,7 +5,11 @@ describe "/ctsa_reports/index.html.haml" do
 
   before(:each) do
     @ctsa_report = Factory(:ctsa_report)
-    assigns[:ctsa_reports] = will_paginate_collection([@ctsa_report])
+    assigns[:ctsa_reports]  = will_paginate_collection([@ctsa_report])
+    assigns[:investigators] = []
+    assigns[:trainees]      = []
+    assigns[:awards]        = []
+    assigns[:publications]  = []
   end
 
   it "renders a list of ctsa_reports" do

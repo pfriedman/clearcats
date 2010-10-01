@@ -40,7 +40,7 @@ class Award < ActiveRecord::Base
   
   has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
-  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_s)} > 0 "} }
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
   named_scope :invalid_for_ctsa, :conditions => "organization_id IS NULL OR activity_code_id IS NULL OR grant_number IS NULL"
   
   belongs_to :person

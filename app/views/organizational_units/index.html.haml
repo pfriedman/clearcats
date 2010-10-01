@@ -1,4 +1,9 @@
 - title "Organizational Units"
+
+- if @user_organizational_units
+  %p
+    #{@user_organizational_units.map(&:to_s).to_sentence}
+
 - if @organizational_units.blank?
   %p.no_records
     No organizational units were found.
@@ -17,7 +22,11 @@
         %td= h organizational_unit.parent
         %td= h organizational_unit.service_lines.size
         %td= link_to 'Show', organizational_unit, :class => "show_link icon_link"
-        %td= link_to 'Edit', edit_organizational_unit_path(organizational_unit), :class => "edit_link icon_link"
-        %td= link_to 'Destroy', organizational_unit, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
+        %td
+          - if @user_organizational_units.blank? or @user_organizational_units.include?(organizational_unit)
+            = link_to 'Edit', edit_organizational_unit_path(organizational_unit), :class => "edit_link icon_link"
+        %td
+          - if @user_organizational_units.blank? or @user_organizational_units.include?(organizational_unit)
+            = link_to 'Destroy', organizational_unit, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 .links
   = link_to 'New Organizational Unit', new_organizational_unit_path, :class => "add_link icon_link"
