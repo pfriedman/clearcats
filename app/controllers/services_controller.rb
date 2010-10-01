@@ -11,12 +11,11 @@ class ServicesController < ApplicationController
     @person = find_or_create_user
     if request.get?
       @organizational_unit = @person.organizational_unit
-      params[:search][:organizational_unit_id_equals] = @organizational_unit.id
     end
     if request.post? 
-      @organizational_unit = @person.organizational_unit
-      params[:search][:organizational_unit_id_equals] = params[:organizational_unit_id]
+      @organizational_unit = OrganizationalUnit.find(params[:organizational_unit_id])
     end
+    params[:search][:organizational_unit_id_equals] = @organizational_unit.id
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end
