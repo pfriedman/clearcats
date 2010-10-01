@@ -136,7 +136,7 @@ class PublicationsController < ApplicationController
   
   def incomplete
     params[:search] ||= {}
-    params[:search][:pmcid_equals] = nil
+    params[:search][:invalid_for_ctsa] = true
     @search = Publication.search(params[:search])
     @publications = @search.paginate(:page => params[:page], :per_page => 20)
   end

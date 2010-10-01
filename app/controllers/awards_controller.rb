@@ -117,9 +117,7 @@ class AwardsController < ApplicationController
   
   def incomplete
     params[:search] ||= {}
-    params[:search][:organization_id_equals] = nil
-    params[:search][:activity_code_id_equals] = nil
-    params[:search][:grant_number_equals] = nil
+    params[:search][:invalid_for_ctsa] = true
     @search = Award.search(params[:search])
     @awards = @search.paginate(:page => params[:page], :per_page => 20)
   end

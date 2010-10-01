@@ -131,6 +131,7 @@ Factory.define :award do |a|
   a.grant_title       "grant title"
   a.grant_amount      11.00
   a.budget_identifier "NORTHWESTU00000039703000"
+  a.ctsa_reporting_years_mask 1
 end
 
 Factory.define :award_detail do |a|

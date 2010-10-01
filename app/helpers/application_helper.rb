@@ -18,20 +18,6 @@ module ApplicationHelper
     link_to_function(name, h("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"), :class => "add add_link icon_link", :id => "add_#{association.to_s.singularize}")
   end
 
-  #### SELECT OPTIONS ####
-  
-  def organizational_units_list
-    values = [] 
-    values = OrganizationalUnit.all(:order => :name)
-    # TODO: limit access to org units
-    # if current_user.admin?
-    #   values = OrganizationalUnit.all(:order => :name)
-    # else
-    #   values = [current_user.organizational_unit]
-    # end
-    values
-  end
-
   #### PAGE TITLE ####
 
   def title(page_title, show_title = true)

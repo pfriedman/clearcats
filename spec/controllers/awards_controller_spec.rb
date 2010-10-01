@@ -146,6 +146,60 @@ describe AwardsController do
 
     end
 
+    describe "POST update_ctsa_reporting_year" do
+      it "updates the reporting year of the person's awards to the current reporting year" do
+        person = Factory(:person)
+        award = Factory(:award, :person => person)
+        person.awards << award
+        person.save!
+        
+        person = Person.find(person.id)
+        person.awards.size.should == 1
+        person.awards.first.ctsa_reporting_years.should == [2000]
+        
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        post :update_ctsa_reporting_year, "award_ids" => [award.id.to_s], :service_id => "99"
+        
+        person = Person.find(person.id)
+        person.awards.size.should == 1
+        person.awards.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        response.should redirect_to(person_awards_path(person))
+      end
+      
+      it "removes the current reporting year of the person's awards if not sent as a param" do
+        person = Factory(:person)
+        award = Factory(:award, :person => person)
+        award.ctsa_reporting_years = (award.ctsa_reporting_years << Time.now.year) 
+        person.awards << award
+        person.save!
+        
+        person = Person.find(person.id)
+        person.awards.size.should == 1
+        person.awards.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        
+        Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
+        post :update_ctsa_reporting_year, "award_ids" => [], :service_id => "99"
+        
+        person = Person.find(person.id)
+        person.awards.size.should == 1
+        person.awards.first.ctsa_reporting_years.should == [2000]
+        
+        response.should redirect_to(person_awards_path(person))
+      end
+    end
+
+
+    describe "GET incomplete" do
+      it "should return all awards that are incomplete" do
+        good = Factory(:award)
+        bad  = Factory(:award, :grant_number => nil)
+        get :incomplete
+        assigns[:awards].size.should == 1
+        assigns[:awards].first.id.should equal(bad.id)
+      end
+    end
+
   end
 end
 
