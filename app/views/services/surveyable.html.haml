@@ -1,0 +1,20 @@
+- stylesheet "services"
+- title "New Service - Choose Organizational Units"
+
+= render "menu"
+
+%p
+  This service is ready to be surveyed. To edit #{@service.person} choose one of the links above.
+
+%p
+  Survey feature has yet to be implemented. 
+
+%p
+  At this point you can:
+  %ul
+    %li
+      = link_to "Create a new service", new_service_path
+    %li
+      = link_to "View Services", view_all_services_path
+    %li
+      = link_to "Edit client information", people_path

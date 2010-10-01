@@ -1,8 +1,13 @@
+
 - stylesheet "services"
 - title "New Service - Choose Approvals"
 
 :javascript
-  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+  $(function () { 
+    $(".datepicker").live('mouseover', function() { 
+      $(this).datepicker({ maxDate: "0D" }); 
+    }); 
+  });
 
 = render "menu"
 

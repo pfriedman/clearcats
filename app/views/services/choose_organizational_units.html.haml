@@ -4,6 +4,9 @@
 = render "menu"
 
 - form_for @service do |f|
+
+  = hidden_field_tag "service[state]", "surveyable"
+
   #organizational_unit_services_rendered
     .instructions
       Please indicate the NUCATS Institute Centers that you participated in. 

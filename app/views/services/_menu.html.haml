@@ -1,6 +1,15 @@
-%ul#service_menu
-  %li= link_to "Update Person", edit_service_path(@service)
-  %li= link_to "Choose Awards", choose_awards_service_path(@service)
-  %li= link_to "Choose Publications", choose_publications_service_path(@service)
-  %li= link_to "Choose Approvals", choose_approvals_service_path(@service)
-  %li= link_to "Choose Organizational Units", choose_organizational_units_service_path(@service)
+.service_menu
+  .container.span-24
+    .span-4.colborder
+      = link_to "Update Person", edit_service_path(@service)
+    .span-4.colborder
+      = link_to "Choose Awards", choose_awards_service_path(@service)
+    .span-4.colborder
+      = link_to "Choose Publications", choose_publications_service_path(@service)
+    .span-4.colborder
+      = link_to "Choose Approvals", choose_approvals_service_path(@service)
+    .span-5.colborder
+      = link_to "Choose Organizational Units", choose_organizational_units_service_path(@service)
+.clear
+= render "service_header"
+

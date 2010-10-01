@@ -123,12 +123,16 @@ class ServicesController < ApplicationController
     process_request
   end
   
+  def surveyable
+    get_service
+  end
   
   private 
   
     def process_request
       get_service
       update_service
+      update_client
       determine_redirect
     end
   
@@ -142,8 +146,14 @@ class ServicesController < ApplicationController
     end
     
     def update_service
-      @service.person.update_attributes(params[:person]) if params[:person]
-      @service.update_attributes(params[:service])       if params[:service]
+      @service.update_attributes(params[:service]) if params[:service]
+    end
+    
+    def update_client
+      attr_params = {}
+      # Handle polymorphic person - params key dependent on person class
+      [:person, :client, :user].each { |e| attr_params = attr_params.merge(params[e]) unless params[e].blank? }
+      @service.person.update_attributes(attr_params)
     end
     
     def determine_redirect

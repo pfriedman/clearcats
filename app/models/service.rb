@@ -43,6 +43,10 @@ class Service < ActiveRecord::Base
       transition [:choose_approvals] => :choose_organizational_units
     end
     
+    event :readied_for_survey do
+      transition [:choose_organizational_units] => :surveyable
+    end
+    
     state :new
     state :choose_person
     state :choose_service_line
@@ -52,6 +56,7 @@ class Service < ActiveRecord::Base
     state :choose_publications
     state :choose_approvals
     state :choose_organizational_units
+    state :surveyable
   end
   
   def initialize(attributes = nil)

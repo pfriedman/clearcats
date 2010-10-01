@@ -1,4 +1,13 @@
 
+.service_header {
+  border-bottom: 1px solid #eee;
+}
+
+.service_header h3 {
+  line-height: 1.25em;
+  margin-bottom: 0.5em;
+}
+
 .awards select {
   width: 25em;
 }
@@ -50,15 +59,8 @@
   margin-bottom: 0.25em;
 }
 
-ul#service_menu {
-  padding: 0;
-}
-
-ul#service_menu li {
-  display: inline-block;
-  border-right: 5px solid #A3A3A3;
-  width: 15em;
-  padding-left: 1em;
+.service_menu .container {
+  margin-bottom: 0.5em;
 }
 
 .datepicker {
