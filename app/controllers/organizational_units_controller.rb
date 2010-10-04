@@ -4,7 +4,7 @@ class OrganizationalUnitsController < ApplicationController
   # GET /organizational_units
   # GET /organizational_units.xml
   def index
-    determine_org_units_for_user
+    @user_organizational_units = determine_org_units_for_user
     
     @search = OrganizationalUnit.search(params[:search])
     @organizational_units = @search.paginate(:page => params[:page], :per_page => 10)
@@ -18,7 +18,7 @@ class OrganizationalUnitsController < ApplicationController
   # GET /organizational_units/1
   # GET /organizational_units/1.xml
   def show    
-    determine_org_units_for_user
+    @user_organizational_units = determine_org_units_for_user
     
     @organizational_unit = OrganizationalUnit.find(params[:id])
 
@@ -41,7 +41,7 @@ class OrganizationalUnitsController < ApplicationController
 
   # GET /organizational_units/1/edit
   def edit
-    determine_org_units_for_user
+    @user_organizational_units = determine_org_units_for_user
     @organizational_unit = OrganizationalUnit.find(params[:id])
     if @user_organizational_units and !@user_organizational_units.include?(@organizational_unit)
       flash[:warning] = "You do not have access to edit #{@organizational_unit}"
@@ -94,12 +94,5 @@ class OrganizationalUnitsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  private
-  
-    def determine_org_units_for_user
-      ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
-      @user_organizational_units = OrganizationalUnit.find_by_affiliate_ids(ids) unless ids.blank?
-    end
   
 end

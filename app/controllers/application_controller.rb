@@ -67,4 +67,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def determine_org_units_for_user
+      ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
+      OrganizationalUnit.find_by_affiliate_ids(ids) unless ids.blank?
+    end
+    alias :determine_organizational_units_for_user :determine_org_units_for_user
+
 end

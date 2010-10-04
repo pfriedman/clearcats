@@ -69,15 +69,15 @@ class ServicesController < ApplicationController
   end
   
   def update_person
-    process_request
+    process_update_request
   end
 
   def continue
-    process_request
+    process_update_request
   end
   
   def update
-    process_request
+    process_update_request
   end
   
   def identified
@@ -120,7 +120,7 @@ class ServicesController < ApplicationController
   end
   
   def update_approvals
-    process_request
+    process_update_request
   end
   
   def surveyable
@@ -129,7 +129,7 @@ class ServicesController < ApplicationController
   
   private 
   
-    def process_request
+    def process_update_request
       get_service
       update_service
       update_client

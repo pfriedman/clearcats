@@ -6,11 +6,8 @@ class ServiceLinesController < ApplicationController
   def index
     params[:search] ||= {}
     
-    ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
-    unless ids.blank?
-      @user_organizational_units = OrganizationalUnit.find_by_affiliate_ids(ids) 
-      params[:search][:organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id)
-    end
+    @user_organizational_units = determine_org_units_for_user
+    params[:search][:organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) unless @user_organizational_units.blank?
     
     @search = ServiceLine.search(params[:search])
     @service_lines = @search.all

@@ -6,6 +6,35 @@ describe OrganizationalUnitsController do
     @mock_organizational_unit ||= mock_model(OrganizationalUnit, stubs)
   end
   
+  context "with an authenticated user for a particular organizational unit" do
+    
+    before(:each) do
+      login(admin_login)
+      @admin = Factory(:person, :netid => 'admin')
+      @org_unit1 = Factory(:organizational_unit, :name => "org_unit1")
+      @admin.organizational_units << @org_unit1
+      
+      @org_unit2 = Factory(:organizational_unit, :name => "org_unit2")
+    end
+    
+    it "should /not/ allow the user to edit an org unit to which the user is not a member" do
+      controller.should_receive(:determine_org_units_for_user).and_return([@org_unit1])
+      OrganizationalUnit.stub(:find).with("37").and_return(@org_unit2)
+      get :edit, :id => "37"
+      assigns[:user_organizational_units].should == [@org_unit1]
+      response.should redirect_to(organizational_unit_path(@org_unit2))
+      flash[:warning].should == "You do not have access to edit #{@org_unit2}"
+    end
+    
+    it "should allow the user to edit the org unit if a member" do
+      controller.should_receive(:determine_org_units_for_user).and_return([@org_unit1])
+      OrganizationalUnit.stub(:find).with("37").and_return(@org_unit1)
+      get :edit, :id => "37"
+      response.should be_success
+    end
+    
+  end
+  
   context "with an authenticated user" do
     before(:each) do
       login(admin_login)

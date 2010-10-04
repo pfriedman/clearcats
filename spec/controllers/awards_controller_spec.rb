@@ -29,6 +29,14 @@ describe AwardsController do
       
     end
 
+    describe "GET details" do
+      it "assigns the requested award as @award" do
+        Award.stub(:find).with("37").and_return(mock_award)
+        get :details, :id => "37"
+        assigns[:award].should equal(mock_award)
+      end
+    end
+
     describe "GET new" do
       it "assigns a new award as @award" do
         Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
@@ -106,19 +114,19 @@ describe AwardsController do
           put :update, :id => "37", :award => {:these => 'params'}, :service_id => "99", :format => "js"
         end
 
-        # it "assigns the requested award as @award" do
-        #   Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
-        #   Award.stub(:find).and_return(mock_award(:update_attributes => true))
-        #   put :update, :id => "1", :service_id => "99"
-        #   assigns[:award].should equal(mock_award)
-        # end
+        it "assigns the requested award as @award" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Award.stub(:find).and_return(mock_award(:update_attributes => true))
+          put :update, :id => "1", :service_id => "99"
+          assigns[:award].should equal(mock_award)
+        end
 
-        # it "redirects to the award" do
-        #   Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
-        #   Award.stub(:find).and_return(mock_award(:update_attributes => true))
-        #   put :update, :id => "1", :service_id => "99"
-        #   response.should redirect_to(edit_award_url(mock_award))
-        # end
+        it "redirects to the award" do
+          Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => mock_model(Person)))
+          Award.stub(:find).and_return(mock_award(:update_attributes => true))
+          put :update, :id => "1", :service_id => "99"
+          response.should redirect_to(edit_award_url(mock_award))
+        end
       end
 
       describe "with invalid params" do
