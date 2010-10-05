@@ -5,6 +5,7 @@ doc/app
 cc
 reports/cucumber.html
 reports/cucumber-xml/*
+reports/spec-xml/*
 coverage/*
 coverage.data
 *.tmproj
