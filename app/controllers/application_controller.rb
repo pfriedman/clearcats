@@ -14,11 +14,7 @@ class ApplicationController < ActionController::Base
   
   # Only save the current_user [Bcsec::User] username for auditing
   def user_for_paper_trail
-    if current_user.nil? or current_user == false
-      return 'n/a'
-    else
-      return current_user.username
-    end
+    current_user ? current_user.username : 'n/a'
   end
   
   private
