@@ -1,7 +1,12 @@
-%h3 Administrative Actions
-%ul#administrative_actions
-  %li= link_to "Manage Users", :controller => "users", :action => "index"
+
+%h3 Center Manager Actions
+%ul#organizational_unit_administrator_actions
   %li= link_to "Manage Organizational Units", :controller => "organizational_units", :action => "index"
   %li= link_to "Manage Service Lines", :controller => "service_lines", :action => "index"
-  %li= link_to "Upload CTSA Data", :controller => "admin", :action => "upload_ctsa_data"
   %li= link_to "View CTSA Data", {:controller => "admin", :action => "view_ctsa_data"}
+
+
+%h3 System Administrative Actions
+%ul#administrative_actions
+  %li= link_to "Manage Users", :controller => "users", :action => "index"
+  %li= link_to "Upload CTSA Data", :controller => "admin", :action => "upload_ctsa_data"
