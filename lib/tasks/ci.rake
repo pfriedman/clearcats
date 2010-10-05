@@ -1,8 +1,9 @@
 require 'cucumber/rake/task'
 require 'spec/rake/spectask'
 
-namespace :rcov do
+namespace :ci do
   Cucumber::Rake::Task.new(:cucumber_run) do |t|
+    t.profile = 'ci'
     t.rcov = true
     t.rcov_opts = %w{--rails --exclude osx\/objc,gems\/,spec\/,features\/ --aggregate coverage.data}
     t.rcov_opts << %[-o "coverage"]
@@ -18,16 +19,11 @@ namespace :rcov do
   end
   
   desc "Run both specs and features to generate aggregated coverage"
-  task :all => ["rcov:clean", "rcov:cucumber_run", "rcov:rspec_run"]
-  
-  task :clean do |t|
-    rm "coverage.data" if File.exist?("coverage.data")
-  end
+  task :all => ["db:migrate", "rcov:clean", "ci:cucumber_run", "ci:rspec_run"]
   
   desc "Run only rspecs"
-  task :rspec => ["rcov:clean", "rcov:rspec_run"]
+  task :rspec => ["rcov:clean", "ci:rspec_run"]
   
   desc "Run only cucumber"
-  task :cucumber => ["rcov:clean", "rcov:cucumber_run"]
-
+  task :cucumber => ["rcov:clean", "ci:cucumber_run"]
 end

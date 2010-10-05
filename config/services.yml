@@ -36,7 +36,19 @@ cucumber:
     :host: http://faculty-ws.local
     :path: 
       :ws:
-        
+ci:
+  :lattice_grid:
+    :host: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
+    :path:
+      :mesh_json: mesh.json
+      :mesh: mesh
+      :investigators: investigators
+      :investigator: investigator
+  :faculty_ws:
+    :host: https://clinical-rails-stg.nubic.northwestern.edu/
+    :path: 
+      :ws: ws-faculty
+
 staging:
   :lattice_grid:
     :host: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
