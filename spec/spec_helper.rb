@@ -26,7 +26,7 @@ module TestLogins
   end
   
   def faculty_login
-    Bcsec.authority.valid_credentials?(:user, 'wakibbe', 'wakibbe')    
+    Bcsec.authority.valid_credentials?(:user, 'faculty', 'faculty')    
   end
 
   def login(as)
