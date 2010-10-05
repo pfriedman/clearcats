@@ -3,6 +3,8 @@ log/*.log
 tmp/**/*
 doc/app
 cc
+reports/cucumber.html
+reports/cucumber-xml/*
 coverage/*
 coverage.data
 *.tmproj
