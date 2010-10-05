@@ -248,7 +248,7 @@ describe PeopleController do
     describe "GET edit" do
       
       it "should allow the user to edit their own profile" do
-        faculty = Factory(:person, :netid => "wakibbe") # we know the username of the logged in user
+        faculty = Factory(:person, :netid => "faculty") # we know the username of the logged in user
         get :edit, :id => faculty.id + 123              # obviously not the id of the logged in user
         response.should be_success
       end
