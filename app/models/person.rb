@@ -316,25 +316,37 @@ class Person < ActiveRecord::Base
         pers.organizational_units << user.organizational_unit if !user.organizational_unit.nil? and !pers.organizational_units.include?(user.organizational_unit)
         
         reporting_years = pers.ctsa_reporting_years
-        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)         
+        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)
         
-        if !row[:service_lines].blank?
-          service_lines = row[:service_lines].split(",")
-          service_lines.each do |name|
-            service_line = ServiceLine.find_by_name(name.strip)
-            if !service_line.blank?
-              svc = Service.create(:person => pers, :service_line => service_line) # , :created_bu => user ?
-              svc.update_state
-              
-              pers.organizational_units << service_line.organizational_unit if !service_line.organizational_unit.blank? and !pers.organizational_units.include?(service_line.organizational_unit)
-            end
-          end
-        end
-        # TODO: handle service lines
-        # initiated
-        
-        pers.save
-
+        pers.save!
+        process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
+      end
+    end
+  end
+  
+  # only create Service if one does not exist
+  def self.create_imported_service(person, service_line)
+    if Service.first(:conditions => {:person_id => person, :service_line_id => service_line}).blank? 
+      svc = Service.create(:person => person, :service_line => service_line)
+      svc.update_state
+    end
+  end
+  
+  # update org unit associations for person if that person has not yet been associated with that organization
+  def self.update_organizational_unit_associations(person, service_line)
+    if !service_line.organizational_unit.blank? and !person.organizational_units.include?(service_line.organizational_unit)
+      person.organizational_units << service_line.organizational_unit 
+      person.save!
+    end
+  end
+  
+  # process each Service Line in upload file for person
+  def self.process_service_lines_row(person, service_lines)
+    service_lines.each do |name|
+      service_line = ServiceLine.find_by_name(name.strip)
+      if !service_line.blank?
+        create_imported_service(person, service_line)
+        update_organizational_unit_associations(person, service_line)
       end
     end
   end
