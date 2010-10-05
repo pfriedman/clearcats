@@ -49,7 +49,8 @@ module NavigationHelpers
       edit_publication_path(Publication.find_by_title($1))
       
     when /the publications edit page/
-      edit_publication_path(Publication.first(:order => "updated_at desc"))
+      edit_publication_path(Publication.last)
+      # edit_publication_path(Publication.first(:order => "updated_at desc"))
       
     when /the publication versions page for "(.*)"/
       versions_publication_path(Publication.find_by_pmid($1))

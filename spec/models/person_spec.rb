@@ -214,10 +214,12 @@ describe Person do
       it "should create Person records from the data" do
         Person.count.should == 0
         usr = Factory(:user)
+        svc_line = Factory(:service_line, :name => "Laboratory")
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
         
         Person.count.should == 4
         User.count.should   == 1
+        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
       end
       
       it "should associate Person with organizational units of the uploader" do
@@ -231,7 +233,22 @@ describe Person do
         Person.last.organizational_units.should == [org_unit]
       end
       
-      # "service line name"
+      it "should only create one service for a person and service line even if the file is uploaded more than once" do
+        Person.count.should == 0
+        usr = Factory(:user)
+        svc_line = Factory(:service_line, :name => "Laboratory")
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
+        
+        Person.count.should == 4
+        User.count.should   == 1
+        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
+        
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
+        
+        Person.count.should == 4
+        User.count.should   == 1
+        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
+      end
       
     end
     
