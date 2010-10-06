@@ -18,11 +18,11 @@ require 'shoulda'
 
 module TestLogins
   def user_login
-    Bcsec.authority.valid_credentials?(:user, 'user', 'user')
+    Bcsec.authority.valid_credentials?(:user, 'cc_user', 'cc_user')
   end
 
   def admin_login
-    Bcsec.authority.valid_credentials?(:user, 'admin', 'admin')
+    Bcsec.authority.valid_credentials?(:user, 'cc_admin', 'cc_admin')
   end
   
   def faculty_login

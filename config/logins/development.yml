@@ -1,11 +1,11 @@
 users:
-  user:
-    password: user
+  cc_user:
+    password: cc_user
     portals:
       - ClearCATS:
         - User
-  admin:
-    password: admin
+  cc_admin:
+    password: cc_admin
     portals:
       - ClearCATS:
         - Admin

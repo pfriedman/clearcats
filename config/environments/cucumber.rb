@@ -26,26 +26,17 @@ config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' unless File.
 config.gem 'capybara',         :lib => false, :version => '>=0.3.5' unless File.directory?(File.join(Rails.root, 'vendor/plugins/capybara'))
 
 config.after_initialize do
-  # Bcsec.configure do
-  #   ui_mode :cas
-  #   api_mode :cas_proxy
-  #   authorities :cas, :pers
-  #   pers_parameters :separate_connection => true
-  #   central '/etc/nubic/bcsec-local.yml'
-  # end
-
-  # Bcsec.configure do
-  #   login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
-  # 
-  #   authority Bcsec::Authorities::Static.from_file(login_config)
-  # end
+  Bcsec.configure do
+    login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
+    authorities Bcsec::Authorities::Static.from_file(login_config)
+  end
   
   # look at db/user-setup.sql for user and group security settings when developing in a local environment
-  Bcsec.configure do
-    ui_mode :form
-    authorities :pers
-    central '/etc/nubic/bcsec-local.yml'
-  end
+  # Bcsec.configure do
+  #   ui_mode :form
+  #   authorities :pers
+  #   central '/etc/nubic/bcsec-local.yml'
+  # end
   
   PaperTrail.enabled = true
 end

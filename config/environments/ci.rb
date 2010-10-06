@@ -28,8 +28,7 @@ config.after_initialize do
   Bcsec.configure do
     ui_mode :form
     login_config = File.join(RAILS_ROOT, %w(config logins development.yml))
-    authorities :automatic_access, :pers, Bcsec::Authorities::Static.from_file(login_config)
-    central '/etc/nubic/bcsec-local.yml'
+    authorities Bcsec::Authorities::Static.from_file(login_config)
   end
   
   PaperTrail.enabled = true
