@@ -1,7 +1,7 @@
 - stylesheet "people"
 - title "View Version"
 
-.container.span-24
+.span-24
   .span-6.colborder
     %h4{ :class => "section_header" } Basic Information
     %p
@@ -126,6 +126,6 @@
         %b Has a disability?
         %br
         = @person.has_disability? ? "Yes" : "No"
-  .container.span-24
+  .span-24
     .links
       = link_to 'All Versions', versions_person_path(@person), :class => "list_link icon_link"

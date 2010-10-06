@@ -5,24 +5,40 @@
     $(".help_icon").tooltip();
   });
 
-%p
-  %h1 Welcome to ClearCATS!
+.welcome
+  %h2
+    - if @person
+      = "#{@person.to_s} :: "
+    Welcome to ClearCATS!
 
   - if current_user
     - if current_user.permit?(:Admin)
-      = render "/admin/admin_list" 
-    
+      .span-24
+      = render "/admin/admin_list"
     - if current_user.permit?(:Admin, :User)
-      %h3 User Actions
-      %ul
-        %li
-          = link_to "Initiate Service", :controller => "services", :action => "new"
-          %span{ :class => "help_icon" }
-            &nbsp;
-          = render "initiate_service_tooltip"
-        - if @person
+      .span-12.colborder
+        %h3 
+          User Actions
+        %p
+          The following are the actions taken to enter data into the application.
+        %ul
           %li
-            = link_to "Edit Profile for #{@person}", edit_person_path(@person)
+            = link_to "Upload Investigators File", upload_people_path
+            %span{ :class => "help_icon" }
+              &nbsp;
+            = render "/people/upload_import_file_tooltip"
+          %li
+            = link_to "Initiate Service", :controller => "services", :action => "new"
+            %span{ :class => "help_icon" }
+              &nbsp;
+            = render "initiate_service_tooltip"
+    .span-12
+      - if @person
+        %h3 
+          Profile for #{@person}
+        %ul
+          %li
+            = link_to "Edit My Profile", edit_person_path(@person)
             %span{ :class => "help_icon" }
               &nbsp;
             = render "edit_profile_tooltip"

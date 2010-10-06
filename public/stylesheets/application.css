@@ -18,6 +18,10 @@
   color: red;
 }
 
+.instructions {
+  margin: 1em 0;
+}
+
 /* Flash Messages */
 
 .message {
@@ -151,6 +155,7 @@
 
 #main {
   min-height: 45em;
+  padding: 0.5em;
 }
 
 #footer {
@@ -375,7 +380,9 @@ table.nested {
 /* Blueprint css overrides */
 
 .container {
-  width: 95% !important;
+  width: 1160px;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
 }
 
 a:after {

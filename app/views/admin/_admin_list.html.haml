@@ -1,12 +1,22 @@
 
-%h3 Center Manager Actions
-%ul#organizational_unit_administrator_actions
-  %li= link_to "Manage Organizational Units", :controller => "organizational_units", :action => "index"
-  %li= link_to "Manage Service Lines", :controller => "service_lines", :action => "index"
-  %li= link_to "View CTSA Data", {:controller => "admin", :action => "view_ctsa_data"}
+.span-12.colborder
+  %h3 
+    Center Manager Actions
+  %p
+    As a member of the CTSA Center, you should ensure that the system data is 
+    consistent with the information used by your center. Data such as the abbreviation used
+    by your center or the service lines you provide.
+  %ul#organizational_unit_administrator_actions
+    %li= link_to "Manage Organizational Units", :controller => "organizational_units", :action => "index"
+    %li= link_to "Manage Service Lines", :controller => "service_lines", :action => "index"
 
-
-%h3 System Administrative Actions
-%ul#administrative_actions
-  %li= link_to "Manage Users", :controller => "users", :action => "index"
-  %li= link_to "Upload CTSA Data", :controller => "admin", :action => "upload_ctsa_data"
+.span-12.last
+  %h3 
+    System Administrative Actions
+  %p
+    The following are actions to be performed by the System Administrators.
+    These are actions that should be performed rarely, so act with caution when managing users or uploading CTSA data.
+  %ul#administrative_actions
+    %li= link_to "Manage Users", :controller => "users", :action => "index"
+    %li= link_to "Upload CTSA Data", :controller => "admin", :action => "upload_ctsa_data"
+    %li= link_to "View CTSA Data", {:controller => "admin", :action => "view_ctsa_data"}

@@ -1,12 +1,12 @@
 %h3
   CTSA Report Summary for #{current_ctsa_reporting_year}
 
-.container
+.span-24
   .span-8
     = link_to "Investigators: #{@investigators.size}", people_path({:search => {:for_reporting_year=>"#{current_ctsa_reporting_year}"}})
   .span-8
     Trainees: #{@trainees.size}
-.container
+.span-24
   .span-8
     Awards: #{@awards.size}
   .span-8
