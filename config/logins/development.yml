@@ -11,6 +11,8 @@ users:
         - Admin
   faculty:
     password: faculty
+    portals:
+      - ClearCATS:
   cecd_user:
     password: cecd_user
     portals:

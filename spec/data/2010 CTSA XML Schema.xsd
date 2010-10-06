@@ -31,26 +31,18 @@
 	<xs:simpleType name="degree_types_1">
 		<xs:restriction base="xs:string">
 			<xs:annotation>
-				<xs:documentation>PhD in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
 				<xs:documentation>MS in Clinical and Translational Science (or equivalent depending on institution)</xs:documentation>
-				<xs:documentation>PhD (in any other field)</xs:documentation>
-				<xs:documentation>Masters (in any other field)</xs:documentation>
 			</xs:annotation>
 			<xs:maxLength value="15"/>
-			<xs:enumeration value="PhD CTS"/>
 			<xs:enumeration value="MS CTS"/>
-			<xs:enumeration value="PhD non-CTS"/>
-			<xs:enumeration value="Masters non-CTS"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="degree_types_2">
 		<xs:restriction base="xs:string">
 			<xs:annotation>
-				<xs:documentation>MD is Doctor of Medicine</xs:documentation>
 				<xs:documentation>DDS is Doctor of Dental Surgery</xs:documentation>
 			</xs:annotation>
 			<xs:maxLength value="4"/>
-			<xs:enumeration value="MD"/>
 			<xs:enumeration value="DDS"/>
 		</xs:restriction>
 	</xs:simpleType>
