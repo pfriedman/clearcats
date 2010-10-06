@@ -4,7 +4,7 @@
 %>
 
 <%= bcdb.development :local_postgresql, :clearcats_development %>
-<%= bcdb.ci :local_postgresql, :clearcats_ci %>
+<%= bcdb.ci :pdev, :clearcats_hudson %>
 <%= bcdb.staging :pstage, :clearcats_staging %>
 <%= bcdb.production :pprod, :clearcats_production %>
 
