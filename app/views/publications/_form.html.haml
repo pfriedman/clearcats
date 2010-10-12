@@ -1,33 +1,35 @@
 - stylesheet "awards"
 
 - if @show_header
-  Publication for #{@publication.person}
+  %span{ :class => "publication_header" }
+    Publication for #{@publication.person}
 
   .header_option
     = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
 
-  %div{ :id => "publication_form", :class => "publications" }
-    - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
-      = hidden_field_tag :service_id, @service.id if @service
-      = f.hidden_field :person_id
-      - if params[:search]
-        - params[:search].each do |k, v| 
-          = hidden_field_tag "search[#{k}]", v
+  .page_section
+    %div{ :id => "publication_form", :class => "publications" }
+      - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
+        = hidden_field_tag :service_id, @service.id if @service
+        = f.hidden_field :person_id
+        - if params[:search]
+          - params[:search].each do |k, v| 
+            = hidden_field_tag "search[#{k}]", v
 
-      = render 'publication_fields', {:f => f}
+        = render 'publication_fields', {:f => f}
 
 - else
+  .page_section
+    %div{ :id => "publication_form", :class => "publications" }
+      - form_for @publication, :html => { :id => "edit_form"} do |f|
+        = hidden_field_tag :service_id, @service.id if @service
+        = f.hidden_field :person_id
+        = hidden_field_tag "publication[edited_by_user]", true
+        - if params[:search]
+          - params[:search].each do |k, v| 
+            = hidden_field_tag "search[#{k}]", v
 
-  %div{ :id => "publication_form", :class => "publications" }
-    - form_for @publication, :html => { :id => "edit_form"} do |f|
-      = hidden_field_tag :service_id, @service.id if @service
-      = f.hidden_field :person_id
-      = hidden_field_tag "publication[edited_by_user]", true
-      - if params[:search]
-        - params[:search].each do |k, v| 
-          = hidden_field_tag "search[#{k}]", v
-
-      = render 'publication_fields', {:f => f}
+        = render 'publication_fields', {:f => f}
 
     .links
       = link_to 'View Other Publications', person_publications_path(@publication.person), :class => "list_link icon_link"

@@ -22,6 +22,27 @@
   margin: 1em 0;
 }
 
+.page_section {
+  border: 1px solid #ccc;
+  margin: 0.25em;
+  padding: 0.75em 0.25em 0.5em 0.75em;
+  background-color: whitesmoke;
+  border-radius: .5em;
+  -o-border-radius: .5em;
+  -icab-border-radius: .5em;
+  -khtml-border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+}
+
+.welcome .page_section {
+  min-height: 14em;
+}
+
+.blockOverlay {
+  opacity: 0.5 !important;
+}
+
 /* Flash Messages */
 
 .message {
@@ -338,6 +359,10 @@ table.nested {
 
 .delete_link, .delete_link:hover {
   background: url(../images/delete.png) 0 2px no-repeat !important;
+}
+
+.external_link, .external_link:hover {
+  background: url(../images/page_world.png) 0 2px no-repeat !important;
 }
 
 .help_icon, .help_icon:hover {

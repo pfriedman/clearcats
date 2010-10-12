@@ -4,3 +4,11 @@
   font-size: 1.125em;
   margin: 0.5em 0;
 }
+
+.publication_form .page_section {
+  margin: 0.5em 10em 0 0;
+}
+
+.publication_form .page_section #modal_edit_form {
+  margin-top: 0;
+}

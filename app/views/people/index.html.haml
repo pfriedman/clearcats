@@ -5,8 +5,9 @@
   $(document).ready(function() {
     $(".help_icon").tooltip();
   });
-  
-= render 'search_form'
+
+.page_section 
+  = render 'search_form'
 
 %p
   = link_to "Upload File to Import Investigators", upload_people_path, { :class => "upload_link icon_link" }

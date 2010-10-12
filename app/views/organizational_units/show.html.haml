@@ -1,9 +1,11 @@
 - title "Organizational Unit"
-%p
-  %b Name:
-  = h @organizational_unit.name
+
+.page_section
+  %p
+    %b Name:
+    = h @organizational_unit.name
   
-  = render 'org_unit_service_lines'
+    = render 'org_unit_service_lines'
   
 .links
   #{link_to 'List', organizational_units_path, :class => "list_link icon_link"}

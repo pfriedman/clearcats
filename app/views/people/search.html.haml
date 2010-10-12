@@ -2,33 +2,34 @@
 - title "Faculty Search"
 - prefix = (Rails.env == "staging") ? "/clearcats" : ""
 
-%p
-  %h3 Search Faculty Members
+.page_section
+  %p
+    %h3 Search Faculty Members
 
-.instructions
-  The Faculty Search will look in the
-  %a{ :href => "https://fsmweb.northwestern.edu/facultylogin/", :target => "_blank" } 
-    Feinberg School of Medicine Faculty Database
-  for records matching by either Net ID or Last Name.
-
-%p
-  If the client is not a University Faculty Member or does not have a Net ID, 
-  you should create a 
-  = link_to "New Person", new_person_path, :class => "add_link icon_link"
-
-- form_tag "#{prefix}/people/search_results", :class => "faculty_search" do
-
-  = hidden_field_tag :organizational_unit_id, @organizational_unit_id
+  .instructions
+    The Faculty Search will look in the
+    %a{ :href => "https://fsmweb.northwestern.edu/facultylogin/", :target => "_blank" } 
+      Feinberg School of Medicine Faculty Database
+    for records matching by either Net ID or Last Name.
 
   %p
-    = label_tag :netid, "Net ID"
-    %br
-    = text_field_tag :netid
+    If the client is not a University Faculty Member or does not have a Net ID, 
+    you should create a 
+    = link_to "New Person", new_person_path, :class => "add_link icon_link"
 
-  %p
-    = label_tag :last_name, "Last Name"
-    %br
-    = text_field_tag :last_name
+  - form_tag "#{prefix}/people/search_results", :class => "faculty_search" do
 
-  .buttons
-    = submit_tag "Search", :disable_with => 'Searching...'
+    = hidden_field_tag :organizational_unit_id, @organizational_unit_id
+
+    %p
+      = label_tag :netid, "Net ID"
+      %br
+      = text_field_tag :netid
+
+    %p
+      = label_tag :last_name, "Last Name"
+      %br
+      = text_field_tag :last_name
+
+    .buttons
+      = submit_tag "Search", :disable_with => 'Searching...'

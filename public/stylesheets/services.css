@@ -5,8 +5,8 @@
 }
 
 .service_header {
-  border-bottom: 1px solid #eee;
-  border-top: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   padding-top: 0.5em;
   margin-bottom: 0.5em;
 }
@@ -23,7 +23,8 @@
 #modal_window {
   display: none;
   height: 55em;
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .blockMsg {
@@ -44,6 +45,12 @@
   padding: 0.25em;
   position: absolute;
   border: 1px solid #ccc;
+  border-radius: .5em;
+  -o-border-radius: .5em;
+  -icab-border-radius: .5em;
+  -khtml-border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
 }
 
 .header_option:hover {
@@ -52,6 +59,10 @@
 
 #modal_window p {
   margin: 0 0 0.5em 0;
+}
+
+#award_form #modal_edit_form {
+  margin-top: 0.75em;
 }
 
 #award_form select,
@@ -79,21 +90,28 @@
   text-decoration: underline;
 }
 
+.publication_header,
+.award_header {
+  font-size: 1.25em;
+}
+
 .award_section {
-  border: 1px solid #ddd;
-  padding: 0.25em;
+  border: 1px solid #ccc;
   margin: 0.25em 0;
-  width: 345px;
+  padding: 0.5em 0.25em 0 0.75em;
+  width: 340px;
+  background-color: whitesmoke;
+  border-radius: .5em;
+  -o-border-radius: .5em;
+  -icab-border-radius: .5em;
+  -khtml-border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
 }
 
 .award_section p b {
   font-size: 1.25em;
 }
-
-.buttons {
-  margin-top: 0.75em;
-}
-
 
 .buttons {
   margin-top: 0.75em;

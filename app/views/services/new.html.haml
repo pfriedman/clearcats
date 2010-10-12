@@ -8,22 +8,23 @@
 %h2
   New Service
 
-%p 
-  In order to initiate a service you must first choose the client or the service line.
-%p
-  Please select one of these options below.
+.page_section
+  %p 
+    In order to initiate a service you must first choose the client or the service line.
+  %p
+    Please select one of these options below.
   
-%p
-  %ul
-    %li
-      = link_to "Choose Client", choose_person_services_path
-      %span{ :class => "help_icon" }
-        &nbsp;
-      = render "choose_client_tooltip"
-    %li
-      = link_to "Choose Service Line", choose_service_line_services_path
-      %span{ :class => "help_icon" }
-        &nbsp;
-      = render "choose_service_line_tooltip"
+  %p
+    %ul
+      %li
+        = link_to "Choose Client", choose_person_services_path
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "choose_client_tooltip"
+      %li
+        = link_to "Choose Service Line", choose_service_line_services_path
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "choose_service_line_tooltip"
 
 = render 'list', { :services => @pending_services, :header => "Services In Process" }

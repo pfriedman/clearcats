@@ -1,5 +1,5 @@
 - stylesheet "people"
-- title "Edit Person"
+- title "Edit Profile"
 
 :javascript
   $(document).ready(function() {
@@ -10,7 +10,8 @@
   .organizational_units
     #{@person} has worked with #{@person.organizational_units.to_sentence}.
 
-= render 'form'
+.page_section
+  = render 'form'
 
 .links
   = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

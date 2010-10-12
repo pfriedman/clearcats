@@ -1,7 +1,8 @@
 - stylesheet "awards"
 
 - if @show_header
-  Award for #{@award.person}
+  %span{ :class => "award_header" } 
+    Award for #{@award.person}
 
   .header_option
     = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")

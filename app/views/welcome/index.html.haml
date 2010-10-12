@@ -12,11 +12,8 @@
     Welcome to ClearCATS!
 
   - if current_user
-    - if current_user.permit?(:Admin)
-      .span-24
-      = render "/admin/admin_list"
     - if current_user.permit?(:Admin, :User)
-      .span-12.colborder
+      .page_section.span-12
         %h3 
           User Actions
         %p
@@ -32,7 +29,7 @@
             %span{ :class => "help_icon" }
               &nbsp;
             = render "initiate_service_tooltip"
-    .span-12
+    .page_section.span-12
       - if @person
         %h3 
           Profile for #{@person}
@@ -42,3 +39,6 @@
             %span{ :class => "help_icon" }
               &nbsp;
             = render "edit_profile_tooltip"
+    - if current_user.permit?(:Admin)
+      .span-24
+      = render "/admin/admin_list"
