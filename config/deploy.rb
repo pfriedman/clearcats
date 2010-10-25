@@ -81,7 +81,7 @@ namespace :deploy do
   
   desc "Remove certain files that should not be deployed - should find way to not deploy them in the first place" 
   task :remove_files do
-    ["cucumber", "rcov"].each do |rake|
+    ["cucumber", "rcov", "ci"].each do |rake|
       run "cd #{release_path} && rm lib/tasks/#{rake}.rake"
     end
   end
