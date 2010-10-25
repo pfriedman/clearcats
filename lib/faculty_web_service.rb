@@ -235,6 +235,8 @@ class FacultyWebService
     
     def self.parse_award_response(body)
       results = []
+      # ic = Iconv.new('UTF-8', 'WINDOWS-1252')
+      # ic = Iconv.new('UTF-8', 'ISO-8859-1')
       value = ActiveSupport::JSON.decode(body)
       value.each do |attributes|
         award = instantiate_award(attributes) 
