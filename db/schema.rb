@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915163558) do
+ActiveRecord::Schema.define(:version => 20101026151305) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20100915163558) do
     t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cc_pers_affiliate_identifier"
   end
 
   add_index "organizational_units", ["name"], :name => "index_organizational_units_on_name"

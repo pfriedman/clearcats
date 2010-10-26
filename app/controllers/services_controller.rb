@@ -46,7 +46,7 @@ class ServicesController < ApplicationController
     if ids.blank?
       @organizational_units = OrganizationalUnit.all(:order => :name)
     else
-      @organizational_units = OrganizationalUnit.find_by_affiliate_ids(ids).sort_by { |ou| ou.name }
+      @organizational_units = OrganizationalUnit.find_by_cc_pers_affiliate_ids(ids).sort_by { |ou| ou.name }
     end
   end
   

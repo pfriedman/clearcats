@@ -1,16 +1,17 @@
 # == Schema Information
-# Schema version: 20100915163558
+# Schema version: 20101026151305
 #
 # Table name: organizational_units
 #
-#  id           :integer         not null, primary key
-#  name         :string(255)
-#  abbreviation :string(255)
-#  parent_id    :integer
-#  lft          :integer
-#  rgt          :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                           :integer         not null, primary key
+#  name                         :string(255)
+#  abbreviation                 :string(255)
+#  parent_id                    :integer
+#  lft                          :integer
+#  rgt                          :integer
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  cc_pers_affiliate_identifier :string(255)
 #
 
 class OrganizationalUnit < ActiveRecord::Base
@@ -34,10 +35,10 @@ class OrganizationalUnit < ActiveRecord::Base
     str.strip
   end
   
-  def self.find_by_affiliate_ids(ids)
+  def self.find_by_cc_pers_affiliate_ids(ids)
     result = []
     affiliates = Pers::Affiliate.find_all_by_affiliate_id(ids)
-    affiliates.each { |a| result << OrganizationalUnit.find_by_abbreviation(a.name_abbrev) }
+    affiliates.each { |a| result << OrganizationalUnit.find_by_cc_pers_affiliate_identifier(a.name_abbrev) }
     result.compact
   end
   

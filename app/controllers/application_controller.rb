@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       # # Ensure that the User record org unit relationship matches that in cc_pers
       # ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
       # if ids.size == 1
-      #   usr.organizational_unit = OrganizationalUnit.find_by_affiliate_ids(ids).first
+      #   usr.organizational_unit = OrganizationalUnit.find_by_cc_pers_affiliate_ids(ids).first
       #   usr.save!
       # end
       
@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
 
     def determine_org_units_for_user
       ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
-      OrganizationalUnit.find_by_affiliate_ids(ids) unless ids.blank?
+      OrganizationalUnit.find_by_cc_pers_affiliate_ids(ids) unless ids.blank?
     end
     alias :determine_organizational_units_for_user :determine_org_units_for_user
 
