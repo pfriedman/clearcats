@@ -137,6 +137,7 @@ class ServicesController < ApplicationController
     @service.destroy
 
     respond_to do |format|
+      params.delete(:action)
       format.html { redirect_to(services_url(params)) }
       format.xml  { head :ok }
     end
