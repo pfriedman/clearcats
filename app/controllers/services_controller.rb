@@ -2,6 +2,7 @@ class ServicesController < ApplicationController
   permit :Admin, :User
 
   def index
+    params[:search] ||= Hash.new
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end

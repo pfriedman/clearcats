@@ -7,14 +7,16 @@
   %table{ :class => "records pending_services" }
     %tr
       %th Select
-      %th Status
-      %th Person
-      %th Service Line
+      %th= order @search, :by => :state, :as => "Status", :params => {:page => params[:page]}
+      %th= order @search, :by => :person_last_name, :as => "Person", :params => {:page => params[:page]}
+      %th= order @search, :by => :service_line_name, :as => "Service Line", :params => {:page => params[:page]}
+      %th= order @search, :by => :service_line_organizational_unit_name, :as => "Organizational Unit", :params => {:page => params[:page]}
     - services.each do |svc|
       %tr{:class => cycle('even_record', 'odd_record')}
         %td= link_to "Select", :controller => "services", :action => "continue", :id => svc
         %td= svc.state.titleize
         %td= svc.person
         %td= svc.service_line
+        %td= svc.service_line.organizational_unit if svc.service_line
 
   = will_paginate services
