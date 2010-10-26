@@ -91,9 +91,10 @@ class LatticeGridWebService
       pub = Publication.find_by_pmid(attributes["pubmed"])
       
       if pub.nil?
-        pub = Publication.new(attributes)
-      else
-        pub.update_attributes(attributes) if pub.versions.empty?
+        pub = Publication.new
+        attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
+      elsif pub.versions.empty?
+        attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       end
       pub
     end
