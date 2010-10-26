@@ -115,21 +115,31 @@ class Service < ActiveRecord::Base
   end
   
   def add_organizational_unit_to_person
-    if self.person and self.service_line and !service_line.organizational_unit.blank? and !self.person.organizational_units.include?(self.service_line.organizational_unit)
+    if should_add_organizational_unit_to_person?
       self.person.organizational_units << self.service_line.organizational_unit 
       self.person.save!
     end
   end
   
   def remove_organizational_unit_from_person
-    if self.person and only_person_association_to_organizational_unit_is_through_this_service?
-      self.person.organizational_units.destroy(self.service_line.organizational_unit)
+    if should_remove_organizational_unit_from_person?
+      self.person.organizational_units.delete(self.service_line.organizational_unit)
       self.person.save!
     end
   end
   
-  def only_person_association_to_organizational_unit_is_through_this_service?
-    self.person.services.map(&:organizational_unit).select { |ou| ou.id == self.service_line.organizational_unit.id }.count == 1
-  end
+  private
+  
+    def should_add_organizational_unit_to_person?
+      self.person and self.service_line and !service_line.organizational_unit.blank? and !self.person.organizational_units.include?(self.service_line.organizational_unit)
+    end
+    
+    def should_remove_organizational_unit_from_person?
+      self.person and self.service_line and only_person_association_to_organizational_unit_is_through_this_service?
+    end
+  
+    def only_person_association_to_organizational_unit_is_through_this_service?
+      self.person.services.map(&:organizational_unit).select { |ou| ou.id == self.service_line.organizational_unit.id }.count == 1
+    end
 
 end

@@ -2,12 +2,14 @@ class ServicesController < ApplicationController
   permit :Admin, :User
 
   def index
+    @user_organizational_units = determine_org_units_for_user
     params[:search] ||= Hash.new
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end
 
   def view_all
+    @user_organizational_units = determine_org_units_for_user
     params[:search] ||= Hash.new
     @person = find_or_create_user
     if request.get?
@@ -127,6 +129,19 @@ class ServicesController < ApplicationController
   def surveyable
     get_service
   end
+  
+  # DELETE /services/1
+  # DELETE /services/1.xml
+  def destroy
+    @service = Service.find(params.delete(:id))
+    @service.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(services_url(params)) }
+      format.xml  { head :ok }
+    end
+  end
+  
   
   private 
   

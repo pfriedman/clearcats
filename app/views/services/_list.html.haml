@@ -11,6 +11,7 @@
       %th= order @search, :by => :person_last_name, :as => "Person", :params => {:page => params[:page]}
       %th= order @search, :by => :service_line_name, :as => "Service Line", :params => {:page => params[:page]}
       %th= order @search, :by => :service_line_organizational_unit_name, :as => "Organizational Unit", :params => {:page => params[:page]}
+      %th
     - services.each do |svc|
       %tr{:class => cycle('even_record', 'odd_record')}
         %td= link_to "Select", :controller => "services", :action => "continue", :id => svc
@@ -18,5 +19,6 @@
         %td= svc.person
         %td= svc.service_line
         %td= svc.service_line.organizational_unit if svc.service_line
+        %td= link_to 'Destroy', service_path(svc, :search => params[:search]), :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 
   = will_paginate services

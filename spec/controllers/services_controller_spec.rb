@@ -58,5 +58,19 @@ describe ServicesController do
       end
 
     end
+    
+    describe "DELETE destroy" do
+      it "destroys the requested service" do
+        Service.should_receive(:find).with("37").and_return(mock_service)
+        mock_service.should_receive(:destroy)
+        delete :destroy, :id => "37"
+      end
+
+      it "redirects to the activity_types list" do
+        Service.stub(:find).and_return(mock_service(:destroy => true))
+        delete :destroy, :id => "1"
+        response.should redirect_to(services_url)
+      end
+    end
   end
 end

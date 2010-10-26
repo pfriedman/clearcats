@@ -6,7 +6,7 @@
   %p
     = label_tag "organizational_unit_id", "Organizational Unit"
     %br
-    = select_tag(:organizational_unit_id, options_for_select(OrganizationalUnit.all.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, @organizational_unit.id))
+    = select_tag(:organizational_unit_id, options_for_select(@user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id.to_s]}, @organizational_unit.id))
   .buttons
     = submit_tag "Submit", :disable_with => 'Submitting...'
 
