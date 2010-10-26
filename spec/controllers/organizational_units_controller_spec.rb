@@ -50,6 +50,7 @@ describe OrganizationalUnitsController do
 
     describe "GET show" do
       it "assigns the requested organizational_unit as @organizational_unit" do
+        controller.should_receive(:determine_org_units_for_user).and_return([mock_organizational_unit])
         OrganizationalUnit.stub(:find).with("37").and_return(mock_organizational_unit)
         get :show, :id => "37"
         assigns[:organizational_unit].should equal(mock_organizational_unit)
@@ -66,6 +67,7 @@ describe OrganizationalUnitsController do
 
     describe "GET edit" do
       it "assigns the requested organizational_unit as @organizational_unit" do
+        controller.should_receive(:determine_org_units_for_user).and_return([mock_organizational_unit])
         OrganizationalUnit.stub(:find).with("37").and_return(mock_organizational_unit)
         get :edit, :id => "37"
         assigns[:organizational_unit].should equal(mock_organizational_unit)
