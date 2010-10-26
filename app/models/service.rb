@@ -23,6 +23,7 @@ class Service < ActiveRecord::Base
   delegate :organizational_unit, :to => :service_line
   
   before_save :add_organizational_unit_to_person
+  before_destroy :remove_organizational_unit_from_person
   
   named_scope :organizational_unit_id_equals, lambda { |id|  {:joins => :service_line, :conditions => ["service_lines.organizational_unit_id = :id", {:id => id} ]} }
   
@@ -118,6 +119,17 @@ class Service < ActiveRecord::Base
       self.person.organizational_units << self.service_line.organizational_unit 
       self.person.save!
     end
+  end
+  
+  def remove_organizational_unit_from_person
+    if self.person and only_person_association_to_organizational_unit_is_through_this_service?
+      self.person.organizational_units.destroy(self.service_line.organizational_unit)
+      self.person.save!
+    end
+  end
+  
+  def only_person_association_to_organizational_unit_is_through_this_service?
+    self.person.services.map(&:organizational_unit).select { |ou| ou.id == self.service_line.organizational_unit.id }.count == 1
   end
 
 end

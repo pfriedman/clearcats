@@ -100,8 +100,6 @@ describe Service do
         svc.should be_initiated
         svc.service_line.should_not be_nil
       end
-    
-      it "should know the order (if any)"
       
     end
     
@@ -122,6 +120,44 @@ describe Service do
       states.include?(:asdf).should_not be_true
     end
     
+    
+  end
+
+  context "associations" do
+    
+    it "should delete all orphaned associations upon destroy" do
+      
+      svc = Factory(:service)
+      person = svc.person
+      organizational_unit = svc.service_line.organizational_unit
+      person.organizational_units.should == [organizational_unit]
+      person.services.size.should == 1
+      svc.destroy
+      
+      person = Person.find(person.id)
+      person.organizational_units.should be_empty
+    end
+    
+    it "should not remove organizational_unit association if there are more than one services for that person with that organizational unit" do
+      org_unit     = Factory(:organizational_unit)
+      person       = Factory(:person)
+      svc_line_one = Factory(:service_line, :organizational_unit => org_unit, :name => "one")
+      svc_line_two = Factory(:service_line, :organizational_unit => org_unit, :name => "two")
+      svc_one = Factory(:service, :person => person, :service_line => svc_line_one)
+      svc_two = Factory(:service, :person => person, :service_line => svc_line_two)
+
+      person.services.size.should == 2
+      
+      svc_one.destroy
+      
+      person = Person.find(person.id)
+      person.organizational_units.should_not be_empty
+      
+      svc_two.destroy
+      
+      person = Person.find(person.id)
+      person.organizational_units.should be_empty
+    end
     
   end
 
