@@ -31,5 +31,5 @@
               %li= link_to "CTSA Report", ctsa_reports_path
               %li= link_to "Incomplete Awards", incomplete_awards_path
               %li= link_to "Incomplete Publications", incomplete_publications_path
-    - logout_path = (Rails.env == "staging") ? "/clearcats/logout" : "/logout"
+    - logout_path = (Rails.env == "staging" or Rails.env == "production") ? "/clearcats/logout" : "/logout"
     %li= link_to "Logout", logout_path
