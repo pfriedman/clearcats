@@ -5,10 +5,10 @@
       = link_to "Update #{@person}.", edit_person_path(@person), :class => "edit_link icon_link"
 
   - if @service
-    - ordering_params = { :controller => "services", :action => "choose_publications", :id => @service.id }
+    - ordering_params = { :controller => "services", :action => "choose_publications", :id => @service.id, :view_all => params[:view_all] }
     - pub_association = { :service_id => @service.id }
   - else 
-    - ordering_params = { :controller => "publications", :action => "index", :person_id => @person.id }
+    - ordering_params = { :controller => "publications", :action => "index", :person_id => @person.id, :view_all => params[:view_all] }
     - pub_association = { :person_id => @person.id }
 
   .publications_body
