@@ -170,7 +170,7 @@ class Person < ActiveRecord::Base
   end
   
   def to_s
-    full_name
+    "#{full_name}"
   end
   
   def full_name
@@ -190,7 +190,6 @@ class Person < ActiveRecord::Base
     results = self.awards.select {|a| a.organization == org}
     results
   end
-
 
   def business_phone=(phone_number)
     self.phone = phone_number
@@ -303,25 +302,30 @@ class Person < ActiveRecord::Base
   ###
 
   def self.import_data(file, user)
-    FasterCSV.parse(file, :headers => :first_row, :write_headers => false, :return_headers => false, :header_converters => :symbol) do |row|
-      if !row[:era_commons_username].blank?
-        pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
-        
-        if !row[:area_of_expertise].blank?
-          specialty = Specialty.find_by_code(row[:area_of_expertise])
-          pers.specialty = specialty unless specialty.nil?
-        end
-        
-        [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
-        pers.organizational_units << user.organizational_unit if !user.organizational_unit.nil? and !pers.organizational_units.include?(user.organizational_unit)
-        
-        reporting_years = pers.ctsa_reporting_years
-        pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)
-        
-        pers.save!
-        process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
-      end
+    FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
+      next if row.header_row?
+      next if row[:era_commons_username].blank?
+      next if row[:service_lines].blank?
+      process_import_row(row, user)
     end
+  end
+  
+  def self.process_import_row(row, user)
+    pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
+  
+    if !row[:area_of_expertise].blank?
+      specialty = Specialty.find_by_code(row[:area_of_expertise])
+      pers.specialty = specialty unless specialty.nil?
+    end
+
+    [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+    pers.organizational_units << user.organizational_unit if !user.organizational_unit.nil? and !pers.organizational_units.include?(user.organizational_unit)
+
+    reporting_years = pers.ctsa_reporting_years
+    pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)
+  
+    pers.save!
+    process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
   end
   
   # only create Service if one does not exist
@@ -341,6 +345,8 @@ class Person < ActiveRecord::Base
   end
   
   # process each Service Line in upload file for person
+  #   - creates a Service record
+  #   - associates the person with the organizational_unit for that service line
   def self.process_service_lines_row(person, service_lines)
     service_lines.each do |name|
       service_line = ServiceLine.find_by_name(name.strip)
@@ -352,7 +358,6 @@ class Person < ActiveRecord::Base
   end
 
   def import_row(row)
-    
   end
 
 

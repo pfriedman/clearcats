@@ -209,45 +209,54 @@ describe Person do
   
   context "uploading csv data" do
     
+    before(:each) do
+    
+      @org_unit = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
+      @usr      = Factory(:user, :organizational_unit => @org_unit)
+      @lab      = Factory(:service_line, :name => "Laboratory")
+      @wkshp    = Factory(:service_line, :name => "Workshops")
+    end
+    
     describe "processing a valid csv document" do
       
+      before(:each) do
+        Person.count.should == 1
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), @usr)
+      end
+      
       it "should create Person records from the data" do
-        Person.count.should == 0
-        usr = Factory(:user)
-        svc_line = Factory(:service_line, :name => "Laboratory")
-        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
-        
         Person.count.should == 4
         User.count.should   == 1
-        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
+        Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
       end
       
       it "should associate Person with organizational units of the uploader" do
-        Person.count.should == 0
-        org_unit = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
-        usr = Factory(:user, :organizational_unit => org_unit)
-        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
-        
         Person.count.should == 4
         User.count.should   == 1
-        Person.last.organizational_units.should == [org_unit]
+        Person.last.organizational_units.include?(@org_unit).should == true
       end
       
-      it "should only create one service for a person and service line even if the file is uploaded more than once" do
-        Person.count.should == 0
-        usr = Factory(:user)
-        svc_line = Factory(:service_line, :name => "Laboratory")
-        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
+      it "should only create one service for a person and service line even if the file is uploaded more than once" do        
+        Person.count.should == 4
+        User.count.should   == 1
+        Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
+        
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), @usr)
         
         Person.count.should == 4
         User.count.should   == 1
-        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
+        Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
+      end
+      
+    end
+    
+    describe "processing an invalid document" do
+      it "should not import anyone without a service line" do
+        Person.count.should == 1
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/person_upload_without_service_lines.csv')), @usr)
         
-        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), usr)
-        
-        Person.count.should == 4
+        Person.count.should == 3
         User.count.should   == 1
-        Service.all(:conditions => {:service_line_id => svc_line.id}).size.should == 1
       end
       
     end
