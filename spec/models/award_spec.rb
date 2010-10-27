@@ -42,6 +42,16 @@ describe Award do
     Factory(:award)
   end
   
+  it "should describe itself in a human readable format" do
+    award = Factory(:award)
+    award.to_s.should == "#{award.sponsor_name} - #{award.sponsor_award_number} [#{award.grant_title}]"
+  end
+  
+  it "should report missing fields for the ctsa report" do
+    award = Factory(:award, :activity_code => nil, :grant_number => nil, :organization => nil)
+    award.ctsa_missing_fields.should == "Activity Code, Grant Number, Organization"
+  end
+  
   it { should belong_to(:person) }
   it { should belong_to(:organization) }
   it { should belong_to(:activity_code) }
@@ -90,6 +100,12 @@ describe Award do
       @non_phs_org.id.to_s.should_not be_blank
       award.non_phs_organization = @non_phs_org.id.to_s
       award.organization.should == award.non_phs_organization
+    end
+    
+    it "should defer to the organzation when asking for phs or non phs ids" do
+      award = Factory(:award)
+      award.phs_organization_id.should == award.organization.id
+      award.non_phs_organization_id.should == award.organization.id
     end
     
   end

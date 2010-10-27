@@ -37,8 +37,9 @@ class OrganizationalUnit < ActiveRecord::Base
   
   def self.find_by_cc_pers_affiliate_ids(ids)
     result = []
-    affiliates = Pers::Affiliate.find_all_by_affiliate_id(ids)
-    affiliates.each { |a| result << OrganizationalUnit.find_by_cc_pers_affiliate_identifier(a.name_abbrev) }
+    Pers::Affiliate.all(:conditions => ["affiliate_id in (:ids)", {:ids => ids}]).each do |a|
+      result << OrganizationalUnit.first(:conditions => {:cc_pers_affiliate_identifier => a.name_abbrev})
+    end
     result.compact
   end
   

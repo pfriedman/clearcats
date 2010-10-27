@@ -48,8 +48,9 @@ Factory.define :race_type do |rt|
 end
 
 Factory.define :organizational_unit do |ou|
-  ou.name         "organizational_unit name"
-  ou.abbreviation "ou"
+  ou.name                         "organizational_unit name"
+  ou.abbreviation                 "ou"
+  ou.cc_pers_affiliate_identifier "cc_pers"
 end
 
 Factory.define :service_line do |sl|
