@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe ReportsController do
 
+  def mock_client(stubs={})
+    @mock_client ||= mock_model(Client, stubs)
+  end
+  
+  def mock_organizational_unit(stubs={})
+    @mock_organizational_unit ||= mock_model(OrganizationalUnit, stubs)
+  end
+
   context "logged in as administrator" do
 
     before(:each) do
@@ -21,11 +29,11 @@ describe ReportsController do
         response.should be_success
       end
       
-      it "assigns the clients as @clients"
-      
-      it "filters the clients based on selected organizational unit"
-      
-      it "filters the clients based on selected organizational unit and service line"
+      it "assigns the clients as @clients" do
+        Client.stub(:search).and_return([mock_client])
+        get :client_list
+        assigns[:clients].should  == [mock_client]
+      end
         
     end
   
