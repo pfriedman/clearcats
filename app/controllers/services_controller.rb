@@ -8,21 +8,6 @@ class ServicesController < ApplicationController
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end
 
-  def view_all
-    @user_organizational_units = determine_org_units_for_user
-    params[:search] ||= Hash.new
-    @person = find_or_create_user
-    if request.get?
-      @organizational_unit = @person.organizational_unit
-    end
-    if request.post? 
-      @organizational_unit = OrganizationalUnit.find(params[:organizational_unit_id])
-    end
-    params[:search][:organizational_unit_id_equals] = @organizational_unit.id
-    @search = Service.search(params[:search])
-    @services = @search.paginate(:page => params[:page], :per_page => 10)
-  end
-
   def new
     @service = Service.new
     @search  = Service.search(:created_by_id_equals => find_or_create_user.id, :state_does_not_equal => "complete")
@@ -134,10 +119,12 @@ class ServicesController < ApplicationController
   # DELETE /services/1.xml
   def destroy
     @service = Service.find(params.delete(:id))
+    person = @service.person
     @service.destroy
 
     respond_to do |format|
       params.delete(:action)
+      flash[:link_notice] = "Service has been deleted. <br />Go to the <a href=#{people_path}>Client List</a> to remove the ctsa reportable field for #{person} if desired."
       format.html { redirect_to(services_url(params)) }
       format.xml  { head :ok }
     end
