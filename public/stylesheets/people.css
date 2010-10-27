@@ -8,6 +8,10 @@
   float: right;
 }
 
+#upload_error_log {
+  float: right;
+}
+
 #people_search_form {
   padding: 0.5em;
 }

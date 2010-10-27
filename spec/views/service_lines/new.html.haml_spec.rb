@@ -5,7 +5,7 @@ describe "/service_lines/new.html.haml" do
 
   before(:each) do
     login(user_login)
-
+    assigns[:user_organizational_units] = []
     assigns[:service_line] = stub_model(ServiceLine,
       :new_record? => true,
       :name => "value for name"

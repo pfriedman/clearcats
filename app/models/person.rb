@@ -304,11 +304,22 @@ class Person < ActiveRecord::Base
   def self.import_data(file, user)
     FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
       next if row.header_row?
-      next if row[:era_commons_username].blank?
-      next if row[:service_lines].blank?
-      process_import_row(row, user)
+      if row[:era_commons_username].blank?
+        File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] era_commons_username missing for row - #{row}") }
+      elsif row[:service_lines].blank?
+        File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] service_lines missing for row - #{row}") }
+      else
+        process_import_row(row, user)
+      end
     end
   end
+  
+  def self.import_error_log(username)
+    dir = "#{Rails.root}/log/#{username}"
+    FileUtils.makedirs(dir) unless File.exists?(dir)
+    "#{dir}/#{Date.today.strftime('%Y%m%d')}_import_errors.log"
+  end
+  
   
   def self.process_import_row(row, user)
     pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])

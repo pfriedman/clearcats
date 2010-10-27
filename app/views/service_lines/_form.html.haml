@@ -11,7 +11,8 @@
   %p
     = f.label :organizational_unit_id, "Organizational Unit"
     %br
-    = f.select :organizational_unit_id, options_for_select(nested_set_options(OrganizationalUnit) {|i| "#{'-' * i.level} #{i.name} (#{i.abbreviation})" },  @service_line.organizational_unit_id)
+    - org_unit = @user_organizational_units.size == 1 ? @user_organizational_units.first : OrganizationalUnit 
+    = f.select :organizational_unit_id, options_for_select(nested_set_options(org_unit) {|i| "#{'-' * i.level} #{i.name} (#{i.abbreviation})" },  @service_line.organizational_unit_id)
   
   %table{ :class => "records activity_types" }
     %thead

@@ -32,6 +32,7 @@ class ServiceLinesController < ApplicationController
   # GET /service_lines/new
   # GET /service_lines/new.xml
   def new
+    @user_organizational_units = determine_org_units_for_user
     @service_line = ServiceLine.new
 
     respond_to do |format|
@@ -42,6 +43,7 @@ class ServiceLinesController < ApplicationController
 
   # GET /service_lines/1/edit
   def edit
+    @user_organizational_units = determine_org_units_for_user
     @service_line = ServiceLine.find(params[:id])
   end
 
