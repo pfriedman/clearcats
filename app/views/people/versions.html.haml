@@ -34,7 +34,7 @@
           %td= h attrs["era_commons_username"]
           %td= h attrs["last_four_of_ssn"]
     %tr{ :class => 'current_record' }
-      %td{ :colspan = '2' }
+      %td{ :colspan => '2' }
         = link_to 'Edit', edit_person_path(@person), :class => "edit_link icon_link"
       %td Current Version
       %td &nbsp;
