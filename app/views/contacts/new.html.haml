@@ -1,0 +1,7 @@
+- stylesheet "contacts"
+- title "New Contact"
+
+= render 'form'
+
+.links
+  = link_to 'List', contacts_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

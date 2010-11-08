@@ -1,0 +1,42 @@
+- stylesheet "contacts"
+- title "Contacts"
+
+- if @user_organizational_units.size > 1
+  .page_section
+    - form_for @search, :url => {:controller => "contacts", :action => "index", :method => :get}, :html => {:class => "contact_list_search_form"} do |f|
+      %p
+        = f.label "organizational_units_id_equals", "Organizational Unit"
+        %br
+        = f.select(:organizational_units_id_equals, @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, { :include_blank => "-- Select Organizational Unit --" })
+      .buttons
+        = f.submit "Submit", :disable_with => 'Submitting...'
+
+- if @contacts.blank?
+  %p.no_records
+    No contacts were found.
+- else
+  %table.records
+    %tr
+      %th= order @search, :by => :email, :as => "Email"
+      %th= order @search, :by => :last_name, :as => "Last Name"
+      %th= order @search, :by => :first_name, :as => "First Name"
+      %th= order @search, :by => :company_name, :as => "Company Name"
+      %th{:colspan => "3"}
+    - @contacts.each do |contact|
+      %tr{:class => cycle('even_record', 'odd_record')}
+        %td= h contact.email
+        %td= h contact.last_name
+        %td= h contact.first_name
+        %td= h contact.company_name
+        %td
+          = link_to 'Edit', edit_contact_path(contact), :class => "edit_link icon_link"
+        %td
+          = link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?(contact.organizational_units, @user_organizational_units)
+        %td
+          = link_to 'Edit Client Record', edit_person_path(contact.person), :class => "edit_link icon_link" if contact.person
+
+  = will_paginate @contacts
+
+.links
+  = link_to 'New Contact', new_contact_path, :class => "add_link icon_link"
+  

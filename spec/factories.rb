@@ -199,3 +199,10 @@ Factory.define :user do |u|
   u.country             { |a| a.association(:country) }
   u.organizational_unit { |a| a.association(:organizational_unit) }
 end
+
+Factory.define :contact do |c|
+  c.sequence(:email) { |n| "contactemail#{n}@dev.null" }
+  c.first_name       "first_name"
+  c.last_name        "last_name"
+  c.company_name     "company_name"
+end

@@ -17,7 +17,7 @@ users:
     password: cecd_user
     portals:
       - ClearCATS:
-        - Admin: [5002]
+        - Admin: [4619]
   wakibbe:
     password: wakibbe
   pgreenld:

@@ -91,13 +91,13 @@ describe PeopleController do
     describe "POST create" do
 
       describe "with valid params" do
-        it "assigns a newly created activity_type as @activity_type" do
+        it "assigns a newly created person as @person" do
           Person.stub(:new).with({'these' => 'params'}).and_return(mock_person(:save => true))
           post :create, :person => {:these => 'params'}
           assigns[:person].should equal(mock_person)
         end
 
-        it "redirects to the created activity_type" do
+        it "redirects to the created person" do
           Person.stub(:new).and_return(mock_person(:save => true))
           post :create, :person => {}
           response.should redirect_to(people_path)

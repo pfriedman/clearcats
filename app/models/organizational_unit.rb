@@ -15,13 +15,13 @@
 #
 
 class OrganizationalUnit < ActiveRecord::Base
-  # has_many :users
   # has_many :milestones
   # has_many :projects
 
   has_many :service_lines
   
   has_and_belongs_to_many :people
+  has_and_belongs_to_many :contacts
 
   # has_many :participating_organizational_units
   # has_many :intake_forms, :through => :participating_organizational_units

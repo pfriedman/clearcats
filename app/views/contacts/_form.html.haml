@@ -1,0 +1,31 @@
+- form_for @contact do |f|
+  = f.error_messages
+
+  %p
+    = f.label :email, "Email"
+    %br
+    = f.text_field :email
+
+  %p
+    = f.label :first_name, "First Name" 
+    %br
+    = f.text_field :first_name 
+  
+  %p
+    = f.label :last_name, "Last Name" 
+    %br
+    = f.text_field :last_name
+
+  %p
+    = f.label :company_name, "Company Name" 
+    %br
+    = f.text_field :company_name 
+
+  - if @user_organizational_units.size > 1
+    %p
+      = f.label :organizational_unit_ids, "Organizational Units"
+      %br
+      = collection_select :contact, :organizational_unit_ids, @user_organizational_units.sort_by{ |e| e.name }, :id, :name, { :selected => @contact.organizational_unit_ids }, { :multiple => true, :name => 'contact[organizational_unit_ids][]' }
+
+  .buttons
+    = f.submit "Save", :disable_with => 'Saving...'

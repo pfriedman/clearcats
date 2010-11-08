@@ -31,11 +31,10 @@ describe OrganizationalUnit do
   end
   
   it { should have_and_belong_to_many(:people) }
+  it { should have_and_belong_to_many(:contacts) }
   
   it { should belong_to(:parent) }
   it { should have_many(:children) }
   it { should have_many(:service_lines) }
-  # it { should have_many(:users) }
-  # it { should have_many(:milestones) }
-  # it { should have_many(:projects) }
+
 end
