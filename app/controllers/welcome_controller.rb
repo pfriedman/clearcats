@@ -8,6 +8,7 @@ class WelcomeController < ApplicationController
   
   def upload_error_log
     @lines = Array.new
-    File.open(Person.import_error_log(current_user.username)).each_line { |line| @lines << "#{line}"}
+    file_path = Person.import_error_log(current_user.username)
+    File.open(file_path).each_line { |line| @lines << "#{line}"} if File.exists?(file_path)
   end
 end
