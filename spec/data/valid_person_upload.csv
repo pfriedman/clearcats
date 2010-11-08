@@ -1,4 +1,4 @@
-First Name,Last Name,Middle Name,Email,ERA Commons Username,Netid,Employeeid,Service Lines
-James,Kirk,T,jamestkirk@starfleet.org,jamestkirk,jamestkirk,1000,"Workshops"
-Leonard,McCoy,H,bones@starfleet.org,bones,bones,1100,"Laboratory,Workshops"
-Warren,Kibbe,A,wakibbe@northwestern.edu,WAKIBBE,wakibbe,1018461,"Workshops"
+First Name,Last Name,Middle Name,Email,ERA Commons Username,Netid,Employeeid,Area of Expertise,Service Lines
+James,Kirk,T,jamestkirk@starfleet.org,jamestkirk,jamestkirk,1000,1111,"Laboratory,Workshops"
+Leonard,McCoy,H,bones@starfleet.org,bones,bones,1100,"Laboratory,1100,Workshops"
+Warren,Kibbe,A,wakibbe@northwestern.edu,WAKIBBE,wakibbe,1018461,,"Workshops"

@@ -211,10 +211,11 @@ describe Person do
     
     before(:each) do
     
-      @org_unit = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
-      @usr      = Factory(:user, :organizational_unit => @org_unit)
-      @lab      = Factory(:service_line, :name => "Laboratory")
-      @wkshp    = Factory(:service_line, :name => "Workshops")
+      @org_unit  = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
+      @usr       = Factory(:user, :organizational_unit => @org_unit)
+      @lab       = Factory(:service_line, :name => "Laboratory")
+      @wkshp     = Factory(:service_line, :name => "Workshops")
+      @specialty = Factory(:specialty, :code => 1111)
     end
     
     describe "processing a valid csv document" do
@@ -225,27 +226,31 @@ describe Person do
       end
       
       it "should create Person records from the data" do
-        Person.count.should == 4
+        Person.count.should == 3
         User.count.should   == 1
         Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
       end
       
       it "should associate Person with organizational units of the uploader" do
-        Person.count.should == 4
+        Person.count.should == 3
         User.count.should   == 1
         Person.last.organizational_units.include?(@org_unit).should == true
       end
       
-      it "should only create one service for a person and service line even if the file is uploaded more than once" do        
-        Person.count.should == 4
+      it "should only create one service for a person and service line even if the file is uploaded more than once" do
+        Person.count.should == 3
         User.count.should   == 1
         Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
         
         Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), @usr)
         
-        Person.count.should == 4
+        Person.count.should == 3
         User.count.should   == 1
         Service.all(:conditions => {:service_line_id => @lab.id}).size.should == 1
+      end
+      
+      it "should associate Person with a Specialty" do
+        Person.find_by_netid("jamestkirk").specialty.should == @specialty
       end
       
     end

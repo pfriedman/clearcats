@@ -325,7 +325,7 @@ class Person < ActiveRecord::Base
     pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
   
     if !row[:area_of_expertise].blank?
-      specialty = Specialty.find_by_code(row[:area_of_expertise])
+      specialty = Specialty.find_by_code(row[:area_of_expertise].to_s)
       pers.specialty = specialty unless specialty.nil?
     end
 
@@ -337,6 +337,19 @@ class Person < ActiveRecord::Base
   
     pers.save!
     process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
+  end
+  
+  # process each Service Line in upload file for person
+  #   - creates a Service record
+  #   - associates the person with the organizational_unit for that service line
+  def self.process_service_lines_row(person, service_lines)
+    service_lines.each do |name|
+      service_line = ServiceLine.find_by_name(name.strip)
+      if !service_line.blank?
+        create_imported_service(person, service_line)
+        update_organizational_unit_associations(person, service_line)
+      end
+    end
   end
   
   # only create Service if one does not exist
@@ -352,19 +365,6 @@ class Person < ActiveRecord::Base
     if !service_line.organizational_unit.blank? and !person.organizational_units.include?(service_line.organizational_unit)
       person.organizational_units << service_line.organizational_unit 
       person.save!
-    end
-  end
-  
-  # process each Service Line in upload file for person
-  #   - creates a Service record
-  #   - associates the person with the organizational_unit for that service line
-  def self.process_service_lines_row(person, service_lines)
-    service_lines.each do |name|
-      service_line = ServiceLine.find_by_name(name.strip)
-      if !service_line.blank?
-        create_imported_service(person, service_line)
-        update_organizational_unit_associations(person, service_line)
-      end
     end
   end
 
