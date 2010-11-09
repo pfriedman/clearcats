@@ -12,7 +12,7 @@ class LatticeGridWebService
 
     begin
       resp = make_request(uri, req)
-      value = ActiveSupport::JSON.decode(resp.body)
+      value = ActiveSupport::JSON.decode(cleantext(resp.body))
 
       if value
         value.each do |attributes|
@@ -41,7 +41,7 @@ class LatticeGridWebService
     begin
 
       resp = make_request(uri, req)
-      value = ActiveSupport::JSON.decode(resp.body)
+      value = ActiveSupport::JSON.decode(cleantext(resp.body))
       
       if value
         person = find_or_create_person(netid)
@@ -103,6 +103,11 @@ class LatticeGridWebService
       person = Person.find_by_netid(netid)
       person = FacultyWebService.locate_one({:netid => netid}) if person.nil?
       person
+    end
+    
+    def self.cleantext(txt)
+      File.open("#{Rails.root}/log/lattice_grid.log", 'w') { |f| f.write(txt) }
+      txt.gsub(/\022|\023|\024|\030|\031|\034|\035/,' ')
     end
     
 end
