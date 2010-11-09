@@ -41,14 +41,24 @@ class ServicesController < ApplicationController
   # A service will be created after the user selects either the client or the service line
   # The redirect will be determined by the service
   def create
-    @service = Service.new(params[:service])
-    @service.created_by = find_or_create_user
-
-    if @service.save!
-      flash[:notice] = 'Service was successfully created.'
-      determine_redirect
+    
+    if params[:service].blank? or (params[:service][:service_line_id].blank? and params[:service][:person_id].blank?)
+      if request.referrer.include?("choose_person")
+        flash[:notice] = "You must take some action. Please select a person."
+      else
+        flash[:notice] = "You must take some action. Please select a service line."
+      end
+      redirect_to :back
     else
-      render :action => "new"
+      @service = Service.new(params[:service])
+      @service.created_by = find_or_create_user
+
+      if @service.save!
+        flash[:notice] = 'Service was successfully created.'
+        determine_redirect
+      else
+        render :action => "new"
+      end
     end
   end
   
@@ -157,6 +167,7 @@ class ServicesController < ApplicationController
       attr_params = {}
       # Handle polymorphic person - params key dependent on person class
       [:person, :client, :user].each { |e| attr_params = attr_params.merge(params[e]) unless params[e].blank? }
+      @service.person = Client.new if @service.person.nil?
       @service.person.update_attributes(attr_params)
     end
     
