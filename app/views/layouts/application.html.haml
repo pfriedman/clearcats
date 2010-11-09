@@ -39,7 +39,7 @@
       #main
         - flash.each do |message_type, message|
           %div{ :class => "message", :id => message_type }
-            - if message_type == :link_notice
+            - if message_type == :link_notice or message_type == :link_warning
               = message
             - else
               = h(message)

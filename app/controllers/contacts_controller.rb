@@ -63,6 +63,20 @@ class ContactsController < ApplicationController
     end
   end
 
+  def upload
+    if request.post?
+      org_unit = OrganizationalUnit.find(params[:organizational_unit_id]) unless params[:organizational_unit_id].blank?
+      
+      if org_unit.blank?
+        flash[:link_warning] = "You cannot upload contacts outside the context of an organizational unit. <br />Please Select an Organizational Unit."
+        redirect_to upload_contacts_path
+      else
+        Contact.import_data(params[:file].open, org_unit)
+        redirect_to contacts_path
+      end
+    end
+  end
+
   private 
   
     def set_user_organizational_units

@@ -7,7 +7,22 @@ class Contact < ActiveRecord::Base
 
 	before_save :associate_person
 	
+	def self.import_data(file, org_unit)
+	  FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
+      next if row.header_row?
+      next if row[:email_address].blank?
+      process_import_row(row, org_unit)
+    end
+	end
+	
 	private
+	
+	  def self.process_import_row(row, org_unit)
+	    contact = Contact.find_or_create_by_email(row[:email_address])
+      [:first_name, :last_name, :company_name].each { |attribute| contact.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+      contact.organizational_units << org_unit if !org_unit.nil? and !contact.organizational_units.include?(org_unit)
+      contact.save!
+	  end
 	
 		def associate_person
 		  if !self.email.blank?

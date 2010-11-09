@@ -16,4 +16,22 @@ describe Contact do
     contact.person.should_not be_nil
     contact.person.should == person
   end
+  
+  context "uploading csv" do
+    
+    before(:each) do
+      @org_unit = Factory(:organizational_unit, :abbreviation => "NUCATS", :name => "Clinical and Translational Sciences Institute")
+      Contact.count.should == 0
+    end
+    
+    it "should process the given file" do
+      @org_unit.contacts.size.should == 0
+      
+      Contact.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/contact_upload.csv')), @org_unit)
+      
+      Contact.count.should == 13
+      @org_unit.contacts.reload
+      @org_unit.contacts.size.should == Contact.count
+    end
+  end
 end

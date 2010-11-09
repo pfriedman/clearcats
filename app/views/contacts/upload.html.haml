@@ -1,0 +1,29 @@
+- stylesheet "contacts"
+- title "Contacts - Upload"
+
+.instructions
+  Please upload a comma-separated values (csv) file with the following fields:
+  %ul
+    %li Email Address
+    %li First Name
+    %li Last Name
+    %li Company Name
+- form_tag(upload_contacts_path, :multipart => true) do
+
+  - if @user_organizational_units.size > 1
+    %p 
+      Also select an organizational unit to associate with the contact.
+      %br
+      = label_tag "organizational_unit_id", "Organizational Unit"
+      %br
+      = select_tag("organizational_unit_id", "<option value=''>-- Select Organizational Unit --</option>" + options_from_collection_for_select(@user_organizational_units.sort_by{|e| e.name}, 'id', 'to_s'), :include_blank => true)
+  - else
+    = hidden_field_tag :organizational_unit_id, @user_organizational_units.first.id
+
+
+  %span Upload Contacts
+  = file_field_tag(:file)
+  = submit_tag("Upload", :disable_with => 'Uploading...')
+
+.links
+  = link_to 'List Contacts', contacts_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

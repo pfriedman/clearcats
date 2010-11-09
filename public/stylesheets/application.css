@@ -56,6 +56,7 @@ a.no_link {
   margin: .75em auto;
 }
 
+#link_warning,
 #error,
 #warning {
   border: 1px solid maroon;

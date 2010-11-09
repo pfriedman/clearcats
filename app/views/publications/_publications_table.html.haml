@@ -1,40 +1,44 @@
-- form_tag(update_ctsa_reporting_year_publications_path) do
-  = hidden_field_tag "person_id", @person.id
-  - current_year = current_ctsa_reporting_year
-  %table.records
-    %tr
-      - unless @service
-        %th CTSA Reportable #{current_year}
-      %th Select
-      %th
-        = order @search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => ordering_params
-      %th Reporting Years
-      %th
-        = order @search, :by => :pmcid, :as => "PMCID", :params => ordering_params
-      %th
-        = order @search, :by => :pmid, :as => "PMID", :params => ordering_params
-      %th
-        = order @search, :by => :nihms_number, :as => "NIHMS Number", :params => ordering_params
-      %th
-        = order @search, :by => :publication_date, :as => "Publication Date", :params => ordering_params
-      %th
-        = order @search, :by => :title, :as => "Title", :params => ordering_params
-      %th History
-    - @publications.each do |pub|
-      %tr{ :class => cycle('even_record', 'odd_record') }
+- if @publications.blank?
+  .no-records
+    No publications found for #{@person}.
+- else
+  - form_tag(update_ctsa_reporting_year_publications_path) do
+    = hidden_field_tag "person_id", @person.id
+    - current_year = current_ctsa_reporting_year
+    %table.records
+      %tr
         - unless @service
+          %th CTSA Reportable #{current_year}
+        %th Select
+        %th
+          = order @search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => ordering_params
+        %th Reporting Years
+        %th
+          = order @search, :by => :pmcid, :as => "PMCID", :params => ordering_params
+        %th
+          = order @search, :by => :pmid, :as => "PMID", :params => ordering_params
+        %th
+          = order @search, :by => :nihms_number, :as => "NIHMS Number", :params => ordering_params
+        %th
+          = order @search, :by => :publication_date, :as => "Publication Date", :params => ordering_params
+        %th
+          = order @search, :by => :title, :as => "Title", :params => ordering_params
+        %th History
+      - @publications.each do |pub|
+        %tr{ :class => cycle('even_record', 'odd_record') }
+          - unless @service
+            %td
+              = check_box_tag "publication_ids[]", pub.id, pub.ctsa_reporting_years.include?(current_year)
           %td
-            = check_box_tag "publication_ids[]", pub.id, pub.ctsa_reporting_years.include?(current_year)
-        %td
-          = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :search => params[:search] }.merge(pub_association), { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
-        %td= h pub.nucats_assisted? ? "Yes" : "No"
-        %td= h pub.ctsa_reporting_years.blank? ? "n/a" : pub.ctsa_reporting_years.join(",")
-        %td= h pub.pmcid
-        %td= h pub.pmid
-        %td= h pub.nihms_number
-        %td= h pub.publication_date
-        %td= h pub.title
-        %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link"
-  - unless @service
-    .buttons
-      = submit_tag "Submit"
+            = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :search => params[:search] }.merge(pub_association), { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
+          %td= h pub.nucats_assisted? ? "Yes" : "No"
+          %td= h pub.ctsa_reporting_years.blank? ? "n/a" : pub.ctsa_reporting_years.join(",")
+          %td= h pub.pmcid
+          %td= h pub.pmid
+          %td= h pub.nihms_number
+          %td= h pub.publication_date
+          %td= h pub.title
+          %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link"
+    - unless @service
+      .buttons
+        = submit_tag "Submit"
