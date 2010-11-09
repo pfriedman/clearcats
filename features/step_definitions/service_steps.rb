@@ -1,12 +1,12 @@
 Given /^an organizational_unit "(.*)" with these service_lines:$/ do |org_unit_name, table|
-  org_unit = OrganizationalUnit.create!(:name => org_unit_name, :abbreviation => org_unit_name)
+  org_unit = OrganizationalUnit.create!(:name => org_unit_name, :abbreviation => org_unit_name, :cc_pers_affiliate_identifier => org_unit_name)
   table.hashes.each do |sl|
     svc_line = ServiceLine.create!(:name => sl[:name], :organizational_unit => org_unit)
   end
 end
 
 Given /^an organizational_unit "(.*)" with the service_line "(.*)"$/ do |org_unit_name, service_line_name|
-  org_unit = OrganizationalUnit.create!(:name => org_unit_name, :abbreviation => org_unit_name)
+  org_unit = OrganizationalUnit.create!(:name => org_unit_name, :abbreviation => org_unit_name, :cc_pers_affiliate_identifier => org_unit_name)
   svc_line = ServiceLine.create!(:name => service_line_name, :organizational_unit => org_unit)
 end
 
