@@ -1,32 +1,38 @@
 - title "New Service - Choose Person"
 
-#projects
+#projects.page_section
   %h3 Please select client
 
 - if @people
 
-  - form_for @service do |f|
-    %table.records
-      %tr
-        %th Select
-        %th Last Name
-        %th First Name
-        %th Middle Name
-        %th Email
-        %th Net ID
-        %th NU Employee ID
-      - @people.each do |person|
-        %tr{ :class => cycle('even_record', 'odd_record') }
-          %td= f.radio_button "person_id", person.id
-          %td= h person.last_name
-          %td= h person.first_name
-          %td= h person.middle_name
-          %td= h person.email
-          %td= h person.netid
-          %td= h person.employeeid
+  - if @people.empty?
+    .no_records
+      No one was found. 
+      .links
+        = link_to "New Person", {:controller => "people", :action => "new"}, { :class => "add_link icon_link"  }
+  - else
+    - form_for @service do |f|
+      %table.records
+        %tr
+          %th Select
+          %th Last Name
+          %th First Name
+          %th Middle Name
+          %th Email
+          %th Net ID
+          %th NU Employee ID
+        - @people.each do |person|
+          %tr{ :class => cycle('even_record', 'odd_record') }
+            %td= f.radio_button "person_id", person.id
+            %td= h person.last_name
+            %td= h person.first_name
+            %td= h person.middle_name
+            %td= h person.email
+            %td= h person.netid
+            %td= h person.employeeid
 
-    .buttons
-      = f.submit "Save", :disable_with => 'Saving...'
+      .buttons
+        = f.submit "Save", :disable_with => 'Saving...'
   %p
     - path = @service.new_record? ? choose_person_services_path : choose_person_service_path(@service)
     = link_to "New Search", path, { :class => "search_link icon_link"  }

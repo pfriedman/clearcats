@@ -81,7 +81,7 @@ describe PeopleController do
     
     describe "GET new" do
       it "assigns a new person as @person" do
-        Person.stub(:new).and_return(mock_person)
+        Client.stub(:new).and_return(mock_person)
         get :new
         assigns[:person].should equal(mock_person)
       end
@@ -92,28 +92,28 @@ describe PeopleController do
 
       describe "with valid params" do
         it "assigns a newly created person as @person" do
-          Person.stub(:new).with({'these' => 'params'}).and_return(mock_person(:save => true))
-          post :create, :person => {:these => 'params'}
+          Client.stub(:new).with({'these' => 'params'}).and_return(mock_person(:save => true))
+          post :create, :client => {:these => 'params'}
           assigns[:person].should equal(mock_person)
         end
 
         it "redirects to the created person" do
-          Person.stub(:new).and_return(mock_person(:save => true))
-          post :create, :person => {}
+          Client.stub(:new).and_return(mock_person(:save => true))
+          post :create, :client => {}
           response.should redirect_to(people_path)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved person as @person" do
-          Person.stub(:new).with({'these' => 'params'}).and_return(mock_person(:save => false))
-          post :create, :person => {:these => 'params'}
+          Client.stub(:new).with({'these' => 'params'}).and_return(mock_person(:save => false))
+          post :create, :client => {:these => 'params'}
           assigns[:person].should equal(mock_person)
         end
 
         it "re-renders the 'new' template" do
-          Person.stub(:new).and_return(mock_person(:save => false))
-          post :create, :person => {}
+          Client.stub(:new).and_return(mock_person(:save => false))
+          post :create, :client => {}
           response.should render_template('new')
         end
       end

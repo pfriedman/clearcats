@@ -81,7 +81,7 @@ class PeopleController < ApplicationController
   # GET /people/new
   # GET /people/new.xml
   def new
-    @person = Person.new
+    @person = Client.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -92,7 +92,7 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.xml
   def create
-    @person = Person.new(params[:person])
+    @person = Client.new(params[:client])
 
     respond_to do |format|
       if @person.save

@@ -1,6 +1,6 @@
 - stylesheet "people"
 - title "Faculty Search"
-- prefix = (Rails.env == "staging") ? "/clearcats" : ""
+- prefix = (Rails.env == "staging" or Rails.env == "production") ? "/clearcats" : ""
 
 .page_section
   %p

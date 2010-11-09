@@ -86,7 +86,7 @@
       .span-5
         = f.label :organizational_units_organizational_unit_id_equals, "Organizational Unit"
       .span-17
-        = f.select(:organizational_units_organizational_unit_id_equals, OrganizationalUnit.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Organizational Unit --" })
+        = f.select(:organizational_units_organizational_unit_id_equals, OrganizationalUnit.all.collect { |a| [ a.to_s, a.id.to_s ] }, { :include_blank => "-- Select Organizational Unit --" })
         
     .buttons
       = f.submit "Submit", :disable_with => 'Submitting...'
