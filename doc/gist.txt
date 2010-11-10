@@ -1,0 +1,9 @@
+contact email autocomplete
+
+:javascript
+  $(document).ready( function(){
+    $('#contact_email').autocomplete({
+      source: '/contacts/email_search.js',
+      minLength: 2
+    });
+  });

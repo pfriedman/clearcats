@@ -18,10 +18,14 @@
               %li= link_to "Upload Investigators", upload_people_path
               %li= link_to "Search FSM Faculty Database", search_people_path
               %li= link_to "Contact Lists", contacts_path
-              %li= link_to "Missing Employee ID",      :controller => "people", :action => "incomplete", :criteria => "employeeid"
-              %li= link_to "Missing Net ID",           :controller => "people", :action => "incomplete", :criteria => "netid"
-              %li= link_to "Missing ERA Commons Name", :controller => "people", :action => "incomplete", :criteria => "era_commons_username"
-              %li= link_to "Missing Specialty",        :controller => "people", :action => "incomplete", :criteria => "specialty"
+              %li
+                %a{ :href => "#" }
+                  Incomplete Records
+                %ul
+                  %li= link_to "Missing Employee ID",      :controller => "people", :action => "incomplete", :criteria => "employeeid"
+                  %li= link_to "Missing Net ID",           :controller => "people", :action => "incomplete", :criteria => "netid"
+                  %li= link_to "Missing ERA Commons Name", :controller => "people", :action => "incomplete", :criteria => "era_commons_username"
+                  %li= link_to "Missing Specialty",        :controller => "people", :action => "incomplete", :criteria => "specialty"
           %li= link_to "Users",                :controller => "users",                :action => "index"
           %li= link_to "Organizational Units", :controller => "organizational_units", :action => "index"
           %li= link_to "Service Lines",        :controller => "service_lines",        :action => "index"

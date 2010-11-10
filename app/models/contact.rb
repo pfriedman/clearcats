@@ -7,6 +7,10 @@ class Contact < ActiveRecord::Base
 
 	before_save :associate_person
 	
+	def to_s
+	 "#{self.first_name} #{self.last_name} #{self.email}".strip
+	end
+	
 	def self.import_data(file, org_unit)
 	  FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
       next if row.header_row?

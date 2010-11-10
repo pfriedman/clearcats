@@ -1,11 +1,3 @@
-:javascript
-  $(document).ready( function(){
-    $('#contact_email').autocomplete({
-      source: '/contacts/email_search.js',
-      minLength: 2
-    });
-  });
-
 - form_for @contact do |f|
   = f.error_messages
 

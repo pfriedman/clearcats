@@ -70,6 +70,11 @@ INSERT INTO T_SECURITY_LOGINS
 VALUES
 ( 'pcm777', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
+INSERT INTO T_SECURITY_LOGINS
+( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
+VALUES
+( 'lmw351', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
+
 ---
 -- assign personnel to groups -- ensure affiliate_id matches that in institutional affiliates
 ---

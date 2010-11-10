@@ -60,6 +60,15 @@ describe ContactsController do
           post :create, :contact => {}
           response.should render_template('new')
         end
+        
+        it "re-renders the new template if a contact already exists with that email address" do
+          email = "asdf@asdf.asdf"
+          Factory(:contact, :email => email)
+          post :create, :contact => { :email => email }
+          flash[:link_warning].should_not be_blank
+          response.should render_template('new')
+        end
+        
       end
 
     end

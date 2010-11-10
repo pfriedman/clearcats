@@ -27,18 +27,25 @@ class ContactsController < ApplicationController
   end
 
   def create
+    params[:contact] ||= {}
+    existing_contact = Contact.find_by_email(params[:contact][:email])
     @contact = Contact.new(params[:contact])
-    @contact.organizational_units << @user_organizational_units.first if @user_organizational_units.size == 1 and !@contact.organizational_units.include?(@user_organizational_units.first)
+    if existing_contact.blank?
+      @contact.organizational_units << @user_organizational_units.first if @user_organizational_units.size == 1 and !@contact.organizational_units.include?(@user_organizational_units.first)
 
-    respond_to do |format|
-      if @contact.save
-        flash[:notice] = 'Contact was successfully created.'
-        format.html { redirect_to(contacts_path) }
-        format.xml  { render :xml => @contact, :status => :created, :location => @contact }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @contact.save
+          flash[:notice] = 'Contact was successfully created.'
+          format.html { redirect_to(contacts_path) }
+          format.xml  { render :xml => @contact, :status => :created, :location => @contact }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @contact.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      flash[:link_warning] = "Contact already exists. Click to edit <a href=#{edit_contact_path(existing_contact)}>#{existing_contact}</a>."
+      render :action => "new"
     end
   end
   
