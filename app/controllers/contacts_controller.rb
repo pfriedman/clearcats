@@ -9,6 +9,14 @@ class ContactsController < ApplicationController
     @contacts = @search.paginate(:select => "distinct contacts.*", :page => params[:page], :per_page => 20)
   end
   
+  def email_search
+    @contacts = Contact.email_like(params[:term])
+    respond_to do |format|
+      format.html
+      format.js { render :json => @contacts.map(&:email).to_json }
+    end
+  end
+  
   def new
     @contact = Contact.new
 

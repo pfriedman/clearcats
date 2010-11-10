@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
       people.resources :publications
   end
   map.resources :clients, :controller => "people"
-  map.resources :contacts, :collection => { :upload => [:get, :post] }
+  map.resources :contacts, :collection => { :upload => [:get, :post], :email_search => [:get] }
   
   map.resources :participating_organizations
   map.resources :service_lines
