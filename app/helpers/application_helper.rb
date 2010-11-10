@@ -53,4 +53,12 @@ module ApplicationHelper
     val.blank? ? default : h(val.to_s)
   end
   
+  def non_local_environment?
+    return ((Rails.env == "staging") or (Rails.env == "production"))
+  end
+  
+  def cc_prefix_path
+    non_local_environment? ? "/clearcats" : ""
+  end
+  
 end

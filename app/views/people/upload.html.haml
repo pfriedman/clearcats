@@ -4,11 +4,14 @@
 .instructions
   Please upload a comma-separated values (csv) file with the following fields:
   %ul
-    %li Last Name
     %li First Name
-    %li ERA Commons Name
+    %li Last Name
+    %li Middle Name
+    %li Email
+    %li ERA Commons Username (required)
     %li Netid
-    %li Employee Id
-    %li= link_to "Service Line", :controller => "service_lines", :action => "index"
+    %li Employeeid
+    %li Area of Expertise
+    %li= link_to "Service Lines (required)", :controller => "service_lines", :action => "index"
 
 = render :partial => 'upload_form'

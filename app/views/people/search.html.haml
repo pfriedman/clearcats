@@ -1,6 +1,5 @@
 - stylesheet "people"
 - title "Faculty Search"
-- prefix = (Rails.env == "staging" or Rails.env == "production") ? "/clearcats" : ""
 
 .page_section
   %p
@@ -17,7 +16,7 @@
     you should create a 
     = link_to "New Person", new_person_path, :class => "add_link icon_link"
 
-  - form_tag "#{prefix}/people/search_results", :class => "faculty_search" do
+  - form_tag "#{cc_prefix_path}/people/search_results", :class => "faculty_search" do
 
     = hidden_field_tag :organizational_unit_id, @organizational_unit_id
 

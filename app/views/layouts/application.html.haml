@@ -9,7 +9,7 @@
     = stylesheet_link_tag('application', :media => "all")
     = stylesheet_link_tag('jquery-ui-1.8.1.custom')
     = stylesheet_link_tag('ddsmoothmenu', 'ddsmoothmenu-v')
-    = stylesheet_link_tag('ddsmoothmenu-images') if Rails.env == "staging" or Rails.env == "production"
+    = stylesheet_link_tag('ddsmoothmenu-images') if non_local_environment?
     = yield :stylesheet
     = javascript_include_tag("application", "ddsmoothmenu", "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min", "jrails", "jquery.livequery", "jquery.tooltip.min")
     = yield :javascript
