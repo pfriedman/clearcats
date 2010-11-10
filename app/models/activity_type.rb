@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101026151305
+# Schema version: 20101108171033
 #
 # Table name: activity_types
 #

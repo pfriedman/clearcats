@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20101108171033
+#
+# Table name: contacts
+#
+#  id           :integer         not null, primary key
+#  email        :string(255)
+#  first_name   :string(255)
+#  last_name    :string(255)
+#  company_name :string(255)
+#  person_id    :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require 'spec_helper'
 
 describe Contact do
