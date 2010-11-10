@@ -37,22 +37,22 @@ describe ServicesController do
 
       describe "with valid params" do
         it "assigns a newly created activity_type as @activity_type" do
-          Service.stub(:new).with({'these' => 'params'}).and_return(mock_service(:save! => true, :created_by= => true, :state => "new", :initiated? => true))
-          post :create, :service => {:these => 'params'}
+          Service.stub(:new).with({'service_line_id' => '2'}).and_return(mock_service(:save! => true, :created_by= => true, :state => "new", :initiated? => true))
+          post :create, :service => {:service_line_id => '2'}
           assigns[:service].should equal(mock_service)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved activity_type as @activity_type" do
-          Service.stub(:new).with({'these' => 'params'}).and_return(mock_service(:save! => false, :created_by= => true))
-          post :create, :service => {:these => 'params'}
+          Service.stub(:new).with({'service_line_id' => '2'}).and_return(mock_service(:save! => false, :created_by= => true))
+          post :create, :service => {:service_line_id => '2'}
           assigns[:service].should equal(mock_service)
         end
 
         it "re-renders the 'new' template" do
           Service.stub(:new).and_return(mock_service(:save! => false, :created_by= => true))
-          post :create, :service => {}
+          post :create, :service => {:service_line_id => '2'}
           response.should render_template('new')
         end
       end
