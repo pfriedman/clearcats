@@ -206,3 +206,8 @@ Factory.define :contact do |c|
   c.last_name        "last_name"
   c.company_name     "company_name"
 end
+
+Factory.define :contact_list do |c|
+  c.name "contact_list"
+  c.organizational_unit { |a| a.association(:organizational_unit) }
+end

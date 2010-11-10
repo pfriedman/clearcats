@@ -22,6 +22,7 @@ describe Contact do
   
   it { should validate_presence_of(:email) }
   it { should have_and_belong_to_many(:organizational_units) }
+  it { should have_and_belong_to_many(:contact_lists) }
   it { should belong_to(:person)}
   
   it "should reference the person whose email equals that of the contact" do

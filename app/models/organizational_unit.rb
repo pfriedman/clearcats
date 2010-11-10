@@ -19,6 +19,7 @@ class OrganizationalUnit < ActiveRecord::Base
   # has_many :projects
 
   has_many :service_lines
+  has_many :contact_lists
   
   has_and_belongs_to_many :people
   has_and_belongs_to_many :contacts

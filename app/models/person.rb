@@ -136,7 +136,7 @@ class Person < ActiveRecord::Base
   
   validates_presence_of :last_name,  :if => proc { |obj| !obj.imported? }
   validates_presence_of :first_name, :if => proc { |obj| !obj.imported? }
-  validates_presence_of :email,      :if => proc { |obj| !obj.imported? }
+  # validates_presence_of :email,      :if => proc { |obj| !obj.imported? }
   
   accepts_nested_attributes_for :awards,       :allow_destroy => true
   accepts_nested_attributes_for :publications, :allow_destroy => true

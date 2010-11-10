@@ -18,6 +18,7 @@ class Contact < ActiveRecord::Base
 	validates_presence_of :email
 	validates_uniqueness_of :email
 	has_and_belongs_to_many :organizational_units
+	has_and_belongs_to_many :contact_lists
 	belongs_to :person
 
 	before_save :associate_person

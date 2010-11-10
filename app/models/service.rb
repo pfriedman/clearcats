@@ -98,7 +98,7 @@ class Service < ActiveRecord::Base
     when "choose_person"
       if !self.person_id.blank?
         self.initiate!
-        self.person.update_attribute(:service_rendered, true) unless person.service_rendered?
+        self.person.update_attribute(:service_rendered, true) if person and !person.service_rendered?
       end
     when "choose_service_line"
       if !self.service_line_id.blank?

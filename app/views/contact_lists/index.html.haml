@@ -1,0 +1,36 @@
+- stylesheet "contact_lists"
+- title "Contact Lists"
+
+- if @user_organizational_units.size > 1
+  .page_section
+    - form_for @search, :url => {:controller => "contacts", :action => "index", :method => :get}, :html => {:class => "contact_list_search_form"} do |f|
+      %p
+        = f.label "organizational_units_id_equals", "Organizational Unit"
+        %br
+        = f.select(:organizational_units_id_equals, @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, { :include_blank => "-- Select Organizational Unit --" })
+      .buttons
+        = f.submit "Submit", :disable_with => 'Submitting...'
+
+- if @contact_lists.blank?
+  %p.no_records
+    No contact lists were found.
+- else
+  %table.records
+    %tr
+      %th= order @search, :by => :name, :as => "Name"
+      %th= order @search, :by => :organizational_unit_name, :as => "Org Unit"
+      %th
+        Number of Contacts
+      %th{:colspan => "3"}
+    - @contact_lists.each do |list|
+      %tr{:class => cycle('even_record', 'odd_record')}
+        %td= h list.name
+        %td= h list.organizational_unit
+        %td= h list.contacts.size
+        %td
+          = link_to 'Edit', edit_contact_path(contact), :class => "edit_link icon_link"
+        %td
+          = link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?(contact.organizational_units, @user_organizational_units)
+
+.links
+  = link_to 'New Contact List', new_contact_list_path, :class => "add_link icon_link"

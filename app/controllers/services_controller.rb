@@ -4,6 +4,8 @@ class ServicesController < ApplicationController
   def index
     @user_organizational_units = determine_org_units_for_user
     params[:search] ||= Hash.new
+    params[:search][:service_line_organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) unless @user_organizational_units.blank?
+
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end
@@ -167,8 +169,11 @@ class ServicesController < ApplicationController
       attr_params = {}
       # Handle polymorphic person - params key dependent on person class
       [:person, :client, :user].each { |e| attr_params = attr_params.merge(params[e]) unless params[e].blank? }
-      @service.person = Client.new if @service.person.nil?
-      @service.person.update_attributes(attr_params)
+      if @service.person.nil?
+        @service.person = Client.new(attr_params)
+      else
+        @service.person.update_attributes(attr_params)
+      end
     end
     
     def determine_redirect

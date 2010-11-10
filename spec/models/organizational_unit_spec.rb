@@ -36,5 +36,6 @@ describe OrganizationalUnit do
   it { should belong_to(:parent) }
   it { should have_many(:children) }
   it { should have_many(:service_lines) }
+  it { should have_many(:contact_lists) }
 
 end
