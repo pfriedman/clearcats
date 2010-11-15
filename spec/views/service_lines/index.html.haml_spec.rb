@@ -5,6 +5,7 @@ describe "/service_lines/index.html.haml" do
 
   before(:each) do
     @organizational_unit = Factory(:organizational_unit)
+    assigns[:user_organizational_units] = []
     assigns[:search] = @search = ServiceLine.search
     assigns[:service_lines] = [
       stub_model(ServiceLine,

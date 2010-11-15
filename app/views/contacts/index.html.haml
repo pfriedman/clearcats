@@ -21,13 +21,15 @@
       %th= order @search, :by => :last_name, :as => "Last Name"
       %th= order @search, :by => :first_name, :as => "First Name"
       %th= order @search, :by => :company_name, :as => "Company Name"
-      %th{:colspan => "3"}
+      %th{:colspan => "4"}
     - @contacts.each do |contact|
       %tr{:class => cycle('even_record', 'odd_record')}
         %td= h contact.email
         %td= h contact.last_name
         %td= h contact.first_name
         %td= h contact.company_name
+        %td
+          = link_to 'View LDAP record', contact, :class => "show_link icon_link"
         %td
           = link_to 'Edit', edit_contact_path(contact), :class => "edit_link icon_link"
         %td

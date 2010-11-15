@@ -4,10 +4,11 @@ class ServiceLinesController < ApplicationController
   # GET /service_lines
   # GET /service_lines.xml
   def index
-    params[:search] ||= {}
-    
     @user_organizational_units = determine_org_units_for_user
-    params[:search][:organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) unless @user_organizational_units.blank?
+    
+    params[:search] ||= {}
+    usr_org_units = @user_organizational_units.blank? ? [] : @user_organizational_units.collect(&:id)
+    params[:search][:organizational_unit_id_eq_any] ||= usr_org_units
     
     @search = ServiceLine.search(params[:search])
     @service_lines = @search.all

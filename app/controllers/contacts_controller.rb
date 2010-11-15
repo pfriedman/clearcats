@@ -25,6 +25,11 @@ class ContactsController < ApplicationController
       format.xml  { render :xml => @contact }
     end
   end
+  
+  def show
+    @contact = Contact.find(params[:id])
+    @ldap_record = Ldap.new.retrieve_entry_by_email(@contact.email)
+  end
 
   def create
     params[:contact] ||= {}

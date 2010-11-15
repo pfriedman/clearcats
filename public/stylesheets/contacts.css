@@ -68,3 +68,8 @@
   padding: 0;
   width: 20em;
 }
+
+.ldap_schema_link {
+  float: right;
+}
+}

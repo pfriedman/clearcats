@@ -2,12 +2,20 @@ require 'net/ldap'
 
 class Ldap
 
-  ATTRIBUTES = ["title", "ou", "dn", "cn", "mail", 
-                "displayname", "givenname", "sn", "uidnumber", "uid",
+  ATTRIBUTES = ["title", "displayname", "givenname", "cn", "sn", "mail", "ou", 
+                "uid", "uidnumber", "dn", 
                 "facsimiletelephonenumber", "telephonenumber", "postaladdress"]
 
-  def retrieve_entry(uid)
-    process_entry(Net::LDAP::Filter.eq("uid", uid))
+  def retrieve_entry_by_netid(netid)
+    retrieve_entry(netid, "uid")
+  end
+  
+  def retrieve_entry_by_email(email)
+    retrieve_entry(email, "mail")
+  end
+  
+  def retrieve_entry(value, key = "uid")
+    process_entry(Net::LDAP::Filter.eq(key, value))
   end
 
   private

@@ -3,11 +3,12 @@
 
 - if @user_organizational_units.size > 1
   .page_section
-    - form_for @search, :url => {:controller => "contacts", :action => "index", :method => :get}, :html => {:class => "contact_list_search_form"} do |f|
+    - form_for @search, :url => {:controller => "contact_lists", :action => "index", :method => :get}, :html => {:class => "contact_list_search_form"} do |f|
       %p
-        = f.label "organizational_unit_id_equals", "Organizational Unit"
+        = f.label "organizational_unit_id_eq", "Organizational Unit"
         %br
-        = f.select(:organizational_unit_id_equals, @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, { :include_blank => "-- Select Organizational Unit --" })
+        - opts = [["-- Select Organizational Unit --",  ""]] + @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}
+        = select_tag("search[organizational_unit_id_eq]", options_for_select(opts, params[:search][:organizational_unit_id_eq].to_i))
       .buttons
         = f.submit "Submit", :disable_with => 'Submitting...'
 

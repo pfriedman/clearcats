@@ -3,7 +3,8 @@ class ContactListsController < ApplicationController
   
   def index
     params[:search] ||= {}
-    params[:search][:organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) unless @user_organizational_units.blank?
+    usr_org_units = @user_organizational_units.blank? ? [] : @user_organizational_units.collect(&:id)
+    params[:search][:organizational_unit_id_eq_any] ||= usr_org_units
     
     @search = ContactList.search(params[:search])
     @contact_lists = @search.all
