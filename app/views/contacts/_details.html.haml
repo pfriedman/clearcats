@@ -1,0 +1,6 @@
+.contact_details
+  %p
+    %span.contact_label
+      = h contact.to_s
+    = hidden_field_tag "contact_list[contact_ids][]", contact.id
+    = content_tag(:span, link_to("Remove Contact", "#", :class => "remove_contact delete_link icon_link"))

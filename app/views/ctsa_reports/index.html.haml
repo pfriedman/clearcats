@@ -1,31 +1,32 @@
 - stylesheet "reports"
 - title "CTSA Reports"
 
-.summary
+.summary.page_section
   = render "summary"  
 
-- if @ctsa_reports.empty?
-  %p
-    .no_records No CTSA reports were found.
-- else
-  %table{ :class => "records" }
-    %tr
-      %th Download
-      %th Reporting Year
-      %th Created By
-      %th Finalized
-      %th Has Errors
-      %th Edit
-    - @ctsa_reports.each do |rpt|
-      %tr{:class => cycle('even_record', 'odd_record')}
-        %td= link_to 'Download', download_ctsa_report_path(rpt, :format => "zip")
-        %td= rpt.reporting_year
-        %td= rpt.created_by.to_s
-        %td= rpt.finalized? ? "True" : "False"
-        %td= rpt.has_errors? ? "True" : "False"
-        %td= link_to 'Edit', edit_ctsa_report_path(rpt), :class => "edit_link icon_link"
+.page_section
+  - if @ctsa_reports.empty?
+    %p
+      .no_records No CTSA reports were found.
+  - else
+    %table{ :class => "records" }
+      %tr
+        %th Download
+        %th Reporting Year
+        %th Created By
+        %th Finalized
+        %th Has Errors
+        %th Edit
+      - @ctsa_reports.each do |rpt|
+        %tr{:class => cycle('even_record', 'odd_record')}
+          %td= link_to 'Download', download_ctsa_report_path(rpt, :format => "zip")
+          %td= rpt.reporting_year
+          %td= rpt.created_by.to_s
+          %td= rpt.finalized? ? "True" : "False"
+          %td= rpt.has_errors? ? "True" : "False"
+          %td= link_to 'Edit', edit_ctsa_report_path(rpt), :class => "edit_link icon_link"
 
-  = will_paginate @ctsa_reports
+    = will_paginate @ctsa_reports
   
 .links
   = link_to 'New CTSA Report', new_ctsa_report_path, :class => "add_link icon_link"

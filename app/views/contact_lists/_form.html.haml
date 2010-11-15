@@ -1,0 +1,28 @@
+.page_section
+  - form_for @contact_list do |f|
+    = f.error_messages
+
+    %p
+      = f.label :name, "Name"
+      %br
+      = f.text_field :name
+
+    - if @user_organizational_units.size > 1
+      %p
+        = f.label :organizational_unit_id, "Organizational Unit"
+        %br
+        = collection_select :contact_list, :organizational_unit_id, @user_organizational_units.sort_by{ |e| e.name }, :id, :to_s, { :selected => @contact_list.organizational_unit_id }
+
+
+    .records.contacts
+      %label{ :for => "contact_email" }
+        Add contact
+        %br
+        = text_field_tag "contact_email", nil, :class => "text", :id => "contact_email"
+
+    %fieldset{ :class => "data_container" }
+      - @contacts.each do |contact|
+        = render "/contacts/details", :contact => contact
+
+    .buttons
+      = f.submit "Save", :disable_with => 'Saving...'

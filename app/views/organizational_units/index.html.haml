@@ -26,7 +26,7 @@
           - if @user_organizational_units.blank? or @user_organizational_units.include?(organizational_unit)
             = link_to 'Edit', edit_organizational_unit_path(organizational_unit), :class => "edit_link icon_link"
         %td
-          - if @user_organizational_units.blank? or @user_organizational_units.include?(organizational_unit)
+          - if (@user_organizational_units.blank? or @user_organizational_units.include?(organizational_unit)) and organizational_unit.service_lines.blank?
             = link_to 'Destroy', organizational_unit, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 .links
   = link_to 'New Organizational Unit', new_organizational_unit_path, :class => "add_link icon_link"

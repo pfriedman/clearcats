@@ -5,9 +5,9 @@
   .page_section
     - form_for @search, :url => {:controller => "contacts", :action => "index", :method => :get}, :html => {:class => "contact_list_search_form"} do |f|
       %p
-        = f.label "organizational_units_id_equals", "Organizational Unit"
+        = f.label "organizational_unit_id_equals", "Organizational Unit"
         %br
-        = f.select(:organizational_units_id_equals, @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, { :include_blank => "-- Select Organizational Unit --" })
+        = f.select(:organizational_unit_id_equals, @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}, { :include_blank => "-- Select Organizational Unit --" })
       .buttons
         = f.submit "Submit", :disable_with => 'Submitting...'
 
@@ -22,15 +22,16 @@
       %th
         Number of Contacts
       %th{:colspan => "3"}
-    - @contact_lists.each do |list|
+    - @contact_lists.each do |contact_list|
       %tr{:class => cycle('even_record', 'odd_record')}
-        %td= h list.name
-        %td= h list.organizational_unit
-        %td= h list.contacts.size
+        %td= h contact_list.name
+        %td= h contact_list.organizational_unit
+        %td= h contact_list.contacts.size
         %td
-          = link_to 'Edit', edit_contact_path(contact), :class => "edit_link icon_link"
+          = link_to 'Edit', edit_contact_list_path(contact_list), :class => "edit_link icon_link"
         %td
-          = link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?(contact.organizational_units, @user_organizational_units)
+          = link_to 'Destroy', contact_list, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?([contact_list.organizational_unit], @user_organizational_units)
 
 .links
   = link_to 'New Contact List', new_contact_list_path, :class => "add_link icon_link"
+  = link_to 'List Contacts', contacts_path, :class => "list_link icon_link"

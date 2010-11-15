@@ -1,23 +1,31 @@
 - title "View CTSA DATA"
-%ul#ctsa_data
-  %li
-    = link_to "Countries", :controller => "admin", :action => "countries"
-  %li
-    = link_to "Activity Codes", :controller => "admin", :action => "activity_codes"
-  %li
-    = link_to "Non PHS Organizations", :controller => "admin", :action => "non_phs_organizations"
-  %li
-    = link_to "PHS Organizations", :controller => "admin", :action => "phs_organizations"
-  %li
-    = link_to "Specialties", :controller => "admin", :action => "specialties"
-  %li
-    = link_to "Degree Type One", :controller => "admin", :action => "degree_type_ones"
-  %li
-    = link_to "Degree Type Two", :controller => "admin", :action => "degree_type_twos"
-  %li
-    = link_to "Ethnic Types", :controller => "admin", :action => "ethnic_types"
-  %li
-    = link_to "Race Types", :controller => "admin", :action => "race_types"
+
+.page_section
+  %p
+    These are the values provided by the CTSA for use in reporting. 
+    %br
+    Forms throughout this application use these values to populate select lists and restrict the values of these fields to those
+    expected by the CTSA.
+
+  %ul#ctsa_data
+    %li
+      = link_to "Countries", :controller => "admin", :action => "countries"
+    %li
+      = link_to "Activity Codes", :controller => "admin", :action => "activity_codes"
+    %li
+      = link_to "Non PHS Organizations", :controller => "admin", :action => "non_phs_organizations"
+    %li
+      = link_to "PHS Organizations", :controller => "admin", :action => "phs_organizations"
+    %li
+      = link_to "Specialties", :controller => "admin", :action => "specialties"
+    %li
+      = link_to "Degree Type One", :controller => "admin", :action => "degree_type_ones"
+    %li
+      = link_to "Degree Type Two", :controller => "admin", :action => "degree_type_twos"
+    %li
+      = link_to "Ethnic Types", :controller => "admin", :action => "ethnic_types"
+    %li
+      = link_to "Race Types", :controller => "admin", :action => "race_types"
 
 .links
-  = link_to "Administrative Actions", {:controller => "admin", :action => "index"}, {:class => "list_link icon_link"}
+  = link_to "Upload CTSA Data", { :controller => "admin", :action => "upload_ctsa_data" }, { :class => "upload_link icon_link" }

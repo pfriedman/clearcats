@@ -20,5 +20,8 @@ users:
         - Admin: [4619]
   wakibbe:
     password: wakibbe
+    portals:
+      - ClearCATS:
+        - Admin: [4623]
   pgreenld:
     password: pgreenld

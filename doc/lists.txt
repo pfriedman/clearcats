@@ -1,0 +1,39 @@
+11/11/2010 - Directories and Lists
+
+Contact List
+------------
+
+We need lists on these folks:
+  Faculty we serve and those we do not.
+
+
+
+Person and Organization on that association - preform tag it
+
+  CERC
+  ----
+    Bob  - 2010 Dec wksp
+    Jane - 2010 Dec wksp 
+    
+    "2010 Dec wksp" becomes a Project
+    
+    
+    Embargo - resolution process for those entries that are not in ldap (require netid/era commons name)
+    
+
+Add address to mailing list + phone number (address, city, state, postal_code, phone_number, email, first_name, last_name)
+
+
+
+Directory
+---------
+
+Remove list serves - use app for announcements
+
+
+Users v Clients ? Use app to get directory for FSM faculty and staff
+
+  Test editing a User profile who is also a Client (e.g. wakibbe)
+  
+  Directory User profile is much different than the 23 questions profile
+

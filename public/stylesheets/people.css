@@ -61,3 +61,7 @@ h4.section_header {
   font-weight: bold;
   font-size: 1.25em;
 }
+
+#search_awards_activity_code_id_equals {
+  width: 17em;
+}

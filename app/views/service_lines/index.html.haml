@@ -22,6 +22,8 @@
         %td= h service_line.organizational_unit
         %td= link_to 'Show', service_line, :class => "show_link icon_link"
         %td= link_to 'Edit', edit_service_line_path(service_line), :class => "edit_link icon_link"
-        %td= link_to 'Destroy', service_line, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
+        %td
+          - if service_line.services.blank?
+            = link_to 'Destroy', service_line, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 .links
   = link_to 'New Service Line', new_service_line_path, :class => "add_link icon_link"

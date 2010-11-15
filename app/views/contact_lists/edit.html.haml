@@ -1,0 +1,8 @@
+- stylesheet "contacts"
+- javascript "contacts"
+- title "Edit Contact List"
+
+= render 'form'
+
+.links
+  = link_to 'List Contact Lists', contact_lists_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

@@ -18,13 +18,17 @@ class Contact < ActiveRecord::Base
 	validates_presence_of :email
 	validates_uniqueness_of :email
 	has_and_belongs_to_many :organizational_units
-	has_and_belongs_to_many :contact_lists
+  has_and_belongs_to_many :contact_lists
 	belongs_to :person
 
 	before_save :associate_person
 	
+	named_scope :autocomplete_email, lambda { |email| { :conditions => ["contacts.email LIKE ?", "%#{email}%"]} }
+	
+	attr_accessor :email_display
+	
 	def to_s
-	 "#{self.first_name} #{self.last_name} #{self.email}".strip
+	 "#{self.first_name} #{self.last_name} <#{self.email}>".strip
 	end
 	
 	def self.import_data(file, org_unit)

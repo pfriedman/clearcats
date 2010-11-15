@@ -3,89 +3,89 @@
     .span-24
       .span-5
         = f.label :first_name_like, "First Name"
-      .span-6
+      .span-7
         = f.text_field :first_name_like
-      .span-5
-        = f.label :last_name_like, "Last Name"
       .span-6
+        = f.label :last_name_like, "Last Name"
+      .span-6.last
         = f.text_field :last_name_like
     .span-24
       .span-5
         = f.label :netid_like, "Net ID"
-      .span-6
+      .span-7
         = f.text_field :netid_like
-      .span-5
-        = f.label :employeeid_like, "Employee ID"
       .span-6
+        = f.label :employeeid_like, "Employee ID"
+      .span-6.last
         = f.text_field :employeeid_like
     .span-24
       .span-5
         = f.label :email_like, "Email"
-      .span-6
+      .span-7
         = f.text_field :email_like
-      .span-5
-        = f.label :era_commons_username_like, "Era Commons Username"
       .span-6
+        = f.label :era_commons_username_like, "Era Commons Username"
+      .span-6.last
         = f.text_field :era_commons_username_like
     .span-24
       .span-5
         = f.label :degree_type_one_id_equals, "Degree Type One"
-      .span-6
+      .span-7
         = f.select(:degree_type_one_id_equals, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type One --" })
-      .span-5
-        = f.label :degree_type_two_id_equals, "Degree Type Two"
       .span-6
+        = f.label :degree_type_two_id_equals, "Degree Type Two"
+      .span-6.last
         = f.select(:degree_type_two_id_equals, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type Two --" })
     .span-24
       .span-5
         = f.label :institution_positions_id_equals, "Position/Title"
-      .span-6
+      .span-7
         = f.select(:institution_positions_id_equals, InstitutionPosition.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Position/Title --" })
-      .span-5
-        = f.label :disadvantaged_background, "Disadvantaged Background?"
       .span-6
+        = f.label :disadvantaged_background, "Disadvantaged Background?"
+      .span-6.last
         = f.select :disadvantaged_background, [["N/A", nil], ["Yes", true], ["No", false]]
     .span-24
       .span-5
         = f.label :ethnic_type_id_equals, "Ethnic Background"
-      .span-6
+      .span-7
         = f.select(:ethnic_type_id_equals, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
-      .span-5
-        = f.label :race_type_id_equals, "Racial Background"
       .span-6
+        = f.label :race_type_id_equals, "Racial Background"
+      .span-6.last
         = f.select(:race_type_id_equals, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" })
 
     .span-24
       .span-5
         = label_tag "CTSA Award Type", "CTSA Award Type"
-      .span-6
+      .span-7
         - phs_orgs = [["-- Select Federal PHS Award Organizational Code --",  ""]] + PhsOrganization.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
         = select_tag("search[awards_phs_organization_id_equals]", options_for_select(phs_orgs, params[:search][:awards_phs_organization_id_equals].to_i))
-      .span-5
+      .span-6
         - act_codes = [["-- Select PHS Award --",  ""]] + ActivityCode.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
         = select_tag("search[awards_activity_code_id_equals]", options_for_select(act_codes, params[:search][:awards_activity_code_id_equals].to_i))
-      .span-6
+      .span-6.last
         - non_phs_orgs = [["-- Select Federal Non-PHS Award --",  ""]] + NonPhsOrganization.all(:order => :code).collect { |a| [ a.to_s, a.id ] }
         = select_tag("search[awards_non_phs_organization_id_equals]", options_for_select(non_phs_orgs, params[:search][:awards_non_phs_organization_id_equals].to_i))
 
     .span-24
       .span-5
         = f.label :service_rendered, "Service Rendered"
-      .span-6
+      .span-7
         = f.select :service_rendered, [["N/A", nil], ["Yes", true], ["No", false]]
       .span-5
         = f.label :for_reporting_year, "CTSA Reporting Year"
-      .span-6
+      .span-6.last
         = f.select :for_reporting_year, Person::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
     .span-24
       .span-5
         = f.label :services_service_line_id_equals, "Service Line"
-      .span-17
+      .span-17.last
         = f.select(:services_service_line_id_equals, ServiceLine.all.collect { |a| [ "#{a.organizational_unit.to_s} - #{a.to_s}", a.id ] }.sort!, { :include_blank => "-- Select Service Line --" })
     .span-24
       .span-5
         = f.label :organizational_units_organizational_unit_id_equals, "Organizational Unit"
-      .span-17
+      .span-17.last
         = f.select(:organizational_units_organizational_unit_id_equals, OrganizationalUnit.all.collect { |a| [ a.to_s, a.id.to_s ] }, { :include_blank => "-- Select Organizational Unit --" })
         
     .buttons

@@ -9,12 +9,12 @@ class ContactsController < ApplicationController
     @contacts = @search.paginate(:select => "distinct contacts.*", :page => params[:page], :per_page => 20)
   end
   
+  def load_contact
+    render :partial => "/contacts/details", :locals => {:contact => Contact.find(params[:id])}
+  end
+
   def email_search
-    @contacts = Contact.email_like(params[:term])
-    respond_to do |format|
-      format.html
-      format.js { render :json => @contacts.map(&:email).to_json }
-    end
+    render :json => Contact.autocomplete_email(params[:term]).collect{ |c| {:value => c.id, :label => "#{c.email}"} }.sort { |a, b| a[:label].downcase <=> b[:label].downcase }
   end
   
   def new
@@ -73,7 +73,7 @@ class ContactsController < ApplicationController
     @contact.destroy
 
     respond_to do |format|
-      format.html { redirect_to(contacts_url) }
+      format.html { redirect_to(contacts_url(:search => params[:search], :page => params[:page])) }
       format.xml  { head :ok }
     end
   end
@@ -82,7 +82,10 @@ class ContactsController < ApplicationController
     if request.post?
       org_unit = OrganizationalUnit.find(params[:organizational_unit_id]) unless params[:organizational_unit_id].blank?
       
-      if org_unit.blank?
+      if params[:file].blank?
+        flash.now[:warning] = "You must select a file to upload."
+        render :action => "upload"
+      elsif org_unit.blank?
         flash[:link_warning] = "You cannot upload contacts outside the context of an organizational unit. <br />Please Select an Organizational Unit."
         redirect_to upload_contacts_path
       else
@@ -90,6 +93,11 @@ class ContactsController < ApplicationController
         redirect_to contacts_path
       end
     end
+  end
+
+  def sample_upload_file
+    csv_headers = "Email Address,First Name,Last Name,Company Name"
+    send_data(csv_headers, :file_name => "sample_clearcats_investigator_upload_file.csv", :type => "text/csv")
   end
 
   private 

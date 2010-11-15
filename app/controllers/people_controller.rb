@@ -112,10 +112,20 @@ class PeopleController < ApplicationController
   end
   
   def upload
-    if request.post?
-      Person.import_data(params[:file].open, find_or_create_user)
-      redirect_to people_path
+    if request.post? 
+      if params[:file].blank?
+        flash.now[:warning] = "You must select a file to upload."
+        render :action => "upload"
+      else
+        Person.import_data(params[:file].open, find_or_create_user)
+        redirect_to people_path
+      end
     end
+  end
+  
+  def sample_upload_file
+    csv_headers = "First Name,Last Name,Middle Name,Email,ERA Commons Username,Netid,Employeeid,Area of Expertise,Service Lines"
+    send_data(csv_headers, :file_name => "sample_clearcats_investigator_upload_file.csv", :type => "text/csv")
   end
 
   # GET /people/search

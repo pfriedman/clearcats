@@ -139,5 +139,33 @@ describe ContactsController do
       end
     end
     
+    describe "POST upload" do
+      
+      describe "with valid params" do
+        it "redirects to the contacts_path" do
+          controller.stub!(:set_user_organizational_units).and_return(true)
+          OrganizationalUnit.should_receive(:find).with("37").and_return(mock_model(OrganizationalUnit))
+          Contact.stub!(:import_data).and_return(true)
+          mock_file = mock_model(File, :open => true)
+          post :upload, :organizational_unit_id => "37", :file => mock_file
+          response.should redirect_to(contacts_path)
+        end
+      end
+      
+      describe "with invalid params" do
+        it "lets the user know that an org_unit is required" do
+          mock_file = mock_model(File, :open => true)
+          post :upload, :file => mock_file
+          flash[:link_warning].should == "You cannot upload contacts outside the context of an organizational unit. <br />Please Select an Organizational Unit."
+        end
+      
+        it "redirects to the upload_contacts_path" do
+          mock_file = mock_model(File, :open => true)
+          post :upload, :file => mock_file
+          response.should redirect_to(upload_contacts_path)
+        end
+      end
+    end
+    
   end
 end

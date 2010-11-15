@@ -302,6 +302,7 @@ class Person < ActiveRecord::Base
   ###
 
   def self.import_data(file, user)
+    
     FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
       next if row.header_row?
       if row[:era_commons_username].blank?
@@ -317,7 +318,9 @@ class Person < ActiveRecord::Base
   def self.import_error_log(username)
     dir = "#{Rails.root}/log/#{username}"
     FileUtils.makedirs(dir) unless File.exists?(dir)
-    "#{dir}/#{Date.today.strftime('%Y%m%d')}_import_errors.log"
+    log_path = "#{dir}/#{Date.today.strftime('%Y%m%d')}_import_errors.log"
+    File.open(log_path, 'w') {|f| f.write("[#{Time.now.to_s(:db)}] UPLOAD ERROR LOG FOR #{username}\n\n") } unless File.exists?(log_path)
+    log_path
   end
   
   

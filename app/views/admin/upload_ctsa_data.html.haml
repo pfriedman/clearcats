@@ -1,6 +1,23 @@
-%h3 Upload CTSA Data File
-- form_for(@attachment, :url => { :action => "process_ctsa_upload" }, :html => { :multipart => true }) do |f|
-  %b= f.label :data, "CTSA schema"
-  %br
-  = f.file_field :data
-  = f.submit "Upload", :disable_with => 'Uploading...'
+.page_section
+  %h3 
+    Upload CTSA Data File
+  %p
+    This action 
+    %b
+      should only 
+    be taken by a 
+    %b 
+      system administrator 
+    and should only be done 
+    %b
+      once a year.
+  %p
+    Please upload the CTSA XML Schema Data Definition file to update the CTSA data values to be used in reporting.
+    
+.page_section    
+  - form_for(@attachment, :url => { :action => "process_ctsa_upload" }, :html => { :multipart => true }) do |f|
+    %b
+      = f.label :data, "CTSA schema"
+    %br
+    = f.file_field :data
+    = f.submit "Upload", :disable_with => 'Uploading...'

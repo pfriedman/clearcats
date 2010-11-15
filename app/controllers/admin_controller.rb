@@ -2,6 +2,7 @@ class AdminController < ApplicationController
   permit :Admin
   
   def index
+    redirect_to :controller => "welcome", :action => "index"
   end
   
   def upload_ctsa_data
