@@ -134,6 +134,9 @@ class Person < ActiveRecord::Base
   validates_presence_of :netid,                :if => proc { |obj| obj.era_commons_username.blank? and !obj.imported? }
   validates_presence_of :era_commons_username, :if => proc { |obj| obj.netid.blank? and !obj.imported? }
   
+  validates_uniqueness_of :netid, :if => proc { |obj| !obj.netid.blank? }
+  validates_uniqueness_of :era_commons_username, :if => proc { |obj| !obj.era_commons_username.blank? }
+  
   validates_presence_of :last_name,  :if => proc { |obj| !obj.imported? }
   validates_presence_of :first_name, :if => proc { |obj| !obj.imported? }
   # validates_presence_of :email,      :if => proc { |obj| !obj.imported? }
@@ -325,7 +328,7 @@ class Person < ActiveRecord::Base
   
   
   def self.process_import_row(row, user)
-    pers = Client.find_or_create_by_era_commons_username(row[:era_commons_username])
+    pers = determine_client(row)
   
     if !row[:area_of_expertise].blank?
       specialty = Specialty.find_by_code(row[:area_of_expertise].to_s)
@@ -340,6 +343,17 @@ class Person < ActiveRecord::Base
   
     pers.save!
     process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
+  end
+  
+  def self.determine_client(row)
+    pers = Client.find_by_era_commons_username(row[:era_commons_username])
+    if pers.blank? and !row[:netid].blank?
+      pers = Client.find_by_netid(row[:netid])
+    end
+    if pers.blank?
+      pers = Client.create(:era_commons_username => row[:era_commons_username])
+    end
+    pers
   end
   
   # process each Service Line in upload file for person
