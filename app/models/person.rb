@@ -135,7 +135,7 @@ class Person < ActiveRecord::Base
   validates_presence_of :era_commons_username, :if => proc { |obj| obj.netid.blank? and !obj.imported? }
   
   validates_uniqueness_of :netid, :if => proc { |obj| !obj.netid.blank? }
-  validates_uniqueness_of :era_commons_username, :if => proc { |obj| !obj.era_commons_username.blank? }
+  # validates_uniqueness_of :era_commons_username, :if => proc { |obj| !obj.era_commons_username.blank? }
   
   validates_presence_of :last_name,  :if => proc { |obj| !obj.imported? }
   validates_presence_of :first_name, :if => proc { |obj| !obj.imported? }
