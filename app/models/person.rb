@@ -180,7 +180,16 @@ class Person < ActiveRecord::Base
     [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
   end
   
-  before_save :set_affiliations
+  before_save :clean_or_set_attributes
+  
+  def clean_or_set_attributes
+    set_affiliations
+    upcase_era_commons_username
+  end
+  
+  def upcase_era_commons_username
+    self.era_commons_username = self.era_commons_username.upcase unless self.era_commons_username.blank?
+  end
   
   def set_affiliations
     if self.department
@@ -346,12 +355,15 @@ class Person < ActiveRecord::Base
   end
   
   def self.determine_client(row)
-    pers = Client.find_by_era_commons_username(row[:era_commons_username])
-    if pers.blank? and !row[:netid].blank?
-      pers = Client.find_by_netid(row[:netid])
-    end
+    eracn = row[:era_commons_username].upcase
+    pers = Client.find_by_era_commons_username(eracn)
+    
+    pers = Client.find_by_netid(row[:netid]) if pers.blank? and !row[:netid].blank?
+    
+    pers = Client.find_by_email(row[:email]) if pers.blank? and !row[:email].blank?
+    
     if pers.blank?
-      pers = Client.create(:era_commons_username => row[:era_commons_username])
+      pers = Client.create(:era_commons_username => eracn)
     end
     pers
   end

@@ -60,7 +60,7 @@ describe Person do
   
   it "should output in a csv format" do
     p = Factory(:person, :last_name => "Jefferson", :first_name => "Thomas")
-    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "#{p.netid}", "#{p.email}", "phone", "", "era_commons", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
+    p.to_comma.should == ["Jefferson", "Thomas", "middle_name", "#{p.netid}", "#{p.email}", "phone", "", "ERA_COMMONS", "dept", "school", "four", "dt1 name", "dt2 name", "specialty code specialty name", "country name", "", "", "", "", "", "", "", ""]
   end
   
   it "should set affiliations based on department" do
