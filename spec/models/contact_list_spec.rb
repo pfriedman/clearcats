@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20101201173251
+#
+# Table name: contact_lists
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  organizational_unit_id :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+
 require 'spec_helper'
 
 describe ContactList do

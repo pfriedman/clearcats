@@ -89,6 +89,7 @@ Factory.define :person do |p|
   p.netid                  { Factory.next(:netid) }
   p.training_type          nil
   p.trainee_status         nil
+  p.system_administrator   false
 
   p.country             { |a| a.association(:country) }
   p.degree_type_one     { |a| a.association(:degree_type_one) }

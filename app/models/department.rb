@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101108171033
+# Schema version: 20101201173251
 #
 # Table name: departments
 #

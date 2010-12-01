@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101108171033
+# Schema version: 20101201173251
 #
 # Table name: people
 #
@@ -44,6 +44,7 @@
 #  edited                                        :boolean
 #  imported                                      :boolean
 #  ctsa_reporting_years_mask                     :integer
+#  system_administrator                          :boolean
 #
 
 require 'spec_helper'

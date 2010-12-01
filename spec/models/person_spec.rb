@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101108171033
+# Schema version: 20101201173251
 #
 # Table name: people
 #
@@ -44,6 +44,7 @@
 #  edited                                        :boolean
 #  imported                                      :boolean
 #  ctsa_reporting_years_mask                     :integer
+#  system_administrator                          :boolean
 #
 
 require 'spec_helper'
@@ -78,6 +79,14 @@ describe Person do
     ldap_entry = Ldap.new.retrieve_entry(netid)
     ldap_entry.attribute_names.each { |key| pers.send("#{key}=", ldap_entry[key]) if pers.respond_to?("#{key}=") }
     pers.phone.should_not be_blank
+  end
+  
+  it "knows if it is a sys admin" do
+    pers = Factory.build(:person)
+    sa   = Factory.build(:person, :system_administrator => true)
+    
+    pers.should_not be_sysadmin
+    sa.should be_sysadmin
   end
   
   context "finding people of a particular reporting type" do

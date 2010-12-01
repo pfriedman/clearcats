@@ -25,6 +25,11 @@
     %span.required *
     %br
     = f.text_field :username
+    
+  - if @current_user and @current_user.sysadmin?
+    %p
+      = f.label :system_administrator
+      = f.check_box :system_administrator, :disabled => @current_user.netid = @user.netid
   %p
     = f.label :organizational_unit_id, "Organizational Unit"
     %br
