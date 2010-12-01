@@ -8,7 +8,6 @@
     = render 'org_unit_service_lines'
   
 .links
-  #{link_to 'List', organizational_units_path, :class => "list_link icon_link"}
   - if @user_organizational_units.blank? or @user_organizational_units.include?(@organizational_unit)
     |
     = link_to 'Edit', edit_organizational_unit_path(@organizational_unit), :class => "edit_link icon_link" 

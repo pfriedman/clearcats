@@ -14,6 +14,6 @@
         %td= h activity_type.service_line
         %td= link_to 'Show', activity_type, :class => "show_link icon_link"
         %td= link_to 'Edit', edit_activity_type_path(activity_type), :class => "edit_link icon_link"
-        %td= link_to 'Destroy', activity_type, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
+        %td= link_to 'Delete', activity_type, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 .links
   = link_to 'New Activity Type', new_activity_type_path, :class => "add_link icon_link"

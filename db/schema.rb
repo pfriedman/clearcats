@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101110200934) do
+ActiveRecord::Schema.define(:version => 20101124173725) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -422,15 +422,14 @@ ActiveRecord::Schema.define(:version => 20101110200934) do
   add_index "race_types", ["name"], :name => "index_race_types_on_name"
 
   create_table "response_sets", :force => true do |t|
-    t.integer  "user_id",         :limit => 8
-    t.integer  "survey_id",       :limit => 8
+    t.integer  "user_id"
+    t.integer  "survey_id"
     t.string   "access_code"
     t.datetime "started_at"
     t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "person_id"
-    t.integer  "service_line_id"
+    t.integer  "service_id"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true

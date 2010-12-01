@@ -84,25 +84,25 @@ Try out the "kitchen sink" survey:
 
     rake surveyor FILE=surveys/kitchen_sink_survey.rb
 
-The rake surveyor task overwrites previous surveys by default, but can append instead:
-
-    rake surveyor FILE=surveys/kitchen_sink_survey.rb APPEND=true
-
 The rake tasks above generate surveys in our custom survey DSL (which is a great format for end users and stakeholders to use). 
 After you have run them start up your app and go to:
 
     http://localhost:3000/surveys
 
-Try taking the survey and compare it to the contents of the DSL file kitchen\_sink\_survey.rb. See how each type of
-DSL question maps to the resulting rendered view of the question.
+Try taking the survey and compare it to the contents of the DSL file kitchen\_sink\_survey.rb. See how each type of DSL question maps to the resulting rendered view of the question.
+
+There are two other useful rake tasks for removing (only surveys without responses) and un-parsing (from db to DSL file) surveys:
+
+    rake surveyor:remove
+    rake surveyor:unparse
 
 # Customizing surveyor
 
 Surveyor's controller, models, and views may be customized via classes in your app/models, app/helpers and app/controllers directories. To generate a sample custom controller and layout, run:
 
-    script/rails generate surveyor:custom
+    script/generate extend_surveyor
 
-and check out surveys/README\_FOR\_CUSTOM\_SURVEYOR.md
+and check out surveys/EXTENDING\_SURVEYOR
 
 # Dependencices
 
@@ -113,6 +113,46 @@ Surveyor depends on Ruby (1.8.7 - 1.9.1), Rails 2.3 and the SASS style sheet lan
 To work on the plugin code (for enhancements, and bug fixes, etc...) fork this github project. Then clone the project under the vendor/plugins directory in a Rails app used only for development:
 
 # Changes
+
+0.16.1
+
+* fixed surveyor.sections translation line
+* changed map resources order to access results survey success
+* add translations for Sections title
+* Add I18n to Sections title
+* updated date on license
+* updating results views and controller for new paths
+* new results routes
+
+0.16.0
+
+* minor fixes to unparsing
+* refining unparser. added rake task to unparse survey. closes #79
+* unparsing for groups, dependencies, validations
+* starting work on unparser for basic survey, section and question.
+
+0.15.0
+
+* prevent duplicate survey titles by appending incrementing numbers
+* rake task to remove a survey. closes #64
+* cleanup of old parsing strategy
+* features and specs and new parser. closes #62
+* first test driven work on parser
+* moving parser and common specs so they run automatically. fixing some spec errors
+* first shot a surveyor parser. some parts untested, but coded to determine style. references #62
+* refactoring counters
+* fixing failing specs. fixes acts\_as\_response issues
+
+0.14.5
+
+* use modules to include model methods. re-closes #77
+* rails init. destroy dependent models
+
+0.14.4
+
+* explicitly require surveyor models and helper. update sweeper syntax. closes #77
+* cleanup and requires
+* fixing instructions for extending surveyor. closes #76
 
 0.14.3
 

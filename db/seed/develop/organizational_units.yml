@@ -1,6 +1,7 @@
 nucats:
   id: 1
   abbreviation: NUCATS
+  cc_pers_affiliate_identifier: NUCATS
   name: Clinical and Translational Sciences Institute
   lft: 1
   rgt: 20
@@ -8,6 +9,7 @@ nucats:
 clinical_research:
   id: 2
   abbreviation: CRC
+  cc_pers_affiliate_identifier: CRC
   name: Center for Clinical Research
   parent_id: 1
   lft: 2
@@ -16,6 +18,7 @@ clinical_research:
 education_and_career_development:
   id: 3
   abbreviation: CECD
+  cc_pers_affiliate_identifier: CECD
   name: Center for Education and Career Development
   parent_id: 1
   lft: 8
@@ -24,6 +27,7 @@ education_and_career_development:
 translational_innovation:
   id: 4
   abbreviation: CTI
+  cc_pers_affiliate_identifier: CTI
   name: Center for Translational Innovation
   parent_id: 1
   lft: 10
@@ -32,6 +36,7 @@ translational_innovation:
 community_engaged_research:
   id: 5
   abbreviation: CERC
+  cc_pers_affiliate_identifier: CERC
   name: Community Engaged Research Center
   parent_id: 1
   lft: 12
@@ -40,6 +45,7 @@ community_engaged_research:
 biomedical_informatics:
   id: 6
   abbreviation: NUBIC
+  cc_pers_affiliate_identifier: NUBIC
   name: Biomedical Informatics Center
   parent_id: 1
   lft: 14
@@ -48,6 +54,7 @@ biomedical_informatics:
 research_team_support:
   id: 7
   abbreviation: RTC
+  cc_pers_affiliate_identifier: RTC
   name: Research Team Support Program
   parent_id: 1
   lft: 16
@@ -56,6 +63,7 @@ research_team_support:
 tracking_and_evaluation:
   id: 8
   abbreviation: T and E
+  cc_pers_affiliate_identifier: TE
   name: Tracking and Evaluation Program
   parent_id: 1
   lft: 18
@@ -64,6 +72,7 @@ tracking_and_evaluation:
 regulatory_support:
   id: 9
   abbreviation: RSP
+  cc_pers_affiliate_identifier: RSP
   name: Regulatory Support Program
   parent_id: 2
   lft: 3
@@ -72,6 +81,7 @@ regulatory_support:
 clinical_research_unit:
   id: 10
   abbreviation: CRU
+  cc_pers_affiliate_identifier: CRU
   name: Clinical Research Unit
   parent_id: 2
   lft: 5

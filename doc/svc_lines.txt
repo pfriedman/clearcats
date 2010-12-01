@@ -1,0 +1,25 @@
+Define Service Lines
+  - repeatable service
+
+  Finances and Financial Decisions **
+  CTSA reporting
+  FSM reporting
+  Data for web site
+  EAB and Steering/Governance
+  
+
+Define Activity Types
+  - one time activity 
+  - something to put time against
+  
+  
+What to Report
+--------------
+
+All interactions with any investigator should be reported into ClearCATS
+
+
+Scope of ClearCATS data
+-----------------------
+
+

@@ -31,7 +31,7 @@
         %td
           = link_to 'Edit', edit_contact_list_path(contact_list), :class => "edit_link icon_link"
         %td
-          = link_to 'Destroy', contact_list, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?([contact_list.organizational_unit], @user_organizational_units)
+          = link_to 'Delete', contact_list, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?([contact_list.organizational_unit], @user_organizational_units)
 
 .links
   = link_to 'New Contact List', new_contact_list_path, :class => "add_link icon_link"

@@ -33,7 +33,7 @@
         %td
           = link_to 'Edit', edit_contact_path(contact), :class => "edit_link icon_link"
         %td
-          = link_to 'Destroy', contact_path(contact, :search => params[:search], :page => params[:page]), :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?(contact.organizational_units, @user_organizational_units)
+          = link_to 'Delete', contact_path(contact, :search => params[:search], :page => params[:page]), :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link" if can_destroy?(contact.organizational_units, @user_organizational_units)
         %td
           = link_to 'Edit Client Record', edit_person_path(contact.person), :class => "edit_link icon_link" if contact.person
 

@@ -4,6 +4,7 @@
   .span-6.colborder
     %h4{ :class => "section_header" } Basic Information
     
+    = hidden_field_tag "person[type]", "Client"
     = f.hidden_field :imported
     = f.hidden_field :edited_by_user
     

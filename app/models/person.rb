@@ -356,14 +356,17 @@ class Person < ActiveRecord::Base
   
   def self.determine_client(row)
     eracn = row[:era_commons_username].upcase
-    pers = Client.find_by_era_commons_username(eracn)
+    netid = row[:netid]
+    empid = row[:employeeid]
+    email = row[:email]
     
-    pers = Client.find_by_netid(row[:netid]) if pers.blank? and !row[:netid].blank?
-    
-    pers = Client.find_by_email(row[:email]) if pers.blank? and !row[:email].blank?
+    pers = Person.find_by_era_commons_username(eracn)
+    pers = Person.find_by_netid(netid) if pers.blank? and !netid.blank?
+    pers = Person.find_by_email(email) if pers.blank? and !email.blank?
+    pers = Person.find_by_employeeid(empid) if pers.blank? and !empid.blank?
     
     if pers.blank?
-      pers = Client.create(:era_commons_username => eracn)
+      pers = Client.create(:era_commons_username => eracn, :email => email, :netid => netid, :employeeid => empid)
     end
     pers
   end

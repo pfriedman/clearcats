@@ -169,7 +169,7 @@ GEM
     sexp_processor (3.0.4)
     shoulda (2.11.3)
     state_machine (0.9.4)
-    surveyor (0.14.4)
+    surveyor (0.16.1)
       fastercsv
       haml
     term-ansicolor (1.0.5)
@@ -215,7 +215,7 @@ DEPENDENCIES
   searchlogic
   shoulda
   state_machine
-  surveyor (>= 0.14.4)
+  surveyor (>= 0.16.1)
   term-ansicolor
   trollop
   will_paginate

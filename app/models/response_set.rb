@@ -16,8 +16,9 @@
 #
 
 class ResponseSet < ActiveRecord::Base
+  unloadable
+  include Surveyor::Models::ResponseSetMethods
   
-  belongs_to :person
-  belongs_to :service_line
+  belongs_to :service
   
 end

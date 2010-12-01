@@ -2,8 +2,8 @@ class CreateResponseSets < ActiveRecord::Migration
   def self.up
     create_table :response_sets do |t|
       # Context
-      t.column :user_id, :bigint
-      t.column :survey_id, :bigint
+      t.integer :user_id
+      t.integer :survey_id
 
       # Content
       t.string :access_code #unique id for the object used in urls

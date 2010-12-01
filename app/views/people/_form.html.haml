@@ -1,7 +1,10 @@
-- form_for @person, :url => person_path(@person) do |f|
-  = f.error_messages
-  
-  = render '/people/person_fields', :f => f
+.page_section
 
-  .buttons
-    = f.submit "Save", :disable_with => 'Saving...'
+  - action = @person.new_record? ? :create : :update
+  - form_for @person, :url => {:controller => :people, :action => action} do |f|
+    = f.error_messages
+  
+    = render '/people/person_fields', :f => f
+
+    .buttons
+      = f.submit "Save", :disable_with => 'Saving...'

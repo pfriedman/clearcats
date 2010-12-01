@@ -124,8 +124,7 @@ class PeopleController < ApplicationController
   end
   
   def sample_upload_file
-    csv_headers = "First Name,Last Name,Middle Name,Email,ERA Commons Username,Netid,Employeeid,Area of Expertise,Service Lines"
-    send_data(csv_headers, :file_name => "sample_clearcats_investigator_upload_file.csv", :type => "text/csv")
+    send_file("#{Rails.root}/lib/data/sample_clearcats_investigator_upload_file.csv", :file_name => "sample_clearcats_investigator_upload_file.csv", :type => "text/csv")
   end
 
   # GET /people/search
@@ -137,7 +136,11 @@ class PeopleController < ApplicationController
   def search_results
     @organizational_unit_id = params[:organizational_unit_id]
     @redirect_action = params[:redirect_action]
-    @people = FacultyWebService.locate(params)
+#    @people = FacultyWebService.locate(params)
+    search = {:netid => params[:netid], :last_name => params[:last_name]}
+    people  = Person.search(search).all
+    faculty = FacultyWebService.locate(params)
+    @people = (faculty + people).uniq
   end
 
   def versions

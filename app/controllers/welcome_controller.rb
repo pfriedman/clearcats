@@ -11,4 +11,8 @@ class WelcomeController < ApplicationController
     file_path = Person.import_error_log(current_user.username)
     File.open(file_path).each_line { |line| @lines << "#{line}"} if File.exists?(file_path)
   end
+  
+  def faq
+  end
+  
 end

@@ -19,7 +19,7 @@ gem "paperclip"
 gem "pg"
 gem "searchlogic"
 gem "state_machine"
-gem "surveyor", ">= 0.14.4"
+gem "surveyor", ">= 0.16.1"
 gem "will_paginate"
 gem "zippy"
 

@@ -73,4 +73,9 @@ class ApplicationController < ActionController::Base
     end
     alias :determine_organizational_units_for_user :determine_org_units_for_user
 
+    def get_current_user
+      person = Person.find_by_netid(current_user.username)
+      return person.nil? ? current_user : person
+    end
+
 end

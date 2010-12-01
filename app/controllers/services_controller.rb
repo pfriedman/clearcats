@@ -125,6 +125,20 @@ class ServicesController < ApplicationController
   
   def surveyable
     get_service
+    @survey = Survey.first(:conditions => { :common_namespace => "clearcats", :common_identifier => "satisfaction_survey" } )
+  end
+  
+  def survey
+    get_service
+    @survey = Survey.find_by_access_code(params[:survey_code])
+    @response_set = ResponseSet.create(:survey => @survey, :user_id => (@current_user.nil? ? @current_user : @current_user.id), :service => @service)
+    if (@survey && @response_set)
+      flash[:notice] = t('surveyor.survey_started_success')
+      redirect_to(edit_my_survey_path(:survey_code => @survey.access_code, :response_set_code  => @response_set.access_code))
+    else
+      flash[:notice] = t('surveyor.Unable_to_find_that_survey')
+      redirect_to :controller => :services, :action => :surveyable, :id => @service
+    end
   end
   
   # DELETE /services/1

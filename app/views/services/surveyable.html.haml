@@ -7,7 +7,14 @@
   This service is ready to be surveyed. To edit #{@service.person} choose one of the links above.
 
 %p
-  Survey feature has yet to be implemented. 
+  #surveyor
+    #survey_list
+      %ul
+        %li
+          - form_tag(:controller => :services, :action => :survey, :id => @service, :survey_code => @survey.access_code) do 
+            = @survey.title
+            &nbsp;
+            = submit_tag( t ('surveyor.take_it') )
 
 %p
   At this point you can:
