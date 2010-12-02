@@ -28,16 +28,16 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 config.after_initialize do
-  # Bcsec.configure do
-  #   ui_mode :cas
-  #   api_mode :cas_proxy
-  #   authorities :cas, :pers, :netid
-  #   central '/etc/nubic/bcsec-prod.yml'
-  # end
-  
   Bcsec.configure do
-    ui_mode :form
-    authorities :automatic_access, :netid, :pers
+    ui_mode :cas
+    api_mode :cas_proxy
+    authorities :cas, :automatic_access, :netid, :pers
     central '/etc/nubic/bcsec-prod.yml'
   end
+  
+  # Bcsec.configure do
+  #   ui_mode :form
+  #   authorities :automatic_access, :netid, :pers
+  #   central '/etc/nubic/bcsec-prod.yml'
+  # end
 end
