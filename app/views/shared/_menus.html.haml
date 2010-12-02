@@ -15,11 +15,11 @@
           Administrative Actions
         %ul
           %li
-            = link_to "Clients", people_path
+            = link_to "Manage Clients", people_path
             %ul
               %li= link_to "Upload Investigators", upload_people_path
               %li= link_to "Search FSM Faculty Database", search_people_path
-              %li= link_to "Contact Lists", contacts_path
+              %li= link_to "Manage Contact Lists", contacts_path
               %li
                 %a{ :href => "#" }
                   Incomplete Records
@@ -28,13 +28,15 @@
                   %li= link_to "Missing Net ID",           :controller => "people", :action => "incomplete", :criteria => "netid"
                   %li= link_to "Missing ERA Commons Name", :controller => "people", :action => "incomplete", :criteria => "era_commons_username"
                   %li= link_to "Missing Specialty",        :controller => "people", :action => "incomplete", :criteria => "specialty"
-          %li= link_to "Users",                :controller => "users",                :action => "index" if sysadmin
-          %li= link_to "Organizational Units", :controller => "organizational_units", :action => "index"
-          %li= link_to "Service Lines",        :controller => "service_lines",        :action => "index"
-          %li= link_to "CTSA Data",            :controller => "admin",                :action => "view_ctsa_data" if sysadmin
+    
+          %li= link_to "Manage Users",                :controller => "users",                :action => "index" if sysadmin
+          %li= link_to "Manage Organizational Units", :controller => "organizational_units", :action => "index"
+          %li= link_to "Manage Service Lines",        :controller => "service_lines",        :action => "index"
+          %li= link_to "Manage CTSA Data",            :controller => "admin",                :action => "view_ctsa_data" if sysadmin
           %li
-            = link_to "Reports",              :controller => "reports",              :action => "index"
+            = link_to "View Reports", :controller => "reports", :action => "index"
             %ul
               %li= link_to "CTSA Report", ctsa_reports_path if sysadmin
               %li= link_to "Incomplete Awards", incomplete_awards_path
               %li= link_to "Incomplete Publications", incomplete_publications_path
+    %li= link_to "FAQ", :controller => "welcome", :action => "faq"
