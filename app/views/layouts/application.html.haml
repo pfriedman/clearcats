@@ -28,6 +28,8 @@
             = render "shared/menus"
             = image_tag("banner_edge.jpg")
           #menu2
+            %span{:id => "logout_link"}
+              = link_to "logout", "#{cc_prefix_path}/logout"
             - username = current_user ? current_user.username : "anonymous"
             = session[:name] || username
         #title

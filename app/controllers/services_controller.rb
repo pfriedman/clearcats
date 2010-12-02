@@ -12,7 +12,7 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
-    @search  = Service.search(:created_by_id_equals => find_or_create_user.id, :state_does_not_equal => "complete")
+    @search  = Service.search(:created_by_equals => current_user.username, :state_does_not_equal => "complete")
     @pending_services = @search.paginate(:page => params[:page], :per_page => 10)
     
     respond_to do |format|
@@ -53,7 +53,6 @@ class ServicesController < ApplicationController
       redirect_to :back
     else
       @service = Service.new(params[:service])
-      @service.created_by = find_or_create_user
 
       if @service.save!
         flash[:notice] = 'Service was successfully created.'

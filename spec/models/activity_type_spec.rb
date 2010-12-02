@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: activity_types
 #
@@ -8,6 +8,8 @@
 #  service_line_id :integer
 #  created_at      :datetime
 #  updated_at      :datetime
+#  created_by      :string(255)
+#  updated_by      :string(255)
 #
 
 require 'spec_helper'

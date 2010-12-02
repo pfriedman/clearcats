@@ -1,16 +1,17 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: services
 #
 #  id              :integer         not null, primary key
 #  service_line_id :integer
 #  person_id       :integer
-#  created_by_id   :integer
 #  entered_on      :date
 #  state           :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  created_by      :string(255)
+#  updated_by      :string(255)
 #
 
 require "state_machine"
@@ -18,7 +19,6 @@ class Service < ActiveRecord::Base
   
   belongs_to :service_line
   belongs_to :person
-  belongs_to :created_by, :class_name => "User", :foreign_key => :created_by_id
   
   delegate :organizational_unit, :to => :service_line
   

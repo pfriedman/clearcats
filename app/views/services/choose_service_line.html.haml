@@ -11,16 +11,11 @@
     %ul.service_lines
       - @organizational_units.each do |ou|
         %li
-          - if !ou.service_lines.blank?
-            %a{ :href => "javascript:{}", :onclick => "$('##{ou.cc_pers_affiliate_identifier.downcase}').toggle(); return false;" }
-              = ou.to_s
-            %ul{ :class => "ou_service_lines", :id => "#{ou.cc_pers_affiliate_identifier.downcase}"}
-              - ou.service_lines.all(:order => "name").each do |svc_line|
-                %li 
-                  = f.radio_button "service_line_id", svc_line.id
-                  = f.label "service_line_id_#{svc_line.id}", svc_line.to_s
-          - else
-            %span 
-              = ou.to_s
+          = ou.to_s
+          %ul{ :class => "ou_service_lines", :id => "#{ou.cc_pers_affiliate_identifier.downcase}"}
+            - ou.service_lines.all(:order => "name").each do |svc_line|
+              %li 
+                = f.radio_button "service_line_id", svc_line.id
+                = f.label "service_line_id_#{svc_line.id}", svc_line.to_s
     .buttons
-      = f.submit "Save", :disable_with => 'Saving...'
+      = f.submit "Continue", :disable_with => 'Processing...'

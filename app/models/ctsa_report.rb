@@ -1,21 +1,21 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: ctsa_reports
 #
 #  id             :integer         not null, primary key
-#  created_by_id  :integer
 #  finalized      :boolean
 #  has_errors     :boolean
 #  reporting_year :integer
 #  grant_number   :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  created_by     :string(255)
+#  updated_by     :string(255)
 #
 
 require 'ctsa_xml_builders'
 class CtsaReport < ActiveRecord::Base
-  belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
   has_many :attachments, :as => :attachable
   accepts_nested_attributes_for :attachments, :allow_destroy => true
   

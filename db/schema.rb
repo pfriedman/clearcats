@@ -9,13 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101201173251) do
+ActiveRecord::Schema.define(:version => 20101202161044) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "activity_codes", ["code"], :name => "index_activity_codes_on_code"
@@ -26,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "service_line_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "activity_types", ["name"], :name => "index_activity_types_on_name"
@@ -63,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "approvals", ["person_id"], :name => "index_approvals_on_person_id"
@@ -78,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "data_content_type"
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "award_details", :force => true do |t|
@@ -93,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.float    "total_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "award_details", ["budget_number"], :name => "index_award_details_on_budget_number"
@@ -126,6 +136,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "sponsor_id"
     t.integer  "originating_sponsor_id"
     t.integer  "ctsa_reporting_years_mask"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "awards", ["activity_code_id"], :name => "index_awards_on_activity_code_id"
@@ -141,6 +153,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "organizational_unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "contact_lists_contacts", :id => false, :force => true do |t|
@@ -158,6 +172,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "contacts", ["email"], :name => "index_contacts_on_email"
@@ -173,21 +189,22 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "countries", ["name"], :name => "index_countries_on_name"
 
   create_table "ctsa_reports", :force => true do |t|
-    t.integer  "created_by_id"
     t.boolean  "finalized"
     t.boolean  "has_errors"
     t.integer  "reporting_year"
     t.string   "grant_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
-
-  add_index "ctsa_reports", ["created_by_id"], :name => "index_ctsa_reports_on_created_by_id"
 
   create_table "degree_types", :force => true do |t|
     t.string   "type"
@@ -195,6 +212,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "degree_types", ["name"], :name => "index_degree_types_on_name"
@@ -207,6 +226,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "school"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "departments", ["externalid"], :name => "index_departments_on_externalid"
@@ -218,6 +239,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "rule"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "dependency_conditions", :force => true do |t|
@@ -235,12 +258,16 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "response_other"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "ethnic_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "ethnic_types", ["name"], :name => "index_ethnic_types_on_name"
@@ -249,6 +276,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "institution_positions", ["name"], :name => "index_institution_positions_on_name"
@@ -269,6 +298,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cc_pers_affiliate_identifier"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "organizational_units", ["name"], :name => "index_organizational_units_on_name"
@@ -287,6 +318,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "organizations", ["code"], :name => "index_organizations_on_code"
@@ -345,6 +378,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.boolean  "imported"
     t.integer  "ctsa_reporting_years_mask"
     t.boolean  "system_administrator",                          :default => false
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "people", ["country_id"], :name => "index_people_on_country_id"
@@ -374,6 +409,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.boolean  "cited"
     t.string   "missing_pmcid_reason"
     t.integer  "ctsa_reporting_years_mask"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "publications", ["person_id"], :name => "index_publications_on_person_id"
@@ -390,6 +427,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "custom_renderer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "questions", :force => true do |t|
@@ -412,12 +451,16 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "correct_answer_id"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "race_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "race_types", ["name"], :name => "index_race_types_on_name"
@@ -431,6 +474,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_id"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
@@ -450,6 +495,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "survey_section_id"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
@@ -459,6 +506,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.integer  "organizational_unit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "service_lines", ["name"], :name => "index_service_lines_on_name"
@@ -466,14 +515,14 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
   create_table "services", :force => true do |t|
     t.integer  "service_line_id"
     t.integer  "person_id"
-    t.integer  "created_by_id"
     t.date     "entered_on"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
-  add_index "services", ["created_by_id"], :name => "index_services_on_created_by_id"
   add_index "services", ["person_id"], :name => "index_services_on_person_id"
   add_index "services", ["service_line_id"], :name => "index_services_on_service_line_id"
 
@@ -482,6 +531,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "specialties", ["code"], :name => "index_specialties_on_code"
@@ -494,6 +545,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "sponsor_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "sponsors", ["code"], :name => "index_sponsors_on_code"
@@ -511,6 +564,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "custom_class"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "surveys", :force => true do |t|
@@ -528,6 +583,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "display_order"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   add_index "surveys", ["access_code"], :name => "surveys_ac_idx", :unique => true
@@ -537,6 +594,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "validation_conditions", :force => true do |t|
@@ -555,6 +614,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "regexp"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "validations", :force => true do |t|
@@ -563,6 +624,8 @@ ActiveRecord::Schema.define(:version => 20101201173251) do
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "created_by"
+    t.string   "updated_by"
   end
 
   create_table "versions", :force => true do |t|

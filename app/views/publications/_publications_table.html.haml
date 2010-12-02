@@ -28,7 +28,7 @@
         %tr{ :class => cycle('even_record', 'odd_record') }
           - unless @service
             %td
-              = check_box_tag "publication_ids[]", pub.id, pub.ctsa_reporting_years.include?(current_year)
+              = check_box_tag "publication_ids[]", pub.id, pub.ctsa_reporting_years.include?(current_year), { :disabled => pub.previously_reported?(current_year) }
           %td
             = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :search => params[:search] }.merge(pub_association), { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
           %td= h pub.nucats_assisted? ? "Yes" : "No"

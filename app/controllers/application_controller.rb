@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Bcsec::Rails::SecuredController
   
-  helper_method :current_ctsa_reporting_year
+  helper_method :current_ctsa_reporting_year, :get_current_user
   
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

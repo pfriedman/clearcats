@@ -109,8 +109,9 @@ class PublicationsController < ApplicationController
     @person.publications.each do |pub|
       reporting_years = pub.ctsa_reporting_years
       if params["publication_ids"].include?(pub.id.to_s)
-        if !reporting_years.include?(current_year)
-          pub.ctsa_reporting_years = (reporting_years << current_year) 
+        # Publications are unique and can only have one reporting year unlike awards and people
+        if reporting_years.blank?
+          pub.ctsa_reporting_years = [current_year]
           pub.save
         end
       elsif reporting_years.include?(current_year)

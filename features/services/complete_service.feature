@@ -13,12 +13,12 @@ Feature: Creating a new service
     When I fill in "Net ID" with "wakibbe"
     And I press "Search"
     When I choose "service[person_id]"
-    And I press "Save"
+    And I press "Continue"
     Then I should be on the service choose service line page
     When I choose "CRC Basic Training"
-    And I press "Save"
+    And I press "Continue"
     Then I should be on the edit service page
-    When I press "Save"
+    When I press "Continue"
     Then I should be on the service identified page
     When I choose "service_state_choose_awards"
     And I press "Continue"

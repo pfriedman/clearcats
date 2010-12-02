@@ -11,11 +11,12 @@
 - else
   = render "service_header"
 
-- form_for @service.person, :url => { :controller => "services", :action => "update_person", :id => @service.id } do |f|
+.page_section
+  - form_for @service.person, :url => { :controller => "services", :action => "update_person", :id => @service.id } do |f|
 
-  = hidden_field_tag "service[state]", "identified" if @service.initiated?
+    = hidden_field_tag "service[state]", "identified" if @service.initiated?
 
-  = render '/people/person_fields', :f => f
+    = render '/people/person_fields', :f => f
   
-  .buttons
-    = f.submit "Save", :disable_with => 'Saving...'
+    .buttons
+      = f.submit "Continue", :disable_with => 'Processing...'

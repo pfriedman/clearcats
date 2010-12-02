@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: awards
 #
@@ -32,6 +32,8 @@
 #  sponsor_id                   :integer
 #  originating_sponsor_id       :integer
 #  ctsa_reporting_years_mask    :integer
+#  created_by                   :string(255)
+#  updated_by                   :string(255)
 #
 
 require 'spec_helper'

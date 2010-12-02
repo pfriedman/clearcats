@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: publications
 #
@@ -18,6 +18,8 @@
 #  cited                     :boolean
 #  missing_pmcid_reason      :string(255)
 #  ctsa_reporting_years_mask :integer
+#  created_by                :string(255)
+#  updated_by                :string(255)
 #
 
 require 'spec_helper'
@@ -46,5 +48,18 @@ describe Publication do
       pubs.size.should  == 1
       pubs.first.should == @pub2001
     end
+    
+    
+    it "should know if has already been reported" do
+      @pub2000.previously_reported?(2001).should be_true
+      
+      @pub2001.previously_reported?(2001).should be_false
+      @pub2001.previously_reported?(2002).should be_true
+      
+      new_pub = Factory(:publication, :ctsa_reporting_years_mask => nil)
+      new_pub.previously_reported?(2001).should be_false
+      new_pub.previously_reported?(2002).should be_false
+    end
+    
   end
 end

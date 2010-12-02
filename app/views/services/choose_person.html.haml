@@ -32,7 +32,7 @@
             %td= h person.employeeid
 
       .buttons
-        = f.submit "Save", :disable_with => 'Saving...'
+        = f.submit "Continue", :disable_with => 'Processing...'
   %p
     - path = @service.new_record? ? choose_person_services_path : choose_person_service_path(@service)
     = link_to "New Search", path, { :class => "search_link icon_link"  }

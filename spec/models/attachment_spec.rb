@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: attachments
 #
@@ -14,6 +14,8 @@
 #  data_content_type :string(255)
 #  data_file_size    :integer
 #  data_updated_at   :datetime
+#  created_by        :string(255)
+#  updated_by        :string(255)
 #
 
 require 'spec_helper'

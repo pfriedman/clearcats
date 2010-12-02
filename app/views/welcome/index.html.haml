@@ -25,6 +25,13 @@
               &nbsp;
             = render "/people/upload_import_file_tooltip"
           %li
+            = link_to "Search for Investigator", search_people_path
+          %li
+            = link_to "Add Investigator", search_people_path
+            %span{ :class => "help_icon" }
+              &nbsp;
+            = render "add_investigator_tooltip"
+          %li.hide
             = link_to "Initiate Service", :controller => "services", :action => "new"
             %span{ :class => "help_icon" }
               &nbsp;

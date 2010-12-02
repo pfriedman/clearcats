@@ -1,1 +1,93 @@
-%h3 FAQ
+- stylesheet "faq"
+- title "ClearCATS FAQ"
+
+.faq
+
+  %h2 
+    ClearCATS FAQ
+
+  .page_section
+    %h3 
+      Focus of ClearCATS:
+    %p
+      ClearCATS is intended to be a reporting tool for the use of NUCATS. 
+      %br
+      It will aid in the submission of various reports required throughout the year, 
+      help with financial decision-making, and assist with general record keeping.
+
+  .page_section
+    
+    %h3 
+      Definitions
+  
+    %dl
+      %dt 
+        Service Line 
+      %dd 
+        A method of describing a service that is 
+        %em repeatedly offered 
+        by a center or program. 
+        %br
+        Examples might be recurring education offerings, seminars, support programs, trainings, informatics applications, consultations, etc.
+    
+      %dt
+        Activities
+      %dd
+        Are items that occur during the cycle of a service line. 
+        These are items that 
+        %em 
+          repeat 
+        each time you offer the service. 
+        %br
+        An example would be an education offering (service line) where you would follow-up with many activities, 
+        such as an initial meeting with an investigator, a follow-up phone call, a budget development meeting, 
+        gather materials for application, assist with a proposal, etc.
+        %br
+        Activities can also be 
+        %em
+          onetime events 
+        that fall under a service line. 
+        %br
+        Examples would be things you spend time on that may or may not be specific to a single investigator and follow a systematic progression. 
+        An informatics example is the development of an application specific to the needs of one investigator that would not be used by others, 
+        but fall under a general service line of informatics development.
+
+  .page_section
+    %h3
+      What is this data used for?
+  
+    %ul
+      %li 
+        CTSA reporting
+      %li
+        FSM reporting
+      %li
+        Data for web site
+      %li
+        EAB meeting
+      %li
+        Steering and  Governance
+
+  .page_section
+    %h3
+      What will I have to do for the APR?
+    
+    %ul
+      %li
+        Upload investigator information contained in spreadsheet
+        = link_to " (Download Sample Spreadsheet) ", { :controller => :people, :action => :sample_upload_file }, { :class => "export_link icon_link" } 
+        or individually enter investigators
+      %li
+        Verify investigator information, connect investigators with publications and grants
+      %li
+        Note if the events are CTSA reportable
+
+  .page_section
+    %h3
+      When will I need to complete the above?
+
+    %ul
+      %li
+        February 4th
+      %li
+        Reporting period: January 15, 2010 to January 31, 2011

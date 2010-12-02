@@ -141,9 +141,17 @@ class FacultyWebService
       
         # use ldap over faculty db
         begin
-        
           ldap_entry = Ldap.new.retrieve_entry_by_netid(attributes["netid"])
-          ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key]) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
+          ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key].to_s) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
+          # unless ldap_entry.blank?
+          #   ldap_entry.attribute_names.each do |key| 
+          #     if person.respond_to?("#{key}=")
+          #       val = ldap_entry[key]
+          #       val = val.first if val.is_a?(Array)
+          #       person.send("#{key}=", val)
+          #     end
+          #   end
+          # end
       
           dept = Department.find_by_externalid(person.dept_id)
           person.department = dept if dept
@@ -235,8 +243,6 @@ class FacultyWebService
     
     def self.parse_award_response(body)
       results = []
-      # ic = Iconv.new('UTF-8', 'WINDOWS-1252')
-      # ic = Iconv.new('UTF-8', 'ISO-8859-1')
       value = ActiveSupport::JSON.decode(body)
       value.each do |attributes|
         award = instantiate_award(attributes) 

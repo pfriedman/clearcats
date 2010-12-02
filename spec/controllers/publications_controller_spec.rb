@@ -62,7 +62,7 @@ describe PublicationsController do
 
     
     describe "POST update_ctsa_reporting_year" do
-      it "updates the reporting year of the person's publications to the current reporting year" do
+      it "updates does not add the current reporting year if the person's publications has already been reported" do
         person = Factory(:person)
         pub = Factory(:publication, :person => person)
         person.publications << pub
@@ -77,7 +77,7 @@ describe PublicationsController do
         
         person = Person.find(person.id)
         person.publications.size.should == 1
-        person.publications.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        person.publications.first.ctsa_reporting_years.should == [2000]
         
         response.should redirect_to(person_publications_path(person))
       end
@@ -85,20 +85,20 @@ describe PublicationsController do
       it "removes the current reporting year of the person's publications if not sent as a param" do
         person = Factory(:person)
         pub = Factory(:publication, :person => person)
-        pub.ctsa_reporting_years = (pub.ctsa_reporting_years << Time.now.year) 
+        pub.ctsa_reporting_years = [Time.now.year]
         person.publications << pub
         person.save!
         
         person = Person.find(person.id)
         person.publications.size.should == 1
-        person.publications.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        person.publications.first.ctsa_reporting_years.should == [Time.now.year]
         
         Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
         post :update_ctsa_reporting_year, "publication_ids" => [], :service_id => "99"
         
         person = Person.find(person.id)
         person.publications.size.should == 1
-        person.publications.first.ctsa_reporting_years.should == [2000]
+        person.publications.first.ctsa_reporting_years.should == []
         
         response.should redirect_to(person_publications_path(person))
       end

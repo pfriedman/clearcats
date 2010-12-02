@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: publications
 #
@@ -18,6 +18,8 @@
 #  cited                     :boolean
 #  missing_pmcid_reason      :string(255)
 #  ctsa_reporting_years_mask :integer
+#  created_by                :string(255)
+#  updated_by                :string(255)
 #
 
 # TurboCATS             ClearCATS
@@ -79,6 +81,12 @@ class Publication < ActiveRecord::Base
   
   def citation_cnt
     @citation_cnt
+  end
+  
+  def previously_reported?(yr)
+    return false if ctsa_reporting_years_mask.nil?
+    return false if ctsa_reporting_years.size == 1 and ctsa_reporting_years.include?(yr)
+    true
   end
   
   def self.reporting_years(reporting_years_mask)

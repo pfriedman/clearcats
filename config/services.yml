@@ -1,6 +1,6 @@
 development:  
   :lattice_grid:
-    :host: http://fsm-publications.local
+    :host: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
     :path:
       :mesh_json: mesh.json
       :mesh: mesh

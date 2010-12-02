@@ -117,10 +117,6 @@
   margin-top: 0.75em;
 }
 
-ul.ou_service_lines {
-  display: none;
-}
-
 ul.ou_service_lines li {
   list-style-type: none;
 }

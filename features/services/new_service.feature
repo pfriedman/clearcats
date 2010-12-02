@@ -22,7 +22,7 @@ Feature: Creating a new service
     Then I should see "Choose Service Line"
     And I should see "How to write a K Award"
     When I choose "How to write a K Award"
-    And I press "Save"
+    And I press "Continue"
     Then I should see "Service was successfully created."
     And I should see "Please select client"
     
@@ -40,7 +40,7 @@ Feature: Creating a new service
     And I should see "Warren"
     And I should see "wakibbe"
     When I choose "service[person_id]"
-    And I press "Save"
+    And I press "Continue"
     Then I should see "Service was successfully created."
     And I should see "Choose Service Line"
     

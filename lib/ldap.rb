@@ -47,11 +47,10 @@ class Ldap
       
       if val.kind_of?(Array)
         return nil if val.length == 0
-        val = clean_ldap_value(val[0])
+        val = clean_ldap_value(val[0].to_s)
       else
-        val.gsub(/[\n-\[\]]*/,"").strip
+        val = val.to_s.gsub("\n", "").gsub("-", "").gsub("[", "").gsub("]", "").strip
       end
-      
       val
     end
   

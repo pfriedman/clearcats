@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: people
 #
@@ -45,6 +45,8 @@
 #  imported                                      :boolean
 #  ctsa_reporting_years_mask                     :integer
 #  system_administrator                          :boolean
+#  created_by                                    :string(255)
+#  updated_by                                    :string(255)
 #
 
 # TurboCATS                 ClearCATS

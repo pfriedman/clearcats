@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101201173251
+# Schema version: 20101202161044
 #
 # Table name: contact_lists
 #
@@ -8,6 +8,8 @@
 #  organizational_unit_id :integer
 #  created_at             :datetime
 #  updated_at             :datetime
+#  created_by             :string(255)
+#  updated_by             :string(255)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
