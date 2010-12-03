@@ -3,7 +3,7 @@
 %html{ :xmlns =>"http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en" }
   %head
     %meta{ "http-equiv" => "content-type", :content => "text/html;charset=UTF-8" }
-    %title= "ClearCATS :: " + h(yield(:title) || "Northwestern University")
+    %title= "clearcats :: " + h(yield(:title) || "Northwestern University")
     = stylesheet_link_tag('blueprint/screen')
     = stylesheet_link_tag('blueprint/print', :media => "print")
     = stylesheet_link_tag('application', :media => "all")
@@ -33,7 +33,7 @@
             - username = current_user ? current_user.username : "anonymous"
             = session[:name] || username
         #title
-          = link_to("ClearCATS", "/", :class => "no_link")
+          = link_to("clearcats", "/", :class => "no_link")
           - if show_title?
             %span= ":: " + h(yield(:title))
       #niceline

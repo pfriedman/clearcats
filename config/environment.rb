@@ -44,6 +44,10 @@ Rails::Initializer.run do |config|
   config.middleware.use "AuthenticationFailureHandler"
   
   CTSA_BASE_LINE_YEAR = 2008
+  
+  
+  config.load_paths << "#{Rails.root}/app/models/ctsa"
+  config.load_paths << "#{Rails.root}/app/models/surveyor"
 end
 
 require "will_paginate"

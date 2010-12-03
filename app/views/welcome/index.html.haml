@@ -1,4 +1,4 @@
-- title "Welcome"
+- title "welcome"
 
 :javascript
   $(document).ready(function() {
@@ -9,7 +9,7 @@
   %h2
     - if @person
       = "#{@person.to_s} :: "
-    Welcome to ClearCATS!
+    Welcome to clearCATS!
 
   - if current_user
     - if current_user.permit?(:Admin, :User)

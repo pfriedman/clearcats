@@ -28,12 +28,17 @@ group :development do
 end
 
 group :test do
+
+  # autotest
+  gem "autotest"
+  gem 'autotest-growl'
+
   # rspec
-  gem "rspec", ">= 1.3.0"
-  gem "rspec-rails", ">= 1.3.2"
+  gem "rspec"
+  gem "rspec-rails"
   
   # factory_girl
-  gem "factory_girl", '1.2.4'
+  gem "factory_girl"
   
   # shoulda
   gem "shoulda"
