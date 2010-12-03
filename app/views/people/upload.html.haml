@@ -14,7 +14,9 @@
       %li Last Name
       %li Middle Name
       %li Email
-      %li ERA Commons Username (required)
+      %li 
+        ERA Commons Username (required) 
+        = link_to "Lookup ERA Commons Username", :controller => "people", :action => "era_commons_username_search"
       %li Netid
       %li Employeeid
       %li Area of Expertise

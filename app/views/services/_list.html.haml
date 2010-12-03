@@ -4,6 +4,8 @@
 - if services.empty?
   .no_records No services were found.
 - else
+  .page_entries_info
+    = page_entries_info services
   %table{ :class => "records pending_services" }
     %tr
       %th Select

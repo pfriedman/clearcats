@@ -330,6 +330,10 @@ table.nested {
   color: #ddd;
 }
 
+.page_entries_info {
+  text-align: right;
+}
+
 /* Link styles */
 
 .icon_link {

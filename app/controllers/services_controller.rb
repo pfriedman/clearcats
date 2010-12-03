@@ -5,7 +5,8 @@ class ServicesController < ApplicationController
     @user_organizational_units = determine_org_units_for_user
     params[:search] ||= Hash.new
     params[:search][:service_line_organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) unless @user_organizational_units.blank?
-
+    params[:search][:person_id] = params[:person_id] if params[:person_id]
+    
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 10)
   end

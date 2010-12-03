@@ -10,13 +10,14 @@
         %br
         = f.text_field :service_line_name_like
     .span-8
-      %p
-        = f.label "person_first_name_like", "First Name"
-        %br
-        = f.text_field :person_first_name_like
-      %p
-        = f.label "person_last_name_like", "Last Name"
-        %br
-        = f.text_field :person_last_name_like
+      - if params[:search][:person_id].blank?
+        %p
+          = f.label "person_first_name_like", "First Name"
+          %br
+          = f.text_field :person_first_name_like
+        %p
+          = f.label "person_last_name_like", "Last Name"
+          %br
+          = f.text_field :person_last_name_like
     .buttons
       = f.submit "Submit", :disable_with => 'Submitting...'

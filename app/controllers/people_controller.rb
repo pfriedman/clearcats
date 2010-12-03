@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_filter :permit_user,  :only => [:index, :directory, :search, :search_results, :versions, :new, :create, :update_ctsa_reporting_year]
-  before_filter :permit_admin, :only => [:upload, :revert]
+  before_filter :permit_admin, :only => [:upload, :revert, :merge]
 
   def index
     params[:search]         ||= Hash.new
@@ -136,7 +136,6 @@ class PeopleController < ApplicationController
   def search_results
     @organizational_unit_id = params[:organizational_unit_id]
     @redirect_action = params[:redirect_action]
-#    @people = FacultyWebService.locate(params)
     search = {:netid => params[:netid], :last_name => params[:last_name]}
     people  = Person.search(search).all
     faculty = FacultyWebService.locate(params)
@@ -157,6 +156,46 @@ class PeopleController < ApplicationController
   def version
     @version = Person.find(params[:id]).versions.find(params[:version_id])
     @person  = @version.reify
+  end
+  
+  def merge
+    if request.post?
+      
+      if !params[:netid].blank? and !params[:era_commons_username].blank?
+        ClientMerger.merge(params[:era_commons_username], params[:netid])
+        flash[:notice] = 'Records were successfully merged.'
+        redirect_to people_path(:search => { :netid_like => params[:netid] })
+      else
+        render :merge
+      end
+    end
+  end
+  
+  def era_commons_username_search
+    #TODO: eventually use the FSM Faculty Database to look up this data, but until that is available use file
+    if request.get?
+      @era_commons_usernames = nil
+    elsif request.post?
+      @era_commons_usernames = []
+      map = DataScrubber.get_commons_name_map_from_file
+      
+      if !params[:netid].blank?
+        pers = Person.find_by_netid(params[:netid])
+        if pers
+          eracn = map["#{pers.full_name}"]
+          @era_commons_usernames << eracn unless eracn.blank?
+        end
+      end
+      
+      eracn = map["#{params[:employeeid]}"]
+      @era_commons_usernames << eracn unless eracn.blank?
+      
+      eracn = map["#{params[:first_name]} #{params[:last_name]}"]
+      @era_commons_usernames << eracn unless eracn.blank?
+      
+      @era_commons_usernames = @era_commons_usernames.uniq
+    end
+    
   end
   
 end

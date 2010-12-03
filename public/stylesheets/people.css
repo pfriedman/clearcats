@@ -65,3 +65,7 @@ h4.section_header {
 #search_awards_activity_code_id_equals {
   width: 17em;
 }
+
+hr {
+  margin-bottom: 0.25em;
+}

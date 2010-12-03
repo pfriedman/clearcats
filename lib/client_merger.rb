@@ -11,7 +11,10 @@ class ClientMerger
       
     end
     
-    client_to_kill.services.each { |svc| client_to_keep.services << svc }
+    client_to_kill.services.each do |svc| 
+      svc.person = client_to_keep
+      client_to_keep.services << svc
+    end
     
     client_to_kill.destroy
     client_to_keep.save!

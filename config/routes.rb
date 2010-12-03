@@ -23,11 +23,21 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :versions => :get, :revert => :post },
     :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post }
   map.resources :organizational_units
+  
+  map.resources :services, 
+    :member     => { :choose_service_line => :get, :choose_person => :get, :update_person => :put, :update_approvals => :put, 
+                     :continue => [:get, :put], :identified => [:get, :put], :surveyable => :get, :survey => :post,
+                     :choose_awards => :get, :choose_organizational_units => :get, :choose_publications => :get, :choose_approvals => :get }, 
+    :collection => { :choose_service_line => :get, :choose_person => :get }
+  
   map.resources :people, :only => [:index, :edit, :update, :new, :create], 
-    :member     => { :versions => :get, :revert => :post, :version => :get },
-    :collection => { :upload => [:get, :post], :search => [:get,:post], :search_results => [:get,:post], :directory => [:get, :post], :incomplete => :get, :update_ctsa_reporting_year => :post } do |people|
+    :member     => { :versions => :get, :revert => :post, :version => :get, :merge => [:get, :post] },
+    :collection => { :upload => [:get, :post], :search => [:get,:post], :search_results => [:get,:post], 
+                     :directory => [:get, :post], :incomplete => :get, :update_ctsa_reporting_year => :post,
+                     :era_commons_username_search => [:get, :post] } do |people|
       people.resources :awards
       people.resources :publications
+      people.resources :services
   end
   map.resources :clients, :controller => "people"
   map.resources :contacts, :collection => { :upload => [:get, :post], :email_search => [:get], :load_contact => [:get], :sample_upload_file => :get }
@@ -35,11 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :participating_organizations
   map.resources :service_lines
-  map.resources :services, 
-    :member     => { :choose_service_line => :get, :choose_person => :get, :update_person => :put, :update_approvals => :put, 
-                     :continue => [:get, :put], :identified => [:get, :put], :surveyable => :get, :survey => :post,
-                     :choose_awards => :get, :choose_organizational_units => :get, :choose_publications => :get, :choose_approvals => :get }, 
-    :collection => { :choose_service_line => :get, :choose_person => :get }
+
   map.resources :users, :except => [ :destroy, :show ]
 
   map.connect 'reports/:action', :controller => "reports"
