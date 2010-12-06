@@ -60,12 +60,6 @@ group :test do
   gem "database_cleaner"
   gem 'capybara'
   
-  # webrat
-  # gem "rack-test"
-  # gem "webrat"
-
-  # mocking web services
-  # gem "fakeweb"
   
   gem "ci_reporter"
 end
