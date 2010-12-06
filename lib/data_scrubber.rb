@@ -35,12 +35,26 @@ class DataScrubber
   
   def self.get_commons_name_map_from_file
     map = {}
-    file = File.open("#{Rails.root}/lib/data/commonsids.csv")    
+    file = File.open(determine_file_path)
+    
     FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|      
       map["#{row[:fname]} #{row[:lname]}"] = row[:commonsid]
       map["#{row[:employer_id]}"]          = row[:commonsid]
     end      
     map
   end
+
+  private
+
+    # TODO: FIXME: 
+    # hack to work around naming issue in git
+    def determine_file_path
+      filename = "CommonsIDs"      
+      if File.exists?("#{Rails.root}/lib/data/#{filename.downcase}.csv")
+        return "#{Rails.root}/lib/data/#{filename.downcase}.csv"
+      else
+        return "#{Rails.root}/lib/data/#{filename}.csv"
+      end
+    end
   
 end
