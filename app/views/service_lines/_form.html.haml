@@ -9,7 +9,11 @@
     = f.text_field :name
   
   - if @user_organizational_units.size == 1
-    = hidden_field_tag "service_line[organizational_unit_id]", @user_organizational_units.first.id
+    %p
+      %b Organizational Unit
+      %br
+      = @user_organizational_units.first
+      = hidden_field_tag "service_line[organizational_unit_id]", @user_organizational_units.first.id
   - else
     %p
       = f.label :organizational_unit_id, "Organizational Unit"
@@ -20,7 +24,7 @@
     %thead
       %tr
         %th
-          Activity Types
+          Activity Types (optional)
         %th
     %tbody{ :class => "nested_records" }
       - f.fields_for :activity_types do |activity_type_form|

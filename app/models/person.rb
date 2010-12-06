@@ -315,6 +315,10 @@ class Person < ActiveRecord::Base
     self.middle_name = (parts[2] && parts[1])
   end
 
+  def era_commons_id=(commons_name)
+    self.era_commons_username = commons_name
+  end
+
 
   ###
   #    Parsing data from CSV

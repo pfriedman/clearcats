@@ -1,0 +1,26 @@
+
+.sub_row_even_record td {
+  border-top: 1px solid whitesmoke;
+}
+
+.sub_row_odd_record td {
+  border-top: 1px solid white;
+}
+
+.sub_row_odd_record li,
+.sub_row_even_record li {
+  list-style: none;
+}
+
+/* copied from application.css to ensure that the above colors are correct */
+table.records tr.even_record {
+  background-color: whitesmoke;
+}
+
+table.records tr.odd_record {
+  background-color: white;
+}
+
+table.activity_types {
+  margin-top: 1em;
+}
