@@ -1,11 +1,11 @@
-%h4
-  = header
-  
+
 - if services.empty?
   .no_records No services were found.
 - else
-  .page_entries_info
-    = page_entries_info services
+  .records_header
+    .page_entries_info
+      = page_entries_info services
+    = will_paginate services
   %table{ :class => "records pending_services" }
     %tr
       %th Select

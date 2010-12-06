@@ -15,4 +15,8 @@ class WelcomeController < ApplicationController
   def faq
   end
   
+  def add_investigator
+    @organizational_unit_id = params[:organizational_unit_id]
+  end
+  
 end

@@ -18,6 +18,9 @@
     = render "shared/menu_init_script"
   %body
     .container
+      #home
+        = link_to("clearcats", "/", :class => "no_link")
+      
       #menu
         
       #header
@@ -33,10 +36,8 @@
             - username = current_user ? current_user.username : "anonymous"
             = session[:name] || username
         #title
-          = link_to("clearcats", "/", :class => "no_link")
           - if show_title?
-            %span= ":: " + h(yield(:title))
-      #niceline
+            %span= h(yield(:title))
       .clear
 
       #main

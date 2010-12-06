@@ -2,24 +2,5 @@
 - title "Clients - Upload Investigators"
 
 .page_section
-  %h4
-    Upload Investigators File
-  %p
-    To quickly add several investigators with whom you've worked you may upload a comma-separated values (.csv) file.
-    = link_to "Download Sample File", { :controller => :people, :action => :sample_upload_file }, { :class => "export_link icon_link" }
-  .instructions
-    Please upload a comma-separated values (.csv) file with the following fields:
-    %ul
-      %li First Name
-      %li Last Name
-      %li Middle Name
-      %li Email
-      %li 
-        ERA Commons Username (required) 
-        = link_to "Lookup ERA Commons Username", :controller => "people", :action => "era_commons_username_search"
-      %li Netid
-      %li Employeeid
-      %li Area of Expertise
-      %li= link_to "Service Lines (required)", :controller => "service_lines", :action => "index"
+  = render 'upload'
 
-= render :partial => 'upload_form'

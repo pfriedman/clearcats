@@ -1,0 +1,16 @@
+- form_tag "#{cc_prefix_path}/people/search_results", :class => "faculty_search" do
+
+  = hidden_field_tag :organizational_unit_id, @organizational_unit_id
+
+  %p
+    = label_tag :last_name, "Last Name"
+    %br
+    = text_field_tag :last_name
+
+  %p
+    = label_tag :netid, "Net ID"
+    %br
+    = text_field_tag :netid
+
+  .buttons
+    = submit_tag "Search"

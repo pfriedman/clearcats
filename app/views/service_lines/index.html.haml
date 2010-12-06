@@ -1,25 +1,21 @@
-- title "Service Lines"
-
 - if @user_organizational_units.blank?
-  %h3 
-    All Service Lines
+  - title "All Service Lines"
 - elsif params[:search] and params[:search][:organizational_unit_id_eq].blank?
-  %h3
-    Service Lines for #{@user_organizational_units.map(&:to_s).to_sentence}
+  - if @user_organizational_units.size == 1
+    - title "Service Lines for #{@user_organizational_units.map(&:to_s).to_sentence}"
+  - else
+    - title "Service Lines"
+    = @user_organizational_units.map(&:to_s).to_sentence
 - else
-  %h3
-    Service Lines for 
-    = OrganizationalUnit.find(params[:search][:organizational_unit_id_eq])
+  - title "Service Lines for #{OrganizationalUnit.find(params[:search][:organizational_unit_id_eq])}"
 
 - if @user_organizational_units.size > 1
   .page_section
     - form_for @search, :url => {:controller => "service_lines", :action => "index", :method => :get}, :html => {:class => "service_line_search_form"} do |f|
       %p
         = f.label "organizational_unit_id_equals", "Organizational Unit"
-        %br
         - opts = [["-- Select Organizational Unit --",  ""]] + @user_organizational_units.sort_by{|e| e.name}.map{|u| [u.to_s, u.id]}
         = select_tag("search[organizational_unit_id_eq]", options_for_select(opts, params[:search][:organizational_unit_id_eq].to_i))
-      .buttons
         = f.submit "Submit", :disable_with => 'Submitting...'
 
 - if @service_lines.blank?

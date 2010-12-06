@@ -144,11 +144,22 @@ describe PeopleController do
     describe "POST search" do
       describe "with valid netid" do
         it "assigns @people with the search results" do
+          request.env["HTTP_REFERER"] = "/"
           FacultyWebService.stub!(:locate).and_return([mock_person(:save => true)])
-          post :search_results, {:these => 'params'}
+          post :search_results, {:netid => 'asdf'}
           assigns[:people].should == [mock_person]
         end
       end
+      
+      describe "with invalid params" do
+        it "redirects people back" do
+          request.env["HTTP_REFERER"] = "/"
+          FacultyWebService.stub!(:locate).and_return([mock_person(:save => true)])
+          post :search_results, {:these => 'params'}
+          response.should redirect_to("/")
+        end
+      end
+      
     end
     
     describe "POST update_ctsa_reporting_year" do

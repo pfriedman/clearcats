@@ -118,6 +118,7 @@ class PeopleController < ApplicationController
         render :action => "upload"
       else
         Person.import_data(params[:file].open, find_or_create_user)
+        flash[:notice] = "Data was successfully uploaded."
         redirect_to people_path
       end
     end
@@ -134,12 +135,16 @@ class PeopleController < ApplicationController
   
   # POST /people/search_results
   def search_results
-    @organizational_unit_id = params[:organizational_unit_id]
-    @redirect_action = params[:redirect_action]
-    search = {:netid => params[:netid], :last_name => params[:last_name]}
-    people  = Person.search(search).all
-    faculty = FacultyWebService.locate(params)
-    @people = (faculty + people).uniq
+    if params[:netid].blank? and params[:last_name].blank?
+      flash[:warning] = "Please enter search criteria"
+      redirect_to :back
+    else
+      @organizational_unit_id = params[:organizational_unit_id]
+      search = {:netid => params[:netid], :last_name => params[:last_name]}
+      people  = Person.search(search).all
+      faculty = FacultyWebService.locate(params)
+      @people = (faculty + people).uniq
+    end
   end
 
   def versions

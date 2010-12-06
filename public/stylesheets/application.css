@@ -35,10 +35,6 @@
   -webkit-border-radius: .5em;
 }
 
-.welcome .page_section {
-  min-height: 14em;
-}
-
 .blockOverlay {
   opacity: 0.5 !important;
 }
@@ -160,26 +156,37 @@ a.no_link {
   clear: both; 
 }
 
-#title {
+#home {
   margin: 0px;
-  padding: 5px 20px;
+  padding: 0px 20px;
   font-family: Arial, Helvetica, Geneva, sans-serif;
-  font-size: 150%;
-  font-weight: bold;
-  color: #222266;
-  line-height: 180%;
-  background-color: lightyellow; 
+  background-color: white;
 }
 
-#title a {
-  padding: 5px;
+#home a {
+  font-size: 2.5em;
+  line-height: 180%;
   color: #222266;
   text-decoration: none;
-  background: lightyellow; 
 }
 
-#title a:hover {
+#home a:hover {
   color: darkorange; 
+}
+
+#menu {
+  padding: 0px;
+}
+
+
+#title {
+  margin: 0px;
+  padding: 5px 20px 0 10px;
+  font-family: Arial, Helvetica, Geneva, sans-serif;
+  font-size: 1.875em;
+  color: #222266;
+  line-height: 180%;
+  background-color: white; 
 }
 
 #niceline {
@@ -193,7 +200,8 @@ a.no_link {
 
 #main {
   min-height: 45em;
-  padding: 0.5em;
+  margin: 0;
+  padding: 0 0.5em;
 }
 
 #footer {
@@ -331,7 +339,12 @@ table.nested {
 }
 
 .page_entries_info {
-  text-align: right;
+  float: right;
+  padding-top: 0.25em;
+}
+
+.records_header {
+  min-height: 2em;
 }
 
 /* Link styles */
@@ -433,8 +446,6 @@ table.nested {
 
 .container {
   width: 1160px;
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
 }
 
 a:after {

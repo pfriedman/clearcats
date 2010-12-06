@@ -2,9 +2,6 @@
 - title "Faculty Search"
 
 .page_section
-  %p
-    %h3 Search Faculty Members
-
   .instructions
     The Faculty Search will look in the
     %a{ :href => "https://fsmweb.northwestern.edu/facultylogin/", :target => "_blank" } 
@@ -16,19 +13,4 @@
     you should create a 
     = link_to "New Person", new_person_path, :class => "add_link icon_link"
 
-  - form_tag "#{cc_prefix_path}/people/search_results", :class => "faculty_search" do
-
-    = hidden_field_tag :organizational_unit_id, @organizational_unit_id
-
-    %p
-      = label_tag :netid, "Net ID"
-      %br
-      = text_field_tag :netid
-
-    %p
-      = label_tag :last_name, "Last Name"
-      %br
-      = text_field_tag :last_name
-
-    .buttons
-      = submit_tag "Search"
+  = render '/people/faculty_search_form'

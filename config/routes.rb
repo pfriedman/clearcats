@@ -27,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :services, 
     :member     => { :choose_service_line => :get, :choose_person => :get, :update_person => :put, :update_approvals => :put, 
                      :continue => [:get, :put], :identified => [:get, :put], :surveyable => :get, :survey => :post,
+                     :create_service_for_person => :post,
                      :choose_awards => :get, :choose_organizational_units => :get, :choose_publications => :get, :choose_approvals => :get }, 
     :collection => { :choose_service_line => :get, :choose_person => :get }
   

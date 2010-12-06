@@ -1,0 +1,23 @@
+%p
+  Upload multiple investigators in a .csv file
+%p
+  = link_to "Download Sample File", { :controller => :people, :action => :sample_upload_file }, { :class => "export_link icon_link" }
+  
+= render :partial => '/people/upload_form'
+
+.instructions
+  The file you upload must have the following column headers:
+  %ul
+    %li First Name
+    %li Last Name
+    %li Middle Name
+    %li Email
+    %li 
+      ERA Commons Username
+      = link_to "Lookup ERA Commons Username", { :controller => "people", :action => "era_commons_username_search" }, { :class => "search_link icon_link" }
+    %li Netid
+    %li Employeeid
+    %li Area of Expertise
+    %li
+      = link_to "Service Lines", :controller => "service_lines", :action => "index"
+      (if multiple, separate each with a comma)

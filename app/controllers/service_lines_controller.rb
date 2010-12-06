@@ -56,9 +56,10 @@ class ServiceLinesController < ApplicationController
     respond_to do |format|
       if @service_line.save
         flash[:notice] = 'Service Line was successfully created.'
-        format.html { redirect_to(@service_line) }
+        format.html { redirect_to(service_lines_url(:search => { :order => "descend_by_created_at" })) }
         format.xml  { render :xml => @service_line, :status => :created, :location => @service_line }
       else
+        @user_organizational_units = determine_org_units_for_user
         format.html { render :action => "new" }
         format.xml  { render :xml => @service_line.errors, :status => :unprocessable_entity }
       end
@@ -73,9 +74,10 @@ class ServiceLinesController < ApplicationController
     respond_to do |format|
       if @service_line.update_attributes(params[:service_line])
         flash[:notice] = 'Service Line was successfully updated.'
-        format.html { redirect_to(@service_line) }
+        format.html { redirect_to(service_lines_url(:search => { :order => "descend_by_created_at" })) }
         format.xml  { head :ok }
       else
+        @user_organizational_units = determine_org_units_for_user
         format.html { render :action => "edit" }
         format.xml  { render :xml => @service_line.errors, :status => :unprocessable_entity }
       end

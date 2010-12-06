@@ -1,0 +1,10 @@
+- if @person and @person.type == "Client"
+  .page_section.span-12 
+    %h3 
+      Profile for #{@person}
+    %ul
+      %li
+        = link_to "Edit My Profile", edit_person_path(@person)
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "edit_profile_tooltip"

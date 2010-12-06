@@ -3,43 +3,44 @@
 
 .page_section
 
-  %h3
-    Search ERA Commons Username
-
   %p
     The Office of Sponsored Research has provided a list of ERA Commons Usernames known to them. 
     This is by no means a complete list of ERA Commons Usernames and is not a search of all ERA Commons Usernames.
     We provide this as a service to lookup ERA Commons Usernames for Investigators with whom you've worked.
+
+  %p
+    = render '/people/electronic_research_administration'
+
   %p
     If you attempt a search by name, we require both the first AND last name of the investigator.
 
-  %p
-    = render :partial => '/people/electronic_research_administration'
 
-  - form_tag do
+  .era_commons_username_search_form
+    - form_tag do
 
-    %p
-      = label_tag :first_name, "First Name"
-      %br
-      = text_field_tag :first_name, params[:first_name]
+      .span-5
+        = label_tag :first_name, "First Name and"
+        %br
+        = text_field_tag :first_name, params[:first_name]
   
-    %p
-      = label_tag :last_name, "Last Name"
-      %br
-      = text_field_tag :last_name, params[:last_name]
+      .span-5
+        = label_tag :last_name, "Last Name"
+        %br
+        = text_field_tag :last_name, params[:last_name]
   
-    %p
-      = label_tag :employeeid, "Employee ID"
-      %br
-      = text_field_tag :employeeid, params[:employeeid]
+      .span-24
+        %p
+          = label_tag :employeeid, "Employee ID"
+          %br
+          = text_field_tag :employeeid, params[:employeeid]
   
-    %p
-      = label_tag :netid, "NetID"
-      %br
-      = text_field_tag :netid, params[:netid]
+        %p
+          = label_tag :netid, "NetID"
+          %br
+          = text_field_tag :netid, params[:netid]
   
-    .buttons
-      = submit_tag "Search", :disable_with => 'Searching...'
+      .buttons
+        = submit_tag "Search", :disable_with => 'Searching...'
       
       
 - if @era_commons_usernames
@@ -57,4 +58,4 @@
     
 
 .links
-  = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
+  = link_to 'List all Investigators', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

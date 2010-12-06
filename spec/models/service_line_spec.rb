@@ -23,5 +23,6 @@ describe ServiceLine do
   
   it { should belong_to(:organizational_unit) }
   it { should have_many(:services) }
+  it { should validate_presence_of(:name) }
   
 end

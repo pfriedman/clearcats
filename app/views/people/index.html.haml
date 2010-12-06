@@ -6,17 +6,13 @@
     $(".help_icon").tooltip();
   });
 
+- if File.exists?(Person.import_error_log(current_user.username))
+  .page_section
+    #upload_error_log
+      = link_to "View Upload Errors", {:controller => "welcome", :action => "upload_error_log"}, { :class => "show_link icon_link" }
+
 .page_section 
   = render 'search_form'
 
-%p
-  #upload_error_log
-    - if File.exists?(Person.import_error_log(current_user.username))
-      = link_to "View Upload Errors", {:controller => "welcome", :action => "upload_error_log"}, { :class => "show_link icon_link" }
-  = link_to "Upload File to Import Investigators", upload_people_path, { :class => "upload_link icon_link" }
-  %span{ :class => "help_icon" }
-    &nbsp;
-  = render "upload_import_file_tooltip"
-%hr
-
-= render 'search_results'
+.page_section
+  = render 'search_results'

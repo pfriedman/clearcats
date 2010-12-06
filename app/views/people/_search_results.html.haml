@@ -1,8 +1,11 @@
 - if @people.blank?
   .no_records No clients were found.
 - else
-  .page_entries_info
-    = page_entries_info @people, :entry_name => "record"
+  .records_header
+    .page_entries_info
+      = page_entries_info @people, :entry_name => "record"
+    = will_paginate @people
+
   - form_tag(update_ctsa_reporting_year_people_path) do
     - current_year = current_ctsa_reporting_year
     - if params[:page]
@@ -20,9 +23,6 @@
         %th= order @search, :by => :employeeid, :as => "Employee ID", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :email, :as => "Email", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :era_commons_username, :as => "ERA Commons", :params => {:criteria => params[:criteria]}
-        %th= order @search, :by => :degree_type_one_name, :as => "Degree Type One", :params => {:criteria => params[:criteria]}
-        %th= order @search, :by => :degree_type_two_name, :as => "Degree Type Two", :params => {:criteria => params[:criteria]}
-        %th= order @search, :by => :institution_positions_name, :as => "Position/Title", :params => {:criteria => params[:criteria]}
         %th Reporting Years
         %th History
 
@@ -37,9 +37,6 @@
           %td= h person.employeeid
           %td= h person.email
           %td= h person.era_commons_username
-          %td= h person.degree_type_one
-          %td= h person.degree_type_two
-          %td= h person.institution_positions.map{|p| p.name}.to_sentence
           %td= h person.ctsa_reporting_years.blank? ? "n/a" : person.ctsa_reporting_years.join(",")
           %td= link_to 'View', versions_person_path(person), :class => "show_link icon_link"
 

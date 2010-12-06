@@ -18,6 +18,8 @@ class ServiceLine < ActiveRecord::Base
   has_many :activity_types
   has_many :services
   
+  validates_presence_of :name
+  
   accepts_nested_attributes_for :activity_types, :allow_destroy => true
   
   def to_s

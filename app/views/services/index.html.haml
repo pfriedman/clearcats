@@ -1,6 +1,8 @@
 - stylesheet "services"
 - title "Service"
 
-= render 'search_form'
+.page_section
+  = render 'search_form'
 
-= render 'list', { :services => @services, :header => "Services" }
+.page_section
+  = render 'list', { :services => @services }

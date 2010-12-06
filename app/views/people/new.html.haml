@@ -1,7 +1,8 @@
 - stylesheet "people"
-- title "New Person"
+- title "Create Person"
 
-= render 'form'
+.page_section
+  = render 'form'
 
 .links
-  = link_to 'List', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
+  = link_to 'List all investigators', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)

@@ -1,6 +1,4 @@
-#investigator_upload.page_section
-  #search= link_to "Faculty Search", {:controller => "people", :action => "search"}, {:class => "search_link icon_link"}
+#investigator_upload
   - form_tag(upload_people_path, :multipart => true) do
-    %span Upload Investigators
     = file_field_tag(:file)
     = submit_tag("Upload")

@@ -1,12 +1,9 @@
-- title "New Service"
+- title "Create Service"
 
 :javascript
   $(document).ready(function() {
     $(".help_icon").tooltip();
   });
-
-%h2
-  New Service
 
 .page_section
   %p 
@@ -27,4 +24,7 @@
           &nbsp;
         = render "choose_service_line_tooltip"
 
-= render 'list', { :services => @pending_services, :header => "Services In Process" }
+.page_section
+  .records_header
+    Services In Process
+  = render 'list', { :services => @pending_services }

@@ -1,4 +1,4 @@
-- title "Person Search Results"
+- title "Search Results"
 
 - if @people.blank?
   .no_records
@@ -8,7 +8,8 @@
 - else
   %table.records
     %tr
-      %th Select
+      %th Add to Service Line
+      %th Edit
       %th Last Name
       %th First Name
       %th Middle Name
@@ -17,6 +18,8 @@
       %th NU Employee ID
     - @people.each do |person|
       %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = link_to "Add to service line", { :controller => "services", :action => "create_service_for_person", :person_id => person.id }, :method => :post, :class => "add_link icon_link"
         %td= link_to "Edit", edit_person_path(person), :class => "edit_link icon_link"
         %td= h person.last_name
         %td= h person.first_name

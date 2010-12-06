@@ -1,0 +1,23 @@
+.page_section.span-12
+  %h3 
+		      User Actions
+		    %p
+		      The following are the actions taken to enter data into the application.
+  %ul
+    %li
+      = link_to "Upload Investigators File", upload_people_path
+      %span{ :class => "help_icon" }
+        &nbsp;
+      = render "/people/upload_import_file_tooltip"
+    %li
+      = link_to "Search for Investigator", search_people_path
+    %li
+      = link_to "Add Investigator", new_person_path
+      %span{ :class => "help_icon" }
+        &nbsp;
+      = render "add_investigator_tooltip"
+    %li.hide
+      
+      %span{ :class => "help_icon" }
+        &nbsp;
+      = render "initiate_service_tooltip"

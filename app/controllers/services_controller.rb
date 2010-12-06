@@ -8,13 +8,13 @@ class ServicesController < ApplicationController
     params[:search][:person_id] = params[:person_id] if params[:person_id]
     
     @search = Service.search(params[:search])
-    @services = @search.paginate(:page => params[:page], :per_page => 10)
+    @services = @search.paginate(:page => params[:page], :per_page => 20)
   end
 
   def new
     @service = Service.new
     @search  = Service.search(:created_by_equals => current_user.username, :state_does_not_equal => "complete")
-    @pending_services = @search.paginate(:page => params[:page], :per_page => 10)
+    @pending_services = @search.paginate(:page => params[:page], :per_page => 20)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -61,6 +61,19 @@ class ServicesController < ApplicationController
       else
         render :action => "new"
       end
+    end
+  end
+  
+  def create_service_for_person
+    person   = Person.find(params[:person_id])
+    @service = Service.new(:person => person)
+
+    if @service.save!
+      flash[:notice] = 'Service was successfully created.'
+      determine_redirect
+    else
+      flash[:warning] = "Could not create service for #{person}"
+      redirect_to :back
     end
   end
   

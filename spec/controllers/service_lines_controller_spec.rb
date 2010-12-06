@@ -52,10 +52,10 @@ describe ServiceLinesController do
           assigns[:service_line].should equal(mock_service_line)
         end
 
-        it "redirects to the created service_line" do
+        it "redirects to the created service_lines list with the most recent first" do
           ServiceLine.stub(:new).and_return(mock_service_line(:save => true))
           post :create, :service_line => {}
-          response.should redirect_to(service_line_url(mock_service_line))
+          response.should redirect_to(service_lines_url(:search => {:order => "descend_by_created_at"}))
         end
       end
 
@@ -90,16 +90,16 @@ describe ServiceLinesController do
           assigns[:service_line].should equal(mock_service_line)
         end
 
-        it "redirects to the service_line" do
+        it "redirects to the service_lines list with the most added first" do
           ServiceLine.stub(:find).and_return(mock_service_line(:update_attributes => true))
           put :update, :id => "1"
-          response.should redirect_to(service_line_url(mock_service_line))
+          response.should redirect_to(service_lines_url(:search => {:order => "descend_by_created_at"}))
         end
       end
 
       describe "with invalid params" do
         it "updates the requested service_line" do
-          ServiceLine.should_receive(:find).with("37").and_return(mock_service_line)
+          ServiceLine.should_receive(:find).with("37").and_return(mock_service_line(:name => "asdf"))
           mock_service_line.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, :id => "37", :service_line => {:these => 'params'}
         end
