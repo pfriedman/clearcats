@@ -48,7 +48,7 @@ class DataScrubber
 
     # TODO: FIXME: 
     # hack to work around naming issue in git
-    def determine_file_path
+    def self.determine_file_path
       filename = "CommonsIDs"      
       if File.exists?("#{Rails.root}/lib/data/#{filename.downcase}.csv")
         return "#{Rails.root}/lib/data/#{filename.downcase}.csv"
