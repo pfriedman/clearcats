@@ -6,18 +6,27 @@
 = render :partial => '/people/upload_form'
 
 .instructions
-  The file you upload must have the following column headers:
-  %ul
-    %li First Name
-    %li Last Name
-    %li Middle Name
-    %li Email
-    %li 
-      ERA Commons Username
-      = link_to "Lookup ERA Commons Username", { :controller => "people", :action => "era_commons_username_search" }, { :class => "search_link icon_link" }
-    %li Netid
-    %li Employeeid
-    %li Area of Expertise
-    %li
-      = link_to "Service Lines", :controller => "service_lines", :action => "index"
-      (if multiple, separate each with a comma)
+  The file you upload should look like this:
+  %table.records.sample_upload
+    %tr
+      %th First Name
+      %th Middle Name
+      %th Last Name
+      %th Email
+      %th ERA Commons Username
+      %th Netid
+      %th Employeeid
+      %th Area of Expertise
+      %th Service Lines
+    %tr
+      %td Abraham
+      %td 
+      %td Lincoln
+      %td abe@nmh.org
+      %td ALINCOLN
+      %td abe022
+      %td 02021809
+      %td presidentialty
+      %td eNOTIS, Registar
+  %p
+    = link_to "Lookup ERA Commons Username", { :controller => "people", :action => "era_commons_username_search" }, { :class => "search_link icon_link", :target => "_blank" }
