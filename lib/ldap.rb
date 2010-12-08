@@ -24,13 +24,13 @@ class Ldap
     # NOTE!!
     # See: /config/ldap_config.yml file for configuration
     #
-    def get_connnection
+    def get_connection
       Net::LDAP.new({:host => LDAP_CONFIG['server'], :port => LDAP_CONFIG['port']})
     end
   
     def process_entry(user_filter)
       entry   = nil
-      entries = get_connnection.search(:base => LDAP_CONFIG['treebase'], :filter => user_filter)
+      entries = get_connection.search(:base => LDAP_CONFIG['treebase'], :filter => user_filter)
       entry   = clean_ldap_entry(entries[0]) unless entries.blank?
       entry
     end

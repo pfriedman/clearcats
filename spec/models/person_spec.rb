@@ -264,6 +264,16 @@ describe Person do
         Person.find_by_netid("jamestkirk").specialty.should == @specialty
       end
       
+      it "should only create the person once if the file is uploaded more than once" do
+        kirk = Person.all(:conditions => { :era_commons_username => "JAMESTKIRK" })
+        kirk.size.should == 1
+        Person.count.should == 3
+        Person.import_data(File.open(File.expand_path(File.dirname(__FILE__) + '/../data/valid_person_upload.csv')), @usr)
+        kirk = Person.all(:conditions => { :era_commons_username => "JAMESTKIRK" })
+        kirk.size.should == 1
+        Person.count.should == 3
+      end
+      
     end
     
     describe "processing an invalid document" do

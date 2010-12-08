@@ -1,5 +1,5 @@
 - stylesheet "welcome"
-- title "Welcome to ClearCATS"
+- title "Welcome to clearcats!"
 
 :javascript
   $(document).ready(function() {
@@ -10,19 +10,14 @@
 
   - if current_user
     - if current_user.permit?(:Admin, :User)
-      .front_page_section.span-12
+      .front_page_section
         %h3.add_investigator 
           = link_to "Add Investigator", {:controller => "welcome", :action => "add_investigator"}
-
-    .span-1
-      .front_page_decision
-        OR
-    
     - if current_user.permit?(:Admin)
-      .front_page_section.span-13.last
+      .front_page_section
         %h3.create_service_line 
           = link_to "Create Service Line", new_service_line_path
-            
-    = render 'client_action_list'
-
-    = render 'system_administrator_action_list'
+    - if current_user.permit?(:Admin)
+      .front_page_section
+        %h3.create_service_line 
+          = link_to "Manage Clients", people_path

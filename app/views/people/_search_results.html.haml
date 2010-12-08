@@ -1,3 +1,6 @@
+- user = get_current_user
+- sysadmin = user.respond_to?(:sysadmin?) and user.sysadmin?
+
 - if @people.blank?
   .no_records No clients were found.
 - else
@@ -24,7 +27,8 @@
         %th= order @search, :by => :email, :as => "Email", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :era_commons_username, :as => "ERA Commons", :params => {:criteria => params[:criteria]}
         %th Reporting Years
-        %th History
+        %th 
+          = "History" if sysadmin
 
       - @people.each do |person|
         %tr{ :class => cycle('even_record', 'odd_record') }
@@ -38,7 +42,7 @@
           %td= h person.email
           %td= h person.era_commons_username
           %td= h person.ctsa_reporting_years.blank? ? "n/a" : person.ctsa_reporting_years.join(",")
-          %td= link_to 'View', versions_person_path(person), :class => "show_link icon_link"
+          %td= link_to 'View', versions_person_path(person), :class => "show_link icon_link" if sysadmin
 
     .buttons
       = submit_tag "Submit"

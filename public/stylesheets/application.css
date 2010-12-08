@@ -225,6 +225,24 @@ a.no_link {
   width: 100%; 
 }
 
+.branding {
+  width: 1100px; 
+  margin: 0 auto;
+}
+.branding #northwestern img {
+  margin: 1em 5em; 
+}
+.branding #nmh img {
+  margin: 3.5em 2em; 
+}
+.branding #feinberg img {
+  margin: 1em 2em; 
+}
+.branding #nucats img {
+  margin: 3em 2em; 
+}
+
+
 /* Error Styles */
 
 #error_message {

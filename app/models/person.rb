@@ -318,6 +318,10 @@ class Person < ActiveRecord::Base
   def era_commons_id=(commons_name)
     self.era_commons_username = commons_name
   end
+  
+  def unique_organizational_units
+    self.organizational_units.uniq.sort_by { |org| org.abbreviation }
+  end
 
 
   ###
@@ -446,7 +450,7 @@ class Person < ActiveRecord::Base
     human_subject_protection_training_date
     institution_positions :to_sentence => "Position/Title"
     services :to_sentence => "Services"
-    organizational_units :to_sentence => "Organizational Units"
+    unique_organizational_units :to_sentence => "Organizational Units"
   end
 
   # # starts a Comma description block, generating 2 methods #to_comma and

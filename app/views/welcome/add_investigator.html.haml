@@ -1,15 +1,13 @@
 - stylesheet "welcome"
 - title "Add investigators to a service line"
 
-.span-13
-  .page_section
-    .instructions 
-      First, find out if the investigator is already in the database by searching under name or netid.
-    = render '/people/faculty_search_form'
-.span-1
-  .decision
-    OR
+.page_section
+  .instructions 
+    First, find out if the investigator is already in the database by searching under name or netid.
+  = render '/people/faculty_search_form'
 
-.span-13.last
-  .page_section
-    = render '/people/upload'
+.decision
+  OR
+
+.page_section
+  = render '/people/upload'

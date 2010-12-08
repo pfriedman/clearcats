@@ -25,14 +25,6 @@ class ApplicationController < ActionController::Base
     
     def find_or_create_user
       usr = User.find_or_create_by_netid(current_user.username)
-      
-      # # Ensure that the User record org unit relationship matches that in cc_pers
-      # ids = current_user.group_memberships.collect(&:affiliate_ids).flatten.map(&:to_i)
-      # if ids.size == 1
-      #   usr.organizational_unit = OrganizationalUnit.find_by_cc_pers_affiliate_ids(ids).first
-      #   usr.save!
-      # end
-      
       usr
     end
 

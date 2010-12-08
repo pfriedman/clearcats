@@ -52,6 +52,13 @@
 
       #footer
         .branding
-          = link_to(image_tag("pageheader.jpg", options={:alt=>"The Northwestern University Clinical and Translational Sciences Institute"}), "http://www.nucats.northwestern.edu")
+          #northwestern
+            = link_to(image_tag("nu_logo_purple.jpg", options={:alt=>"Northwestern University", :width => 150, :height => 85}), "http://www.northwestern.edu")
+          #nmh
+            = link_to(image_tag("nm_hospital_logo.jpg", options={:alt=>"Northwestern Memorial Hospital", :width => 230, :height => 35}), "http://www.nmh.org")
+          #feinberg
+            = link_to(image_tag("feinberg_logo_large.jpg", options={:alt=>"Feinberg School of Medicine, Northwestern University", :width => 180, :height => 85}), "http://www.feinberg.northwestern.edu")
+          #nucats
+            = link_to(image_tag("nucats_logo_med.jpg", options={:alt=>"The Northwestern University Clinical and Translational Sciences Institute", :width => 250, :height => 50}), "http://www.nucats.northwestern.edu")
         .version
           = "v. " + application_version

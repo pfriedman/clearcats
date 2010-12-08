@@ -11,6 +11,9 @@
     %link{ :href => "/stylesheets/jquery-ui-1.8.1.custom.css", :media => "screen", :rel => "stylesheet", :type => "text/css" }
   %body
     .container
+      #home
+        %a{ :href => "/", :class => "no_link" }
+          clearcats
       #menu
         
       #header
@@ -23,22 +26,17 @@
                 %li
                   %a{ :href => "/" }
                     Home
-                %li
-                  %a{ :href => "/logout" }
-                    Logout
             %img{ :src => "/images/banner_edge.jpg", :class => "banner_edge" }
           #menu2
+            %a{ :href => "/logout", :style => "color: white; text-decoration: none;" }
+              logout
             = @user.username
         #title
-          %a{ :href => "/", :class => "no_link" }
-            ClearCATS
-      #niceline
+          %span 
+            Authentication Denied
       .clear
 
       #main
-
-        %h3
-          Authentication Denied
         
         %h4
           %span
@@ -50,7 +48,16 @@
 
       #footer
         .branding
-          %a{ :href => "http://www.nucats.northwestern.edu" }
-            %img{ :src => "/images/pageheader.jpg", :alt => "The Northwestern University Clinical and Translational Sciences Institute" }
-      .debug
-        = @user.to_yaml
+          #northwestern
+            %a{ :href => "http://www.northwestern.edu" }
+              %img{ :alt => "Northwestern University", :height => "85", :width => "150", :src => "/images/nu_logo_purple.jpg" }
+          #nmh
+            %a{ :href => "http://www.nmh.org" }
+              %img{ :alt => "Northwestern Memorial Hospital", :height => "35", :width => "230", :src => "/images/nm_hospital_logo.jpg" }
+          #feinberg
+            %a{ :href => "http://www.feinberg.northwestern.edu" }
+              %img{ :alt => "Feinberg School of Medicine, Northwestern University", :height => "85", :width => "180", :src => "/images/feinberg_logo_large.jpg" }
+          #nucats
+            %a{ :href => "http://www.nucats.northwestern.edu" }
+              %img{ :alt => "The Northwestern University Clinical and Translational Sciences Institute", :height => "50", :width => "250", :src => "/images/nucats_logo_med.jpg" }
+        .version

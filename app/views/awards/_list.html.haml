@@ -12,14 +12,10 @@
     - award_association = { :person_id => @person.id }
 
   .awards_body
-    = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link edit_modal_form_add_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
-
     - if @awards.blank?
       .no-records
         No awards found for #{@person}
     - else
-      %h3
-        = link_to "Awards for #{@person}", person_awards_path(@person)
       = render '/awards/awards_table', { :ordering_params => ordering_params, :award_association => award_association }
     - unless @service
       .links
@@ -30,3 +26,4 @@
           = link_to 'All Awards', person_awards_path(@person, :view_all => true), :class => "list_link icon_link" 
         - else
           = link_to 'CTSA Reportable Awards', person_awards_path(@person), :class => "list_link icon_link"
+        = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }

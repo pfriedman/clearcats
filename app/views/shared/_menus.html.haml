@@ -11,7 +11,7 @@
           %li
             = link_to "Manage Clients", people_path
             %ul
-              %li= link_to "Upload Investigators", upload_people_path
+              %li= link_to "Add Investigators", :controller => "welcome", :action => "add_investigator"
               %li= link_to "Search FSM Faculty Database", search_people_path
               %li= link_to "Manage Contact Lists", contacts_path
               %li

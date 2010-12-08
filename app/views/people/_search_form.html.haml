@@ -29,34 +29,6 @@
         = f.text_field :era_commons_username_like
     .span-24
       .span-5
-        = f.label :degree_type_one_id_equals, "Degree Type One"
-      .span-7
-        = f.select(:degree_type_one_id_equals, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type One --" })
-      .span-6
-        = f.label :degree_type_two_id_equals, "Degree Type Two"
-      .span-6.last
-        = f.select(:degree_type_two_id_equals, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type Two --" })
-    .span-24
-      .span-5
-        = f.label :institution_positions_id_equals, "Position/Title"
-      .span-7
-        = f.select(:institution_positions_id_equals, InstitutionPosition.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Position/Title --" })
-      .span-6
-        = f.label :disadvantaged_background, "Disadvantaged Background?"
-      .span-6.last
-        = f.select :disadvantaged_background, [["N/A", nil], ["Yes", true], ["No", false]]
-    .span-24
-      .span-5
-        = f.label :ethnic_type_id_equals, "Ethnic Background"
-      .span-7
-        = f.select(:ethnic_type_id_equals, EthnicType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Ethnic Background --" }) 
-      .span-6
-        = f.label :race_type_id_equals, "Racial Background"
-      .span-6.last
-        = f.select(:race_type_id_equals, RaceType.all.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Racial Background --" })
-
-    .span-24
-      .span-5
         = label_tag "CTSA Award Type", "CTSA Award Type"
       .span-7
         - phs_orgs = [["-- Select Federal PHS Award Organizational Code --",  ""]] + PhsOrganization.all(:order => :code).collect { |a| [ a.to_s, a.id ] }

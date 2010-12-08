@@ -52,7 +52,7 @@ class PublicationsController < ApplicationController
           @search = Publication.search(params[:search])
           @publications = @search.all
           render :update do |page|
-            page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search] }
+            page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search], :service => @service, :person => @person, :publications => @publications }
           end
         end
       else
@@ -80,7 +80,8 @@ class PublicationsController < ApplicationController
   
   # POST /publications
   def update
-    params[:search] ||= Hash.new
+    params[:search]    ||= Hash.new
+    params[:person_id] ||= params[:publication][:person_id] if params[:publication]
     populate_service_and_person
     @publication = Publication.find(params[:id])
     respond_to do |format|
@@ -93,7 +94,7 @@ class PublicationsController < ApplicationController
           @search = Publication.search(params[:search])
           @publications = @search.all
           render :update do |page|
-            page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search] }
+            page.replace "publications", :partial => "/publications/list", :locals => { :search => params[:search], :service => @service, :person => @person, :publications => @publications }
           end
         end
       else

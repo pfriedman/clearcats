@@ -188,6 +188,7 @@ class PeopleController < ApplicationController
         pers = Person.find_by_netid(params[:netid])
         if pers
           eracn = map["#{pers.full_name}"]
+          eracn = pers.era_commons_username if eracn.blank?
           @era_commons_usernames << eracn unless eracn.blank?
         end
       end

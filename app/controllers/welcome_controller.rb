@@ -3,6 +3,11 @@ class WelcomeController < ApplicationController
     if current_user
       @person = Person.find_by_netid(current_user.username)
       @person = FacultyWebService.locate_one({:netid => current_user.username}) if @person.nil?
+      
+      if @person.is_a?(Client) and !current_user.permit?(:Admin)
+        redirect_to edit_person_path(@person)
+      end
+      
     end
   end
   

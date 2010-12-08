@@ -61,4 +61,10 @@ module ApplicationHelper
     non_local_environment? ? "/clearcats" : ""
   end
   
+  def encode_email(email)
+    encoded = []
+    email.each_char { |c| encoded << "&##{c[0]};" }
+    encoded.join("")
+  end
+  
 end

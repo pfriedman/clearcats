@@ -9,7 +9,6 @@
   %table.records
     %tr
       %th Add to Service Line
-      %th Edit
       %th Last Name
       %th First Name
       %th Middle Name
@@ -20,8 +19,6 @@
       %tr{ :class => cycle('even_record', 'odd_record') }
         %td
           = link_to "Add to service line", { :controller => "services", :action => "create_service_for_person", :person_id => person.id }, :method => :post, :class => "add_link icon_link"
-        %td
-          = link_to "Edit", edit_person_path(person), :class => "edit_link icon_link"
         %td= h person.last_name
         %td= h person.first_name
         %td= h person.middle_name
@@ -30,5 +27,6 @@
         %td= h person.employeeid
 
 .links
-  = link_to "New Search", {:controller => "people", :action => "search"}, { :class => "search_link icon_link"  }
-  = link_to "View All Clients", {:controller => "people", :action => "index"}, { :class => "list_link icon_link"  }
+  = link_to "New Search", {:controller => "people", :action => "search"}, { :class => "search_link icon_link" }
+  = link_to "View All Clients", {:controller => "people", :action => "index"}, { :class => "list_link icon_link" }
+  = link_to "Add New Client", {:controller => "people", :action => "new"}, { :class => "add_link icon_link" }
