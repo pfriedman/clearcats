@@ -51,9 +51,10 @@ describe PeopleController do
         end
 
         it "redirects to the person" do
-          Person.stub(:find).and_return(mock_person(:update_attributes => true, :netid => "asdf"))
+          pers = mock_person(:update_attributes => true, :netid => "asdf")
+          Person.stub(:find).and_return(pers)
           put :update, :id => "1"
-          response.should redirect_to(people_url)
+          response.should redirect_to(edit_person_url(pers))
         end
       end
 
@@ -98,9 +99,10 @@ describe PeopleController do
         end
 
         it "redirects to the created person" do
-          Client.stub(:new).and_return(mock_person(:save => true))
+          pers = mock_person(:save => true)
+          Client.stub(:new).and_return(pers)
           post :create, :client => {}
-          response.should redirect_to(people_path)
+          response.should redirect_to(edit_person_path(pers))
         end
       end
 

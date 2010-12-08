@@ -1,10 +1,8 @@
 - title "Search Results"
 
 - if @people.blank?
-  .no_records
-    No one was found. 
-    .links
-      = link_to "New Person", {:controller => "people", :action => "new"}, { :class => "add_link icon_link"  }
+  .no_records.page_section
+    No one was found with the entered criteria. 
 - else
   %table.records
     %tr
@@ -29,4 +27,5 @@
 .links
   = link_to "New Search", {:controller => "people", :action => "search"}, { :class => "search_link icon_link" }
   = link_to "View All Clients", {:controller => "people", :action => "index"}, { :class => "list_link icon_link" }
-  = link_to "Add New Client", {:controller => "people", :action => "new"}, { :class => "add_link icon_link" }
+  - person_params = @people.blank? ? {:netid => params[:netid], :last_name => params[:last_name]} : {}
+  = link_to "Add New Client", {:controller => "people", :action => "new", :person => person_params }, { :class => "add_link icon_link" }

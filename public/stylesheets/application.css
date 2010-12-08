@@ -50,6 +50,12 @@ a.no_link {
   padding: 0.5em;
   text-align: center;
   margin: .75em auto;
+  border-radius: .5em;
+  -o-border-radius: .5em;
+  -icab-border-radius: .5em;
+  -khtml-border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
 }
 
 #link_warning,

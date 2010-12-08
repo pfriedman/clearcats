@@ -43,8 +43,8 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.update_attributes(params[@person.class.to_s.downcase.to_sym])
         redirect_path = (@person.netid == current_user.username) ? edit_person_path(@person) : people_path
-        flash[:notice] = 'Person was successfully updated.'
-        format.html { redirect_to(redirect_path) }
+        flash[:notice] = 'Person was successfully updated. Please select action below to continue working with this record.'
+        format.html { redirect_to edit_person_path(@person) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -81,7 +81,7 @@ class PeopleController < ApplicationController
   # GET /people/new
   # GET /people/new.xml
   def new
-    @person = Client.new
+    @person = Client.new(params[:person])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -96,8 +96,8 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        flash[:notice] = 'Person was successfully created.'
-        format.html { redirect_to(people_path) }
+        flash[:notice] = 'Person was successfully created. Please select action below to continue working with this record.'
+        format.html { redirect_to(edit_person_path(@person)) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else
         format.html { render :action => "new" }
@@ -140,7 +140,7 @@ class PeopleController < ApplicationController
       redirect_to :back
     else
       @organizational_unit_id = params[:organizational_unit_id]
-      search = {:netid => params[:netid], :last_name => params[:last_name]}
+      search = {:netid_like => params[:netid], :last_name_like => params[:last_name]}
       people  = Person.search(search).all
       faculty = FacultyWebService.locate(params)
       @people = (faculty + people).uniq
