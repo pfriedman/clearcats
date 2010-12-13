@@ -34,8 +34,8 @@ group :test do
   gem 'autotest-growl'
 
   # rspec
-  gem "rspec"
-  gem "rspec-rails"
+  gem "rspec", "~> 1.3"
+  gem "rspec-rails", "~> 1.3"
   
   # factory_girl
   gem "factory_girl"
