@@ -8,6 +8,14 @@
 
 .welcome
 
+  %p.hello
+    ClearCATS is a reporting tool for NUCATS employees. 
+  %p.hello
+    It will help you keep track of who you worked with and assist you in submitting reports. 
+  %p.hello
+    ClearCATS allows you to demonstrate that, with NUCATS' support, investigators have been able to 
+    obtain grants, receive awards, publish, and conduct studies.
+
   - if current_user
     - if current_user.permit?(:Admin, :User)
       .front_page_section

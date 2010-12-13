@@ -11,7 +11,12 @@
 
 .welcome .front_page_section {
   min-height: 2em;
-  margin-top: 2em;
+  margin: 2em;
+}
+
+.hello {
+  font-size: 1.125em;
+  padding-left: 2em;
 }
 
 .front_page_decision {
