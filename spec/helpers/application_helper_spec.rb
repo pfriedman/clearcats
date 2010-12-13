@@ -16,10 +16,6 @@ describe ApplicationHelper do
     helper.show_title?.should be_true
   end
   
-  it "should return the current ctsa year" do
-    helper.current_ctsa_reporting_year.should == Date.today.year
-  end
-  
   it "should return the default value for a blank obj" do
     helper.null_safe(nil, "asdf").should == "asdf"
   end
