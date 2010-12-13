@@ -1,9 +1,6 @@
 .span-18
   .span-6
     %p
-      = f.check_box :nucats_assisted
-      = f.label :nucats_assisted, "NUCATS Assisted"
-    %p
       = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
       =h f.object.ctsa_reporting_years.join(",")

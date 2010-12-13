@@ -8,7 +8,6 @@ Feature: Editing a publication
     And a publication with a title "Cucumber Publication"
     When I go to the edit publication page for the "Cucumber Publication"
     Then the "publication_title" field should contain "Cucumber Publication"
-    And the "publication_nucats_assisted" checkbox should not be checked
     And the "publication_pmid" field should contain ""
     And the "publication_pmcid" field should contain ""
     And the "publication_nihms_number" field should contain ""
@@ -18,11 +17,9 @@ Feature: Editing a publication
       | publication_pmcid            | the pmcid  |
       | publication_nihms_number     | the nihms  |
       | publication_publication_date | 2525-12-25 |
-    And I check "publication_nucats_assisted"
     And I press "Save"
     Then I should be on the edit publication page for the "Cucumber Publication"
     And the "publication_title" field should contain "Cucumber Publication"
-    And the "publication_nucats_assisted" checkbox should be checked
     And the "publication_pmid" field should contain "the pmid"
     And the "publication_pmcid" field should contain "the pmcid"
     And the "publication_nihms_number" field should contain "the nihms"

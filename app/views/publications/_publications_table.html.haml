@@ -10,8 +10,6 @@
         - unless @service
           %th CTSA Reportable #{current_year}
         %th Select
-        %th
-          = order @search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => ordering_params
         %th Reporting Years
         %th
           = order @search, :by => :pmcid, :as => "PMCID", :params => ordering_params
@@ -31,7 +29,6 @@
               = check_box_tag "publication_ids[]", pub.id, pub.ctsa_reporting_years.include?(current_year), { :disabled => pub.previously_reported?(current_year) }
           %td
             = link_to "Edit", { :controller => "/publications", :action => "edit", :id => pub, :search => params[:search] }.merge(pub_association), { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" }
-          %td= h pub.nucats_assisted? ? "Yes" : "No"
           %td= h pub.ctsa_reporting_years.blank? ? "n/a" : pub.ctsa_reporting_years.join(",")
           %td= h pub.pmcid
           %td= h pub.pmid

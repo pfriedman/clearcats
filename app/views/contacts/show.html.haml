@@ -18,4 +18,4 @@
 
 .links
   = link_to 'List Contacts', contacts_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
-  = link_to 'Edit Client Record', edit_person_path(@contact.person), :class => "edit_link icon_link" if @contact.person
+  = link_to 'Edit Record', edit_person_path(@contact.person), :class => "edit_link icon_link" if @contact.person

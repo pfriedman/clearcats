@@ -8,7 +8,6 @@
       %th Revert
       %th When
       %th Who
-      %th NUCATS Assisted
       %th Sponsor
       %th Sponsor Award Number
       %th Grant Title
@@ -21,7 +20,6 @@
           %td= link_to 'Revert', revert_award_path(@award, :version_id => version.id), :class => "edit_link icon_link", :method => :post
           %td= version.created_at.to_s(:db)
           %td= version.whodunnit
-          %td= attrs["nucats_assisted"]
           %td= Sponsor.find_by_id(attrs["sponsor_id"]).to_s
           %td= attrs["sponsor_award_number"]
           %td= attrs["grant_title"]
@@ -31,7 +29,6 @@
       %td
       %td Current Version
       %td &nbsp;
-      %td= h @award.nucats_assisted
       %td= h @award.sponsor
       %td= h @award.sponsor_award_number
       %td= h @award.grant_title

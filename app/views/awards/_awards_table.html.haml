@@ -6,8 +6,6 @@
       - unless @service
         %th CTSA Reportable #{current_year}
       %th Edit
-      %th
-        = order @search, :by => :nucats_assisted, :as => "NUCATS Assisted", :params => ordering_params
       %th Reporting Years
       %th
         = order @search, :by => :sponsor_name, :as => "Sponsor", :params => ordering_params
@@ -32,7 +30,6 @@
           = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
           %br
           = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" }
-        %td= h award.nucats_assisted? ? "Yes" : "No"
         %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
         %td= h award.sponsor
         %td= h award.sponsor_award_number

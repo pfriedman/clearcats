@@ -8,7 +8,7 @@ Feature: Creating a new service
     And a person having the name "Warren Kibbe" and the username "wakibbe"
     And an organizational_unit "CECD" with the service_line "CRC Basic Training"
     When I go to the new service page
-    And I follow "Choose Client"
+    And I follow "Choose Investigator"
     Then I should be on the services choose person page
     When I fill in "Net ID" with "wakibbe"
     And I press "Search"

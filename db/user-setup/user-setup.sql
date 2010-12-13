@@ -156,6 +156,14 @@ INSERT INTO T_SECURITY_GROUP_MEMBERS
 VALUES
 ( SGM_ID_SEQ.nextval, 'pcm777', 'Admin', 5005, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
 
+
+INSERT INTO T_SECURITY_GROUP_MEMBERS
+( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
+VALUES
+( SGM_ID_SEQ.nextval, 'skk958', 'Admin', 5009, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
+
+
 -- select * from T_INSTITUTIONAL_AFFILIATES where parent_id = 555
 -- select * from t_security_group_members where portal = 'ClearCATS'
 -- select * from t_security_logins where portal = 'ClearCATS'

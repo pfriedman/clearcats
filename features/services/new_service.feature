@@ -6,7 +6,7 @@ Feature: Creating a new service
   Scenario: Creating a new service
     Given an authenticated user
     When I go to the new service page
-    Then I should see "Choose Client"
+    Then I should see "Choose Investigator"
     And I should see "Choose Service Line"
     
   Scenario: Creating a new service starting with a service line selection
@@ -16,7 +16,7 @@ Feature: Creating a new service
       | CRC Basic Training     |
       | How to write a K Award |
     When I go to the new service page
-    Then I should see "Choose Client"
+    Then I should see "Choose Investigator"
     And I should see "Choose Service Line"
     When I follow "Choose Service Line"
     Then I should see "Choose Service Line"
@@ -24,16 +24,16 @@ Feature: Creating a new service
     When I choose "How to write a K Award"
     And I press "Continue"
     Then I should see "Service was successfully created."
-    And I should see "Please select client"
+    And I should see "Please select investigator"
     
   Scenario: Creating a new service starting with a client selection
     Given an authenticated user
     And a person having the name "Warren Kibbe" and the username "wakibbe"
     When I go to the new service page
-    Then I should see "Choose Client"
+    Then I should see "Choose Investigator"
     And I should see "Choose Service Line"
-    When I follow "Choose Client"
-    Then I should see "Please select client"
+    When I follow "Choose Investigator"
+    Then I should see "Please select investigator"
     When I fill in "Net ID" with "wakibbe"
     And I press "Search"
     Then I should see "Kibbe"

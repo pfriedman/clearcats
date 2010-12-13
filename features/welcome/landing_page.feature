@@ -6,5 +6,5 @@ Feature: Logging into the application
     When I am on the home page
     Then I should see "Add Investigator"
     And I should see "Create Service Line"
-    And I should see "Manage Clients"
+    And I should see "Manage Investigators"
     

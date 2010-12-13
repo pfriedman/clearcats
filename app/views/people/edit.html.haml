@@ -14,7 +14,7 @@
   = render 'form'
 
 .links
-  = link_to 'List All Clients', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
+  = link_to 'List All Records', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
   = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link"
   = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link"
   - if current_user.permit?(:Admin)
