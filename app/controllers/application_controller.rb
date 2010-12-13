@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
   def user_for_paper_trail
     current_user ? current_user.username : 'n/a'
   end
+    
+  def current_ctsa_reporting_year
+    Date.today.year
+  end
   
   private
-    
-    def current_ctsa_reporting_year
-      Date.today.year
-    end
     
     def find_or_create_user
       usr = User.find_or_create_by_netid(current_user.username)
