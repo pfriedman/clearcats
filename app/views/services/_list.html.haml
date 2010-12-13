@@ -10,7 +10,7 @@
     %tr
       %th Select
       %th= order @search, :by => :state, :as => "Status", :params => {:page => params[:page]}
-      %th= order @search, :by => :person_last_name, :as => "Person", :params => {:page => params[:page]}
+      %th= order @search, :by => :person_last_name, :as => "Investigator", :params => {:page => params[:page]}
       %th= order @search, :by => :service_line_name, :as => "Service Line", :params => {:page => params[:page]}
       %th= order @search, :by => :service_line_organizational_unit_name, :as => "Organizational Unit", :params => {:page => params[:page]}
       %th
@@ -20,7 +20,7 @@
         %td= svc.state.titleize
         %td= svc.person
         %td= svc.service_line
-        %td= svc.service_line.organizational_unit if svc.service_line
+        %td= svc.service_line.organizational_unit.abbreviation if svc.service_line
         %td= link_to 'Delete', service_path(svc, :search => params[:search]), :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 
   = will_paginate services

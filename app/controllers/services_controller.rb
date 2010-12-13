@@ -10,10 +10,24 @@ class ServicesController < ApplicationController
     @search = Service.search(params[:search])
     @services = @search.paginate(:page => params[:page], :per_page => 20)
   end
+  
+  def my_services
+    params[:search] ||= Hash.new
+    params[:search][:created_by_equals] ||= current_user.username
+    params[:search][:state_does_not_equal] ||= "completed"
+    
+    @search = Service.search(params[:search])
+    @pending_services = @search.paginate(:page => params[:page], :per_page => 20)
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @service }
+    end
+  end
 
   def new
     @service = Service.new
-    @search  = Service.search(:created_by_equals => current_user.username, :state_does_not_equal => "complete")
+    @search  = Service.search(:created_by_equals => current_user.username, :state_does_not_equal => "completed")
     @pending_services = @search.paginate(:page => params[:page], :per_page => 20)
     
     respond_to do |format|
@@ -152,6 +166,10 @@ class ServicesController < ApplicationController
       flash[:notice] = t('surveyor.Unable_to_find_that_survey')
       redirect_to :controller => :services, :action => :surveyable, :id => @service
     end
+  end
+  
+  def completed
+    redirect_to :controller => "services", :action => "list"
   end
   
   # DELETE /services/1

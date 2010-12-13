@@ -43,9 +43,13 @@ class Service < ActiveRecord::Base
     event :project_approvals_chosen do
       transition [:choose_approvals] => :choose_organizational_units
     end
+
+    event :complete do
+      transition [:choose_organizational_units] => :completed
+    end
     
     event :readied_for_survey do
-      transition [:choose_organizational_units] => :surveyable
+      transition [:completed] => :surveyable
     end
     
     state :new
@@ -57,6 +61,7 @@ class Service < ActiveRecord::Base
     state :choose_publications
     state :choose_approvals
     state :choose_organizational_units
+    state :completed
     state :surveyable
   end
   

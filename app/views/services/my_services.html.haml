@@ -1,0 +1,11 @@
+- title "My Services"
+
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
+.page_section
+  .records_header
+    Services In Process
+  = render 'list', { :services => @pending_services }
