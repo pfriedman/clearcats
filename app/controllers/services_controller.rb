@@ -169,7 +169,7 @@ class ServicesController < ApplicationController
   end
   
   def completed
-    redirect_to :controller => "services", :action => "list"
+    redirect_to :controller => "services", :action => "my_services"
   end
   
   # DELETE /services/1
