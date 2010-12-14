@@ -18,7 +18,12 @@ class ApplicationController < ActionController::Base
   end
     
   def current_ctsa_reporting_year
-    Date.today.year
+    today = Date.today
+    if today.month == 1
+      return today.year - 1
+    else
+      return today.year
+    end
   end
   
   private
