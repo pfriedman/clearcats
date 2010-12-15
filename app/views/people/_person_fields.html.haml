@@ -44,16 +44,6 @@
       = f.label :email, "Email"
       %br
       = f.text_field :email
-      
-    %p
-      = f.label :department_affiliation, "Department Affiliation" 
-      %br
-      = f.text_field :department_affiliation 
-
-    %p
-      = f.label :school_affiliation, "School Affiliation" 
-      %br
-      = f.text_field :school_affiliation 
 
     %p
       = f.label :last_four_of_ssn, "Last 4 digits SSN" 
@@ -74,16 +64,6 @@
     %h4{ :class => "section_header" } Scholarly Information
 
     %p
-      = f.label :degree_type_one_id, "Degree Type 1" 
-      %br
-      = f.select(:degree_type_one_id, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 1 --" }) 
-
-    %p
-      = f.label :degree_type_two_id, "Degree Type 2" 
-      %br
-      = f.select(:degree_type_two_id, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 2 --" }) 
-
-    %p
       = f.label :institution_position_id, "What is your position/title category?"
       %br
       %span{ :class => "alt" } (check all that apply)
@@ -100,11 +80,34 @@
       %br
       = f.select(:specialty_id, Specialty.all(:order => :code).collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Area of Expertise --" })            
 
+    %p
+      = f.label :department_affiliation, "Department Affiliation" 
+      %br
+      = f.text_field :department_affiliation 
+
+    %p
+      = f.label :school_affiliation, "School Affiliation" 
+      %br
+      = f.text_field :school_affiliation
 
   .span-6.last
     %h4{ :id => "trainee_header" } Trainees Only
+    
     .trainee_section
-      %h4{ :class => "section_header" } Trainee Questions
+      %h4{ :class => "section_header" } Degree(s) Sought      
+      %p
+        = f.label :degree_type_one_id, "Degree Type 1" 
+        %br
+        = f.select(:degree_type_one_id, DegreeTypeOne.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 1 --" }) 
+
+      %p
+        = f.label :degree_type_two_id, "Degree Type 2" 
+        %br
+        = f.select(:degree_type_two_id, DegreeTypeTwo.all.collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Degree Type 2 --" }) 
+
+    
+    .trainee_section
+      %h4{ :class => "section_header" } Trainee Field
       %p
         = f.label :training_type, "Training Type"
         %br
@@ -117,7 +120,7 @@
     
     .trainee_section
   
-      %h4{ :class => "section_header" } Optional Information
+      %h4{ :class => "section_header" } Diversity Information
       %p
         = f.label :ethnic_type_id, "Please indicate your ethnic background." 
         %br

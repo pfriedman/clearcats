@@ -28,7 +28,7 @@
           %li= link_to "Manage Service Lines",        :controller => "service_lines",        :action => "index"
           %li= link_to "Manage CTSA Data",            :controller => "admin",                :action => "view_ctsa_data" if sysadmin
           %li
-            = link_to "View Reports", :controller => "reports", :action => "index"
+            = link_to "Reports", :controller => "reports", :action => "index"
             %ul
               %li= link_to "CTSA Report", ctsa_reports_path if sysadmin
               %li= link_to "Incomplete Awards", incomplete_awards_path

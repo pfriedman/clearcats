@@ -168,7 +168,13 @@ class CtsaSchemaReader
       element.children.each do |node|
         if node.kind_of? REXML::Element
           data = node.text.split(delimiter)
-          cls.find_or_create_by_code_and_name(data[0], data[1]) 
+          model = cls.find_by_code(data[0])
+          if model.blank?
+            model = cls.new(:code => data[0], :name => data[1])
+          else
+            model.name = data[1] 
+          end
+          model.save!
         end
       end
     end
@@ -189,7 +195,13 @@ class CtsaSchemaReader
       names, abbrs = restriction_names_and_abbreviations(node_name)
       if names.size == abbrs.size
         names.size.times do |idx|
-          cls.find_or_create_by_abbreviation_and_name(abbrs[idx], names[idx]) 
+          model = cls.find_by_abbreviation(abbrs[idx])
+          if model.blank?
+            model = cls.new(:abbreviation => abbrs[idx], :name => names[idx])
+          else
+            model.name = names[idx]
+          end
+          model.save!
         end
       end
     end

@@ -9,3 +9,8 @@
   .records_header
     Services In Process
   = render 'list', { :services => @pending_services }
+  
+.page_section
+  .records_header
+    Completed Services
+  = render 'list', { :services => @completed_services }

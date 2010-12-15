@@ -1,5 +1,9 @@
 - title "Search Results"
+- stylesheet "people", "services"
 
+- if request.referrer.include?("welcome/add_investigator")
+  = render '/services/menu'
+  
 - if @people.blank?
   .no_records.page_section
     No one was found with the entered criteria. 

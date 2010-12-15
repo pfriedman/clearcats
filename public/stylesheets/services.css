@@ -1,9 +1,62 @@
+
+
+/* Flash Messages */
+
+.message {
+  padding: 0.5em;
+  text-align: center;
+  margin: .125em auto 2em auto;
+}
+
 h4 {
   margin-bottom: 0;
 }
 
 .service_menu .span-24 {
   margin-bottom: 0.5em;
+}
+
+.status_bar {
+  margin-top: 10px;
+  border: 3px solid gray;
+}
+
+.service_menu .index {
+  display: inline-block;
+  width: 1.25em;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em;
+  margin-left: 60px;
+  margin-top: -15px;
+  background-color: lightblue;
+  border: 1px solid gray;
+  border-radius: 2em;
+  -o-border-radius: 2em;
+  -icab-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+}
+
+.service_menu .active {
+  background-color: darkblue;
+}
+
+.service_menu .task {
+  display: inline-block;
+}
+
+.service_task div {
+  border-bottom: 1px solid white;
+  text-align: center;
+}
+
+.service_task a {
+  text-decoration: none;
+  font-size: 1.125em;
+  color: darkblue;
 }
 
 .service_header {
@@ -16,6 +69,11 @@ h4 {
 .service_header h3 {
   line-height: 1.25em;
   margin-bottom: 0.5em;
+}
+
+.buttons {
+  text-align: right;
+  margin: 0 2em 1em 0;;
 }
 
 .awards select {

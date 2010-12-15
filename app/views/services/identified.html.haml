@@ -1,29 +1,30 @@
 - title "New Service"
 
-- form_for @service, :url => { :action => "identified" } do |f|
+.page_section
+  - form_for @service, :url => { :action => "identified" } do |f|
 
-  .service_question
-    %span
-      Has any research you have conducted since you were last surveyed benefitted from the NUCATS Institute programs and services either directly or indirectly?
+    .service_question
+      %span
+        Has any research you have conducted since you were last surveyed benefitted from the NUCATS Institute programs and services either directly or indirectly?
     
-    %p
-      Benefits might include, but are not limited to:
-      %ul
-        %li Direct funding (pilot grant, K or T award)
-        %li Assistance in obtaining funding
-        %li Attendance at an educational program
-        %li Statistical support or analysis
-        %li Research team support
-        %li Regulatory, budget, or coordinator support
-        %li Use of the Clinical Research Unit
-        %li Use of the EDW system for patient data
+      %p
+        Benefits might include, but are not limited to:
+        %ul
+          %li Direct funding (pilot grant, K or T award)
+          %li Assistance in obtaining funding
+          %li Attendance at an educational program
+          %li Statistical support or analysis
+          %li Research team support
+          %li Regulatory, budget, or coordinator support
+          %li Use of the Clinical Research Unit
+          %li Use of the EDW system for patient data
 
-  .choices
-    = f.radio_button :state, :choose_awards
-    = f.label :state_choose_awards, "Yes"
-    %br
-    = f.radio_button :state, :choose_organizational_units
-    = f.label :state_choose_organizational_units, "No"
+    .choices
+      = f.radio_button :state, :choose_awards
+      = f.label :state_choose_awards, "Yes"
+      %br
+      = f.radio_button :state, :choose_organizational_units
+      = f.label :state_choose_organizational_units, "No"
   
-  .buttons
-    = f.submit "Continue", :disable_with => 'Processing...'
+    .buttons
+      = f.submit "Continue", :disable_with => 'Processing...'
