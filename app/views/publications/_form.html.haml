@@ -10,6 +10,7 @@
   .page_section
     %div{ :id => "publication_form", :class => "publications" }
       - form_remote_for @publication, :html => { :id => "modal_edit_form"} do |f|
+        = hidden_field_tag :person_id, @person.id if @person
         = hidden_field_tag :service_id, @service.id if @service
         = f.hidden_field :person_id
         - if params[:search]

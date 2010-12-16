@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101202161044
+# Schema version: 20101216175350
 #
 # Table name: people
 #
@@ -47,6 +47,9 @@
 #  system_administrator                          :boolean
 #  created_by                                    :string(255)
 #  updated_by                                    :string(255)
+#  mentor_era_commons_username                   :string(255)
+#  appointment_date                              :date
+#  end_date                                      :date
 #
 
 # TurboCATS                 ClearCATS

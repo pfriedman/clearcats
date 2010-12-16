@@ -5,6 +5,7 @@
   $(document).ready(function() {
     $(".help_icon").tooltip();
   });
+  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
 
 - if @service.person and @service.service_line
   = render "menu"

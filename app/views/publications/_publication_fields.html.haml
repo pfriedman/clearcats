@@ -3,7 +3,11 @@
     %p
       = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
-      =h f.object.ctsa_reporting_years.join(",")
+      =h null_safe(f.object.ctsa_reporting_years.last)
+    %p
+      = f.label :ctsa_reportable, "CTSA Reportable"
+      %br
+      = f.check_box "ctsa_reportable"
     %p
       = f.label :pmid, "PMID"
       %br

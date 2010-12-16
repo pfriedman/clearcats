@@ -60,6 +60,10 @@
       %br
       =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
     %p
+      = f.label :ctsa_reportable, "CTSA Reportable"
+      %br
+      = f.check_box "ctsa_reportable"
+    %p
       = f.label :ctsa_award_type_award_number, "CTSA Award Number"
       %br
       = f.text_field :ctsa_award_type_award_number

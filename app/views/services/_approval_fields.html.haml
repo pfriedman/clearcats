@@ -1,6 +1,6 @@
 %tr.approval.fields
   %td
-    = f.select(:approval_type, Approval::TYPES, { :include_blank => "-- Select Approval Type --"})
+    = f.select(:approval_type, Approval::TYPES, { :include_blank => "-- Select Type --"})
   %td
     = f.text_field :tracking_number
   %td
@@ -12,6 +12,6 @@
   %td
     = f.text_field :principal_investigator
   %td
-    = f.check_box :nucats_assisted
+    = f.check_box "ctsa_reportable"
   %td
     = link_to_remove_fields 'Remove', f

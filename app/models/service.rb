@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101202161044
+# Schema version: 20101216175350
 #
 # Table name: services
 #
@@ -28,29 +28,6 @@ class Service < ActiveRecord::Base
   named_scope :organizational_unit_id_equals, lambda { |id|  {:joins => :service_line, :conditions => ["service_lines.organizational_unit_id = :id", {:id => id} ]} }
   
   state_machine :state, :initial => :new do
-    event :set_service_line do
-      transition [:new, :choose_service_line] => :choose_person
-    end
-
-    event :identify do
-      transition [:new, :choose_person] => :choose_service_line
-    end
-
-    event :initiate do
-      transition [:choose_service_line, :choose_person] => :initiated
-    end
-
-    event :project_approvals_chosen do
-      transition [:choose_approvals] => :choose_organizational_units
-    end
-
-    event :complete do
-      transition [:choose_organizational_units] => :completed
-    end
-    
-    event :readied_for_survey do
-      transition [:completed] => :surveyable
-    end
     
     state :new
     state :choose_person
@@ -63,6 +40,34 @@ class Service < ActiveRecord::Base
     state :choose_organizational_units
     state :completed
     state :surveyable
+    
+    event :identify do
+      transition [:new, :choose_person] => :choose_service_line
+    end
+    
+    event :set_service_line do
+      transition [:new, :choose_service_line] => :choose_person
+    end
+
+    event :start_service do
+      transition [:identified] => [:choose_service_line, :choose_person]
+    end
+
+    event :initiate do
+      transition [:choose_service_line, :choose_person] => :initiated
+    end
+    
+    event :profiling do
+      transition :initiated => :choose_awards, :choose_awards => :choose_publications, :choose_publications => :choose_approvals, :choose_approvals => :choose_organizational_units
+    end
+
+    event :complete do
+      transition [:choose_organizational_units] => :completed
+    end
+    
+    event :readied_for_survey do
+      transition [:completed] => :surveyable
+    end
   end
   
   def initialize(attributes = nil)

@@ -53,6 +53,10 @@ select#search_disadvantaged_background {
   text-decoration: none;
 }
 
+.trainee_fields a.icon_link {
+  font-size: 1em !important;
+}
+
 .trainee_fields {
   display: none;
 }

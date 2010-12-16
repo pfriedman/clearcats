@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101202161044
+# Schema version: 20101216175350
 #
 # Table name: awards
 #
@@ -50,8 +50,6 @@ class Award < ActiveRecord::Base
   belongs_to :activity_code
   belongs_to :sponsor
   has_many :award_details
-    
-  validates_presence_of :budget_identifier
   
   # attributes from faculty_web_service that are not persisted
   attr_accessor :nu_employee_id, :first_name, :last_name, :middle_name

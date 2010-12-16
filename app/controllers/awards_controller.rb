@@ -39,7 +39,7 @@ class AwardsController < ApplicationController
   def create
     @search_params  = params[:search_params]
     @award          = Award.new(params[:award])
-    populate_service_and_person
+    populate_common
 
     respond_to do |format|
       if @award.save

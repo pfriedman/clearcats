@@ -1,3 +1,6 @@
+:javascript
+  $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+  
 - action = @person.new_record? ? :create : :update
 - form_for @person, :url => {:controller => :people, :action => action} do |f|
   = f.error_messages

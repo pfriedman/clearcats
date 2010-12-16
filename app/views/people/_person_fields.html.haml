@@ -100,6 +100,14 @@
     %h4{ :id => "trainee_header", :class => "trainee_fields" } Trainees Only
     
     .trainee_section.trainee_fields
+      %p
+        = f.label :mentor_era_commons_username, "Mentor ERA Commons Username"
+        %br
+        = f.text_field :mentor_era_commons_username
+        %br
+        = link_to "Lookup ERA Commons Username", { :controller => "people", :action => "era_commons_username_search" }, { :class => "search_link icon_link", :target => "_blank" }
+    
+    .trainee_section.trainee_fields
       %h4{ :class => "section_header" } Degree(s) Sought      
       %p
         = f.label :degree_type_one_id, "Degree Type 1" 
@@ -113,7 +121,7 @@
 
     
     .trainee_section.trainee_fields
-      %h4{ :class => "section_header" } Trainee Field
+      %h4{ :class => "section_header" } Trainee Fields
       %p
         = f.label :training_type, "Training Type"
         %br
@@ -123,6 +131,16 @@
         = f.label :trainee_status, "Trainee Status"
         %br
         = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" })
+    
+      %p
+        = f.label :appointment_date, "Appointment Date"
+        %br
+        = f.text_field :appointment_date, :class => "datepicker"
+      
+      %p
+        = f.label :end_date, "End Date"
+        %br
+        = f.text_field :end_date, :class => "datepicker"
     
     .trainee_section.trainee_fields
       %h4{ :class => "section_header" } Diversity Information

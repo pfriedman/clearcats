@@ -4,14 +4,15 @@
 
 = render "menu"
 
-%p
-  Publications PMCIDs that resulted from support from this program.
-  
-= render '/publications/list', :service => @service, :publications => @publications, :search => @search, :person => @service.person, :search => @search_params
+.page_section
+  %p
+    Publications PMCIDs that resulted from support from this program.
 
-- form_for @service do |f|
-  = hidden_field_tag "service[state]", "choose_approvals"
-  .buttons
-    = f.submit "Continue"
+  = render '/publications/list', :service => @service, :publications => @publications, :search => @search, :person => @service.person, :search => @search_params
+
+  - form_for @service do |f|
+    = hidden_field_tag "service[state]", "choose_approvals"
+    .buttons
+      = f.submit "Continue"
     
 #modal_window

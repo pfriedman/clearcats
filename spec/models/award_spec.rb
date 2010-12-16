@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101202161044
+# Schema version: 20101216175350
 #
 # Table name: awards
 #
@@ -59,7 +59,6 @@ describe Award do
   it { should belong_to(:activity_code) }
   it { should belong_to(:sponsor) }
   it { should have_many(:award_details) }
-  it { should validate_presence_of(:budget_identifier) }
   
   context "the award sponsor" do
     

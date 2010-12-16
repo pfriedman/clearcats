@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202161044) do
+ActiveRecord::Schema.define(:version => 20101216175350) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20101202161044) do
     t.datetime "updated_at"
     t.string   "created_by"
     t.string   "updated_by"
+    t.integer  "ctsa_reporting_years_mask"
   end
 
   add_index "approvals", ["person_id"], :name => "index_approvals_on_person_id"
@@ -380,6 +381,9 @@ ActiveRecord::Schema.define(:version => 20101202161044) do
     t.boolean  "system_administrator",                          :default => false
     t.string   "created_by"
     t.string   "updated_by"
+    t.string   "mentor_era_commons_username"
+    t.date     "appointment_date"
+    t.date     "end_date"
   end
 
   add_index "people", ["country_id"], :name => "index_people_on_country_id"

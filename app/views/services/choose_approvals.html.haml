@@ -12,48 +12,49 @@
 = render "menu"
 
 - form_for @service.person, :url => { :controller => "services", :action => "update_approvals", :id => @service.id } do |f|
-  = f.error_messages
+  .page_section
+    = f.error_messages
 
-  = hidden_field_tag "service[state]", "choose_organizational_units"
+    = hidden_field_tag "service[state]", "choose_organizational_units"
 
-  %h4 Approvals
-  %table{ :class => "records approvals" }
-    %thead
-      %tr
-        %th
-          Approval Type
-        %th
-          Approval Number
-        %th
-          Institution
-        %th
-          Project Title
-        %th
-          Approval Date
-        %th
-          Principal Investigator
-        %th
-          NUCATS Assisted
-        %th
-    %tbody{ :class => "nested_records" }
-      - f.fields_for :approvals do |approval_form|
-        = render 'approval_fields', :f => approval_form
-    %tfoot
-      %tr
-        %td{ :colspan => '2' }
-          = link_to_add_fields "Add", f, :approvals
+    %h4 Approvals
+    %table{ :class => "records approvals" }
+      %thead
+        %tr
+          %th
+            Approval Type
+          %th
+            Approval Number
+          %th
+            Institution
+          %th
+            Project Title
+          %th
+            Approval Date
+          %th
+            Principal Investigator
+          %th
+            CTSA Reportable
+          %th
+      %tbody{ :class => "nested_records" }
+        - f.fields_for :approvals do |approval_form|
+          = render 'approval_fields', :f => approval_form
+      %tfoot
+        %tr
+          %td{ :colspan => '2' }
+            = link_to_add_fields "Add", f, :approvals
 
+  .page_section
+    .human_subjects_protection_training
+      %h4 Human Subjects Protection Training
+      %p
+        = f.label :human_subject_protection_training_institution, "Institution that administered training"
+        %br
+        = f.text_field :human_subject_protection_training_institution
+      %p
+        = f.label :human_subject_protection_training_date, "Date Training Completed"
+        %br
+        = f.text_field :human_subject_protection_training_date, :class => "datepicker"
 
-  .human_subjects_protection_training
-    %h4 Human Subjects Protection Training
-    %p
-      = f.label :human_subject_protection_training_institution, "Institution that administered training"
-      %br
-      = f.text_field :human_subject_protection_training_institution
-    %p
-      = f.label :human_subject_protection_training_date, "Date Training Completed"
-      %br
-      = f.text_field :human_subject_protection_training_date, :class => "datepicker"
-
-  .buttons
-    = f.submit "Continue"
+    .buttons
+      = f.submit "Continue"
