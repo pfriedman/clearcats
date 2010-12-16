@@ -5,12 +5,16 @@
     $(".help_icon").tooltip();
   });
 
+- header_text = params[:completed].blank? ? "Services In Process" : "Completed Services"
+
 .page_section
   .records_header
-    Services In Process
-  = render 'list', { :services => @pending_services }
-  
-.page_section
-  .records_header
-    Completed Services
-  = render 'list', { :services => @completed_services }
+    - if params[:completed]
+      = link_to "Services In Process", :controller => "services", :action => "my_services"
+      %span
+        Completed Services
+    - else
+      %span
+        Services In Process
+      = link_to "Completed Services", :controller => "services", :action => "my_services", :completed => true
+  = render 'list', { :services => @services }

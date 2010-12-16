@@ -14,10 +14,15 @@ class ServicesController < ApplicationController
   def my_services
     params[:search] ||= Hash.new
     params[:search][:created_by_equals] ||= current_user.username
-    params[:search][:state_does_not_equal] ||= "completed"
+
+    if params[:completed]
+      params[:search][:state_equals] ||= "completed"
+    else
+      params[:search][:state_does_not_equal] ||= "completed"
+    end
     
     @search = Service.search(params[:search])
-    @pending_services = @search.paginate(:page => params[:page], :per_page => 20)
+    @services = @search.paginate(:page => params[:page], :per_page => 20)
     
     respond_to do |format|
       format.html # new.html.erb
@@ -231,6 +236,7 @@ class ServicesController < ApplicationController
       elsif @service.choose_service_line?
         redirect_to choose_service_line_service_path(@service)
       else
+        flash[:notice] = "#{@service.service_line} for #{@service.person} is complete" if @service.state == "completed"
         redirect_to :controller => "services", :action => @service.state, :id => @service
       end
     end
