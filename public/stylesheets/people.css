@@ -47,6 +47,16 @@ select#search_disadvantaged_background {
   width: 5em;
 }
 
+.trainee_toggler a,
+.trainee_fields a {
+  font-size: 1.25em;
+  text-decoration: none;
+}
+
+.trainee_fields {
+  display: none;
+}
+
 .trainee_section {
   margin-top: 1em;
   border-top: 1px solid #ddd;

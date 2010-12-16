@@ -19,4 +19,8 @@ describe ApplicationController do
   
   end
 
+  after(:all) do
+    Timecop.return
+  end
+
 end

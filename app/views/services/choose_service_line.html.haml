@@ -4,19 +4,20 @@
 = render "menu"
 
 - form_for @service do |f|
-  #projects
-    - person = @service.person.nil? ? nil : @service.person
-    %h3 
-      - for_person = " for #{person}" if person
-      = h "Choose Service Line#{for_person.to_s}"
-    %ul.service_lines
-      - @organizational_units.each do |ou|
-        %li
-          = ou.to_s
-          %ul{ :class => "ou_service_lines", :id => "#{ou.cc_pers_affiliate_identifier.downcase}"}
-            - ou.service_lines.all(:order => "name").each do |svc_line|
-              %li 
-                = f.radio_button "service_line_id", svc_line.id
-                = f.label "service_line_id_#{svc_line.id}", svc_line.to_s
-    .buttons
-      = f.submit "Continue", :disable_with => 'Processing...'
+  .page_section
+    #projects
+      - person = @service.person.nil? ? nil : @service.person
+      %h3 
+        - for_person = " for #{person}" if person
+        = h "Choose Service Line#{for_person.to_s}"
+      %ul.service_lines
+        - @organizational_units.each do |ou|
+          %li
+            = ou.to_s
+            %ul{ :class => "ou_service_lines", :id => "#{ou.cc_pers_affiliate_identifier.downcase}"}
+              - ou.service_lines.all(:order => "name").each do |svc_line|
+                %li 
+                  = f.radio_button "service_line_id", svc_line.id
+                  = f.label "service_line_id_#{svc_line.id}", svc_line.to_s
+      .buttons
+        = f.submit "Continue"

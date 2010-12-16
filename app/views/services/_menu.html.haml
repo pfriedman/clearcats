@@ -68,5 +68,5 @@
         = link_to "Choose Organizational Units", choose_organizational_units_service_path(@service) if action_name == 'choose_organizational_units'
     
 .clear
-= render "/services/service_header" if @service
+= render "/services/service_header" if @service and @service.service_line
 
