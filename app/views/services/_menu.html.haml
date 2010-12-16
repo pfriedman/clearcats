@@ -36,6 +36,7 @@
           Select Investigator
     - else
       .span-4
+        Select Investigator
       .span-4
         = link_to "Choose Service Line", choose_service_line_service_path(@service)
       .span-4
@@ -47,7 +48,7 @@
       .span-4
         = link_to "Link Study", choose_approvals_service_path(@service)
       .span-4
-        = link_to "Choose Organizational Units", choose_organizational_units_service_path(@service)
+        = link_to "Choose Centers", choose_organizational_units_service_path(@service)
     
 .clear
 = render "/services/service_header" if @service and @service.service_line
