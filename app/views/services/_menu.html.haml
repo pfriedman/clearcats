@@ -37,17 +37,17 @@
     - else
       .span-4
       .span-4
-        = link_to "Choose Service Line", choose_service_line_service_path(@service) if action_name == 'choose_service_line'
+        = link_to "Choose Service Line", choose_service_line_service_path(@service)
       .span-4
-        = link_to "Update Profile", edit_service_path(@service) if action_name == 'edit'
+        = link_to "Update Profile", edit_service_path(@service)
       .span-4
-        = link_to "Link Awards", choose_awards_service_path(@service) if action_name == 'choose_awards'
+        = link_to "Link Awards", choose_awards_service_path(@service)
       .span-4
-        = link_to "Link Publications", choose_publications_service_path(@service) if action_name == 'choose_publications'
+        = link_to "Link Publications", choose_publications_service_path(@service)
       .span-4
-        = link_to "Link Study", choose_approvals_service_path(@service) if action_name == 'choose_approvals'
+        = link_to "Link Study", choose_approvals_service_path(@service)
       .span-4
-        = link_to "Choose Organizational Units", choose_organizational_units_service_path(@service) if action_name == 'choose_organizational_units'
+        = link_to "Choose Organizational Units", choose_organizational_units_service_path(@service)
     
 .clear
 = render "/services/service_header" if @service and @service.service_line

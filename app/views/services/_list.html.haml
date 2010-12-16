@@ -16,7 +16,9 @@
       %th
     - services.each do |svc|
       %tr{:class => cycle('even_record', 'odd_record')}
-        %td= link_to "Select", :controller => "services", :action => "continue", :id => svc
+        %td
+          - action = svc.state.to_s == "completed" ? "edit" : "continue"
+          = link_to "Select", :controller => "services", :action => action, :id => svc
         %td= svc.state.titleize
         %td= svc.person
         %td= svc.service_line
