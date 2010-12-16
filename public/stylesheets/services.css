@@ -53,10 +53,13 @@ h4 {
   text-align: center;
 }
 
-.service_task a {
-  text-decoration: none;
+.service_task {
   font-size: 1.125em;
   color: darkblue;
+}
+
+.service_task a {
+  text-decoration: none;
 }
 
 .service_header {
