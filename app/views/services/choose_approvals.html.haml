@@ -38,11 +38,11 @@
           %th
       %tbody{ :class => "nested_records" }
         - f.fields_for :approvals do |approval_form|
-          = render 'approval_fields', :f => approval_form
+          = render '/approvals/approval_fields', :f => approval_form
       %tfoot
         %tr
           %td{ :colspan => '2' }
-            = link_to_add_fields "Add", f, :approvals
+            = link_to_add_fields "Add", f, :approvals, '/approvals/approval'
 
   .page_section
     .human_subjects_protection_training

@@ -29,9 +29,11 @@ describe PeopleController do
   
     describe "GET edit" do
       it "assigns the requested person as @person" do
-        Person.stub(:find).with("37").and_return(mock_person(:imported= => true))
+        mock = mock_person(:imported= => true, :imported => true, :netid => true)
+        FacultyWebService.stub(:locate_one).and_return(mock)
+        Person.stub(:find).with("37").and_return(mock)
         get :edit, :id => "37"
-        assigns[:person].should equal(mock_person)
+        assigns[:person].should equal(mock)
       end
     end
 
@@ -39,41 +41,53 @@ describe PeopleController do
 
       describe "with valid params" do
         it "updates the requested person" do
-          Person.should_receive(:find).with("37").and_return(mock_person)
-          mock_person.should_receive(:update_attributes).with({'these' => 'params'})
+          mock = mock_person(:imported= => true, :imported => true, :netid => true)
+          FacultyWebService.stub(:locate_one).and_return(mock)
+          Person.should_receive(:find).with("37").and_return(mock)
+          mock.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, :id => "37", :person => {:these => 'params'}
         end
 
         it "assigns the requested person as @person" do
-          Person.stub(:find).and_return(mock_person(:update_attributes => true, :netid => "asdf"))
-          put :update, :id => "1"
-          assigns[:person].should equal(mock_person)
+          mock = mock_person(:imported= => true, :imported => true, :netid => "asdf")
+          FacultyWebService.stub(:locate_one).and_return(mock)
+          Person.stub(:find).and_return(mock)
+          mock.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => "1", :person => {:these => 'params'}
+          assigns[:person].should equal(mock)
         end
 
         it "redirects to the person" do
-          pers = mock_person(:update_attributes => true, :netid => "asdf")
-          Person.stub(:find).and_return(pers)
-          put :update, :id => "1"
-          response.should redirect_to(edit_person_url(pers))
+          
+          mock = mock_person(:imported= => true, :imported => true, :netid => "asdf", :update_attributes => true)
+          FacultyWebService.stub(:locate_one).and_return(mock)
+          Person.stub(:find).and_return(mock)
+          mock.should_receive(:update_attributes).with({'these' => 'params'})
+
+          put :update, :id => "1", :person => {:these => 'params'}
+          response.should redirect_to(edit_person_url(mock))
         end
       end
 
       describe "with invalid params" do
-        it "updates the requested person" do
-          Person.should_receive(:find).with("37").and_return(mock_person)
-          mock_person.should_receive(:update_attributes).with({'these' => 'params'})
-          put :update, :id => "37", :person => {:these => 'params'}
-        end
 
         it "assigns the person as @person" do
-          Person.stub(:find).and_return(mock_person(:update_attributes => false))
-          put :update, :id => "1"
+          mock = mock_person(:imported= => true, :imported => true, :netid => "asdf", :update_attributes => false)
+          FacultyWebService.stub(:locate_one).and_return(mock)
+          Person.stub(:find).and_return(mock)
+          mock.should_receive(:update_attributes).with({'these' => 'params'})
+
+          put :update, :id => "1", :person => {:these => 'params'}
           assigns[:person].should equal(mock_person)
         end
 
         it "re-renders the 'edit' template" do
-          Person.stub(:find).and_return(mock_person(:update_attributes => false))
-          put :update, :id => "1"
+          mock = mock_person(:imported= => true, :imported => true, :netid => "asdf", :update_attributes => false)
+          FacultyWebService.stub(:locate_one).and_return(mock)
+          Person.stub(:find).and_return(mock)
+          mock.should_receive(:update_attributes).with({'these' => 'params'})
+
+          put :update, :id => "1", :person => {:these => 'params'}
           response.should render_template('edit')
         end
       end
@@ -132,7 +146,7 @@ describe PeopleController do
       it "should process the upload file and redirect the user to the people index page" do
         Person.stub(:import_data).and_return(true)
         post :upload, :file => Tempfile.new("test")
-        response.should redirect_to people_path
+        response.should redirect_to :controller => "services", :action => "my_services"
       end
     end
 
@@ -267,7 +281,7 @@ describe PeopleController do
       
       it "should allow the user to edit their own profile" do
         faculty = Factory(:person, :netid => "faculty") # we know the username of the logged in user
-        get :edit, :id => faculty.id + 123              # obviously not the id of the logged in user
+        get :edit, :id => faculty.id
         response.should be_success
       end
       

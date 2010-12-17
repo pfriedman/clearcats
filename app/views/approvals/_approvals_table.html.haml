@@ -1,0 +1,43 @@
+- form_tag(update_ctsa_reporting_year_approvals_path) do
+  = hidden_field_tag "person_id", @person.id
+  - current_year = current_ctsa_reporting_year
+  %table.records
+    %tr
+      - unless @service
+        %th CTSA Reportable #{current_year}
+      %th Edit
+      %th Reporting Years
+      %th
+        = order @search, :by => :sponsor_name, :as => "Sponsor", :params => ordering_params
+      %th
+        = order @search, :by => :sponsor_award_number, :as => "Sponsor Award Number", :params => ordering_params
+      %th
+        = order @search, :by => :grant_title, :as => "Grant Title", :params => ordering_params
+      %th
+        = order @search, :by => :budget_identifier, :as => "Budget Number", :params => ordering_params
+      %th
+        = order @search, :by => :project_period_start_date, :as => "Project Start Date", :params => ordering_params
+      %th
+        = order @search, :by => :project_period_end_date, :as => "Project End Date", :params => ordering_params
+      %th History
+    - @awards.each do |award|
+      - edit_link_params = { :controller => "/awards", :action => "edit", :id => award, :search => params[:search] }.merge(award_association)
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        - unless @service
+          %td
+            = check_box_tag "award_ids[]", award.id, award.ctsa_reporting_years.include?(current_year)
+        %td
+          = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
+          %br
+          = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" }
+        %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
+        %td= h award.sponsor
+        %td= h award.sponsor_award_number
+        %td= h truncate(award.grant_title)
+        %td= h award.budget_identifier.blank? ? 'n/a' : award.budget_identifier.gsub('NORTHWESTU00000', '')
+        %td= h award.project_period_start_date
+        %td= h award.project_period_end_date
+        %td= link_to 'View', versions_award_path(award), :class => "show_link icon_link"
+  - unless @service
+    .buttons
+      = submit_tag "Submit"

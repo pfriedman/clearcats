@@ -52,11 +52,12 @@ class ApplicationController < ActionController::Base
     end
     
     def determine_person(param_key = :id)
-      if current_user.permit?(:Admin, :User)
+      if current_user.permit?(:Admin, :User) or param_key == :id
         @person = Person.find(params[param_key])
-      else
+      else        
         @person = Person.find_by_netid(current_user.username)
       end
+      update_person_data(@person)
     end
 
     def determine_org_units_for_user
@@ -68,6 +69,16 @@ class ApplicationController < ActionController::Base
     def get_current_user
       person = Person.find_by_netid(current_user.username)
       return person.nil? ? current_user : person
+    end
+
+    def update_person_data(person)
+      if person and person.imported
+        if person.netid
+          FacultyWebService.locate_one(:netid => person.netid)
+        elsif person.employeeid
+          FacultyWebService.locate_one(:employeeid => person.employeeid)
+        end
+      end
     end
 
 end

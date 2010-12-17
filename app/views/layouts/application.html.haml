@@ -33,8 +33,7 @@
           #menu2
             %span{:id => "logout_link"}
               = link_to "logout", "#{cc_prefix_path}/logout"
-            - username = current_user ? current_user.username : "anonymous"
-            = session[:name] || username
+            = session[:name] || session_username
         #title
           - if show_title?
             %span= h(yield(:title))

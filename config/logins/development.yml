@@ -25,3 +25,7 @@ users:
         - Admin: [4623]
   pgreenld:
     password: pgreenld
+  awa272:
+    password: awa272
+  zbu468:
+    password: zbu468

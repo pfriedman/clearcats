@@ -1,14 +1,19 @@
 class WelcomeController < ApplicationController
+  helper :all 
+  
   def index
     if current_user
-      @person = Person.find_by_netid(current_user.username)
-      @person = FacultyWebService.locate_one({:netid => current_user.username}) if @person.nil?
+      populate_person
       
       if @person.is_a?(Client) and !current_user.permit?(:Admin)
-        redirect_to edit_person_path(@person)
+        redirect_to :controller => "welcome", :action => "client_index"
       end
       
     end
+  end
+  
+  def client_index
+    populate_person if current_user
   end
   
   def upload_error_log
@@ -23,5 +28,12 @@ class WelcomeController < ApplicationController
   def add_investigator
     @organizational_unit_id = params[:organizational_unit_id]
   end
+  
+  private
+    
+    def populate_person
+      @person = Person.find_by_netid(current_user.username)
+      @person = FacultyWebService.locate_one({:netid => current_user.username}) if @person.nil?
+    end
   
 end

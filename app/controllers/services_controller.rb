@@ -14,6 +14,7 @@ class ServicesController < ApplicationController
   def my_services
     params[:search] ||= Hash.new
     params[:search][:created_by_equals] ||= current_user.username
+    params[:search][:order] ||= "descend_by_updated_at"
 
     if params[:completed]
       params[:search][:state_equals] ||= "completed"

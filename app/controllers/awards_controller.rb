@@ -1,5 +1,5 @@
 class AwardsController < ApplicationController
-  before_filter :permit_user,  :only => [:new, :create, :versions, :update_ctsa_reporting_year]
+  before_filter :permit_user,  :only => [:versions]
   before_filter :permit_admin, :only => [:revert]
   layout proc { |controller| controller.request.xhr? ? nil : 'application'  } 
 

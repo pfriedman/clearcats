@@ -8,7 +8,7 @@
 
 - unless @person.organizational_units.blank?
   .organizational_units
-    #{@person} has worked with #{@person.organizational_units.to_sentence}.
+    #{@person} has worked with #{@person.organizational_units.uniq.to_sentence}.
 
 .page_section
   = render 'form'

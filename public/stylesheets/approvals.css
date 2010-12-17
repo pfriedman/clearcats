@@ -1,0 +1,17 @@
+
+#approvals {
+  margin: 1em 0;
+}
+
+#approvals h3 {
+  padding: 0.5em 0;
+}
+
+.instructions {
+  margin: 1em 0;
+}
+
+.approval_form {
+  height: 80em;
+  padding-bottom: 1em;
+}

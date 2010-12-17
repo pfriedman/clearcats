@@ -109,7 +109,7 @@ class PublicationsController < ApplicationController
     current_year = current_ctsa_reporting_year
     @person.publications.each do |pub|
       reporting_years = pub.ctsa_reporting_years
-      if params["publication_ids"].include?(pub.id.to_s)
+      if !params["publication_ids"].blank? and params["publication_ids"].include?(pub.id.to_s)
         # Publications are unique and can only have one reporting year unlike awards and people
         if reporting_years.blank?
           pub.ctsa_reporting_years = [current_year]

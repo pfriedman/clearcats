@@ -19,7 +19,7 @@ describe AwardsController do
       end
       
       it "assigns all awards for the requested person as @awards" do
-        person = mock_model(Person, :employeeid => "100176")
+        person = mock_model(Person, :employeeid => "100176", :imported => true, :netid => "")
         FacultyWebService.stub!(:make_request).and_return(awards_response)
         Person.should_receive(:find).with(person.id.to_s).and_return(person)
         Person.stub!(:find_by_employeeid).and_return(person)

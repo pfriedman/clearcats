@@ -1,4 +1,5 @@
 - title "My Services"
+- stylesheet "services"
 
 :javascript
   $(document).ready(function() {
@@ -8,13 +9,15 @@
 - header_text = params[:completed].blank? ? "Services In Process" : "Completed Services"
 
 .page_section
-  .records_header
+  .records_header.services_links
     - if params[:completed]
       = link_to "Services In Process", :controller => "services", :action => "my_services"
+      %span.divider
       %span
         Completed Services
     - else
       %span
         Services In Process
+      %span.divider
       = link_to "Completed Services", :controller => "services", :action => "my_services", :completed => true
   = render 'list', { :services => @services }

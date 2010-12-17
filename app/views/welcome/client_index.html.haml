@@ -1,0 +1,26 @@
+- stylesheet "welcome"
+- title "Welcome to clearcats!"
+
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
+.welcome
+
+  %p.hello
+    Please edit your information. Thank you!
+
+  - if @person
+    .front_page_section
+      %h3
+        = link_to "Edit Profile", edit_person_path(@person)
+    .front_page_section
+      %h3
+        = link_to "Edit Awards", person_awards_path(@person)
+    .front_page_section
+      %h3
+        = link_to "Edit Publications", person_publications_path(@person)
+    .front_page_section
+      %h3
+        = link_to "Edit Approvals", person_approvals_path(@person)

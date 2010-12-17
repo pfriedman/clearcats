@@ -28,6 +28,15 @@ module ApplicationHelper
   def show_title?
     @show_title
   end
+  
+  def session_username
+    username = "anonymous"
+    if current_user 
+      usr = get_current_user
+      username = usr.respond_to?(:full_name) ? usr.full_name : usr.username
+    end
+    username
+  end
 
   #### APPLICATION VERSION ####
 

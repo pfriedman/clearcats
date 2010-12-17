@@ -22,6 +22,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :publications, :only => [ :edit, :update, :new, :create ],
     :member => { :versions => :get, :revert => :post },
     :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post }
+  map.resources :approvals, :only => [ :index ],
+    :collection => { :update_approvals => :post }
   map.resources :organizational_units
   
   map.resources :services, 
@@ -38,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
                      :era_commons_username_search => [:get, :post] } do |people|
       people.resources :awards
       people.resources :publications
+      people.resources :approvals
       people.resources :services
   end
   map.resources :clients, :controller => "people"

@@ -9,17 +9,19 @@
   %table{ :class => "records pending_services" }
     %tr
       %th Select
-      %th= order @search, :by => :state, :as => "Status", :params => {:page => params[:page]}
-      %th= order @search, :by => :person_last_name, :as => "Investigator", :params => {:page => params[:page]}
-      %th= order @search, :by => :service_line_name, :as => "Service Line", :params => {:page => params[:page]}
-      %th= order @search, :by => :service_line_organizational_unit_name, :as => "Organizational Unit", :params => {:page => params[:page]}
+      %th= order @search, :by => :person_last_name, :as => "Investigator", :params => {:page => params[:page], :completed => params[:completed]}
+      %th= order @search, :by => :service_line_name, :as => "Service Line", :params => {:page => params[:page], :completed => params[:completed]}
+      %th= order @search, :by => :service_line_organizational_unit_name, :as => "Organizational Unit", :params => {:page => params[:page], :completed => params[:completed]}
       %th
     - services.each do |svc|
-      %tr{:class => cycle('even_record', 'odd_record')}
+      %tr{ :class => cycle('even_record', 'odd_record') }
         %td
           - action = svc.state.to_s == "completed" ? "edit" : "continue"
           = link_to "Select", :controller => "services", :action => action, :id => svc
-        %td= svc.state.titleize
+          %span.hide
+            = svc.state.titleize
+            %br
+            = svc.created_at.to_s
         %td= svc.person
         %td= svc.service_line
         %td= svc.service_line.organizational_unit.abbreviation if svc.service_line

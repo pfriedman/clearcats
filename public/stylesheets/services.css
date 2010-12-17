@@ -74,6 +74,26 @@ h4 {
   margin-bottom: 0.5em;
 }
 
+.services_links {
+  font-size: 1.25em;
+}
+
+.services_links a,
+.services_links span {
+  margin: 0 0.25em;
+  padding: 0 0.25em;
+  text-decoration: none;
+}
+
+.services_links a:hover {
+  color: orange;
+}
+
+.services_links span.divider {
+  border: 1px solid #ccc;
+  padding: 0;
+}
+
 .buttons {
   text-align: right;
   margin: 0 2em 1em 0;;
@@ -81,6 +101,15 @@ h4 {
 
 .awards select {
   width: 25em;
+}
+
+.service_question {
+  font-size: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.choices {
+  font-size: 1.25em;
 }
 
 #modal_window {

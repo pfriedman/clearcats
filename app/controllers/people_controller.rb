@@ -119,7 +119,7 @@ class PeopleController < ApplicationController
       else
         Person.import_data(params[:file].open, find_or_create_user)
         flash[:notice] = "Data was successfully uploaded."
-        redirect_to people_path
+        redirect_to :controller => "services", :action => "my_services"
       end
     end
   end

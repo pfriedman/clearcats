@@ -1,0 +1,49 @@
+#approvals
+
+  - if @service
+    - ordering_params      = { :controller => "services", :action => "choose_approvals", :id => @service.id }
+    - approval_association = { :service_id => @service.id }
+  - else 
+    - ordering_params      = { :controller => "approvals", :action => "index", :person_id => @person.id }
+    - approval_association = { :person_id => @person.id }
+
+  .approvals_body
+    - form_for @person, :url => { :controller => "approvals", :action => "update_approvals" } do |f|
+      .page_section
+        = f.error_messages
+
+        = hidden_field_tag "person_id", @person.id
+
+        %h4 Approvals
+        %table{ :class => "records approvals" }
+          %thead
+            %tr
+              %th
+                Approval Type
+              %th
+                Approval Number
+              %th
+                Institution
+              %th
+                Project Title
+              %th
+                Approval Date
+              %th
+                Principal Investigator
+              %th
+                CTSA Reportable
+              %th
+          %tbody{ :class => "nested_records" }
+            - f.fields_for :approvals do |approval_form|
+              = render '/approvals/approval_fields', :f => approval_form
+          %tfoot
+            %tr
+              %td{ :colspan => '2' }
+                = link_to_add_fields "Add", f, :approvals
+      .buttons
+        = f.submit "Save"
+    .links
+      - unless @service 
+        = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
+        = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service
+        = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link" unless @service
