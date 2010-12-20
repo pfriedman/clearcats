@@ -300,6 +300,10 @@ class Person < ActiveRecord::Base
     self.fax = number
   end
   
+  def nu_employee_id=(employeeid)
+    self.employeeid = employeeid
+  end
+  
   def postaladdress=(addr)
     if !addr.nil?
       parts  = addr.split('$')

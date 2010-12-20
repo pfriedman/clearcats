@@ -15,7 +15,7 @@
   .page_section
     = f.error_messages
 
-    = hidden_field_tag "service[state]", "choose_organizational_units"
+    = hidden_field_tag "service[state]", "completed"
 
     %h4 Approvals
     %table{ :class => "records approvals" }
@@ -57,4 +57,4 @@
         = f.text_field :human_subject_protection_training_date, :class => "datepicker"
 
     .buttons
-      = f.submit "Continue"
+      = f.submit "Finish"

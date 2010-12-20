@@ -37,7 +37,6 @@ class Service < ActiveRecord::Base
     state :choose_awards
     state :choose_publications
     state :choose_approvals
-    state :choose_organizational_units
     state :completed
     state :surveyable
     
@@ -58,11 +57,11 @@ class Service < ActiveRecord::Base
     end
     
     event :profiling do
-      transition :initiated => :choose_awards, :choose_awards => :choose_publications, :choose_publications => :choose_approvals, :choose_approvals => :choose_organizational_units
+      transition :initiated => :choose_awards, :choose_awards => :choose_publications, :choose_publications => :choose_approvals
     end
 
     event :complete do
-      transition [:choose_organizational_units] => :completed
+      transition [:choose_approvals] => :completed
     end
     
     event :readied_for_survey do

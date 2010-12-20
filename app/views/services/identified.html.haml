@@ -1,6 +1,8 @@
 - title "New Service - Branching Question"
 - stylesheet "services"
 
+= render "menu"
+
 .page_section
   - form_for @service, :url => { :action => "identified" } do |f|
 
@@ -8,11 +10,14 @@
       Did this service result in any awards, publications, presentations, honors, or studies for the investigator?
 
     .choices
-      = f.radio_button :state, :choose_awards
+      = f.radio_button :state, :choose_awards, :onclick => "javascript: $('#continue_button').show(); $('#finish_button').hide();"
       = f.label :state_choose_awards, "Yes"
       %br
-      = f.radio_button :state, :choose_organizational_units
-      = f.label :state_choose_organizational_units, "No"
+      = f.radio_button :state, :completed, :onclick => "javascript: $('#continue_button').hide(); $('#finish_button').show();"
+      = f.label :state_completed, "No"
   
     .buttons
-      = f.submit "Continue"
+      %span{ :id => "continue_button" }
+        = f.submit "Continue"
+      %span{ :id => "finish_button", :class => "hide" }
+        = f.submit "Finish"

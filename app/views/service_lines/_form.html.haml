@@ -1,37 +1,41 @@
 - stylesheet "service_lines"
 
-- form_for(@service_line) do |f|
-  = f.error_messages
+.page_section
+  - form_for(@service_line) do |f|
+    = f.error_messages
 
-  %p
-    = f.label :name, "Service Line Name"
-    %br
-    = f.text_field :name
-  
-  - if @user_organizational_units.size == 1
     %p
-      %b Organizational Unit
+      = f.label :name, "Service Line Name"
       %br
-      = @user_organizational_units.first
-      = hidden_field_tag "service_line[organizational_unit_id]", @user_organizational_units.first.id
-  - else
-    %p
-      = f.label :organizational_unit_id, "Organizational Unit"
-      %br 
-      = f.select :organizational_unit_id, options_for_select(nested_set_options(OrganizationalUnit) {|i| "#{'-' * i.level} #{i.name} (#{i.abbreviation})" },  @service_line.organizational_unit_id)
+      = f.text_field :name
   
-  %table{ :class => "records activity_types" }
-    %thead
-      %tr
-        %th
-          Activity Types (optional)
-        %th
-    %tbody{ :class => "nested_records" }
-      - f.fields_for :activity_types do |activity_type_form|
-        = render 'activity_type_fields', :f => activity_type_form
-    %tfoot
-      %tr
-        %td{ :colspan => '2' }
-          = link_to_add_fields "Add Activity Type", f, :activity_types
-  %p
-    = f.submit "Save", :disable_with => 'Saving...'
+    - if @user_organizational_units.size == 1
+      %p
+        %b Organizational Unit
+        %br
+        = @user_organizational_units.first
+        = hidden_field_tag "service_line[organizational_unit_id]", @user_organizational_units.first.id
+    - else
+      %p
+        = f.label :organizational_unit_id, "Organizational Unit"
+        %br 
+        = f.select :organizational_unit_id, options_for_select(nested_set_options(OrganizationalUnit) {|i| "#{'-' * i.level} #{i.name} (#{i.abbreviation})" },  @service_line.organizational_unit_id)
+  
+    %table{ :class => "records activity_types" }
+      %thead
+        %tr
+          %th
+            Activity Types (optional)
+          %th
+      %tbody{ :class => "nested_records" }
+        - f.fields_for :activity_types do |activity_type_form|
+          = render 'activity_type_fields', :f => activity_type_form
+      %tfoot
+        %tr
+          %td{ :colspan => '2' }
+            = link_to_add_fields "Add Activity Type", f, :activity_types
+    %p
+      = f.submit "Save", :disable_with => 'Saving...'
+    
+.links
+  = link_to "All Service Lines", service_lines_path, { :class => "list_link icon_link"}

@@ -103,7 +103,7 @@ describe Service do
     end
     
     it "should know all the possible states" do
-      Service.state_machine.states.length.should == 11
+      Service.state_machine.states.length.should == 10
       states = Service.state_machine.states.keys
       states.include?(:new).should be_true
       states.include?(:choose_person).should be_true
@@ -113,7 +113,6 @@ describe Service do
       states.include?(:choose_awards).should be_true
       states.include?(:choose_publications).should be_true
       states.include?(:choose_approvals).should be_true
-      states.include?(:choose_organizational_units).should be_true
       states.include?(:completed).should be_true
       states.include?(:surveyable).should be_true
       

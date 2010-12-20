@@ -3,7 +3,7 @@ require 'net/ldap'
 class Ldap
 
   ATTRIBUTES = ["title", "displayname", "givenname", "cn", "sn", "mail", "ou", 
-                "uid", "uidnumber", "dn", 
+                "uid", "uidnumber", "dn",
                 "facsimiletelephonenumber", "telephonenumber", "postaladdress"]
 
   def retrieve_entry_by_netid(netid)
@@ -15,7 +15,7 @@ class Ldap
   end
   
   def retrieve_entry(value, key = "uid")
-    process_entry(Net::LDAP::Filter.eq(key, value))
+    entry = process_entry(Net::LDAP::Filter.eq(key, value))
   end
 
   private
@@ -25,7 +25,7 @@ class Ldap
     # See: /config/ldap_config.yml file for configuration
     #
     def get_connection
-      Net::LDAP.new({:host => LDAP_CONFIG['server'], :port => LDAP_CONFIG['port']})
+      Net::LDAP.new({ :host => LDAP_CONFIG['server'], :port => LDAP_CONFIG['port'] })
     end
   
     def process_entry(user_filter)
