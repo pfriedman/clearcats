@@ -146,7 +146,7 @@ class FacultyWebService
           ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key].to_s) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
 
           if ["staging", "production"].include?(Rails.env)
-            usr = Bcsec::Authority.find_user(attributes["netid"])
+            usr = Bcsec.authority.find_user(attributes["netid"])
             usr = Bcsec::User::ATTRIBUTES.each {|a| person.send("#{a}=", ldap_entry[a].to_s) if person.respond_to?("#{a}=") } unless usr.blank?
           end
 
