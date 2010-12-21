@@ -40,6 +40,7 @@ class DataScrubber
     FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|      
       map["#{row[:fname]} #{row[:lname]}"] = row[:commonsid]
       map["#{row[:employer_id]}"]          = row[:commonsid]
+      map["#{row[:commonsid]}"]            = row[:employer_id]
     end      
     map
   end

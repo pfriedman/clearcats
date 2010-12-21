@@ -145,11 +145,6 @@ class FacultyWebService
           ldap_entry = Ldap.new.retrieve_entry_by_netid(attributes["netid"])
           ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key].to_s) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
 
-          if ["staging", "production"].include?(Rails.env)
-            usr = Bcsec.authority.find_user(attributes["netid"])
-            usr = Bcsec::User::ATTRIBUTES.each {|a| person.send("#{a}=", ldap_entry[a].to_s) if person.respond_to?("#{a}=") } unless usr.blank?
-          end
-
           dept = Department.find_by_externalid(person.dept_id)
           person.department = dept if dept
           if person.valid?

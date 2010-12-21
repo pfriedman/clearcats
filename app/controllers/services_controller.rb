@@ -99,6 +99,19 @@ class ServicesController < ApplicationController
   
   def edit
     get_service
+    @person = @person.amplify! if @person
+    # 
+    # if ["staging", "production"].include?(Rails.env)
+    #   if @person and @person.netid
+    #     usr = Bcsec.authority.find_user(@person.netid) 
+    #     if usr
+    #       Bcsec::User::ATTRIBUTES.each do |a|
+    #         next if a.to_s.downcase == "country"
+    #         @person.send("#{a}=", usr.send("#{a}").to_s) if @person.respond_to?("#{a}=") and @person.send("#{a}").blank?
+    #       end
+    #     end
+    #   end
+    # end
   end
   
   def update_person

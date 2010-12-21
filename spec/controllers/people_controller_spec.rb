@@ -29,11 +29,11 @@ describe PeopleController do
   
     describe "GET edit" do
       it "assigns the requested person as @person" do
-        mock = mock_person(:imported= => true, :imported => true, :netid => true)
-        FacultyWebService.stub(:locate_one).and_return(mock)
-        Person.stub(:find).with("37").and_return(mock)
+        pers = Factory(:person)
+        FacultyWebService.stub(:locate_one).and_return(pers)
+        Person.stub(:find).with("37").and_return(pers)
         get :edit, :id => "37"
-        assigns[:person].should equal(mock)
+        assigns[:person].should equal(pers)
       end
     end
 

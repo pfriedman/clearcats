@@ -18,14 +18,19 @@ describe DataScrubber do
     end
     
   end
-
-  context "updating records with era_commons_usernames" do
+  
+  context "creating a map of era_commons_usernames" do
     
     it "should map the users from the file provided by the Office of Sponsored Research" do
       map = DataScrubber.get_commons_name_map_from_file
+      map["TSANDERCOCK"].should == "1000868"
       map["1001531"].should == "R-GOLDMAN"
       map["Robert David Goldman"].should == "R-GOLDMAN"
     end
+    
+  end
+
+  context "updating records with era_commons_usernames" do
     
     it "should update the user by emplid" do
       pers = Factory(:person, :employeeid => "1001005", :era_commons_username => nil)

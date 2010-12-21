@@ -304,6 +304,10 @@ class Person < ActiveRecord::Base
     self.employeeid = employeeid
   end
   
+  def nu_employee_id
+    self.employeeid
+  end
+  
   def postaladdress=(addr)
     if !addr.nil?
       parts  = addr.split('$')
@@ -486,4 +490,35 @@ class Person < ActiveRecord::Base
   #   blurb 'Summary'
   # 
   # end
+  
+  def amplify!
+    if ["staging", "production"].include?(Rails.env)
+
+      if self.era_commons_username
+        self.employeeid = DataScrubber.get_commons_name_map_from_file[self.era_commons_username] if self.employeeid.blank?
+      end
+      
+      criteria = []
+      criteria << {:nu_employee_id => self.employeeid} if self.employeeid
+      criteria << {:username       => self.netid}      if self.netid
+      
+      unless criteria.empty?
+        usrs = Bcsec.authority.find_users(criteria)
+        if !usrs.blank?
+          usr = usrs.first
+          if usr
+            Bcsec::User::ATTRIBUTES.each do |a|
+              next if a.to_s.downcase == "country"
+              self.send("#{a}=", usr.send("#{a}").to_s) if self.respond_to?("#{a}=") and self.send("#{a}").blank?
+            end
+          end
+          if self.era_commons_username.blank? and !self.employeeid.blank?
+            self.employeeid = DataScrubber.get_commons_name_map_from_file[self.era_commons_username]
+          end
+        end
+      end
+      
+    end
+    self
+  end
 end

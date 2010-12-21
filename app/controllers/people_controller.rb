@@ -32,6 +32,7 @@ class PeopleController < ApplicationController
   # GET /people/1/edit
   def edit
     determine_person
+    @person = @person.amplify!
     @person.imported = false
   end
   
