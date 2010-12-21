@@ -375,7 +375,9 @@ class Person < ActiveRecord::Base
 
     reporting_years = pers.ctsa_reporting_years
     pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)
-  
+    
+    pers = pers.amplify!
+    
     pers.save!
     process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
   end
@@ -494,8 +496,14 @@ class Person < ActiveRecord::Base
   def amplify!
     if ["staging", "production"].include?(Rails.env)
 
+      map = DataScrubber.get_commons_name_map_from_file
+
       if self.era_commons_username
-        self.employeeid = DataScrubber.get_commons_name_map_from_file[self.era_commons_username] if self.employeeid.blank?
+        self.employeeid = map[self.era_commons_username] if self.employeeid.blank?
+      end
+      
+      if self.employeeid
+        self.era_commons_username = map[self.employeeid] if self.era_commons_username.blank?
       end
       
       criteria = []
@@ -505,14 +513,18 @@ class Person < ActiveRecord::Base
       unless criteria.empty?
         usrs = Bcsec.authority.find_users(criteria)
         if !usrs.blank?
-          usr = usrs.first
-          if usr
+          if usr = usrs.first
             Bcsec::User::ATTRIBUTES.each do |a|
               next if a.to_s.downcase == "country"
               self.send("#{a}=", usr.send("#{a}").to_s) if self.respond_to?("#{a}=") and self.send("#{a}").blank?
             end
           end
+
           if self.era_commons_username.blank? and !self.employeeid.blank?
+            self.era_commons_username = DataScrubber.get_commons_name_map_from_file[self.employeeid]
+          end
+          
+          if self.employeeid.blank? and !self.era_commons_username.blank?
             self.employeeid = DataScrubber.get_commons_name_map_from_file[self.era_commons_username]
           end
         end
