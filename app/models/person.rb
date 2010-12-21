@@ -377,7 +377,7 @@ class Person < ActiveRecord::Base
     reporting_years = pers.ctsa_reporting_years
     pers.ctsa_reporting_years = (reporting_years << current_ctsa_reporting_year)
     
-    pers = pers.amplify!
+    pers = pers.amplify
     
     pers.save!
     process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
@@ -494,19 +494,17 @@ class Person < ActiveRecord::Base
   # 
   # end
   
-  def amplify!
+  def amplify
+    update_record_via_era_commons_username_map
     if ["staging", "production"].include?(Rails.env)
-
-      map = DataScrubber.get_commons_name_map_from_file
-
-      if self.era_commons_username
-        self.employeeid = map[self.era_commons_username] if self.employeeid.blank?
-      end
-      
-      if self.employeeid
-        self.era_commons_username = map[self.employeeid] if self.era_commons_username.blank?
-      end
-      
+      update_record_via_bcsec
+    end
+    self
+  end
+  
+  private
+  
+    def update_record_via_bcsec
       criteria = []
       criteria << {:nu_employee_id => self.employeeid} if self.employeeid
       criteria << {:username       => self.netid}      if self.netid
@@ -521,17 +519,21 @@ class Person < ActiveRecord::Base
             end
           end
 
-          if self.era_commons_username.blank? and !self.employeeid.blank?
-            self.era_commons_username = DataScrubber.get_commons_name_map_from_file[self.employeeid]
-          end
-          
-          if self.employeeid.blank? and !self.era_commons_username.blank?
-            self.employeeid = DataScrubber.get_commons_name_map_from_file[self.era_commons_username]
-          end
+          update_record_via_era_commons_username_map
         end
       end
-      
     end
-    self
-  end
+  
+    def update_record_via_era_commons_username_map
+      map = DataScrubber.get_commons_name_map_from_file
+
+      if self.era_commons_username
+        self.employeeid = map[self.era_commons_username] if self.employeeid.blank?
+      end
+      
+      if self.employeeid
+        self.era_commons_username = map[self.employeeid] if self.era_commons_username.blank?
+      end
+    end
+  
 end
