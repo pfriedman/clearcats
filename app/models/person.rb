@@ -344,10 +344,10 @@ class Person < ActiveRecord::Base
     
     FasterCSV.parse(file, :headers => true, :header_converters => :symbol) do |row|
       next if row.header_row?
-      if row[:era_commons_username].blank?
-        File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] era_commons_username missing for row - #{row}") }
-      elsif row[:service_lines].blank?
+      if row[:service_lines].blank?
         File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] service_lines missing for row - #{row}") }
+      elsif row[:era_commons_username].blank? and row[:netid].blank? and row[:employeeid].blank?
+        File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] unique identifier (netid, employeeid, or era_commons_username) missing for row - #{row}") }
       else
         process_import_row(row, user)
       end
