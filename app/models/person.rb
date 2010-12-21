@@ -95,6 +95,7 @@
 
 
 require 'comma'
+require 'bcsec'
 class Person < ActiveRecord::Base
   include VersionExportable
   include CtsaReportable
@@ -511,7 +512,7 @@ class Person < ActiveRecord::Base
       criteria << {:username       => self.netid}      if self.netid
       
       unless criteria.empty?
-        usrs = Bcsec.authority.find_users(criteria)
+        usrs = Bcsec.authority.find_users(*criteria)
         if !usrs.blank?
           if usr = usrs.first
             Bcsec::User::ATTRIBUTES.each do |a|
