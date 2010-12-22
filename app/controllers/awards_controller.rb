@@ -91,7 +91,7 @@ class AwardsController < ApplicationController
     current_year = current_ctsa_reporting_year
     @person.awards.each do |award|
       reporting_years = award.ctsa_reporting_years
-      if params["award_ids"].include?(award.id.to_s)
+      if !params["award_ids"].blank? and params["award_ids"].include?(award.id.to_s)
         if !reporting_years.include?(current_year)
           award.ctsa_reporting_years = (reporting_years << current_year) 
           award.save
