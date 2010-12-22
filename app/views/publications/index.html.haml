@@ -1,10 +1,13 @@
-- stylesheet "publications", "services"
+- stylesheet "people", "publications", "services"
 - javascript "jquery.blockUI", "modal_form"
 - title "Publications for #{@person}"
 
 :javascript
   $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
 
-= render '/publications/list', :publications => @publications, :person => @person, :search => @search_params, :service => nil
+= render "/people/client_menu" if faculty_member?
+
+.page_section
+  = render '/publications/list', :publications => @publications, :person => @person, :search => @search_params, :service => nil
 
 #modal_window

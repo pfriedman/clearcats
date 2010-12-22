@@ -227,7 +227,7 @@ class Person < ActiveRecord::Base
   end
   
   def sysadmin?
-    self.system_administrator
+    self.system_administrator.to_s == "true"
   end
   
   ###

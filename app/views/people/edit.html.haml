@@ -10,8 +10,8 @@
   .organizational_units
     #{@person} has worked with #{@person.organizational_units.uniq.to_sentence}.
 
-.instructions
-  Please update the fields below.
+= render "/people/client_menu" if faculty_member?
+
 .page_section
   = render 'form'
 

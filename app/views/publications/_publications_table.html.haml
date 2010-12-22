@@ -1,3 +1,6 @@
+- user = get_current_user
+- sysadmin = user.respond_to?(:sysadmin?) && user.sysadmin?
+
 - if @publications.blank?
   .no-records
     No publications found for #{@person}.
@@ -21,7 +24,8 @@
           = order @search, :by => :publication_date, :as => "Publication Date", :params => ordering_params
         %th
           = order @search, :by => :title, :as => "Title", :params => ordering_params
-        %th History
+        %th 
+          = "History" if sysadmin
       - @publications.each do |pub|
         %tr{ :class => cycle('even_record', 'odd_record') }
           - unless @service
@@ -35,7 +39,7 @@
           %td= h pub.nihms_number
           %td= h pub.publication_date
           %td= h pub.title
-          %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link"
+          %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link" if sysadmin
     - unless @service
       .buttons
         = submit_tag "Submit"

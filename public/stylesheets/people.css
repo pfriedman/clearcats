@@ -95,3 +95,61 @@ h4.section_header {
 hr {
   margin-bottom: 0.25em;
 }
+
+.client_menu {
+  padding-left: 1em;
+}
+
+.client_menu .span-24 {
+  margin-bottom: 0.5em;
+}
+
+.status_bar {
+  margin-top: 10px;
+  border: 3px solid gray;
+}
+
+.client_menu .index {
+  display: inline-block;
+  width: 1.25em;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em;
+  margin-top: -15px;
+  background-color: lightblue;
+  border: 1px solid gray;
+  border-radius: 2em;
+  -o-border-radius: 2em;
+  -icab-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+}
+
+.client_menu .active {
+  background-color: darkblue;
+}
+
+.client_menu .task {
+  display: inline-block;
+}
+
+.client_task div {
+  border-bottom: 1px solid white;
+  text-align: center;
+}
+
+.status_bar div,
+.client_task div {
+  text-align: center;
+}
+
+.client_task {
+  font-size: 1.125em;
+  color: darkblue;
+}
+
+.client_task a {
+  text-decoration: none;
+}

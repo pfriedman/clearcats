@@ -1,0 +1,26 @@
+.client_menu
+  .span-24
+    .status_bar
+      .span-6
+        %div{ :class => "index #{'active' if action_name == 'edit' and controller_name == 'people'}" }
+          1
+      .span-5
+        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'awards'}" }
+          2
+      .span-6
+        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'publications'}" }
+          3
+      .span-6.last
+        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'approvals'}" }
+          4
+    .clear
+    .client_task
+      .span-6
+        = link_to "Edit Profile", edit_person_path(@person)
+      .span-5
+        = link_to "Edit Awards", person_awards_path(@person)
+      .span-6
+        = link_to "Edit Publications", person_publications_path(@person)
+      .span-6.last
+        = link_to "Edit Approvals", person_approvals_path(@person)
+.clear

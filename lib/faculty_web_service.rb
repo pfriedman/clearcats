@@ -168,10 +168,10 @@ class FacultyWebService
 
         if !award.edited_by_user?
           sponsor = award.sponsor.blank? ? Sponsor.new : award.sponsor
-          sponsor_attributes.each { |name, value| sponsor.send(name.to_s + '=', value) }
+          sponsor_attributes.each { |name, value| sponsor.send("#{name}=", value) if sponsor.respond_to?("#{name}=") }
           award.sponsor = sponsor unless sponsor.nil?
           
-          award_attributes.each { |name, value| award.send(name.to_s + '=', value) }
+          award_attributes.each { |name, value| award.send("#{name}=", value) if award.respond_to?("#{name}=") }
 
           if award.department.blank?
             dept = Department.find_or_create_by_name(attributes["department"])
@@ -182,7 +182,7 @@ class FacultyWebService
         award_detail = award.award_details.select { |detail| detail.budget_number == budget_number }.first
         award_detail = AwardDetail.new(:award => award) if award_detail.nil?
         
-        award_detail_attributes.each { |name, value| award_detail.send(name.to_s + '=', value) }
+        award_detail_attributes.each { |name, value| award_detail.send("#{name}=", value) if award_detail.respond_to?("#{name}=") }
         award.award_details << award_detail
         
         Rails.logger.info("FacultyWebService.instantiate_award - #{award.inspect}")
