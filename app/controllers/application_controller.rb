@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Bcsec::Rails::SecuredController
   
-  helper_method :current_ctsa_reporting_year, :get_current_user
+  helper_method :current_ctsa_reporting_year, :get_current_user, :faculty_member?
   
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -78,6 +78,14 @@ class ApplicationController < ActionController::Base
         elsif person.employeeid
           FacultyWebService.locate_one(:employeeid => person.employeeid)
         end
+      end
+    end
+    
+    def faculty_member?
+      if [:Admin, :User].any? { |group| current_user.permit?(group) }
+        false
+      else
+        true
       end
     end
 

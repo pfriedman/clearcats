@@ -4,11 +4,7 @@ class WelcomeController < ApplicationController
   def index
     if current_user
       populate_person
-      
-      if @person.is_a?(Client) and !current_user.permit?(:Admin)
-        redirect_to :controller => "welcome", :action => "client_index"
-      end
-      
+      redirect_to :controller => "welcome", :action => "client_index" if faculty_member?
     end
   end
   

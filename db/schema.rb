@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101216175350) do
+ActiveRecord::Schema.define(:version => 20101222163428) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -393,7 +393,6 @@ ActiveRecord::Schema.define(:version => 20101216175350) do
   add_index "people", ["employeeid"], :name => "index_people_on_employeeid"
   add_index "people", ["era_commons_username"], :name => "index_people_on_era_commons_username"
   add_index "people", ["ethnic_type_id"], :name => "index_people_on_ethnic_type_id"
-  add_index "people", ["netid"], :name => "people_netid_idx", :unique => true
   add_index "people", ["organizational_unit_id"], :name => "index_people_on_organizational_unit_id"
   add_index "people", ["race_type_id"], :name => "index_people_on_race_type_id"
   add_index "people", ["specialty_id"], :name => "index_people_on_specialty_id"

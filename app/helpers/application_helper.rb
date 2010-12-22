@@ -71,5 +71,5 @@ module ApplicationHelper
     email.each_char { |c| encoded << "&##{c[0]};" }
     encoded.join("")
   end
-  
+
 end

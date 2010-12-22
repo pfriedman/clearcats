@@ -92,10 +92,10 @@
 
   .span-6.last
     .trainee_toggler
-      = link_to "Click Here if Trainee", "javascript:void(0);", :onclick => "$('.trainee_fields').show(); $('.trainee_toggler').hide();"
+      = link_to "Click Here if Scholar/Trainee", "javascript:void(0);", :onclick => "$('.trainee_fields').show(); $('.trainee_toggler').hide();"
       
     .trainee_fields
-      = link_to "Hide Trainee Fields", "javascript:void(0);", :onclick => "$('.trainee_fields').hide(); $('.trainee_toggler').show();"
+      = link_to "Hide Scholar/Trainee Fields", "javascript:void(0);", :onclick => "$('.trainee_fields').hide(); $('.trainee_toggler').show();"
     
     %h4{ :id => "trainee_header", :class => "trainee_fields" } Trainees Only
     

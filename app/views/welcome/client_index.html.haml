@@ -8,10 +8,10 @@
 
 .welcome
 
-  %p.hello
-    Please edit your information. Thank you!
-
   - if @person
+    %p.hello
+      Please edit your information. Thank you!
+  
     .front_page_section
       %h3
         = link_to "Edit Profile", edit_person_path(@person)
@@ -23,4 +23,13 @@
         = link_to "Edit Publications", person_publications_path(@person)
     .front_page_section
       %h3
-        = link_to "Edit Approvals", person_approvals_path(@person)
+        = link_to "Edit Regulatory Approvals and Technical Transfer", person_approvals_path(@person)
+    
+  - else
+    %p.hello
+      Unfortunately we cannot find your record at this time. 
+      %br
+      - email = encode_email("tylersmith@northwestern.edu")
+      Please contact 
+      = mail_to email, "Tyler Smith <#{email}>"
+      to report this problem. Thank you.
