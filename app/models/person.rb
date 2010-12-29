@@ -510,6 +510,7 @@ class Person < ActiveRecord::Base
       criteria << {:username       => self.netid}      if self.netid
       
       unless criteria.empty?
+        
         usrs = Bcsec.authority.find_users(*criteria)
         if !usrs.blank?
           if usr = usrs.first

@@ -141,9 +141,10 @@ class PeopleController < ApplicationController
       redirect_to :back
     else
       @organizational_unit_id = params[:organizational_unit_id]
-      search = {:netid_like => params[:netid], :last_name_like => params[:last_name]}
+      search  = {:netid_like => params[:netid], :last_name_like => params[:last_name]}
       people  = Person.search(search).all
       faculty = FacultyWebService.locate(params)
+      
       @people = (faculty + people).uniq
     end
   end

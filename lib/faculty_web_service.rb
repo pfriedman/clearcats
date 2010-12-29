@@ -22,6 +22,22 @@ class FacultyWebService
       resp = make_request(uri, req)
       results = parse_faculty_response(resp.body) unless resp.body.blank?
 
+      known_netids = results.map(&:netid)
+
+      if params[:netid] and !known_netids.include?(params[:netid])
+        person  = Client.new(:netid => params[:search][:netid])
+        person  = person.amplify
+        results << person
+      elsif params[:last_name]
+        usrs = Bcsec.authority.find_users({:last_name => params[:last_name]})
+        usrs.each do |usr|
+          next if known_netids.include?(usr.username)
+          person  = Client.new(:netid => usr.username)
+          person  = person.amplify
+          results << person
+        end
+      end
+
     rescue Exception => e
       Rails.logger.error("FacultyWebService.locate - Exception [#{e.message}] occurred when calling web service.\n")
       Rails.logger.error(e.backtrace.join("\n"))
@@ -138,13 +154,9 @@ class FacultyWebService
 
       if !person.edited_by_user?
         attributes.each { |name, value| person.send("#{name.to_s}=", value) if person.respond_to?("#{name.to_s}=") }
-      
-        # use ldap over faculty db
-        begin
-                    
-          ldap_entry = Ldap.new.retrieve_entry_by_netid(attributes["netid"])
-          ldap_entry.attribute_names.each { |key| person.send("#{key}=", ldap_entry[key].to_s) if person.respond_to?("#{key}=") } unless ldap_entry.blank?
 
+        begin
+          person = person.amplify
           dept = Department.find_by_externalid(person.dept_id)
           person.department = dept if dept
           if person.valid?
