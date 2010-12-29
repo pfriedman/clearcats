@@ -25,16 +25,23 @@ class FacultyWebService
       known_netids = results.map(&:netid)
 
       if params[:netid] and !known_netids.include?(params[:netid])
-        person  = Client.new(:netid => params[:search][:netid])
+        person  = Client.new(:netid => params[:netid])
         person  = person.amplify
-        results << person
-      elsif params[:last_name]
+        if person.valid? 
+          person.save!
+          results << person
+        end
+      end
+      if params[:last_name]
         usrs = Bcsec.authority.find_users({:last_name => params[:last_name]})
         usrs.each do |usr|
           next if known_netids.include?(usr.username)
           person  = Client.new(:netid => usr.username)
           person  = person.amplify
-          results << person
+          if person.valid? 
+            person.save!
+            results << person
+          end
         end
       end
 
