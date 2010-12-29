@@ -1,5 +1,5 @@
 - user = get_current_user
-- sysadmin = user.respond_to?(:sysadmin?) and user.sysadmin?
+- sysadmin = user.respond_to?(:sysadmin?) && user.sysadmin?
 
 - form_tag(update_ctsa_reporting_year_awards_path) do
   = hidden_field_tag "person_id", @person.id
@@ -33,7 +33,7 @@
         %td
           = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
           %br
-          = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" }
+          = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" } if sysadmin
         %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
         %td= h award.sponsor
         %td= h award.sponsor_award_number

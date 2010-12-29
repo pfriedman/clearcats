@@ -33,6 +33,7 @@ describe LatticeGridWebService do
         results.size.should == 2
         results.first.class.should == Publication
         results.first.pmid.should == "20180973"
+        results.first.publication_date.to_s.should == "2010-01-01"
       end
       
       it "should catch any exception and return no results" do

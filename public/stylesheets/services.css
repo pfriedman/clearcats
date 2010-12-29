@@ -114,7 +114,7 @@ h4 {
 
 #modal_window {
   display: none;
-  height: 55em;
+  height: 35em;
   overflow-y: scroll;
   overflow-x: hidden;
 }

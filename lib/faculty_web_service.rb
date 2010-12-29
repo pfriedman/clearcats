@@ -23,7 +23,9 @@ class FacultyWebService
       results = parse_faculty_response(resp.body) unless resp.body.blank?
 
       known_netids = results.map(&:netid)
-
+      ####
+      # TODO: move this use of Bcsec to a more appropriate place
+      ####
       if params[:netid] and !known_netids.include?(params[:netid])
         person  = Client.new(:netid => params[:netid])
         person  = person.amplify
