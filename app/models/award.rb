@@ -56,6 +56,13 @@ class Award < ActiveRecord::Base
   attr_accessor :proposal_flag, :modified_date, :cufs_fund, :cufs_area, :cufs_org, :restricted_budget_amount
   attr_accessor :load_date, :moved_to_projects, :department, :orig_sponsor_code_l3, :orig_sponsor_name_l3
   attr_accessor :sponsor_name
+  
+  before_save :set_ctsa_award_type_award_number
+
+  
+  def set_ctsa_award_type_award_number
+    self.ctsa_award_type_award_number = SYSTEM_CONFIG["grant_number"] if self.ctsa_reportable?
+  end
 
   #### MAPPING OF FIELDS FROM cc_admin_holding ####
   

@@ -1,13 +1,15 @@
 .span-18
-  .span-6
+  .span-9
     %p
       = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
       =h null_safe(f.object.ctsa_reporting_years.last)
     %p
-      = f.label :ctsa_reportable, "CTSA Reportable"
-      %br
       = f.check_box "ctsa_reportable"
+      = f.label :ctsa_reportable, "CTSA Reportable for #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
+    %p
+      = f.check_box "nucats_assisted"
+      = f.label :nucats_assisted, "#{SYSTEM_CONFIG['grant_name']} Assisted"
     %p
       = f.label :pmid, "PMID"
       %br
@@ -28,8 +30,8 @@
       = f.text_field :missing_pmcid_reason
     %p
       = f.check_box :cited
-      = f.label :cited, "Cited"
-  .span-12.last
+      = f.label :cited, "Cited #{SYSTEM_CONFIG['grant_name']} (#{SYSTEM_CONFIG['grant_number']})"
+  .span-9.last
     %p
       = f.label :publication_date, "Publication Date"
       %br

@@ -1,3 +1,5 @@
+require 'yaml'
+
 module CtsaReportable
 
   REPORTING_YEARS = (2000..2025).to_a
@@ -14,6 +16,10 @@ module CtsaReportable
     ctsa_reporting_years.include?(current_year)
   end
   
+  def ctsa_reportable?
+    ctsa_reportable
+  end
+  
   def ctsa_reportable=(val)
     yrs = ctsa_reporting_years
     yrs.delete(current_year)
@@ -24,7 +30,16 @@ module CtsaReportable
   private
   
     def current_year
-      return (Date.today.month == 1) ? Date.today.year - 1 : Date.today.year
+      default = (Date.today.month == 1) ? Date.today.year - 1 : Date.today.year
+      
+      begin
+        year = YAML.load_file("#{Rails.root}/config/system_config.yml")["current_ctsa_reporting_year"]
+      rescue
+        year = default
+      end
+      
+      year = default if year.nil?
+      year.to_i
     end
   
 end

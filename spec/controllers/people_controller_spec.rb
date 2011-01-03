@@ -179,6 +179,11 @@ describe PeopleController do
     end
     
     describe "POST update_ctsa_reporting_year" do
+      
+      before(:each) do
+        @year = SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i
+      end
+      
       it "updates the reporting year of the person to the current reporting year" do
         client = Factory(:client)
         client.ctsa_reporting_years.should == [2000]
@@ -187,17 +192,17 @@ describe PeopleController do
         post :update_ctsa_reporting_year, "people_ids" => [client.id.to_s], :search => {}, :page => 1
         
         person = Client.find(client.id)
-        person.ctsa_reporting_years.should == [2000, Time.now.year]
+        person.ctsa_reporting_years.should == [2000, @year]
         
         response.should redirect_to(people_path(:page => 1, :search => {}))
       end
       
       it "removes the current reporting year of the person if not sent as a param" do
         client = Factory(:client)
-        client.ctsa_reporting_years = (client.ctsa_reporting_years << Time.now.year) 
+        client.ctsa_reporting_years = (client.ctsa_reporting_years << @year) 
         client.save!
         
-        client.ctsa_reporting_years.should == [2000, Time.now.year]
+        client.ctsa_reporting_years.should == [2000, @year]
         
         Client.should_receive(:search).and_return([client])
         post :update_ctsa_reporting_year, "people_ids" => [], :search => {}, :page => 1

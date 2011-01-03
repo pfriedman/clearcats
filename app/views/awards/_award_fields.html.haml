@@ -1,4 +1,56 @@
+
 .span-9
+  .award_section
+    %p
+      %b CTSA Award Information
+    %p
+      = f.label :ctsa_reporting_years, "CTSA Reporting Years"
+      %br
+      =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
+    %p
+      = f.check_box "ctsa_reportable"
+      = f.label :ctsa_reportable, "CTSA Reportable for #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
+    %p
+      = f.label :ctsa_award_type_award_number, "CTSA Award Number"
+      %br
+      =h f.object.ctsa_reportable.blank? ? "n/a" : f.object.ctsa_award_type_award_number
+    %p
+      = f.check_box "nucats_assisted"
+      = f.label :nucats_assisted, "#{SYSTEM_CONFIG['grant_name']} Assisted"
+    %p
+      = f.label :phs_organization_id, "PHS Organization"
+      %br
+      = f.select(:phs_organization_id, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
+    %p
+      = f.label :activity_code_id, "Activity Code"
+      %br
+      = f.select(:activity_code_id, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
+    %p
+      = f.label :non_phs_organization_id, "Non PHS Organization"
+      %br
+      = f.select(:non_phs_organization_id, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
+
+  .award_section
+    %p
+      %b Project Information
+    %p
+      = f.label :formatted_project_period_start_date, "Project Period Start Date"
+      %br
+      = f.text_field :formatted_project_period_start_date, :class => "datepicker"
+    %p
+      = f.label :formatted_project_period_end_date, "Project Period End Date"
+      %br
+      = f.text_field :formatted_project_period_end_date, :class => "datepicker"
+    %p
+      = f.label :project_period_total_cost, "Project Period Total Cost"
+      %br
+      = f.text_field :project_period_total_cost
+    %p
+      = f.label :total_project_cost, "Total Project Cost"
+      %br
+      = f.text_field :total_project_cost
+
+.span-9.last
   .award_section
     %p
       %b Award Information
@@ -13,7 +65,7 @@
     %p 
       = f.label :grant_title, "Grant Title"
       %br
-      = f.text_field :grant_title
+      = f.text_area :grant_title, :cols => 40, :rows => 2
     %p
       = f.label :budget_identifier, "Budget Number"
       %br
@@ -50,55 +102,6 @@
       = f.label :award_status, "Award Status"
       %br
       = f.text_field :award_status
-      
-.span-9    
-  .award_section
-    %p
-      %b CTSA Award Information
-    %p
-      = f.label :ctsa_reporting_years, "CTSA Reporting Years"
-      %br
-      =h f.object.ctsa_reporting_years.blank? ? "n/a" : f.object.ctsa_reporting_years.join(",")
-    %p
-      = f.label :ctsa_reportable, "CTSA Reportable"
-      %br
-      = f.check_box "ctsa_reportable"
-    %p
-      = f.label :ctsa_award_type_award_number, "CTSA Award Number"
-      %br
-      = f.text_field :ctsa_award_type_award_number
-    %p
-      = f.label :phs_organization_id, "PHS Organization"
-      %br
-      = f.select(:phs_organization_id, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal PHS Award Organizational Code --" }) 
-    %p
-      = f.label :activity_code_id, "Activity Code"
-      %br
-      = f.select(:activity_code_id, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --" }) 
-    %p
-      = f.label :non_phs_organization_id, "Non PHS Organization"
-      %br
-      = f.select(:non_phs_organization_id, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Federal Non-PHS Award --" }) 
-
-  .award_section
-    %p
-      %b Project Information
-    %p
-      = f.label :formatted_project_period_start_date, "Project Period Start Date"
-      %br
-      = f.text_field :formatted_project_period_start_date, :class => "datepicker"
-    %p
-      = f.label :formatted_project_period_end_date, "Project Period End Date"
-      %br
-      = f.text_field :formatted_project_period_end_date, :class => "datepicker"
-    %p
-      = f.label :project_period_total_cost, "Project Period Total Cost"
-      %br
-      = f.text_field :project_period_total_cost
-    %p
-      = f.label :total_project_cost, "Total Project Cost"
-      %br
-      = f.text_field :total_project_cost
 
 .buttons
   = hidden_field_tag :service_id, @service.id if @service

@@ -155,6 +155,11 @@ describe AwardsController do
     end
 
     describe "POST update_ctsa_reporting_year" do
+      
+      before(:each) do
+        @year = SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i
+      end
+      
       it "updates the reporting year of the person's awards to the current reporting year" do
         person = Factory(:person)
         award = Factory(:award, :person => person)
@@ -170,7 +175,7 @@ describe AwardsController do
         
         person = Person.find(person.id)
         person.awards.size.should == 1
-        person.awards.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        person.awards.first.ctsa_reporting_years.should == [2000, @year]
         
         response.should redirect_to(person_awards_path(person))
       end
@@ -178,13 +183,13 @@ describe AwardsController do
       it "removes the current reporting year of the person's awards if not sent as a param" do
         person = Factory(:person)
         award = Factory(:award, :person => person)
-        award.ctsa_reporting_years = (award.ctsa_reporting_years << Time.now.year) 
+        award.ctsa_reporting_years = (award.ctsa_reporting_years << @year) 
         person.awards << award
         person.save!
         
         person = Person.find(person.id)
         person.awards.size.should == 1
-        person.awards.first.ctsa_reporting_years.should == [2000, Time.now.year]
+        person.awards.first.ctsa_reporting_years.should == [2000, @year]
         
         Service.should_receive(:find).with("99").and_return(mock_model(Service, :person => person))
         post :update_ctsa_reporting_year, "award_ids" => [], :service_id => "99"

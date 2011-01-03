@@ -117,6 +117,13 @@ h4 {
   height: 35em;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-size: 1.125em;
+}
+
+#modal_window textarea,
+#modal_window select,
+#modal_window input {
+  font-size: 1.125em !important;
 }
 
 #modal_window .buttons {
@@ -135,6 +142,7 @@ h4 {
 .header_option {
   top: 0;
   right: 0;
+  background-color: white;
 
   margin-top: .25em;
   margin-right: 2em;
@@ -163,7 +171,11 @@ h4 {
 
 #award_form select,
 #award_form input[type="text"] {
-  width: 30em;
+  width: 22em;
+}
+
+#award_form option {
+  width: 45em;
 }
 
 .edit_modal_form_add_link {
@@ -223,4 +235,9 @@ h4 {
 
 ul.ou_service_lines li {
   list-style-type: none;
+}
+
+textarea#award_grant_title {
+  width: 25em;
+  height: 3em !important;
 }

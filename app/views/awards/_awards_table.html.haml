@@ -8,7 +8,7 @@
     %tr
       - unless @service
         %th CTSA Reportable #{current_year}
-      %th Edit
+      %th Select
       %th Reporting Years
       %th
         = order @search, :by => :sponsor_name, :as => "Sponsor", :params => ordering_params
@@ -31,7 +31,7 @@
           %td
             = check_box_tag "award_ids[]", award.id, award.ctsa_reporting_years.include?(current_year)
         %td
-          = link_to "Edit", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
+          = link_to "Select", edit_link_params, { :class => "edit_modal_form_link edit_link icon_link", :onclick => "return edit_modal_form(this)" } 
           %br
           = link_to "Details", details_award_path(award), { :class => "list_link icon_link", :onclick => "return edit_modal_form(this)" } if sysadmin
         %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")

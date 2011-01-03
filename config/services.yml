@@ -10,6 +10,9 @@ development:
     :host: http://faculty-ws.local
     :path: 
       :ws:
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles
 
 test:
   :lattice_grid:
@@ -23,7 +26,10 @@ test:
     :host: http://faculty-ws.local
     :path: 
       :ws:
-        
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles
+
 cucumber:
   :lattice_grid:
     :host: http://fsm-publications.local
@@ -36,6 +42,10 @@ cucumber:
     :host: http://faculty-ws.local
     :path: 
       :ws:
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles
+
 ci:
   :lattice_grid:
     :host: http://rails-dev.bioinformatics.northwestern.edu/fsmpubs/
@@ -48,6 +58,9 @@ ci:
     :host: https://clinical-rails-stg.nubic.northwestern.edu/
     :path: 
       :ws: ws-faculty
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles
 
 staging:
   :lattice_grid:
@@ -61,6 +74,10 @@ staging:
     :host: https://clinical-rails-stg.nubic.northwestern.edu/
     :path: 
       :ws: ws-faculty
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles
+
 production:
   :lattice_grid:
     :host: http://latticegrid.feinberg.northwestern.edu/
@@ -73,4 +90,6 @@ production:
     :host: https://clinical-rails-stg.nubic.northwestern.edu/
     :path:
       :ws: ws-faculty
-    
+  :enotis:
+    :host: http://enotis.northwestern.edu
+    :path: roles

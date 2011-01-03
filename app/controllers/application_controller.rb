@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
     
   def current_ctsa_reporting_year
-    return (Date.today.month == 1) ? Date.today.year - 1 : Date.today.year
+    SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i
   end
   
   private

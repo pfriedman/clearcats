@@ -84,6 +84,28 @@ describe Award do
     
   end
   
+  context "ctsa reportable" do
+    
+    before(:each) do
+      @year = SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i
+    end
+    
+    it "should update the grant number if ctsa_reportable" do
+      
+      award = Factory(:award)
+      award.should_not be_ctsa_reportable
+      award.ctsa_award_type_award_number.should be_blank
+      
+      award.ctsa_reporting_years = [@year]
+      award.save!
+      
+      award = Award.find(award.id)
+      award.should be_ctsa_reportable
+      award.ctsa_award_type_award_number.should == "UL1RR025741"
+    end
+    
+  end
+  
   context "the organizations" do
     
     before(:each) do
