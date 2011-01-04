@@ -18,6 +18,11 @@ users:
     portals:
       - ClearCATS:
         - Admin: [4619]
+  cti_user:
+    password: cti_user
+    portals:
+      - ClearCATS:
+        - Admin: [4621]
   wakibbe:
     password: wakibbe
     portals:

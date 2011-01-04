@@ -12,8 +12,13 @@ class ServicesController < ApplicationController
   end
   
   def my_services
+    @user_organizational_units = determine_org_units_for_user
     params[:search] ||= Hash.new
-    params[:search][:created_by_equals] ||= current_user.username
+    if @user_organizational_units.blank?
+      params[:search][:created_by_equals] ||= current_user.username
+    else
+      params[:search][:service_line_organizational_unit_id_eq_any] = @user_organizational_units.collect(&:id) 
+    end
     params[:search][:order] ||= "descend_by_updated_at"
 
     if params[:completed]
