@@ -371,7 +371,7 @@ class Person < ActiveRecord::Base
       pers.specialty = specialty unless specialty.nil?
     end
 
-    [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) unless row[attribute].blank? }
+    [:first_name, :last_name, :middle_name, :email, :netid, :employeeid].each { |attribute| pers.send("#{attribute}=", row[attribute]) if !row[attribute].blank? && pers.send("#{attribute}").blank?  }
     pers.organizational_units << user.organizational_unit if !user.organizational_unit.nil? and !pers.organizational_units.include?(user.organizational_unit)
 
     reporting_years = pers.ctsa_reporting_years
@@ -379,23 +379,47 @@ class Person < ActiveRecord::Base
     
     pers = pers.amplify
     
-    pers.save!
-    process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
+    if pers.valid?
+      pers.save!
+      process_service_lines_row(pers, row[:service_lines].split(",")) if !row[:service_lines].blank?
+    else
+      File.open(import_error_log(user.netid), 'a') {|f| f.write("[#{Time.now.to_s(:db)}] person record invalid for - #{row} - #{pers.errors.map(&:to_s)}\n") }
+    end
   end
   
   def self.determine_client(row)
-    eracn = row[:era_commons_username].upcase
+    eracn = row[:era_commons_username].to_s.upcase
     netid = row[:netid]
     empid = row[:employeeid]
     email = row[:email]
     
     pers = Person.find_by_era_commons_username(eracn)
-    pers = Person.find_by_netid(netid) if pers.blank? and !netid.blank?
-    pers = Person.find_by_email(email) if pers.blank? and !email.blank?
-    pers = Person.find_by_employeeid(empid) if pers.blank? and !empid.blank?
+    if pers
+      Rails.logger.error("~~~ found person by eracn #{eracn}")
+    end
+    
+    if pers.blank? && !netid.blank?
+      pers = Person.find_by_netid(netid) 
+      if pers
+        Rails.logger.error("~~~ found person by netid #{netid}")
+      end
+    end
+    if pers.blank? && !email.blank?
+      pers = Person.find_by_email(email) 
+      if pers
+        Rails.logger.error("~~~ found person by email #{email}")
+      end
+    end
+    if pers.blank? && !empid.blank?
+      pers = Person.find_by_employeeid(empid) 
+      if pers
+        Rails.logger.error("~~~ found person by empid #{empid}")
+      end
+    end
     
     if pers.blank?
       pers = Client.create(:era_commons_username => eracn, :email => email, :netid => netid, :employeeid => empid)
+      Rails.logger.error("~~~ creating new person #{eracn}, #{email}, #{netid}, #{empid}")
     end
     pers
   end
@@ -516,7 +540,9 @@ class Person < ActiveRecord::Base
           if usr = usrs.first
             Bcsec::User::ATTRIBUTES.each do |a|
               next if a.to_s.downcase == "country"
-              self.send("#{a}=", usr.send("#{a}").to_s) if self.respond_to?("#{a}=") and self.send("#{a}").blank?
+              next if !self.netid.blank? && a == "netid"
+              next if !self.employeeid.blank? && a == "employeeid"
+              self.send("#{a}=", usr.send("#{a}").to_s) if self.respond_to?("#{a}=") && self.send("#{a}").blank?
             end
           end
 
