@@ -393,8 +393,10 @@ class Person < ActiveRecord::Base
     empid = row[:employeeid]
     email = row[:email]
     
-    pers = Person.find_by_era_commons_username(eracn)
-    if pers
+    pers = nil
+    
+    if pers.blank? && !eracn.blank?
+      pers = Person.find_by_era_commons_username(eracn)
       Rails.logger.error("~~~ found person by eracn #{eracn}")
     end
     
@@ -540,8 +542,6 @@ class Person < ActiveRecord::Base
           if usr = usrs.first
             Bcsec::User::ATTRIBUTES.each do |a|
               next if a.to_s.downcase == "country"
-              next if !self.netid.blank? && a == "netid"
-              next if !self.employeeid.blank? && a == "employeeid"
               self.send("#{a}=", usr.send("#{a}").to_s) if self.respond_to?("#{a}=") && self.send("#{a}").blank?
             end
           end
