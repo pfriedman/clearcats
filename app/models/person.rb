@@ -397,31 +397,20 @@ class Person < ActiveRecord::Base
     
     if pers.blank? && !eracn.blank?
       pers = Person.find_by_era_commons_username(eracn)
-      Rails.logger.error("~~~ found person by eracn #{eracn}")
     end
     
     if pers.blank? && !netid.blank?
       pers = Person.find_by_netid(netid) 
-      if pers
-        Rails.logger.error("~~~ found person by netid #{netid}")
-      end
     end
     if pers.blank? && !email.blank?
       pers = Person.find_by_email(email) 
-      if pers
-        Rails.logger.error("~~~ found person by email #{email}")
-      end
     end
     if pers.blank? && !empid.blank?
       pers = Person.find_by_employeeid(empid) 
-      if pers
-        Rails.logger.error("~~~ found person by empid #{empid}")
-      end
     end
     
     if pers.blank?
       pers = Client.create(:era_commons_username => eracn, :email => email, :netid => netid, :employeeid => empid)
-      Rails.logger.error("~~~ creating new person #{eracn}, #{email}, #{netid}, #{empid}")
     end
     pers
   end
@@ -460,7 +449,11 @@ class Person < ActiveRecord::Base
 
 
   def self.current_ctsa_reporting_year
-    Date.today.year
+    year = SYSTEM_CONFIG["current_ctsa_reporting_year"]
+    if year.blank?
+      year = (Date.today.month == 1) ? Date.today.year - 1 : Date.today.year
+    end
+    year
   end
 
   ###

@@ -44,6 +44,21 @@ class DataScrubber
     end      
     map
   end
+  
+  def self.update_ctsa_reporting_years(from = nil, to = nil)
+    from = Date.today.year if from.nil?
+    to   = from - 1 if to.nil?
+    peeps = Person.for_reporting_year(from)
+    
+    peeps.each do |peep|
+      yrs = peep.ctsa_reporting_years
+      yrs.delete(from)
+      yrs << to unless yrs.include?(to)
+      peep.ctsa_reporting_years = yrs
+      peep.save!
+    end
+    
+  end
 
   private
 
