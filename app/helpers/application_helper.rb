@@ -40,6 +40,11 @@ module ApplicationHelper
 
   #### APPLICATION VERSION ####
 
+  def ctsa_wording
+    ctsa_txt = faculty_member? ? "Benefited from NUCATS" : "CTSA Reportable #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
+    ctsa_txt
+  end
+
   def application_version
     return "#{APP_VERSION["major"]}.#{APP_VERSION["minor"]}.#{APP_VERSION["revision"]}" rescue "x.x.x"
   end

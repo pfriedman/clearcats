@@ -7,7 +7,7 @@ class PublicationsController < ApplicationController
     if params[:person_id]
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
-      params[:search][:order]   ||= "ascend_by_publication_date"
+      params[:search][:order]   ||= "descend_by_publication_date"
       year = params[:view_all].blank? ? CTSA_BASE_LINE_YEAR : 1900
       params[:search][:publication_date_after] = Date.new(year,1,1)
       

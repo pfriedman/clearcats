@@ -8,7 +8,7 @@ class AwardsController < ApplicationController
       @show_header = true
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
-      params[:search][:order]   ||= "ascend_by_project_period_start_date"
+      params[:search][:order]   ||= "descend_by_project_period_start_date"
       params[:search][:project_period_end_date_after] = Date.new(CTSA_BASE_LINE_YEAR,1,1) if params[:view_all].blank?
       
       populate_service_and_person

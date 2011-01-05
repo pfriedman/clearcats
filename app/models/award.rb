@@ -159,4 +159,8 @@ class Award < ActiveRecord::Base
     result.join(", ")
   end
   
+  def total_amount
+    self.award_details.map(&:total_amount).sum
+  end
+  
 end

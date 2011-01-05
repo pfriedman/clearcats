@@ -1,8 +1,11 @@
 .service_header
   %h3
-    #{@service.service_line.organizational_unit.to_s}
-    %br
-    #{@service.service_line} Service
-    - if @service.person
-      for #{@service.person}
+    - if @service.service_line
+      #{@service.service_line.organizational_unit.to_s}
+      %br
+      #{@service.service_line} Service
+      - if @service.person
+        for #{@service.person}
+    - else
+      Service for #{@service.person}
     
