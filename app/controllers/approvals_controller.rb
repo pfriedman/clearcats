@@ -7,6 +7,8 @@ class ApprovalsController < ApplicationController
       params[:search][:person_id] = params[:person_id]
       
       populate_service_and_person
+      
+      EnotisWebService.approvals({:netid => @person.netid}) if @person and @person.netid
 
       @search = Approval.search(@search_params)
       @publications = @search.all

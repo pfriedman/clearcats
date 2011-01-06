@@ -94,12 +94,12 @@
 
   .span-6.last
     .trainee_toggler
-      = link_to "Click Here if Scholar/Trainee", "javascript:void(0);", :onclick => "$('.trainee_fields').show(); $('.trainee_toggler').hide();"
+      = link_to "Click Here if KL2 or TL1 Scholar, Trainee, or Applicant", "javascript:void(0);", :onclick => "$('.trainee_fields').show(); $('.trainee_toggler').hide();"
       
     .trainee_fields
-      = link_to "Hide Scholar/Trainee Fields", "javascript:void(0);", :onclick => "$('.trainee_fields').hide(); $('.trainee_toggler').show();"
+      = link_to "Hide Scholar/Trainee/Applicant Fields", "javascript:void(0);", :onclick => "$('.trainee_fields').hide(); $('.trainee_toggler').show();"
     
-    %h4{ :id => "trainee_header", :class => "trainee_fields" } Trainees Only
+    %h4{ :id => "trainee_header", :class => "trainee_fields" } KL2/TL1 Only
     
     .trainee_section.trainee_fields
       %p
@@ -123,14 +123,13 @@
 
     
     .trainee_section.trainee_fields
-      %h4{ :class => "section_header" } Trainee Fields
       %p
         = f.label :training_type, "Training Type"
         %br
         = f.select(:training_type, Person::TRAINING_TYPES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Training Type --" }) 
 
       %p
-        = f.label :trainee_status, "Trainee Status"
+        = f.label :trainee_status, "Status"
         %br
         = f.select(:trainee_status, Person::TRAINEE_STATUSES.collect { |a| [ a.titleize, a ] }, { :include_blank => "-- Select Trainee Status --" })
     

@@ -11,7 +11,8 @@
     %table.records
       %tr
         - unless @service
-          %th CTSA Reportable #{current_year}
+          %th
+            = ctsa_wording
         %th Select
         %th Reporting Years
         %th

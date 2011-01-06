@@ -11,8 +11,9 @@ development:
     :path: 
       :ws:
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles
 
 test:
   :lattice_grid:
@@ -27,8 +28,9 @@ test:
     :path: 
       :ws:
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles
 
 cucumber:
   :lattice_grid:
@@ -43,8 +45,9 @@ cucumber:
     :path: 
       :ws:
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles
 
 ci:
   :lattice_grid:
@@ -59,8 +62,9 @@ ci:
     :path: 
       :ws: ws-faculty
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles
 
 staging:
   :lattice_grid:
@@ -75,8 +79,9 @@ staging:
     :path: 
       :ws: ws-faculty
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles
 
 production:
   :lattice_grid:
@@ -91,5 +96,6 @@ production:
     :path:
       :ws: ws-faculty
   :enotis:
-    :host: http://enotis.northwestern.edu
-    :path: roles
+    :host: https://enotis.northwestern.edu/
+    :path:
+      :roles: roles

@@ -28,4 +28,24 @@ class Approval < ActiveRecord::Base
 
   belongs_to :person
 
+  attr_accessor :project_role
+  
+  # Mapping of names for enotis web service
+  
+  def study_name
+    self.project_title
+  end
+  
+  def study_name=(study_name)
+    self.project_title = study_name
+  end
+  
+  def irb_number
+    self.tracking_number
+  end
+  
+  def irb_number=(irb_number)
+    self.tracking_number = irb_number
+  end
+  
 end

@@ -52,3 +52,4 @@ end
 
 require "will_paginate"
 require "paperclip"
+require "#{Rails.root}/lib/core_ext"

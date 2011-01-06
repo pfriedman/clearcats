@@ -5,7 +5,9 @@ function edit_modal_form(link) {
   new jQuery.get(url, function(data) {
       // displays modal window - note css centering
       jQuery.blockUI( { message: jQuery("#modal_window").html(data), 
-        css: { width:"500px", margin:"-200px 0 0 -200px", left:"50%", padding: "4px 4px 4px 15px", textAlign: "left" } } );
+        css: { width:"500px", margin:"-200px 0 0 -200px", left:"50%", padding: "4px 4px 4px 15px", textAlign: "left", cursor: "default" },
+        overlayCSS: { cursor: "default" }
+      } );
   });
   return false;
 }
