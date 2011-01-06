@@ -277,6 +277,11 @@ a.no_link {
 }
 
 /* Tabular Data */
+.records_header {
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
 
 table.records {
   width: 100%;

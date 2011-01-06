@@ -168,7 +168,7 @@ class Person < ActiveRecord::Base
   named_scope :trainees,      :conditions => { :training_type => TRAINEE }
   
   named_scope :invalid_for_ctsa_reporting, :conditions => "era_commons_username IS NULL OR specialty_id IS NULL"
-
+  
   # attributes from faculty_web_service that are not persisted
   attr_accessor :interests, :campus, :descriptions, :dv_abbr
   attr_accessor :basis, :category, :dept_id, :career_track, :degree, :division

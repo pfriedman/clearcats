@@ -43,7 +43,3 @@
       .buttons
         = f.submit "Save"
     .links
-      - unless @service 
-        = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
-        = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service
-        = link_to 'Edit Awards', person_awards_path(@person), :class => "edit_link icon_link" unless @service

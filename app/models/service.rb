@@ -148,7 +148,8 @@ class Service < ActiveRecord::Base
     end
   
     def only_person_association_to_organizational_unit_is_through_this_service?
-      self.person.services.map(&:organizational_unit).select { |ou| ou.id == self.service_line.organizational_unit.id }.count == 1
+      svcs = self.person.services.all(:conditions => "services.service_line_id IS NOT NULL") 
+      svcs.map(&:organizational_unit).select { |ou| ou.id == self.service_line.organizational_unit.id }.count == 1
     end
 
 end

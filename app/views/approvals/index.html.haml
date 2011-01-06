@@ -1,9 +1,11 @@
-- stylesheet "approvals", "services"
+- stylesheet "people", "approvals", "services"
 - javascript "jquery.blockUI", "modal_form"
 - title "Approvals for #{@person}"
 
 :javascript
   $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+
+= render "/people/client_menu" 
 
 = render '/approvals/list', :approvals => @approvals, :person => @person, :search => @search_params, :service => nil
 

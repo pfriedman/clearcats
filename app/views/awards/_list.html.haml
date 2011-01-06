@@ -12,18 +12,16 @@
     - award_association = { :person_id => @person.id }
 
   .awards_body
+    .records_header
+      = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+      - unless @service
+        - if params[:view_all].blank?
+          = link_to 'View All Awards', person_awards_path(@person, :view_all => true), :class => "list_link icon_link" 
+        - else
+          = link_to 'View Awards since 2008', person_awards_path(@person), :class => "list_link icon_link"
     - if @awards.blank?
       .no-records
         No awards found for #{@person}
     - else
       = render '/awards/awards_table', { :ordering_params => ordering_params, :award_association => award_association }
-    .links
-      - unless @service  
-        = link_to 'List People', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User) unless @service
-        = link_to 'Edit Person', edit_person_path(@person), :class => "edit_link icon_link" unless @service
-        = link_to 'Edit Publications', person_publications_path(@person), :class => "edit_link icon_link" unless @service
-        - if params[:view_all].blank?
-          = link_to 'All Awards', person_awards_path(@person, :view_all => true), :class => "list_link icon_link" 
-        - else
-          = link_to 'CTSA Reportable Awards', person_awards_path(@person), :class => "list_link icon_link"
-      = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+      
