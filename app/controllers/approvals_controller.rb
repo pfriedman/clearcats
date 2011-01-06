@@ -11,7 +11,7 @@ class ApprovalsController < ApplicationController
       EnotisWebService.approvals({:netid => @person.netid}) if @person and @person.netid
 
       @search = Approval.search(@search_params)
-      @publications = @search.all
+      @approvals = @search.all
     else
       flash[:notice] = "Approvals can be viewed only in the context of a person."
       redirect_to people_path

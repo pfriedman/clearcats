@@ -75,10 +75,12 @@ class EnotisWebService
     def self.determine_approval_to_instantiate(attributes)
       tracking_number = attributes["irb_number"]
       approval = Approval.find_by_tracking_number(tracking_number) unless tracking_number.blank?
-      approval = Approval.new(:approval_type => "IRB", :person => @person) if approval.nil?
+      approval = Approval.new(:approval_type => "IRB", :institution => "NUIRB", :person => @person) if approval.nil?
       approval
     end
     
+    
+    # TODO: determine if the IRB approval should be 
     def self.principal_investigator?(txt)
       if txt.length == 2
         return txt.downcase == "pi"

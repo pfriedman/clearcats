@@ -29,9 +29,7 @@
               %th
                 Approval Date
               %th
-                Principal Investigator
-              %th
-                CTSA Reportable
+                = ctsa_wording
               %th
           %tbody{ :class => "nested_records" }
             - f.fields_for :approvals do |approval_form|

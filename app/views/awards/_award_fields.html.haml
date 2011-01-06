@@ -66,10 +66,6 @@
       %br
       = f.text_field :formatted_project_period_end_date, :class => "datepicker"
     %p
-      = f.label :project_period_total_cost, "Project Period Total Cost"
-      %br
-      = f.text_field :project_period_total_cost
-    %p
       = f.label :total_project_cost, "Total Project Cost"
       %br
       - f.object.total_project_cost = f.object.total_amount if f.object.total_project_cost.blank?
@@ -103,10 +99,6 @@
       = f.label :grant_amount, "Grant Amount"
       %br
       = f.text_field :grant_amount
-    %p
-      = f.label :role, "Role"
-      %br
-      = f.text_field :role
     %p
       = f.label :institution_number, "Institution Number"
       %br
