@@ -408,6 +408,10 @@ table.nested {
   background: url(../images/page_white_upload.png) 0 2px no-repeat !important;
 }
 
+.download_link, .download_link:hover {
+  background: url(../images/download.png) 0 2px no-repeat !important;
+}
+
 .search_link, .search_link:hover {
   background: url(../images/find.png) 0 2px no-repeat !important;
 }

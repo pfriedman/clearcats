@@ -63,12 +63,12 @@ module ApplicationHelper
     val.blank? ? default : h(val.to_s)
   end
   
-  def non_local_environment?
-    return ((Rails.env == "staging") or (Rails.env == "production"))
+  def has_sub_uri?
+    return Rails.env == "staging"
   end
   
   def cc_prefix_path
-    non_local_environment? ? "/clearcats" : ""
+    has_sub_uri? ? "/clearcats" : ""
   end
   
   def encode_email(email)

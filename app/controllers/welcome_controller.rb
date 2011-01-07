@@ -21,6 +21,10 @@ class WelcomeController < ApplicationController
   def faq
   end
   
+  def user_guide
+    send_file("#{Rails.root}/doc/user_guide.pdf", :type => 'application/pdf')
+  end
+  
   def add_investigator
     @organizational_unit_id = params[:organizational_unit_id]
   end
