@@ -45,9 +45,16 @@ Rails::Initializer.run do |config|
   
   CTSA_BASE_LINE_YEAR = 2008
   
-  
   config.load_paths << "#{Rails.root}/app/models/ctsa"
   config.load_paths << "#{Rails.root}/app/models/surveyor"
+  
+  # Email setup
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+   :address => "ns.northwestern.edu",
+   :port => 25,
+   :domain => "northwestern.edu"
+  }
 end
 
 require "will_paginate"

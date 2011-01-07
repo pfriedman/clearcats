@@ -3,6 +3,12 @@
 
 class ApplicationController < ActionController::Base
   include Bcsec::Rails::SecuredController
+
+  # Exception Notifier
+  include ExceptionNotifiable
+  ExceptionNotifier.exception_recipients = %w(p-friedman@northwestern.edu clearcats@northwestern.edu)
+  ExceptionNotifier.sender_address = %("ClearCATS Application Error" <p-friedman@northwestern.edu>)
+  ExceptionNotifier.email_prefix = "[ClearCATS-#{Rails.env}]"
   
   helper_method :current_ctsa_reporting_year, :get_current_user, :faculty_member?
   
@@ -20,6 +26,18 @@ class ApplicationController < ActionController::Base
   def current_ctsa_reporting_year
     SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i
   end
+  
+  protected
+
+    def local_request?
+      false
+    end
+
+    exception_data :additional_data
+
+    def additional_data
+      current_user ? { :current_user => current_user.username } : {}
+    end
   
   private
     
