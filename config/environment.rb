@@ -43,8 +43,6 @@ Rails::Initializer.run do |config|
   # Rack Middleware to handle authenication failures and render the appropriate page
   config.middleware.use "AuthenticationFailureHandler"
   
-  CTSA_BASE_LINE_YEAR = 2008
-  
   config.load_paths << "#{Rails.root}/app/models/ctsa"
   config.load_paths << "#{Rails.root}/app/models/surveyor"
   

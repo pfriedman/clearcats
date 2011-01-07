@@ -41,7 +41,7 @@
 
 a.no_link {
   padding: 0;
-  margin: 0 -0.25em 0 -0.5em;
+  margin: 0 -0.25em 0 0;
 }
 
 /* Flash Messages */
@@ -163,15 +163,15 @@ a.no_link {
 }
 
 #home {
-  margin: 0px;
-  padding: 0px 20px;
+  margin: 0 !important;
+  padding: 5px 20px 0px 20px;
   font-family: Arial, Helvetica, Geneva, sans-serif;
   background-color: white;
 }
 
 #home a {
   font-size: 2.5em;
-  line-height: 180%;
+  line-height: 100%;
   color: #222266;
   text-decoration: none;
 }

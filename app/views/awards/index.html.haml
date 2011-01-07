@@ -1,6 +1,6 @@
 - stylesheet "people", "awards", "services"
 - javascript "jquery.blockUI", "modal_form"
-- title_text = params[:view_all].blank? ? "Awards since 2008 for #{@person}" : "All Awards for #{@person}"
+- title_text = params[:view_all].blank? ? "Awards since #{SYSTEM_CONFIG['ctsa_base_line_year']} for #{@person}" : "All Awards for #{@person}"
 - title title_text
 
 :javascript

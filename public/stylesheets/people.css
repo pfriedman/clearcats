@@ -127,6 +127,18 @@ hr {
   -webkit-border-radius: 2em;
 }
 
+.client_menu a {
+  text-decoration: none;
+}
+
+.client_menu a:hover {
+  color: orange;
+}
+
+.client_menu a.index:hover {
+  background-color: darkslateblue;
+}
+
 .client_menu .active {
   background-color: darkblue;
 }
@@ -135,13 +147,12 @@ hr {
   display: inline-block;
 }
 
-.client_task div {
-  border-bottom: 1px solid white;
+.client_menu div {
   text-align: center;
 }
 
-.status_bar div,
 .client_task div {
+  border-bottom: 1px solid white;
   text-align: center;
 }
 

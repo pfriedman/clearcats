@@ -13,12 +13,12 @@
 
   .publications_body
     .records_header
+      = link_to "Add New Publication", { :controller => "/publications", :action => "new", :search => @search_params, :person_id => person.id }.merge(pub_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
       - if service.nil?
         - if params[:view_all].blank?
           = link_to 'View All Publications', person_publications_path(person, :view_all => true), :class => "list_link icon_link" 
         - else
-          = link_to 'View Publications since 2008', person_publications_path(person), :class => "list_link icon_link" 
-      = link_to "Add New Publication", { :controller => "/publications", :action => "new", :search => @search_params, :person_id => person.id }.merge(pub_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
+          = link_to "View Publications since #{SYSTEM_CONFIG['ctsa_base_line_year']}", person_publications_path(person), :class => "list_link icon_link" 
 
     - if publications
       = render 'publications/publications_table', { :ordering_params => ordering_params, :pub_association => pub_association }

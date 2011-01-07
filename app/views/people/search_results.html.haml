@@ -32,4 +32,4 @@
   = link_to "New Search", {:controller => "people", :action => "search"}, { :class => "search_link icon_link" }
   = link_to "View All Records", {:controller => "people", :action => "index"}, { :class => "list_link icon_link" }
   - person_params = @people.blank? ? {:netid => params[:netid], :last_name => params[:last_name]} : {}
-  = link_to "Add New Record", {:controller => "people", :action => "new", :person => person_params }, { :class => "add_link icon_link" }
+  = link_to "Add New Investigator", {:controller => "people", :action => "new", :person => person_params }, { :class => "add_link icon_link" }

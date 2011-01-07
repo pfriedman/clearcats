@@ -2,16 +2,16 @@
   %div
     .status_bar
       .span-6
-        %div{ :class => "index #{'active' if action_name == 'edit' and controller_name == 'people'}" }
+        %a{ :class => "index #{'active' if action_name == 'edit' and controller_name == 'people'}", :href => edit_person_path(@person) }
           1
       .span-5
-        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'awards'}" }
+        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'awards'}", :href => person_awards_path(@person) }
           2
       .span-6
-        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'publications'}" }
+        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'publications'}", :href => person_publications_path(@person) }
           3
       .span-6.last
-        %div{ :class => "index #{'active' if action_name == 'index' and controller_name == 'approvals'}" }
+        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'approvals'}", :href => person_approvals_path(@person) }
           4
     .clear
     .client_task

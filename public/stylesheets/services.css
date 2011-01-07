@@ -48,6 +48,18 @@ h4 {
   display: inline-block;
 }
 
+.service_menu a {
+  text-decoration: none;
+}
+
+.service_menu a:hover {
+  color: orange;
+}
+
+.service_menu a.index:hover {
+  background-color: darkslateblue;
+}
+
 .service_task div {
   border-bottom: 1px solid white;
   text-align: center;
