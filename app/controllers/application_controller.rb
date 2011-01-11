@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 
   # Exception Notifier
   include ExceptionNotifiable
-  ExceptionNotifier.exception_recipients = %w(p-friedman@northwestern.edu clearcats@northwestern.edu)
-  ExceptionNotifier.sender_address = %("ClearCATS Application Error" <p-friedman@northwestern.edu>)
+  ExceptionNotifier.exception_recipients = %w(clearcats-tech-support@northwestern.edu)
+  ExceptionNotifier.sender_address = %("ClearCATS Application Error" <clearcats@northwestern.edu>)
   ExceptionNotifier.email_prefix = "[ClearCATS-#{Rails.env}]"
   
   helper_method :current_ctsa_reporting_year, :get_current_user, :faculty_member?
