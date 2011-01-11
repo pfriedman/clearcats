@@ -9,11 +9,22 @@ INSERT INTO T_PERSONNEL
 VALUES
 (PERSONNEL_ID_SEQ.nextval, 'clearcats@northwestern.edu', 'Clearcats', 'Faculty', 'clearcats@northwestern.edu', encrypt_password('13#cats#'))
 
+INSERT INTO T_PERSONNEL
+(PERSONNEL_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL)
+VALUES
+(PERSONNEL_ID_SEQ.nextval, 'jhe722', 'Justin', 'Henderson', 'justin-henderson@northwestern.edu')
+
+
 INSERT INTO T_SECURITY_LOGINS
 ( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
 VALUES
 ( 'clearcats@northwestern.edu', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
+
+INSERT INTO T_SECURITY_LOGINS
+( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
+VALUES
+( 'jhe722', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
 INSERT INTO T_SECURITY_LOGINS
 ( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
@@ -99,6 +110,12 @@ INSERT INTO T_SECURITY_GROUP_MEMBERS
 ( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
 VALUES
 ( SGM_ID_SEQ.nextval, 'pfr957', 'Admin', 555, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
+INSERT INTO T_SECURITY_GROUP_MEMBERS
+( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
+VALUES
+( SGM_ID_SEQ.nextval, 'jhe722', 'Admin', 5007, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
 
 
 INSERT INTO T_SECURITY_GROUP_MEMBERS

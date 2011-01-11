@@ -120,7 +120,16 @@ class Service < ActiveRecord::Base
   end
   
   def to_s
-    "#{self.service_line.organizational_unit.to_s} #{self.service_line}".strip #  [#{self.updated_at}]
+    if self.service_line.blank?
+      if self.person.blank?
+        return "Bad Service"
+      else
+        return "Service for #{self.person} does not have a service line"
+      end
+        
+    else
+      return "#{self.service_line.organizational_unit.to_s} #{self.service_line}".strip
+    end
   end
   
   def add_organizational_unit_to_person

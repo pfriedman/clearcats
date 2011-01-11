@@ -48,4 +48,12 @@ class Approval < ActiveRecord::Base
     self.tracking_number = irb_number
   end
   
+  def study_approved_date=(dt)
+    self.approval_date = dt
+  end
+  
+  def study_approved_date
+    self.approval_date
+  end
+  
 end
