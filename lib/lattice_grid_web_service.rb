@@ -76,12 +76,10 @@ class LatticeGridWebService
     
     invalid_text = "Sorry - invalid username"
     
-    p url + path
-    
     begin
 
       resp = make_request(uri, req)
-      p resp.body
+
       result = resp.body.include?(invalid_text) ? false : true
 
     rescue Exception => e
