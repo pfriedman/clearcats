@@ -176,7 +176,7 @@ class Person < ActiveRecord::Base
   attr_accessor :demographics, :certifications, :field_of_study
   
   def employee_id=(emplid)
-    self.employeeid = emplid
+    self.employeeid = emplid if !emplid.blank? && emplid.to_i > 0
   end
   
   def to_s

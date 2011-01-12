@@ -32,31 +32,28 @@ class LatticeGridWebService
   def self.investigator_publications_search(netid)
     results = []
 
-    if self.is_investigator?(netid)
+    url   = ClearCats::ExternalServices::Resource.new(:lattice_grid, :investigators).to_s
+    path  = "/#{netid}/publications.json"
 
-      url   = ClearCats::ExternalServices::Resource.new(:lattice_grid, :investigators).to_s
-      path  = "/#{netid}/publications.json"
+    uri = URI.parse(url + path)
+    req = Net::HTTP::Get.new(uri.path)
 
-      uri = URI.parse(url + path)
-      req = Net::HTTP::Get.new(uri.path)
+    begin
 
-      begin
-
-        resp = make_request(uri, req)
-        value = ActiveSupport::JSON.decode(cleantext(resp.body))
-      
-        if value
-          person = find_or_create_person(netid)
-          value.each do |attributes|
-            results << instantiate_publication(attributes["abstract"]) 
-          end
-          results.each { |r| r.person = person; r.save! }
+      resp = make_request(uri, req)
+      value = ActiveSupport::JSON.decode(cleantext(resp.body))
+    
+      if value
+        person = find_or_create_person(netid)
+        value.each do |attributes|
+          results << instantiate_publication(attributes["abstract"]) 
         end
-
-      rescue Exception => e
-        Rails.logger.error("LatticeGridWebService.investigator_publications_search - Exception [#{e.message}] occurred when calling web service.\n")
-        Rails.logger.error(e.backtrace.join("\n"))
+        results.each { |r| r.person = person; r.save! }
       end
+
+    rescue Exception => e
+      Rails.logger.error("LatticeGridWebService.investigator_publications_search - Exception [#{e.message}] occurred when calling web service.\n")
+      Rails.logger.error(e.backtrace.join("\n"))
     end
 
     return results

@@ -171,7 +171,7 @@ class PeopleController < ApplicationController
       if !params[:netid].blank? and !params[:era_commons_username].blank?
         ClientMerger.merge(params[:era_commons_username], params[:netid])
         flash[:notice] = 'Records were successfully merged.'
-        redirect_to people_path(:search => { :netid_like => params[:netid] })
+        redirect_to people_path(:search => { :era_commons_username_like => params[:era_commons_username] })
       else
         render :merge
       end

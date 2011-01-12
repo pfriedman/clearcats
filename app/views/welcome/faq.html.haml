@@ -13,6 +13,22 @@
       help with financial decision-making, and assist with general record keeping.
 
   .page_section
+    %h3
+      Is there a user guide?
+
+    %ul
+      %li
+        = link_to "Download User Guide", { :controller => :welcome, :action => :user_guide }, { :class => "download_link icon_link" } 
+
+  .page_section
+    %h3
+      How should I define 'benefited'?
+    %ul
+      %li
+        Benefit is defined as research that was enhanced, improved, or aided through your contact with and/or participation in NUCATS Institute programs, events, 
+        connections, awards, bioinformatics support, or services.
+
+  .page_section
     
     %h3 
       Definitions
@@ -89,10 +105,3 @@
       %li
         Reporting period: January 15, 2010 to January 31, 2011
 
-  .page_section
-    %h3
-      Is there a user guide?
-      
-    %ul
-      %li
-        = link_to "Download User Guide", { :controller => :welcome, :action => :user_guide }, { :class => "download_link icon_link" } 
