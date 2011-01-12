@@ -93,6 +93,7 @@ class Publication < ActiveRecord::Base
   
   def previously_reported?(yr)
     return false if ctsa_reporting_years_mask.nil?
+    return false if ctsa_reporting_years_mask.to_i == 0
     return false if ctsa_reporting_years.size == 1 and ctsa_reporting_years.include?(yr)
     true
   end

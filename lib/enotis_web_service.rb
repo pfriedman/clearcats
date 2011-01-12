@@ -3,7 +3,7 @@ require 'uri'
 
 class EnotisWebService
 
-  DEFAULT_HOST_URL = "http://enotis.northwestern.edu/"
+  DEFAULT_HOST_URL = "https://enotis.northwestern.edu/roles"
   
   def self.approvals(params)
     @person = Person.find_by_netid(params[:netid])
@@ -21,7 +21,7 @@ class EnotisWebService
       end
 
     rescue Exception => e
-      Rails.logger.error("FacultyWebService.approvals - Exception [#{e.message}] occurred when calling web service.\n")
+      Rails.logger.error("EnotisWebService.approvals - Exception [#{e.message}] occurred when calling web service.\n")
       Rails.logger.error(e.backtrace.join("\n"))
     end
 
