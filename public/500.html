@@ -1,30 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>We're sorry, but something went wrong (500)</title>
-	<style type="text/css">
-		body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-		div.dialog {
-			width: 25em;
-			padding: 0 4em;
-			margin: 4em auto 0 auto;
-			border: 1px solid #ccc;
-			border-right-color: #999;
-			border-bottom-color: #999;
-		}
-		h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-	</style>
+<meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+<title>clearcats :: Welcome to clearcats!</title>
+<link href="/stylesheets/blueprint/screen.css?1294767303" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/blueprint/print.css?1294767303" media="print" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/application.css?1294767303" media="all" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/jquery-ui-1.8.6.custom.css?1294767303" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/ddsmoothmenu.css?1294767303" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/ddsmoothmenu-v.css?1294767303" media="screen" rel="stylesheet" type="text/css" />
+
+
+<script src="/javascripts/application.js?1294767303" type="text/javascript"></script>
+<script src="/javascripts/ddsmoothmenu.js?1294767303" type="text/javascript"></script>
+
+<script src="/javascripts/jquery-1.4.2.min.js?1294767303" type="text/javascript"></script>
+<script src="/javascripts/jquery-ui-1.8.6.custom.min.js?1294767303" type="text/javascript"></script>
+<script src="/javascripts/jrails.js?1294767303" type="text/javascript"></script>
+<script src="/javascripts/jquery.livequery.js?1294767303" type="text/javascript"></script>
+<script src="/javascripts/jquery.tooltip.min.js?1294767303" type="text/javascript"></script>
+
+
+<link href="/stylesheets/welcome.css?1294767303" media="screen" rel="stylesheet" type="text/css" />
+<script type='text/javascript'>
+  //<![CDATA[
+    ddsmoothmenu.init({
+      mainmenuid: "banner_menu",  //Menu DIV id
+      orientation: 'h',           //Horizontal or vertical menu: Set to "h" or "v"
+      classname: 'ddsmoothmenu',  //class added to menu's outer DIV
+      contentsource: "markup"     //"markup" or ["container_id", "path_to_menu_file"]
+    })
+  //]]>
+</script>
+
 </head>
 
 <body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry, but something went wrong.</h1>
-    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
+
+
+<div class='container'>
+  <div id='home'>
+    <a href="/" class="no_link">clearcats</a>
   </div>
+  <div id='menu'></div>
+  <div id='header'>
+    <div id='banner'>
+      <img alt="Banner_right" class="banner_right" src="/images/banner_right.jpg" />
+      <div id='fl'>
+        <img alt="Banner_edge" src="/images/banner_edge.jpg" />
+        <div class='ddsmoothmenu' id='banner_menu'>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/welcome/faq">FAQ</a>
+            </li>
+          </ul>
+        </div><img alt="Banner_edge" src="/images/banner_edge.jpg" />
+      </div>
+      <div id='menu2'>
+        <span id='logout_link'>
+          <a href="/logout">logout</a>
+        </span>
+      </div>
+    </div>
+    <div id='title'>
+      <span>Oops!</span>
+    </div>
+  </div>
+  <div class='clear'></div>
+  <div id='main'>
+    <div class="error">
+      <h3>We're sorry, but something went wrong.</h3>
+      <p>We've been notified about this issue and we'll take a look at it shortly.</p>
+      
+      <p>
+        Please contact 
+        <a href="mailto:&#99;&#108;&#101;&#97;&#114;&#99;&#97;&#116;&#115;&#45;&#116;&#101;&#99;&#104;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#110;&#111;&#114;&#116;&#104;&#119;&#101;&#115;&#116;&#101;&#114;&#110;&#46;&#101;&#100;&#117;">
+          &#99;&#108;&#101;&#97;&#114;&#99;&#97;&#116;&#115;&#45;&#116;&#101;&#99;&#104;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#110;&#111;&#114;&#116;&#104;&#119;&#101;&#115;&#116;&#101;&#114;&#110;&#46;&#101;&#100;&#117; 
+        </a>
+        if you have any questions about this issue.
+      </p>
+    </div>
+  </div>
+  <div class='clear'></div>
+  <div id='footer'>
+    <div class='branding'>
+      <div id='northwestern'>
+        <a href="http://www.northwestern.edu">
+          <img alt="Northwestern University" height="85" src="/images/nu_logo_purple.jpg" width="150" />
+        </a>
+      </div>
+      <div id='nmh'>
+        <a href="http://www.nmh.org">
+          <img alt="Northwestern Memorial Hospital" height="35" src="/images/nm_hospital_logo.jpg" width="230" />
+        </a>
+      </div>
+      <div id='feinberg'>
+        <a href="http://www.feinberg.northwestern.edu">
+          <img alt="Feinberg School of Medicine, Northwestern University" height="85" src="/images/feinberg_logo_large.jpg" width="180" />
+        </a>
+      </div>
+      <div id='nucats'>
+        <a href="http://www.nucats.northwestern.edu">
+          <img alt="The Northwestern University Clinical and Translational Sciences Institute" height="50" src="/images/nucats_logo_med.jpg" width="250" />
+        </a>
+      </div>
+    </div>
+    <div class='version'>
+      v. 0.0.0
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
