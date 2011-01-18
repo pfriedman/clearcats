@@ -216,14 +216,15 @@ describe PeopleController do
       before(:each) do
         @no_netid    = Factory(:client, :netid => nil)
         @no_emplid   = Factory(:client, :employeeid => nil)
-        @no_era_name = Factory(:client, :era_commons_username => nil)
+        @no_era_name = Factory(:client, :era_commons_username => nil, :ctsa_reporting_years_mask => 1024)
         @no_specialty = Factory(:client, :specialty => nil)
         @all = [@no_netid, @no_emplid, @no_era_name, @no_specialty]
       end
 
       it "should return all people that are incomplete" do
         get :incomplete
-        @all.map(&:id).each { |id| assigns[:people].map(&:id).include?(id).should be_true }
+        assigns[:people].map(&:id).should include(@no_era_name.id)
+        # @all.map(&:id).each { |id| assigns[:people].map(&:id).include?(id).should be_true }
       end
 
       it "should return all people that are incomplete without netids"

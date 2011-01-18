@@ -45,7 +45,7 @@ class Publication < ActiveRecord::Base
   belongs_to :person
   
   named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
-  named_scope :invalid_for_ctsa, :conditions => "pmcid IS NULL"
+  named_scope :invalid_for_ctsa, :conditions => "(publications.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND (pmcid IS NULL)"
 
   # Attributes from LatticeGrid/PubMed
   attr_accessor :endnote_citation, :authors, :full_authors, :is_first_author_investigator, :is_last_author_investigator

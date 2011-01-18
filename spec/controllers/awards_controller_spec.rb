@@ -205,8 +205,8 @@ describe AwardsController do
 
     describe "GET incomplete" do
       it "should return all awards that are incomplete" do
-        good = Factory(:award)
-        bad  = Factory(:award, :grant_number => nil)
+        good = Factory(:award, :ctsa_reporting_years_mask => 1024)
+        bad  = Factory(:award, :grant_number => nil, :ctsa_reporting_years_mask => 1024)
         get :incomplete
         assigns[:awards].size.should == 1
         assigns[:awards].first.id.should equal(bad.id)
