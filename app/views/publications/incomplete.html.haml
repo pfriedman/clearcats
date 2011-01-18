@@ -19,6 +19,8 @@
       = order @search, :by => :nihms_number, :as => "NIHMS Number", :params => { :controller => "publications", :action => "incomplete" }
     %th
       = order @search, :by => :cited, :as => "Cited", :params => { :controller => "publications", :action => "incomplete" }
+    %th
+      Reporting Year
   - @publications.each do |pub|
     %tr{ :class => cycle('even_record', 'odd_record') }
       %td= link_to "Edit", { :controller => "publications", :action => "edit", :id => pub, :search => params[:search], :person_id => pub.person.id }, { :class => "edit_link icon_link" }
@@ -28,5 +30,6 @@
       %td= h pub.pmid
       %td= h pub.nihms_number
       %td= h pub.cited? ? "Yes" : "No"
+      %td= h pub.ctsa_reporting_years.join(",")
 
 = will_paginate @publications

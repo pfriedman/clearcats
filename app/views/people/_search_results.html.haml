@@ -18,7 +18,7 @@
         = hidden_field_tag "search[#{k}]", v
     %table{ :class => "records" }
       %tr
-        %th CTSA Reportable #{current_year}
+        %th= ctsa_wording
         %th Select
         %th= order @search, :by => :first_name, :as => "First Name", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :last_name, :as => "Last Name", :params => {:criteria => params[:criteria]}
@@ -26,6 +26,7 @@
         %th= order @search, :by => :employeeid, :as => "Employee ID", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :email, :as => "Email", :params => {:criteria => params[:criteria]}
         %th= order @search, :by => :era_commons_username, :as => "ERA Commons", :params => {:criteria => params[:criteria]}
+        %th Specialty
         %th Reporting Years
         %th 
           = "History" if sysadmin
@@ -41,6 +42,7 @@
           %td= h person.employeeid
           %td= h person.email
           %td= h person.era_commons_username
+          %td= h person.specialty
           %td= h person.ctsa_reporting_years.blank? ? "n/a" : person.ctsa_reporting_years.join(",")
           %td= link_to 'View', versions_person_path(person), :class => "show_link icon_link" if sysadmin
 

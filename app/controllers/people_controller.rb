@@ -24,6 +24,8 @@ class PeopleController < ApplicationController
       params[:search][:era_commons_username_equals] = nil
     when "specialty"
       params[:search][:specialty_id_equals] = nil
+    else
+      params[:search][:invalid_for_ctsa_reporting] = true
     end
     @search = Client.search(params[:search])
     @people = @search.paginate(:page => params[:page], :per_page => 20)

@@ -335,6 +335,7 @@ table.nested {
   border-bottom: 1px solid #dcdcdc;
   padding: 0.5em;
   margin: 3px;
+  text-align: left;
 }
 
 .pagination a {
