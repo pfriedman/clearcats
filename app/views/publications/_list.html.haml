@@ -14,7 +14,7 @@
   .publications_body
     .records_header
       = link_to "Add New Publication", { :controller => "/publications", :action => "new", :search => @search_params, :person_id => person.id }.merge(pub_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
-      - if service.nil?
+      - if service.nil? and !faculty_member?
         - if params[:view_all].blank?
           = link_to 'View All Publications', person_publications_path(person, :view_all => true), :class => "list_link icon_link" 
         - else

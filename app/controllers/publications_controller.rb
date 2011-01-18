@@ -8,6 +8,9 @@ class PublicationsController < ApplicationController
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
       params[:search][:order]   ||= "descend_by_publication_date"
+      
+      params[:view_all] = true  if faculty_member?
+      
       year = params[:view_all].blank? ? SYSTEM_CONFIG["ctsa_base_line_year"].to_i : 1900
       params[:search][:publication_date_after] = Date.new(year,1,1)
       

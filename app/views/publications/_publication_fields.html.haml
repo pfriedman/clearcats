@@ -4,12 +4,14 @@
       = f.label :ctsa_reporting_years, "CTSA Reporting Years"
       %br
       =h null_safe(f.object.ctsa_reporting_years.last)
+      
+    - unless faculty_member?
+      %p
+        = f.check_box "nucats_assisted"
+        = f.label :nucats_assisted, "#{SYSTEM_CONFIG['grant_name']} Assisted"
     %p
       = f.check_box "ctsa_reportable"
-      = f.label :ctsa_reportable, "CTSA Reportable for #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
-    %p
-      = f.check_box "nucats_assisted"
-      = f.label :nucats_assisted, "#{SYSTEM_CONFIG['grant_name']} Assisted"
+      = f.label :ctsa_reportable, "#{ctsa_wording}"
     %p
       = f.label :pmid, "PMID"
       %br

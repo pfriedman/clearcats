@@ -14,7 +14,7 @@
   .awards_body
     .records_header
       = link_to "Add New Award", { :controller => "/awards", :action => "new", :search => @search_params }.merge(award_association), { :class => "edit_modal_form_link add_link icon_link", :onclick => "return edit_modal_form(this)" }
-      - unless @service
+      - if @service.blank? and !faculty_member?
         - if params[:view_all].blank?
           = link_to 'View All Awards', person_awards_path(@person, :view_all => true), :class => "list_link icon_link" 
         - else

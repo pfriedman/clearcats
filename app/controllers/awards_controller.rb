@@ -9,6 +9,9 @@ class AwardsController < ApplicationController
       params[:search]           ||= Hash.new
       params[:search][:person_id] = params[:person_id]
       params[:search][:order]   ||= "descend_by_project_period_start_date"
+      
+      params[:view_all] = true  if faculty_member?
+      
       params[:search][:project_period_end_date_after] = Date.new(SYSTEM_CONFIG["ctsa_base_line_year"].to_i,1,1) if params[:view_all].blank?
       
       populate_service_and_person
