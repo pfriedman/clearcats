@@ -9,6 +9,11 @@ users:
     portals:
       - ClearCATS:
         - Admin
+  pfr957:
+    password: pfr957
+    portals:
+      - ClearCATS:
+        - Admin
   faculty:
     password: faculty
     portals:
@@ -34,3 +39,5 @@ users:
     password: awa272
   zbu468:
     password: zbu468
+  asdf:
+    password: asdf
