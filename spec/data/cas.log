@@ -1,0 +1,53 @@
+D, [2011-01-18T11:29:08.111535 #16515] DEBUG -- : Logging in with username: amo563, lt: LT-1295371748r85BFA7B66459829A30, service: https://clearcats.nubic.northwestern.edu, auth: CASServer::Authenticators::Bcsec
+D, [2011-01-18T11:29:08.605726 #16515] DEBUG -- : Generated service ticket 'ST-1295371748rDB4C11DD1F5468A477' for service 'https://clearcats.nubic.northwestern.edu' for user 'amo563' at '165.124.23.159'
+I, [2011-01-18T11:29:08.606077 #16515]  INFO -- : Redirecting authenticated user 'amo563' at '165.124.23.159' to service 'https://clearcats.nubic.northwestern.edu'
+D, [2011-01-18T11:29:08.755636 #16515] DEBUG -- : Processing CASServer::Controllers::ProxyValidate::send {"ticket"=>"ST-1295371748rDB4C11DD1F5468A477", "service"=>"https://clearcats.nubic.northwestern.edu/", "pgtUrl"=>"https://cas.nubic.northwestern.edu/cas-proxy-callback/receive_pgt"}
+D, [2011-01-18T11:29:08.755823 #16515] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T11:29:08.755895 #16515] DEBUG -- : Validating service/proxy ticket 'ST-1295371748rDB4C11DD1F5468A477' for service 'https://clearcats.nubic.northwestern.edu'
+I, [2011-01-18T11:29:08.820480 #16515]  INFO -- : Ticket 'ST-1295371748rDB4C11DD1F5468A477' for service 'https://clearcats.nubic.northwestern.edu' for user 'amo563' successfully validated.
+D, [2011-01-18T11:31:44.304938 #16515] DEBUG -- : Deleting ServiceTicket "ST-1295370952r2C951E9C2C3A689755" for service https://clearcats.nubic.northwestern.edu.
+D, [2011-01-18T11:46:31.397844 #16515] DEBUG -- : Deleting ServiceTicket "ST-1295371748rDB4C11DD1F5468A477" for service https://clearcats.nubic.northwestern.edu.
+D, [2011-01-18T12:08:11.183339 #16515] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T12:08:11.184518 #16515] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T12:08:11.201934 #16515] DEBUG -- : Rendering login form with lt: LT-1295374091r5D0A9F8EA48FFC0C18, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T12:57:24.365222 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T12:57:24.367202 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T12:57:24.629584 #20394] DEBUG -- : Rendering login form with lt: LT-1295377044r9A093147FC76E5DC6E, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T13:29:16.301157 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T13:29:16.301981 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T13:29:16.429438 #20394] DEBUG -- : Rendering login form with lt: LT-1295378956rECADA1F94E13DAB4FB, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T13:29:25.431092 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu", "username"=>"skk958", "lt"=>"LT-1295378956rECADA1F94E13DAB4FB", "password"=>"******"}
+D, [2011-01-18T13:29:25.456883 #20394] DEBUG -- : Logging in with username: skk958, lt: LT-1295378965rAD4538CF7303082D6C, service: https://clearcats.nubic.northwestern.edu, auth: CASServer::Authenticators::Bcsec
+D, [2011-01-18T13:29:26.299450 #20394] DEBUG -- : Generated service ticket 'ST-1295378966rB3172F056838FE88FF' for service 'https://clearcats.nubic.northwestern.edu' for user 'skk958' at '165.124.223.223'
+I, [2011-01-18T13:29:26.300144 #20394]  INFO -- : Redirecting authenticated user 'skk958' at '165.124.223.223' to service 'https://clearcats.nubic.northwestern.edu'
+D, [2011-01-18T13:29:26.474255 #20394] DEBUG -- : Processing CASServer::Controllers::ProxyValidate::send {"ticket"=>"ST-1295378966rB3172F056838FE88FF", "service"=>"https://clearcats.nubic.northwestern.edu/", "pgtUrl"=>"https://cas.nubic.northwestern.edu/cas-proxy-callback/receive_pgt"}
+D, [2011-01-18T13:29:26.474441 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T13:29:26.474510 #20394] DEBUG -- : Validating service/proxy ticket 'ST-1295378966rB3172F056838FE88FF' for service 'https://clearcats.nubic.northwestern.edu'
+I, [2011-01-18T13:29:26.478406 #20394]  INFO -- : Ticket 'ST-1295378966rB3172F056838FE88FF' for service 'https://clearcats.nubic.northwestern.edu' for user 'skk958' successfully validated.
+D, [2011-01-18T14:06:40.983930 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T14:06:40.985003 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T14:06:41.001641 #20394] DEBUG -- : Rendering login form with lt: LT-1295381200rA8C47CA15C86129FBB, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T14:06:47.367726 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu", "username"=>"jhe722", "lt"=>"LT-1295381200rA8C47CA15C86129FBB", "password"=>"******"}
+D, [2011-01-18T14:06:47.613661 #20394] DEBUG -- : Logging in with username: jhe722, lt: LT-1295381207r46587FA46F453C1DD0, service: https://clearcats.nubic.northwestern.edu, auth: CASServer::Authenticators::Bcsec
+D, [2011-01-18T14:06:48.006190 #20394] DEBUG -- : Generated service ticket 'ST-1295381208rB67ADEC450F3D395FA' for service 'https://clearcats.nubic.northwestern.edu' for user 'jhe722' at '165.124.223.20'
+I, [2011-01-18T14:06:48.006590 #20394]  INFO -- : Redirecting authenticated user 'jhe722' at '165.124.223.20' to service 'https://clearcats.nubic.northwestern.edu'
+D, [2011-01-18T14:06:48.810571 #20394] DEBUG -- : Processing CASServer::Controllers::ProxyValidate::send {"ticket"=>"ST-1295381208rB67ADEC450F3D395FA", "service"=>"https://clearcats.nubic.northwestern.edu/", "pgtUrl"=>"https://cas.nubic.northwestern.edu/cas-proxy-callback/receive_pgt"}
+D, [2011-01-18T14:06:48.810764 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T14:06:48.810952 #20394] DEBUG -- : Validating service/proxy ticket 'ST-1295381208rB67ADEC450F3D395FA' for service 'https://clearcats.nubic.northwestern.edu'
+I, [2011-01-18T14:06:48.858691 #20394]  INFO -- : Ticket 'ST-1295381208rB67ADEC450F3D395FA' for service 'https://clearcats.nubic.northwestern.edu' for user 'jhe722' successfully validated.
+D, [2011-01-18T14:20:51.996201 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T14:20:51.997666 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T14:20:52.311240 #20394] DEBUG -- : Rendering login form with lt: LT-1295382052r48FC27128CEAE58DF0, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T14:38:40.590042 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu/"}
+D, [2011-01-18T14:38:40.591309 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T14:38:40.709025 #20394] DEBUG -- : Rendering login form with lt: LT-1295383120rC189D98E58C206EA94, service: https://clearcats.nubic.northwestern.edu, renew: , gateway: false
+D, [2011-01-18T14:38:49.957675 #20394] DEBUG -- : Processing CASServer::Controllers::Login::send {"service"=>"https://clearcats.nubic.northwestern.edu", "username"=>"ssa262", "lt"=>"LT-1295383120rC189D98E58C206EA94", "password"=>"******"}
+D, [2011-01-18T14:38:50.077519 #20394] DEBUG -- : Logging in with username: ssa262, lt: LT-1295383129rFC3D1016DC6D1ED13B, service: https://clearcats.nubic.northwestern.edu, auth: CASServer::Authenticators::Bcsec
+D, [2011-01-18T14:38:50.400495 #20394] DEBUG -- : Generated service ticket 'ST-1295383130rDF33671E13CDBC5E7D' for service 'https://clearcats.nubic.northwestern.edu' for user 'ssa262' at '165.124.166.155'
+I, [2011-01-18T14:38:50.400790 #20394]  INFO -- : Redirecting authenticated user 'ssa262' at '165.124.166.155' to service 'https://clearcats.nubic.northwestern.edu'
+D, [2011-01-18T14:38:50.842478 #20394] DEBUG -- : Processing CASServer::Controllers::ProxyValidate::send {"ticket"=>"ST-1295383130rDF33671E13CDBC5E7D", "service"=>"https://clearcats.nubic.northwestern.edu/", "pgtUrl"=>"https://cas.nubic.northwestern.edu/cas-proxy-callback/receive_pgt"}
+D, [2011-01-18T14:38:50.842656 #20394] DEBUG -- : Cleaned dirty service URL "https://clearcats.nubic.northwestern.edu/" to "https://clearcats.nubic.northwestern.edu"
+D, [2011-01-18T14:38:50.843024 #20394] DEBUG -- : Validating service/proxy ticket 'ST-1295383130rDF33671E13CDBC5E7D' for service 'https://clearcats.nubic.northwestern.edu'
+I, [2011-01-18T14:38:50.846890 #20394]  INFO -- : Ticket 'ST-1295383130rDF33671E13CDBC5E7D' for service 'https://clearcats.nubic.northwestern.edu' for user 'ssa262' successfully validated.
+D, [2011-01-18T14:49:31.145036 #20918] DEBUG -- : Deleting ServiceTicket "ST-1295381208rB67ADEC450F3D395FA" for service https://clearcats.nubic.northwestern.edu.
+D, [2011-01-18T15:00:39.812997 #20918] DEBUG -- : Deleting ServiceTicket "ST-1295383130rDF33671E13CDBC5E7D" for service https://clearcats.nubic.northwestern.edu.
