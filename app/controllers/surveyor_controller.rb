@@ -34,7 +34,7 @@ module SurveyorControllerCustomMethods
   end
   
   def get_current_user
-    person = Person.find_by_netid(current_user.username)
+    person = find_person_by_current_user
     @current_user = person.nil? ? current_user : person
   end
   

@@ -32,7 +32,7 @@ class WelcomeController < ApplicationController
   private
     
     def populate_person
-      @person = Person.find_by_netid(current_user.username)
+      @person = find_person_by_current_user
       @person = FacultyWebService.locate_one({:netid => current_user.username}) if @person.nil?
     end
   

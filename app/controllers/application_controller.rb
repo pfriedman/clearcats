@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
       if current_user.permit?(:Admin, :User) or param_key == :id
         @person = Person.find(params[param_key])
       else        
-        @person = Person.find_by_netid(current_user.username)
+        @person = find_person_by_current_user
       end
       update_person_data(@person)
     end
@@ -85,8 +85,12 @@ class ApplicationController < ActionController::Base
     alias :determine_organizational_units_for_user :determine_org_units_for_user
 
     def get_current_user
-      person = Person.find_by_netid(current_user.username)
+      person = find_person_by_current_user
       return person.nil? ? current_user : person
+    end
+    
+    def find_person_by_current_user
+      person = Person.find_by_netid(current_user.username)
     end
 
     def update_person_data(person)
