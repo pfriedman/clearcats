@@ -1,0 +1,14 @@
+SELECT MAX(id) FROM entities;
+
+
+SELECT nextval('entities_id_seq');
+
+This should be higher than the last result.
+
+Is it  the same or lower? If so... did you do some importing or
+restoring? (your sequence might be off)
+
+If it's not higher... run this to try and fix it. (run a quick
+pg_dump first...)
+
+SELECT setval('entities_id_seq', (SELECT MAX(id) FROM entities)+1);
