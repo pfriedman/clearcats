@@ -41,7 +41,7 @@ module ApplicationHelper
   #### APPLICATION VERSION ####
 
   def ctsa_wording
-    ctsa_txt = faculty_member? ? "Benefited from NUCATS" : "CTSA Reportable #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
+    ctsa_txt = faculty_member? ? "Interacted with NUCATS" : "CTSA Reportable #{SYSTEM_CONFIG['current_ctsa_reporting_year']}"
     ctsa_txt
   end
 
