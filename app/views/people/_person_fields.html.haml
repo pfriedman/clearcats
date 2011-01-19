@@ -72,7 +72,7 @@
       %br
       - for institution_position in InstitutionPosition.all(:order => :id)
         %div
-          = check_box_tag "person[institution_position_ids][]", institution_position.id, f.object.institution_positions.include?(institution_position)
+          = check_box_tag "#{@person.class.to_s.downcase}[institution_position_ids][]", institution_position.id, f.object.institution_positions.include?(institution_position)
           = institution_position.to_s
 
     %p
