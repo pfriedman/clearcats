@@ -13,7 +13,7 @@ describe ParticipatingOrganizationsController do
 
     describe "GET index" do
       it "assigns all participating_organizations as @participating_organizations" do
-        ParticipatingOrganization.stub(:find).with(:all).and_return([mock_participating_organization])
+        ParticipatingOrganization.stub(:search).and_return([mock_participating_organization])
         get :index
         assigns[:participating_organizations].should == [mock_participating_organization]
       end
@@ -55,7 +55,7 @@ describe ParticipatingOrganizationsController do
         it "redirects to the created participating_organization" do
           ParticipatingOrganization.stub(:new).and_return(mock_participating_organization(:save => true))
           post :create, :participating_organization => {}
-          response.should redirect_to(participating_organization_url(mock_participating_organization))
+          response.should redirect_to(edit_participating_organization_url(mock_participating_organization))
         end
       end
 
@@ -93,7 +93,7 @@ describe ParticipatingOrganizationsController do
         it "redirects to the participating_organization" do
           ParticipatingOrganization.stub(:find).and_return(mock_participating_organization(:update_attributes => true))
           put :update, :id => "1"
-          response.should redirect_to(participating_organization_url(mock_participating_organization))
+          response.should redirect_to(edit_participating_organization_url(mock_participating_organization))
         end
       end
 

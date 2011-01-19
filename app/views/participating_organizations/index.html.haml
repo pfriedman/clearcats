@@ -1,0 +1,27 @@
+- title "Participating Organizations"
+
+.page_section
+  %table.records
+    %tr
+      %th= order @search, :by => :name, :as => "Name"
+      %th= order @search, :by => :city, :as => "City"
+      %th= order @search, :by => :country_name, :as => "Country"
+      %th= order @search, :by => :us_state_name, :as => "State"
+      %th
+        Reporting year(s)
+      %th{ :colspan => "2" }
+
+    - @participating_organizations.each do |org|
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td=h org.name
+        %td=h org.city
+        %td=h org.country
+        %td=h org.us_state
+        %td=h org.reporting_year
+        %td= link_to 'Edit', edit_participating_organization_path(org), :class => "edit_link icon_link"
+        %td= link_to 'Delete', org, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
+
+= will_paginate @people
+
+.links
+  = link_to 'New Participating Organization', new_participating_organization_path, :class => "add_link icon_link"

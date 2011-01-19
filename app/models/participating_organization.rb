@@ -14,6 +14,12 @@
 #
 
 class ParticipatingOrganization < ActiveRecord::Base
+  include CtsaReportable
+  
+  has_paper_trail :ignore => [:ctsa_reporting_years_mask]
+  
   belongs_to :us_state
   belongs_to :country
+  
+  
 end

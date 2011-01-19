@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101222163428) do
+ActiveRecord::Schema.define(:version => 20110119161456) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(:version => 20101222163428) do
     t.integer  "reporting_year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ctsa_reporting_years_mask"
   end
 
   create_table "people", :force => true do |t|
@@ -469,8 +470,8 @@ ActiveRecord::Schema.define(:version => 20101222163428) do
   add_index "race_types", ["name"], :name => "index_race_types_on_name"
 
   create_table "response_sets", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "survey_id"
+    t.integer  "user_id",      :limit => 8
+    t.integer  "survey_id",    :limit => 8
     t.string   "access_code"
     t.datetime "started_at"
     t.datetime "completed_at"
