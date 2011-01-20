@@ -125,7 +125,13 @@ class PublicationsController < ApplicationController
       end
     end
     flash[:notice] = "Publications were updated successfully"
-    redirect_to person_publications_path(@person) # TODO: determine if there was a service and redirect appropriately
+    flash[:notice] = "Awards were updated successfully"
+    if faculty_member?
+      redirect_to person_approvals_path(@person)
+    else
+      redirect_to person_publications_path(@person) # TODO: determine if there was a service and redirect appropriately
+    end
+    
   end
   
   def versions

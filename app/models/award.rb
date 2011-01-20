@@ -43,7 +43,15 @@ class Award < ActiveRecord::Base
   has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
   named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
-  named_scope :invalid_for_ctsa, :conditions => "(awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND (organization_id IS NULL OR activity_code_id IS NULL OR grant_number IS NULL)"
+  named_scope :invalid_for_ctsa, :joins => "LEFT OUTER JOIN organizations ON organizations.id = awards.organization_id", 
+    :conditions => "(awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND " +
+    "(" +
+    "  (organization_id IS NULL) " +
+    "  OR " +
+    "  (organization_id IS NOT NULL and organizations.type = 'PhsOrganization' and activity_code_id IS NULL)" +
+    "  OR " +
+    "  (organization_id IS NOT NULL and organizations.type = 'NonPhsOrganization' and grant_number IS NULL)" +
+    ")"
   
   
   belongs_to :person
@@ -154,9 +162,9 @@ class Award < ActiveRecord::Base
   
   def ctsa_missing_fields
     result = []
-    result << "Activity Code" if self.activity_code_id.blank?
-    result << "Grant Number"  if self.grant_number.blank?
     result << "Organization"  if self.organization_id.blank?
+    result << "Activity Code" if self.activity_code_id.blank? && (!organization.blank? and organization.type == "PhsOrganization")
+    result << "Grant Number"  if self.grant_number.blank? || (!organization.blank? and organization.type == "NonPhsOrganization")
     result.join(", ")
   end
   

@@ -24,8 +24,12 @@ class ApprovalsController < ApplicationController
     [:person, :client, :user].each { |e| attr_params = attr_params.merge(params[e]) unless params[e].blank? }
     populate_service_and_person
     @person.update_attributes(attr_params)
-    flash[:notice] = "Approvals updated."
-    redirect_to :controller => "approvals", :action => "index", :person_id => @person.id
+    flash[:notice] = "Approvals were updated successfully"
+    if faculty_member?
+      redirect_to :controller => "welcome", :action => "index"
+    else
+      redirect_to person_approvals_path(@person)
+    end
   end
 
   private

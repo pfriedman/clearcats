@@ -8,4 +8,5 @@
   = render '/people/person_fields', :f => f
 
   .buttons
-    = f.submit "Save", :disable_with => 'Saving...'
+    - lbl = faculty_member? ? "Save and Continue" : "Save"
+    = submit_tag lbl

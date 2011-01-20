@@ -43,4 +43,5 @@
           %td= link_to 'View', versions_publication_path(pub), :class => "show_link icon_link" if sysadmin
     - unless @service
       .buttons
-        = submit_tag "Submit"
+        - lbl = faculty_member? ? "Save and Continue" : "Save"
+        = submit_tag lbl

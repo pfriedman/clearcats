@@ -106,7 +106,11 @@ class AwardsController < ApplicationController
       end
     end
     flash[:notice] = "Awards were updated successfully"
-    redirect_to person_awards_path(@person) # TODO: determine if there was a service and redirect appropriately
+    if faculty_member?
+      redirect_to person_publications_path(@person)
+    else
+      redirect_to person_awards_path(@person) # TODO: determine if there was a service and redirect appropriately
+    end
   end
   
   def versions

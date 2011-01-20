@@ -46,8 +46,15 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.update_attributes(params[@person.class.to_s.downcase.to_sym])
         redirect_path = (@person.netid == current_user.username) ? edit_person_path(@person) : people_path
-        flash[:notice] = 'Person was successfully updated. Please select action below to continue working with this record.'
-        format.html { redirect_to edit_person_path(@person) }
+        format.html do 
+          if faculty_member?
+            flash[:notice] = 'Person was successfully updated.'
+            redirect_to person_awards_path(@person)
+          else
+            flash[:notice] = 'Person was successfully updated. Please select action below to continue working with this record.'
+            redirect_to edit_person_path(@person)
+          end
+        end
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

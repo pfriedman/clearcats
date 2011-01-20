@@ -157,8 +157,8 @@ describe PublicationsController do
 
     describe "GET incomplete" do
       it "should return all publications that are incomplete" do
-        good = Factory(:publication, :pmcid => "pmcid", :ctsa_reporting_years_mask => 1024)
-        bad  = Factory(:publication, :pmcid => nil, :ctsa_reporting_years_mask => 1024)
+        good = Factory(:publication, :pmid => "pmid", :ctsa_reporting_years_mask => 1024)
+        bad  = Factory(:publication, :pmid => nil, :ctsa_reporting_years_mask => 1024)
         get :incomplete
         assigns[:publications].first.id.should equal(bad.id)
       end

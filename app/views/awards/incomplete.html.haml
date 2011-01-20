@@ -2,7 +2,17 @@
 - title "Incomplete Awards"
 
 .instructions
-  The following records are ineligible for CTSA Reporting. They are missing either the Grant Number, Activity Code, or Organization
+  The following records are ineligible for CTSA Reporting. 
+  %p
+    They are missing either 
+    %ul
+      %li the Organization or 
+      %li the Activity Code for 'PHS Organizations' or 
+      %li the Grant Number for 'Non-PHS Organizations'
+
+.records_header
+  .page_entries_info
+    = page_entries_info @awards, :entry_name => "record"
 
 %table.records
   %tr

@@ -45,4 +45,5 @@
         %td= link_to 'View', versions_award_path(award), :class => "show_link icon_link" if sysadmin
   - unless @service
     .buttons
-      = submit_tag "Submit"
+      - lbl = faculty_member? ? "Save and Continue" : "Save"
+      = submit_tag lbl
