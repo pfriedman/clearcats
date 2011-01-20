@@ -80,7 +80,7 @@
       %span{ :class => "help_icon" }
         &nbsp;
       = render "/people/area_of_expertise_tooltip"
-      %span{ :class => "alt" } (select the best description)
+      %span{ :class => "alt" } (begin typing and select the best description)
       %br
       = text_field_tag :specialty_autocomplete, f.object.specialty.to_s
       = f.hidden_field :specialty_id

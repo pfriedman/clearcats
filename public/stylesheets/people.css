@@ -47,8 +47,16 @@ select#search_disadvantaged_background {
   width: 5em;
 }
 
+.alt {
+  font-size: 0.8em;
+}
+
 #specialty_autocomplete {
   width: 20em;
+}
+
+.tooltip .instructions p {
+  margin-bottom: 1em;
 }
 
 .ui-autocomplete {
