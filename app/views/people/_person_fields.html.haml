@@ -77,11 +77,13 @@
 
     %p
       = f.label :specialty_id, "Area of Expertise"
-      %br
+      %span{ :class => "help_icon" }
+        &nbsp;
+      = render "/people/area_of_expertise_tooltip"
       %span{ :class => "alt" } (select the best description)
       %br
-      = f.select(:specialty_id, Specialty.all(:order => :code).collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Area of Expertise --" })            
-
+      = text_field_tag :specialty_autocomplete, f.object.specialty.to_s
+      = f.hidden_field :specialty_id
     %p
       = f.label :department_affiliation, "Department Affiliation" 
       %br

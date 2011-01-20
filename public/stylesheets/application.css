@@ -458,6 +458,12 @@ table.nested {
   -webkit-border-radius: 1em;
 }
 
+.scrollable {
+  height: 40em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 /* a .label element inside tooltip */
 .tooltip .label {
   color: purple;

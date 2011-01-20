@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :participating_organizations
   map.resources :service_lines
+  map.resources :specialties, :only => [ :index ]
 
   map.resources :users, :except => [ :destroy, :show ]
 

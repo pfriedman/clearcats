@@ -33,3 +33,7 @@
       .front_page_section
         %h3.create_service_line 
           = link_to "My Services", :controller => "services", :action => "my_services"
+    - if current_user.permit?(:Admin)
+      .front_page_section
+        %h3.participating_organizations
+          = link_to "Participating Organizations", participating_organizations_path

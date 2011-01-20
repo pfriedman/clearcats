@@ -4,7 +4,17 @@
 :javascript
   $(document).ready(function() {
     $(".help_icon").tooltip();
+    
+    $('#specialty_autocomplete').autocomplete({
+      source: "#{specialties_path(:format => :json)}",
+      minLength: 2,
+      select: function(event, ui) { 
+        $('#specialty_autocomplete').val(ui.item.label);
+        $("##{@person.class.to_s.downcase}_specialty_id").val(ui.item.id);
+      }
+    });
   });
+
 
 - unless @person.organizational_units.blank?
   .organizational_units

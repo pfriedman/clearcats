@@ -47,6 +47,15 @@ select#search_disadvantaged_background {
   width: 5em;
 }
 
+#specialty_autocomplete {
+  width: 20em;
+}
+
+.ui-autocomplete {
+  background-color: white;
+  border: 2px solid darkblue;
+}
+
 .trainee_toggler a,
 .trainee_fields a {
   font-size: 1.25em;
