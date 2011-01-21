@@ -72,7 +72,7 @@ class PeopleController < ApplicationController
     
     @people.each do |person|
       reporting_years = person.ctsa_reporting_years
-      if params["people_ids"].include?(person.id.to_s)
+      if !params["people_ids"].nil? and params["people_ids"].include?(person.id.to_s)
         if !reporting_years.include?(current_year)
           person.ctsa_reporting_years = (reporting_years << current_year) 
           person.save
