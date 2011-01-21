@@ -70,7 +70,7 @@ class Publication < ActiveRecord::Base
   end
   
   def formatted_publication_date
-    self.publication_date.strftime("%m/%d/%Y") unless self.project_period_start_date.nil?
+    self.publication_date.strftime("%m/%d/%Y") unless self.publication_date.nil?
   end
 
   def formatted_publication_date=(dt)

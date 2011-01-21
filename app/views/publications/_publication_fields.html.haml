@@ -35,9 +35,9 @@
       = f.label :cited, "Cited #{SYSTEM_CONFIG['grant_name']} (#{SYSTEM_CONFIG['grant_number']})"
   .span-9.last
     %p
-      = f.label :publication_date, "Publication Date"
+      = f.label :formatted_publication_date, "Publication Date (mm/dd/yyyy)"
       %br
-      = f.text_field :publication_date, :class => "datepicker"
+      = f.text_field :formatted_publication_date, :class => "datepicker"
     %p 
       = f.label :title, "Title"
       %br
