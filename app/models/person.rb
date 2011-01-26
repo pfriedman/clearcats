@@ -183,6 +183,14 @@ class Person < ActiveRecord::Base
     "#{full_name}"
   end
   
+  def ctsa_name
+    "#{last_name}, #{first_name} #{middle_initial}".strip
+  end
+  
+  def middle_initial
+    middle_name.to_s.length > 0 ? "#{middle_name[0,1]}." : ""
+  end
+  
   def full_name
     [first_name, middle_name, last_name].reject { |n| n.nil? or n.blank? }.join(' ')
   end

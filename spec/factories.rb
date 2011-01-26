@@ -136,6 +136,27 @@ Factory.define :award do |a|
   a.ctsa_reporting_years_mask 1
 end
 
+Factory.define :phs_award, :class => "Award" do |a|
+  a.person            { |a| a.association(:person) }
+  a.organization      { |a| a.association(:phs_organization) }
+  a.activity_code     { |a| a.association(:activity_code) }
+  a.grant_number      "654312"
+  a.grant_title       "grant title"
+  a.grant_amount      11.00
+  a.budget_identifier "NORTHWESTU00000039703000"
+  a.ctsa_reporting_years_mask 1
+end
+
+Factory.define :non_phs_award, :class => "Award" do |a|
+  a.person            { |a| a.association(:person) }
+  a.organization      { |a| a.association(:non_phs_organization) }
+  a.grant_number      "123456"
+  a.grant_title       "grant title"
+  a.grant_amount      11.00
+  a.budget_identifier "NORTHWESTU00000039703001"
+  a.ctsa_reporting_years_mask 1
+end
+
 Factory.define :award_detail do |a|
   a.award { |a| a.association(:award) }
   a.budget_number "NORTHWESTU0000003970300060001"
@@ -180,7 +201,7 @@ Factory.define :participating_organization do |po|
   po.city "Chicago"
   po.country  { |c| c.association(:country) }
   po.us_state { |s| s.association(:us_state) }
-  po.reporting_year 2525
+  po.ctsa_reporting_years_mask 1
 end
 
 Factory.define :user do |u|

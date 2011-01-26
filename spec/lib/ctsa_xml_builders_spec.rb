@@ -7,9 +7,11 @@ describe ReportBuilder do
     before(:each) do
       @grant_number  = "123456"
       @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil, :ctsa_reporting_years_mask => 1)
+      @phs_award     = Factory(:phs_award, :person => @investigator, :ctsa_reporting_years_mask => 1)
+      @non_phs_award = Factory(:non_phs_award, :person => @investigator, :ctsa_reporting_years_mask => 1)
       @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR, :ctsa_reporting_years_mask => 1)
       @publication   = Factory(:publication, :ctsa_reporting_years_mask => 1, :cited => true)
-      @org           = Factory(:participating_organization)
+      @org           = Factory(:participating_organization, :ctsa_reporting_years_mask => 1)
     end
     
     it "should instantiate an XML element for the CTSA APR with a root element of Progress_Report" do
@@ -20,12 +22,24 @@ describe ReportBuilder do
       report = 
 "<sis:Progress_Report xsi:schemaLocation='http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:sis='http://sis.ncrr.nih.gov'>" +
   "<sis:Grant_Info>" +
-"<sis:Six_Digit_Grant_Number>" + @grant_number + "</sis:Six_Digit_Grant_Number>" +
-"</sis:Grant_Info>" +
+    "<sis:Six_Digit_Grant_Number>" + @grant_number + "</sis:Six_Digit_Grant_Number>" +
+  "</sis:Grant_Info>" +
   "<sis:Roster>"+
     "<sis:Investigator>" +
       "<sis:Commons_Username>"  + @investigator.era_commons_username.upcase + "</sis:Commons_Username>" +
       "<sis:Area_of_Expertise>" + @investigator.specialty.code + "</sis:Area_of_Expertise>" +
+      "<sis:Federal_Non_PHS_Funding>" +
+        "<sis:PI_Name>" + @investigator.ctsa_name + "</sis:PI_Name>" +
+        "<sis:Organization>" + @non_phs_award.organization.code + "</sis:Organization>" +
+        "<sis:Grant_Contract_Number>" + @non_phs_award.grant_number + "</sis:Grant_Contract_Number>" +
+        "<sis:Grant_Title>" + @non_phs_award.grant_title + "</sis:Grant_Title>" +
+        "<sis:Total_Dollars>" + @non_phs_award.grant_amount.to_i.to_s + "</sis:Total_Dollars>" +
+      "</sis:Federal_Non_PHS_Funding>" +
+      "<sis:Federal_PHS_Funding>" +
+        "<sis:Organization>" + @phs_award.organization.code + "</sis:Organization>" +
+        "<sis:Activity_Code>" + @phs_award.activity_code.code + "</sis:Activity_Code>" +
+        "<sis:Six_Digit_Grant_Number>" + @phs_award.grant_number.to_s + "</sis:Six_Digit_Grant_Number>" +
+      "</sis:Federal_PHS_Funding>" +
     "</sis:Investigator>" +
     "<sis:Training>" +
 			"<sis:Scholar>" +

@@ -3,7 +3,7 @@ pfr957@cas.nubic.northwestern.edu's password:
 
 [pfr957@cas ~]$ grep clearcats /var/log/casserver.log > ~/clearcats-cas.log
 
-~:scp pfr957@cas.nubic.northwestern.edu:clearcats-cas.log clearcats-cas.log
+~:scp pfr957@cas.nubic.northwestern.edu:/var/log/casserver.log clearcats-cas.log
 
 
 ~/work/cc:./script/console 

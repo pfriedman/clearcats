@@ -27,10 +27,10 @@ class ReportBuilder < REXML::Element
     investigators = Person.all_investigators.for_reporting_year(reporting_year)
     
     add_element(GrantBuilder.new(grant_number))
-    add_element(RosterBuilder.new(investigators, trainees))
+    add_element(RosterBuilder.new(investigators, trainees, reporting_year))
     add_element(PublicationsBuilder.new(Publication.all_for_reporting_year(reporting_year)))
     add_element(ResourceProjectionsBuilder.new)
-    add_element(ProgramDescriptionBuilder.new(ParticipatingOrganization.all))
+    add_element(ProgramDescriptionBuilder.new(ParticipatingOrganization.all_for_reporting_year(reporting_year)))
     add_element(CharacteristicsBuilder.new(trainees))
   end
 end
@@ -57,10 +57,10 @@ end
 # </sis:Roster>
 
 class RosterBuilder < REXML::Element
-  def initialize(investigators, trainees)
+  def initialize(investigators, trainees, reporting_year)
     super "sis:Roster"
     investigators.each do |investigator|
-      add_element(InvestigatorBuilder.new(investigator))
+      add_element(InvestigatorBuilder.new(investigator, reporting_year))
     end
     add_element(TrainingBuilder.new(trainees))
   end
@@ -73,13 +73,77 @@ end
 # </sis:Investigator>
 
 class InvestigatorBuilder < REXML::Element
-  def initialize(investigator)
+  def initialize(investigator, reporting_year)
     super 'sis:Investigator'
     add_element("sis:Commons_Username").add_text(investigator.commons_username.upcase.strip)
     add_element("sis:Area_of_Expertise").add_text(investigator.area_of_expertise_code.to_s)
+    add_non_phs_awards_list(investigator, reporting_year)
+    add_phs_awards_list(investigator, reporting_year)
   end
+  
+  def add_non_phs_awards_list(investigator, reporting_year)
+    awards = investigator.awards.all_for_reporting_year(reporting_year)
+    awards.each do |award|
+      next unless award.organization.type == "NonPhsOrganization"
+      add_non_phs_award(award)
+    end
+  end
+  
+  def add_non_phs_award(award)
+    add_element(NonPhsAwardBuilder.new(award))
+  end
+  
+  def add_phs_awards_list(investigator, reporting_year)
+    awards = investigator.awards.all_for_reporting_year(reporting_year)
+    awards.each do |award|
+      next unless award.organization.type == "PhsOrganization"
+      add_phs_award(award)
+    end
+  end
+  
+  def add_phs_award(award)
+    add_element(PhsAwardBuilder.new(award))
+  end
+  
 end
 
+
+# <sis:Federal_Non_PHS_Funding> 
+#   <sis:PI_Name> + investigator.ctsa_name + </sis:PI_Name> 
+#   <sis:Organization> + non_phs_award.organization.code + </sis:Organization> 
+#   <sis:Grant_Contract_Number> + non_phs_award.grant_number + </sis:Grant_Contract_Number> 
+#   <sis:Grant_Title> + non_phs_award.grant_title + </sis:Grant_Title> 
+#   <sis:Total_Dollars> + non_phs_award.grant_amount + </sis:Total_Dollars> 
+# <sis:Federal_Non_PHS_Funding> 
+
+class NonPhsAwardBuilder <  REXML::Element
+  
+  def initialize(award)
+    super "sis:Federal_Non_PHS_Funding"
+    add_element("sis:PI_Name").add_text(award.person.ctsa_name)
+    add_element("sis:Organization").add_text(award.organization.code)
+    add_element("sis:Grant_Contract_Number").add_text(award.grant_number)
+    add_element("sis:Grant_Title").add_text(award.grant_title[0,50])
+    add_element("sis:Total_Dollars").add_text(award.grant_amount.to_i.to_s)
+  end
+  
+end
+
+# <sis:Federal_PHS_Funding> 
+#   <sis:Organization> + phs_award.organization.code + </sis:Organization> 
+#   <sis:Activity_Code> + phs_award.activity_code.code + </sis:Activity_Code> 
+#   <sis:Six_Digit_Grant_Number> + phs_award.grant_number.to_s + </sis:Six_Digit_Grant_Number> 
+# <sis:Federal_PHS_Funding> 
+class PhsAwardBuilder <  REXML::Element
+  
+  def initialize(award)
+    super "sis:Federal_PHS_Funding"
+    add_element("sis:Organization").add_text(award.organization.code)
+    add_element("sis:Activity_Code").add_text(award.activity_code.code)
+    add_element("sis:Six_Digit_Grant_Number").add_text(award.grant_number)
+  end
+  
+end
 
 # <sis:Training>
 # ...
