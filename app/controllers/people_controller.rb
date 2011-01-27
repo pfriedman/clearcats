@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
     current_year = current_ctsa_reporting_year
     
     @search = Client.search(params[:search])
-    @people = @search.paginate(:page => params[:page], :per_page => 20)
+    @people = @search.paginate(:page => params[:page], :per_page => 20, :readonly => false)
     
     @people.each do |person|
       reporting_years = person.ctsa_reporting_years
