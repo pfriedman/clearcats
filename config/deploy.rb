@@ -11,15 +11,7 @@
 # Hostname code.bioinformatics.northwestern.edu
 # User xyz123
 
-# require "bundler/capistrano"
-
-set :deploy_via, :checkout
-set :scm_verbose, true
-set :use_sudo, false
-set :deploy_via, :copy
-set :copy_strategy, :export
-set :copy_cache, true
-set :copy_compression, :gzip
+require "bundler/capistrano"
 
 set :runner, nil
 set :use_sudo, false
@@ -35,7 +27,7 @@ set :repository, "ssh://code.bioinformatics.northwestern.edu/git/#{application}.
 
 set :branch, "master"
 set :deploy_to, "/var/www/apps/#{application}"
-# set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
 
 # Roles
 task :set_roles do
