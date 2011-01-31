@@ -11,7 +11,16 @@
 # Hostname code.bioinformatics.northwestern.edu
 # User xyz123
 
-require "bundler/capistrano"
+# require "bundler/capistrano"
+
+set :deploy_via, :checkout
+set :scm_verbose, true
+set :use_sudo, false
+set :deploy_via, :copy
+set :copy_strategy, :export
+set :copy_cache, true
+set :copy_compression, :gzip
+
 
 set :runner, nil
 set :use_sudo, false
