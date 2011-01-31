@@ -21,7 +21,6 @@ set :copy_strategy, :export
 set :copy_cache, true
 set :copy_compression, :gzip
 
-
 set :runner, nil
 set :use_sudo, false
 set :application, 'clearcats'
@@ -36,7 +35,7 @@ set :repository, "ssh://code.bioinformatics.northwestern.edu/git/#{application}.
 
 set :branch, "master"
 set :deploy_to, "/var/www/apps/#{application}"
-set :deploy_via, :remote_cache
+# set :deploy_via, :remote_cache
 
 # Roles
 task :set_roles do
