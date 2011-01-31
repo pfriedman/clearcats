@@ -26,7 +26,7 @@ echo ". ~/.rvm/scripts/rvm"
 . ~/.rvm/scripts/rvm
 set -x
 
-RVM_RUBY=ree-1.8.7-2010.01
+RVM_RUBY=ree-1.8.7-2010.02
 GEMSET=clearcats
 
 if [ -z "$RVM_RUBY" ]; then
