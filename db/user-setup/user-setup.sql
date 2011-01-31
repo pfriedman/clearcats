@@ -19,6 +19,11 @@ INSERT INTO T_PERSONNEL
 VALUES
 (PERSONNEL_ID_SEQ.nextval, 'gco604', 'Genevieve', 'Comeau', 'g-comeau@northwestern.edu')
 
+INSERT INTO T_PERSONNEL
+(PERSONNEL_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL)
+VALUES
+(PERSONNEL_ID_SEQ.nextval, 'tjs464', 'Tyler', 'Smith', 'tyler-smith@northwestern.edu')
+
 
 INSERT INTO T_SECURITY_LOGINS
 ( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
@@ -37,6 +42,11 @@ INSERT INTO T_SECURITY_LOGINS
 VALUES
 ( 'gco604', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
+
+INSERT INTO T_SECURITY_LOGINS
+( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
+VALUES
+( 'tjs464', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
 INSERT INTO T_SECURITY_LOGINS
 ( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
@@ -216,6 +226,10 @@ VALUES
 ( SGM_ID_SEQ.nextval, 'skk958', 'Admin', 5009, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
 
 
+INSERT INTO T_SECURITY_GROUP_MEMBERS
+( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
+VALUES
+( SGM_ID_SEQ.nextval, 'tjs464', 'Admin', null, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
 
 -- select * from T_INSTITUTIONAL_AFFILIATES where parent_id = 555
 -- select * from t_security_group_members where portal = 'ClearCATS'
