@@ -18,6 +18,6 @@ require 'spec_helper'
 describe DegreeType do
   it "should create a new instance given valid attributes" do
     dt = Factory(:degree_type_one)
-    dt.to_s.should equal(dt.name)
+    dt.to_s.should equal(dt.abbreviation)
   end
 end

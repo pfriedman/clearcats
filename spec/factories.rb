@@ -33,10 +33,12 @@ end
 
 Factory.define :degree_type_one, :class => "DegreeTypeOne" do |dt|
   dt.name "dt1 name"
+  dt.abbreviation "dt1"
 end
 
 Factory.define :degree_type_two, :class => "DegreeTypeTwo" do |dt|
   dt.name "dt2 name"
+  dt.abbreviation "dt2"
 end
 
 Factory.define :ethnic_type do |et|
