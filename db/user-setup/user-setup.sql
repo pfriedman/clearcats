@@ -24,6 +24,16 @@ INSERT INTO T_PERSONNEL
 VALUES
 (PERSONNEL_ID_SEQ.nextval, 'tjs464', 'Tyler', 'Smith', 'tyler-smith@northwestern.edu')
 
+INSERT INTO T_PERSONNEL
+(PERSONNEL_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL)
+VALUES
+(PERSONNEL_ID_SEQ.nextval, 'slb', 'Susan', 'LeBailly', 'slebailly@northwestern.edu')
+
+INSERT INTO T_PERSONNEL
+(PERSONNEL_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL)
+VALUES
+(PERSONNEL_ID_SEQ.nextval, 'jfk942', 'Jen', 'Kauper-Brown', 'j-kauper-brown@northwestern.edu')
+
 
 INSERT INTO T_SECURITY_LOGINS
 ( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
@@ -129,6 +139,17 @@ INSERT INTO T_SECURITY_LOGINS
 VALUES
 ( 'lmw351', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
 
+
+INSERT INTO T_SECURITY_LOGINS
+( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
+VALUES
+( 'jfk942', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
+
+INSERT INTO T_SECURITY_LOGINS
+( USERNAME, PORTAL, CHALLENGE, EXPIRE_ON, ENTERED_BY, ENTERED_IP, ENTERED_DATE )
+VALUES
+( 'slb', 'ClearCATS', null, null, 'pfr957', '165.124.223.127', sysdate )
+
 ---
 -- assign personnel to groups -- ensure affiliate_id matches that in institutional affiliates
 ---
@@ -142,6 +163,20 @@ INSERT INTO T_SECURITY_GROUP_MEMBERS
 ( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
 VALUES
 ( SGM_ID_SEQ.nextval, 'jhe722', 'Admin', 5007, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
+
+INSERT INTO T_SECURITY_GROUP_MEMBERS
+( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
+VALUES
+( SGM_ID_SEQ.nextval, 'jfk942', 'Admin', 5007, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
+
+INSERT INTO T_SECURITY_GROUP_MEMBERS
+( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
+VALUES
+( SGM_ID_SEQ.nextval, 'slb', 'Admin', 5007, 'ClearCATS', 'pfr957', '165.124.223.127', sysdate );
+
+
 
 INSERT INTO T_SECURITY_GROUP_MEMBERS
 ( SGM_ID, USERNAME, GROUP_NAME, AFFILIATE_ID, PORTAL, entered_by, entered_ip, entered_date )
