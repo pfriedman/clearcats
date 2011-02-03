@@ -1,3 +1,17 @@
+#search_by,
+#search_results {
+  color: darkblue;
+  border: 2px solid darkblue;
+  font-size: 1.2em;
+  width: 5.25em;
+  padding: 0.25em;
+  border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  -icab-border-radius: 0.5em;
+  -khtml-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
 
 #investigator_upload {
   padding: 1em;

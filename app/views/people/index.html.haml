@@ -6,13 +6,18 @@
     $(".help_icon").tooltip();
   });
 
-- if File.exists?(Person.import_error_log(current_user.username))
+- error_log_path = Person.import_error_log(current_user.username)
+- if File.exists?(error_log_path) && (File.size?(error_log_path) > 80)
   .page_section
     #upload_error_log
       = link_to "View Upload Errors", {:controller => "welcome", :action => "upload_error_log"}, { :class => "show_link icon_link" }
 
+#search_by
+  Search By
 .page_section 
   = render 'search_form'
 
+#search_results
+  Results
 .page_section
   = render 'search_results'
