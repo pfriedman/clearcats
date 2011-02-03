@@ -6,6 +6,8 @@
     $(".help_icon").tooltip();
   });
   $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+  $(function () { $("form").dirty_form(); });
+  $(function () { $("a").dirty_stopper(); });
 
 - if @service.person and @service.service_line
   = render "menu"
