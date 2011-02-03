@@ -15,6 +15,6 @@
 
 class DegreeType < ActiveRecord::Base
   def to_s
-    name
+    abbreviation
   end
 end
