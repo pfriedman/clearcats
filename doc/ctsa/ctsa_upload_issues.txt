@@ -1,0 +1,50 @@
+CTSA Report Errors
+
+Person
+------
+
+era commons username is required
+area of expertise is required
+
+if mentor era commons username is added for scholar/trainee 
+  that person must be in the investigator roster
+
+
+***
+  
+result = ctsa_reportable?
+result = !era_commons_username.blank? && !specialty.blank? if result 
+if result && trainee?
+  result = !mentor_commons_username.blank?
+  result = !degree_1.blank? if result && training_type == TRAINEE
+  result = !date_of_appointment.blank? && !end_date.blank? if result && trainee? 
+end
+result
+
+***
+
+
+Publication
+-----------
+
+missing pmcid reason restricted to list of possible reasons
+  cf. xsd - missing_PMCID_reason_list
+
+
+
+
+Award
+-----
+
+grant number is 6 digits
+
+
+
+
+Validity
+--------
+
+System checks for the following:
+
+ERA Commons Usernames
+PMCID for PMID

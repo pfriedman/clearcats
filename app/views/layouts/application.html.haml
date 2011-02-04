@@ -11,7 +11,7 @@
     = stylesheet_link_tag('ddsmoothmenu', 'ddsmoothmenu-v')
     = stylesheet_link_tag('ddsmoothmenu-images') if has_sub_uri?
     = yield :stylesheet
-    = javascript_include_tag("application", "ddsmoothmenu", "jquery-1.4.2.min", "jquery-ui-1.8.6.custom.min", "jrails", "jquery.livequery", "jquery.tooltip.min", "jquery.dirtyform", "jquery.dirtyforms", "facebox")
+    = javascript_include_tag("application", "ddsmoothmenu", "jquery-1.4.2.min", "jquery-ui-1.8.6.custom.min", "jrails", "jquery.livequery", "jquery.tooltip.min", "jquery.dirtyform", "facebox")
     = yield :javascript
     = surveyor_includes if controller_name == "surveyor"
     = yield(:head)
