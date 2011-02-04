@@ -24,7 +24,7 @@ class CtsaReport < ActiveRecord::Base
     # TODO: check for valid ctsa report data
     file_path = "#{directory}/#{Time.now.to_i}.xml"
     doc = REXML::Document.new
-    doc.add_element(ReportBuilder.new(grant_number, reporting_year))
+    doc.add_element(ReportBuilder.new(grant_number, reporting_year, attachments))
     doc.write("",2)
     File.open(file_path, 'w') { |f| f.write(doc.to_s) }
     add_report_xml_to_attachments(file_path)
@@ -35,7 +35,7 @@ class CtsaReport < ActiveRecord::Base
     zip_file = Zippy.create "#{Rails.root}/tmp/ctsa_reports/ctsa.zip" do |zip|
       attachments.each do |doc|
         #TODO: set other document type extensions
-        doc_name = (doc.name == "ctsa_report.xml") ? doc.name : "#{doc.name}.pdf"
+        doc_name = (doc.name == "ctsa_report.xml") ? doc.name : "#{doc.data_file_name}"
         zip[doc_name] = File.open(doc.data.path)
       end
     end

@@ -50,8 +50,11 @@ describe Award do
   end
   
   it "should report missing fields for the ctsa report" do
-    award = Factory(:award, :grant_number => nil, :organization => nil)
-    award.ctsa_missing_fields.should == "Organization, Grant Number"
+    award = Factory(:award, :organization => nil)
+    award.ctsa_missing_fields.should == "Organization"
+
+    award = Factory(:non_phs_award, :grant_number => nil)
+    award.ctsa_missing_fields.should == "Grant Number"
   end
   
   it { should belong_to(:person) }

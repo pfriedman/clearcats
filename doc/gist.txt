@@ -16,3 +16,16 @@ SELECT DISTINCT t1.id, t1.last_name, t1.first_name, t1.era_commons_username, t2.
 FROM people t1, people t2 
 WHERE t1.last_name = t2.last_name AND t1.first_name = t2.first_name AND t1.id <> t2.id
 ORDER BY t1.last_name
+
+
+pd_dump
+
+pg_dump clearcats_production -i -h pprod.bioinformatics.northwestern.edu -U clearcats_production > clearcats_prod.sql
+
+Ziv4?evasion
+
+
+
+xsd validation
+
+xmllint --noout --schema sitemap.xsd sitemap.xml

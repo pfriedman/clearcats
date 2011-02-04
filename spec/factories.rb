@@ -93,6 +93,10 @@ Factory.define :person do |p|
   p.trainee_status         nil
   p.system_administrator   false
 
+  p.appointment_date       nil
+  p.end_date               nil
+  p.mentor_era_commons_username nil
+
   p.country             { |a| a.association(:country) }
   p.degree_type_one     { |a| a.association(:degree_type_one) }
   p.degree_type_two     { |a| a.association(:degree_type_two) }
@@ -131,7 +135,7 @@ Factory.define :award do |a|
   a.person            { |a| a.association(:person) }
   a.organization      { |a| a.association(:phs_organization) }
   a.activity_code     { |a| a.association(:activity_code) }
-  a.grant_number      "grant number"
+  a.grant_number      "123456"
   a.grant_title       "grant title"
   a.grant_amount      11.00
   a.budget_identifier "NORTHWESTU00000039703000"

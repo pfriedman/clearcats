@@ -158,8 +158,8 @@ class Person < ActiveRecord::Base
   
   named_scope :organizational_units_organizational_unit_id_equals, lambda { |id| {:joins => :organizational_units, :conditions => ["organizational_units.id = :id", {:id => id} ]} }
   
-  named_scope :all_investigators, :conditions => "training_type IS NULL AND trainee_status IS NULL"
-  named_scope :all_trainees,      :conditions => "training_type IS NOT NULL AND trainee_status IS NOT NULL"
+  named_scope :all_investigators, :conditions => "(training_type IS NULL AND trainee_status IS NULL)"
+  named_scope :all_trainees,      :conditions => "(training_type IS NOT NULL AND trainee_status IS NOT NULL)"
   
   named_scope :for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**Person::REPORTING_YEARS.index(yr.to_i)} > 0"} }
   
@@ -259,7 +259,7 @@ class Person < ActiveRecord::Base
   end
   
   def degree_2
-    self.degree_type_two.to_s    
+    self.degree_type_two.to_s
   end
   
   def ethnic_category
@@ -270,20 +270,33 @@ class Person < ActiveRecord::Base
     self.race_type.to_s
   end
   
-  # TODO: determine the date_of_appointment reporting item
   def date_of_appointment
-    Date.today
+    appointment_date.blank? ? "" : appointment_date.strftime('%Y-%m-%d')
   end
   
-  # TODO: determine the end_date reporting item
-  def end_date
-    Date.today
+  def end_date_of_appointment
+    end_date.blank? ? "" : end_date.strftime('%Y-%m-%d')    
   end
   
-  # TODO: determine the mentor_commons_name reporting item
   def mentor_commons_username
-    ""
+    mentor_era_commons_username
   end
+  
+  def trainee?
+    !training_type.blank? && !trainee_status.blank?
+  end
+  
+  def valid_for_ctsa_report?
+    result = ctsa_reportable?
+    result = !era_commons_username.blank? && !specialty.blank? if result 
+    if result && trainee?
+      result = !mentor_commons_username.blank?
+      result = !degree_1.blank? if result && training_type == TRAINEE
+      result = !date_of_appointment.blank? && !end_date.blank? if result && trainee?
+    end
+    result
+  end
+  
 
   ###
   #    For LDAP
@@ -341,6 +354,18 @@ class Person < ActiveRecord::Base
   
   def unique_organizational_units
     self.organizational_units.uniq.sort_by { |org| org.abbreviation }
+  end
+
+  def applied
+    trainee_status.to_s == APPLICANT
+  end
+  
+  def accepted
+    trainee_status.to_s == APPOINTED
+  end
+  
+  def interviewed
+    false
   end
 
 

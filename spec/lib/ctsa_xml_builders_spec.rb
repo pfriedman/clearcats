@@ -6,18 +6,23 @@ describe ReportBuilder do
     
     before(:each) do
       @grant_number  = "123456"
-      @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil, :ctsa_reporting_years_mask => 1)
-      @phs_award     = Factory(:phs_award, :person => @investigator, :ctsa_reporting_years_mask => 1)
-      @non_phs_award = Factory(:non_phs_award, :person => @investigator, :ctsa_reporting_years_mask => 1)
-      @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR, :ctsa_reporting_years_mask => 1)
-      @publication   = Factory(:publication, :ctsa_reporting_years_mask => 1, :cited => true)
-      @org           = Factory(:participating_organization, :ctsa_reporting_years_mask => 1)
+      @investigator  = Factory(:person, :degree_type_one => nil, :degree_type_two => nil)
+      @phs_award     = Factory(:phs_award, :person => @investigator)
+      @non_phs_award = Factory(:non_phs_award, :person => @investigator)
+      @trainee       = Factory(:person, :trainee_status => Person::APPOINTED, :training_type => Person::SCHOLAR, :mentor_era_commons_username => "ASDF", :appointment_date => Date.today, :end_date => Date.today)
+      @publication   = Factory(:publication, :cited => true)
+      @org           = Factory(:participating_organization)
+      
+      [@investigator, @phs_award, @non_phs_award, @trainee, @publication, @org].each do |thing|
+        thing.ctsa_reporting_years = [SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i]
+        thing.save!
+      end
+      
     end
     
     it "should instantiate an XML element for the CTSA APR with a root element of Progress_Report" do
-      
       doc = REXML::Document.new
-      doc.add_element(ReportBuilder.new(@grant_number, 2000))
+      doc.add_element(ReportBuilder.new(@grant_number, SYSTEM_CONFIG["current_ctsa_reporting_year"].to_i))
       doc.write("",2)
       report = 
 "<sis:Progress_Report xsi:schemaLocation='http://sis.ncrr.nih.gov http://aprsis.ncrr.nih.gov/xml/ctsa_progress_report.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:sis='http://sis.ncrr.nih.gov'>" +
@@ -38,7 +43,7 @@ describe ReportBuilder do
       "<sis:Federal_PHS_Funding>" +
         "<sis:Organization>" + @phs_award.organization.code + "</sis:Organization>" +
         "<sis:Activity_Code>" + @phs_award.activity_code.code + "</sis:Activity_Code>" +
-        "<sis:Six_Digit_Grant_Number>" + @phs_award.grant_number.to_s + "</sis:Six_Digit_Grant_Number>" +
+        "<sis:Six_Digit_Grant_Number>" + @phs_award.grant_number + "</sis:Six_Digit_Grant_Number>" +
       "</sis:Federal_PHS_Funding>" +
     "</sis:Investigator>" +
     "<sis:Training>" +
@@ -47,9 +52,9 @@ describe ReportBuilder do
 				"<sis:Degree_Sought_1>" + @trainee.degree_type_one.to_s + "</sis:Degree_Sought_1>" +
 				"<sis:Degree_Sought_2>" + @trainee.degree_type_two.to_s + "</sis:Degree_Sought_2>" +
 				"<sis:Area_of_Training>" + @trainee.specialty.code + "</sis:Area_of_Training>" +
-				"<sis:Date_of_Appointment>" + Date.today.strftime('%Y-%m-%d') + "</sis:Date_of_Appointment>" +
-				"<sis:End_Date>" + Date.today.strftime('%Y-%m-%d') + "</sis:End_Date>" +
-				"<sis:Mentor_Commons_Username>" + "" + "</sis:Mentor_Commons_Username>" +
+				"<sis:Date_of_Appointment>" + @trainee.date_of_appointment + "</sis:Date_of_Appointment>" +
+				"<sis:End_Date>" + @trainee.end_date_of_appointment + "</sis:End_Date>" +
+				"<sis:Mentor_Commons_Username>" + @trainee.mentor_commons_username + "</sis:Mentor_Commons_Username>" +
 			"</sis:Scholar>" +
 		"</sis:Training>" + 
   "</sis:Roster>" +
@@ -79,6 +84,9 @@ describe ReportBuilder do
   appointed_scholar_characteristic_node +
   appointed_other_dev_characteristic_node +
 	"</sis:Characteristics>" +
+	"<sis:Attachments>" + 
+	  "<sis:Is_There_Technology_Transfer_Info_To_Report>N</sis:Is_There_Technology_Transfer_Info_To_Report>" +
+	"</sis:Attachments>" +
 "</sis:Progress_Report>"
 
       doc.to_s.should == report
@@ -106,8 +114,8 @@ describe ReportBuilder do
     def publication_node
       "<sis:Publication>" +
         "<sis:Cited>Y</sis:Cited>" +
-        "<sis:PubMed_ID>1234</sis:PubMed_ID>" +
-        "<sis:Missing_PMCID_Reason>huh?</sis:Missing_PMCID_Reason>" +
+        "<sis:PubMed_ID>pmid</sis:PubMed_ID>" +
+        # "<sis:Missing_PMCID_Reason>huh?</sis:Missing_PMCID_Reason>" +
       "</sis:Publication>"
     end
   

@@ -162,10 +162,16 @@ class Award < ActiveRecord::Base
   
   def ctsa_missing_fields
     result = []
-    result << "Organization"  if self.organization_id.blank?
-    result << "Activity Code" if self.activity_code_id.blank? && (!organization.blank? and organization.type == "PhsOrganization")
-    result << "Grant Number"  if self.grant_number.blank? || (!organization.blank? and organization.type == "NonPhsOrganization")
+    result << "Organization"  if organization_id.blank?
+    result << "Activity Code" if activity_code_id.blank? && (!organization.blank? and organization.type == "PhsOrganization")
+    result << "Grant Number"  if grant_number.blank? && (!organization.blank? and organization.type == "NonPhsOrganization")
     result.join(", ")
+  end
+  
+  def valid_for_ctsa_report?
+    result = ctsa_missing_fields.blank?
+    result = ((/\d{6}/ =~ grant_number) && (grant_number.length == 6)) if result && !grant_number.blank?
+    result
   end
   
   def total_amount

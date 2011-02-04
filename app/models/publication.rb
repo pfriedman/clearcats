@@ -78,7 +78,7 @@ class Publication < ActiveRecord::Base
   end
 
   def pubmed_id
-    self.pmcid
+    self.pmid.to_s.strip
   end
 
   # TODO: determine attribute to base cited on :citation_cnt OR :citation_last_get_at OR ...
