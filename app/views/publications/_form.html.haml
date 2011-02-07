@@ -5,7 +5,7 @@
     Publication for #{@publication.person}
 
   .header_option
-    = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+    = link_to("Close", "javascript: jQuery.unblockUI();", :class => "delete_link icon_link")
 
   .page_section
     %div{ :id => "publication_form", :class => "publications" }
@@ -33,5 +33,5 @@
         = render 'publication_fields', {:f => f}
 
     .links
-      = link_to 'View Other Publications', person_publications_path(@publication.person), :class => "list_link icon_link"
+      = link_to 'View Other Publications', person_publications_path(@publication.person), :class => "list_link icon_link menu_nav"
 

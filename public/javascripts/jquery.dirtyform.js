@@ -176,7 +176,15 @@ if (typeof jQuery == 'undefined') throw("jQuery could not be found.");
             var div = $("<div id='dirty_stopper_dialog'><p>You have edited the form without saving. All of your changes will be lost if you leave this page.</p><p>Are you sure you want to proceed?</p></div>").appendTo(document.body),
               href = $(this).attr('href');
               div.dialog($.extend({buttons: {
-                Proceed:function(){window.location = href},
+                Proceed:function() { 
+                  if(href.indexOf('javascript') == -1) {
+                    window.location = href;
+                  } else {
+                    window.location = href;
+                    $(this).dialog('destroy').remove(); 
+                    return false;
+                  }
+                },
                 Cancel:function(){$(this).dialog('destroy').remove(); return false}
               }
             }, settings.dialog));

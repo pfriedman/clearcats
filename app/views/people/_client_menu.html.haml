@@ -2,25 +2,25 @@
   %div
     .status_bar
       .span-6
-        %a{ :class => "index #{'active' if action_name == 'edit' and controller_name == 'people'}", :href => edit_person_path(@person) }
+        %a{ :class => "menu_nav index #{'active' if action_name == 'edit' and controller_name == 'people'}", :href => edit_person_path(@person) }
           1
       .span-5
-        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'awards'}", :href => person_awards_path(@person) }
+        %a{ :class => "menu_nav index #{'active' if action_name == 'index' and controller_name == 'awards'}", :href => person_awards_path(@person) }
           2
       .span-6
-        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'publications'}", :href => person_publications_path(@person) }
+        %a{ :class => "menu_nav index #{'active' if action_name == 'index' and controller_name == 'publications'}", :href => person_publications_path(@person) }
           3
       .span-6.last
-        %a{ :class => "index #{'active' if action_name == 'index' and controller_name == 'approvals'}", :href => person_approvals_path(@person) }
+        %a{ :class => "menu_nav index #{'active' if action_name == 'index' and controller_name == 'approvals'}", :href => person_approvals_path(@person) }
           4
     .clear
     .client_task
       .span-6
-        = link_to "Edit Profile", edit_person_path(@person)
+        = link_to "Edit Profile", edit_person_path(@person), :class => "menu_nav"
       .span-5
-        = link_to "Edit Awards", person_awards_path(@person)
+        = link_to "Edit Awards", person_awards_path(@person), :class => "menu_nav"
       .span-6
-        = link_to "Edit Publications", person_publications_path(@person)
+        = link_to "Edit Publications", person_publications_path(@person), :class => "menu_nav"
       .span-6.last
-        = link_to "Edit Approvals", person_approvals_path(@person)
+        = link_to "Edit Approvals", person_approvals_path(@person), :class => "menu_nav"
 .clear

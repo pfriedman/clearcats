@@ -2,37 +2,37 @@
 - sysadmin = user.respond_to?(:sysadmin?) and user.sysadmin?
 #banner_menu.ddsmoothmenu
   %ul
-    %li= link_to "Home", root_path
+    %li= link_to "Home", root_path, :class => "menu_nav"
     - if current_user and current_user.permit?(:Admin)
       %li
         %a{ :href => "#" }
           Administrative Actions
         %ul
           %li
-            = link_to "Manage Investigators", people_path
+            = link_to "Manage Investigators", people_path, :class => "menu_nav"
             %ul
-              %li= link_to "Add Investigators", :controller => "welcome", :action => "add_investigator"
-              %li= link_to "Search FSM Faculty Database", search_people_path
-              %li= link_to "Manage Contact Lists", contacts_path
+              %li= link_to "Add Investigators", :controller => "welcome", :action => "add_investigator", :class => "menu_nav"
+              %li= link_to "Search FSM Faculty Database", search_people_path, :class => "menu_nav"
+              %li= link_to "Manage Contact Lists", contacts_path, :class => "menu_nav"
               %li
                 %a{ :href => "#" }
                   Incomplete Records
                 %ul
-                  %li= link_to "Missing Employee ID",      :controller => "people", :action => "incomplete", :criteria => "employeeid"
-                  %li= link_to "Missing Net ID",           :controller => "people", :action => "incomplete", :criteria => "netid"
-                  %li= link_to "Missing ERA Commons Name", :controller => "people", :action => "incomplete", :criteria => "era_commons_username"
-                  %li= link_to "Missing Specialty",        :controller => "people", :action => "incomplete", :criteria => "specialty"
+                  %li= link_to "Missing Employee ID",      :controller => "people", :action => "incomplete", :criteria => "employeeid", :class => "menu_nav"
+                  %li= link_to "Missing Net ID",           :controller => "people", :action => "incomplete", :criteria => "netid", :class => "menu_nav"
+                  %li= link_to "Missing ERA Commons Name", :controller => "people", :action => "incomplete", :criteria => "era_commons_username", :class => "menu_nav"
+                  %li= link_to "Missing Specialty",        :controller => "people", :action => "incomplete", :criteria => "specialty", :class => "menu_nav"
     
-          %li= link_to "Manage Users",                        :controller => "users",                       :action => "index" if sysadmin
-          %li= link_to "Manage Organizational Units",         :controller => "organizational_units",        :action => "index"
-          %li= link_to "Manage Service Lines",                :controller => "service_lines",               :action => "index"
-          %li= link_to "Manage Participating Organizations",  :controller => "participating_organizations", :action => "index"
-          %li= link_to "Manage CTSA Data",                    :controller => "admin",                       :action => "view_ctsa_data" if sysadmin
+          %li= link_to "Manage Users",                        :controller => "users",                       :action => "index", :class => "menu_nav" if sysadmin
+          %li= link_to "Manage Organizational Units",         :controller => "organizational_units",        :action => "index", :class => "menu_nav"
+          %li= link_to "Manage Service Lines",                :controller => "service_lines",               :action => "index", :class => "menu_nav"
+          %li= link_to "Manage Participating Organizations",  :controller => "participating_organizations", :action => "index", :class => "menu_nav"
+          %li= link_to "Manage CTSA Data",                    :controller => "admin",                       :action => "view_ctsa_data", :class => "menu_nav" if sysadmin
           %li
-            = link_to "Reports", :controller => "reports", :action => "index"
+            = link_to "Reports", :controller => "reports", :action => "index", :class => "menu_nav"
             %ul
-              %li= link_to "CTSA Report", ctsa_reports_path if sysadmin
-              %li= link_to "Incomplete Clients", incomplete_people_path
-              %li= link_to "Incomplete Awards", incomplete_awards_path
-              %li= link_to "Incomplete Publications", incomplete_publications_path
-    %li= link_to "FAQ", :controller => "welcome", :action => "faq"
+              %li= link_to "CTSA Report", ctsa_reports_path, :class => "menu_nav" if sysadmin
+              %li= link_to "Incomplete Clients", incomplete_people_path, :class => "menu_nav"
+              %li= link_to "Incomplete Awards", incomplete_awards_path, :class => "menu_nav"
+              %li= link_to "Incomplete Publications", incomplete_publications_path, :class => "menu_nav"
+    %li= link_to "FAQ", :controller => "welcome", :action => "faq", :class => "menu_nav"

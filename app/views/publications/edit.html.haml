@@ -3,6 +3,9 @@
 
 :javascript
   $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
-
+  $(function () { $("input").live('focus', function() { $(this).closest('form').dirty_form(); }); });
+  $(function () { $("select").live('focus', function() { $(this).closest('form').dirty_form(); }); });
+  $(function () { $("a.delete_link").live('focus', function() { $(this).dirty_stopper(); }); });
+  
 .publication_form
   = render 'form'

@@ -5,7 +5,7 @@
     Award for #{@award.person}
 
   .header_option
-    = link_to_function("Close", "jQuery.unblockUI();", :class => "delete_link icon_link")
+    = link_to("Close", "javascript: jQuery.unblockUI();", :class => "delete_link icon_link")
 
   %div{ :id => "award_form", :class => "awards span-24" }
     - form_remote_for @award, :html => { :id => "modal_edit_form"} do |f|

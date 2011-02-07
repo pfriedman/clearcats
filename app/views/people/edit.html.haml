@@ -17,7 +17,8 @@
       }
     });
   });
-
+  $(function () { $("form").dirty_form(); });
+  $(function () { $("a.menu_nav").dirty_stopper(); });
 
 - unless @person.organizational_units.blank?
   .organizational_units
@@ -29,8 +30,8 @@
   .profile_body
     .records_header
       - if current_user.permit?(:Admin)
-        = link_to 'View Services', person_services_path(@person), :class => "show_link icon_link" unless @person.services.blank?
-        = link_to "Add to service line", { :controller => "services", :action => "create_service_for_person", :person_id => @person.id }, :method => :post, :class => "add_link icon_link"
-      = link_to 'List All Records', people_path, :class => "list_link icon_link" if current_user.permit?(:Admin, :User)
+        = link_to 'View Services', person_services_path(@person), :class => "show_link icon_link menu_nav" unless @person.services.blank?
+        = link_to "Add to service line", { :controller => "services", :action => "create_service_for_person", :person_id => @person.id }, :method => :post, :class => "add_link icon_link menu_nav"
+      = link_to 'List All Records', people_path, :class => "list_link icon_link menu_nav" if current_user.permit?(:Admin, :User)
 
   = render 'form'

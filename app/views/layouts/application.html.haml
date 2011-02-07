@@ -19,7 +19,7 @@
   %body
     .container
       #home
-        = link_to("clearcats", "#{cc_prefix_path}/", :class => "no_link")
+        = link_to("clearcats", "#{cc_prefix_path}/", :class => "no_link menu_nav")
       
       #menu
         
@@ -32,7 +32,7 @@
             = image_tag("banner_edge.jpg")
           #menu2
             %span{:id => "logout_link"}
-              = link_to "logout", "#{cc_prefix_path}/logout"
+              = link_to "logout", "#{cc_prefix_path}/logout", :class => "menu_nav"
             = session[:name] || session_username
         #title
           - if show_title?

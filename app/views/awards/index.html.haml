@@ -5,6 +5,9 @@
 
 :javascript
   $(function () { $(".datepicker").live('mouseover', function() { $(this).datepicker(); }); });
+  $(function () { $("form").dirty_form(); });
+  $(function () { $("a.menu_nav").dirty_stopper(); });
+  $(function () { $.DirtyForm.dynamic = true });
 
 = render "/people/client_menu" 
 
