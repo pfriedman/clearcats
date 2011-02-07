@@ -1,0 +1,60 @@
+#award_search_form
+  - form_for @search, :method => :get do |f|
+    .span-24
+      .span-5
+        = f.label :person_first_name_like, "First Name"
+      .span-7
+        = f.text_field :person_first_name_like
+      .span-6
+        = f.label :person_last_name_like, "Last Name"
+      .span-6.last
+        = f.text_field :person_last_name_like
+
+    .span-24
+      .span-5
+        = f.label :phs_organization_id_equals, "PHS Organization"
+      .span-7
+        = f.select(:phs_organization_id_equals, @phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award Organizational Code --" })
+      .span-6
+        = f.label :activity_code_id_equals, "Activity Code"
+      .span-6.last
+        = f.select(:activity_code_id_equals, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --"}) 
+        
+    .span-24
+      .span-5
+        = f.label :non_phs_organization_id_equals, "Non PHS Organization"
+      .span-7
+        = f.select(:non_phs_organization_id_equals, @non_phs_orgs.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select Non-PHS Award --" }) 
+      .span-6
+        = f.label :nucats_assisted, "NUCATS Assisted"
+      .span-6.last
+        = f.check_box :nucats_assisted
+        
+    .span-24
+      .span-5
+        = f.label :sponsor_name_like, "Sponsor"
+      .span-7
+        = f.text_field :sponsor_name_like
+      .span-6
+        = f.label :grant_title_like, "Grant Title"
+      .span-6.last
+        = f.text_field :grant_title_like
+        
+    .span-24
+      .span-5
+        = f.label :all_for_reporting_year, "CTSA Reporting Year"
+      .span-7
+        = f.select :all_for_reporting_year, Award::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
+      .span-6
+        = f.label :invalid_for_ctsa, "Invalid for CTSA Reporting"
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "/awards/invalid_for_ctsa_tooltip"
+      .span-6.last
+        = f.check_box :invalid_for_ctsa
+        
+    .buttons
+      = f.submit "Search", :disable_with => 'Searching...'
+      = link_to "New Search", {:controller => "awards", :action => "search"}, {:class => "search_link icon_link"}
+      = link_to "Export All Results", { :controller => "awards", :action => "search", :format => "csv", :params => params }, { :class => "export_link icon_link" }
+

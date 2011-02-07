@@ -30,8 +30,8 @@
     %tr{ :class => cycle('even_record', 'odd_record') }
       %td= link_to "Edit", { :controller => "/awards", :action => "edit", :id => award, :search => params[:search], :person_id => award.person.id }, { :class => "edit_link icon_link" }
       %td= h award.person
-      %td= h truncate(award.grant_title)
-      %td= h award.budget_identifier
+      %td= h truncate(award.grant_title, :length => 60)
+      %td= h award.budget_identifier.blank? ? 'n/a' : award.budget_identifier.gsub('NORTHWESTU00000', '').gsub('turbocats_import_', '')
       %td= h award.project_period_start_date
       %td= h award.ctsa_missing_fields
 

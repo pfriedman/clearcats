@@ -89,8 +89,7 @@ class CtsaReportsController < ApplicationController
     # as CTSA Reportable for this year (or the chosen year)
     def summary
       yr = current_ctsa_reporting_year
-      @investigators = Person.all_investigators.for_reporting_year(yr)
-      @trainees      = Person.all_trainees.for_reporting_year(yr)
+      @investigators = Person.for_reporting_year(yr)
       @awards        = Award.all_for_reporting_year(yr)
       @publications  = Publication.all_for_reporting_year(yr)
     end

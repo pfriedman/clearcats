@@ -36,13 +36,14 @@
 #  updated_by                   :string(255)
 #
 
+require 'comma'
 class Award < ActiveRecord::Base
   include VersionExportable
   include CtsaReportable
   
   has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
-  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
   named_scope :invalid_for_ctsa, :joins => "LEFT OUTER JOIN organizations ON organizations.id = awards.organization_id", 
     :conditions => "(awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND " +
     "(" +
@@ -50,9 +51,11 @@ class Award < ActiveRecord::Base
     "  OR " +
     "  (organization_id IS NOT NULL and organizations.type = 'PhsOrganization' and activity_code_id IS NULL)" +
     "  OR " +
-    "  (organization_id IS NOT NULL and organizations.type = 'NonPhsOrganization' and grant_number IS NULL)" +
+    "  (organization_id IS NOT NULL and organizations.type = 'NonPhsOrganization' and (grant_number IS NULL OR grant_number = ''))" +
     ")"
   
+  named_scope :phs_organization_id_equals, lambda { |id| {:conditions => "organization_id = #{id.to_i}"} }
+  named_scope :non_phs_organization_id_equals, lambda { |id| {:conditions => "organization_id = #{id.to_i}"} }
   
   belongs_to :person
   belongs_to :organization
@@ -176,6 +179,34 @@ class Award < ActiveRecord::Base
   
   def total_amount
     self.award_details.map(&:total_amount).sum
+  end
+  
+  ###
+  #    Support for exporting to CSV
+  ###
+  
+  comma do
+    person
+    grant_number
+    grant_title
+    grant_amount
+    parent_institution_number
+    institution_number
+    subproject_number
+    ctsa_award_type_award_number
+    project_period_start_date
+    project_period_end_date
+    project_period_total_cost
+    total_project_cost
+    organization
+    activity_code
+    proposal_status
+    award_status
+    sponsor_award_number
+    nucats_assisted
+    budget_identifier
+    sponsor
+    ctsa_reporting_years.to_sentence
   end
   
 end

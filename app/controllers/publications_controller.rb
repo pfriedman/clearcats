@@ -25,6 +25,19 @@ class PublicationsController < ApplicationController
     end
   end
   
+  def search
+    params[:search]           ||= Hash.new
+    params[:search][:order]   ||= "descend_by_publication_date"
+
+    @search = Publication.search(params[:search])
+    @publications = @search.paginate(:page => params[:page], :per_page => 20)
+    
+    respond_to do |format|
+      format.html 
+      format.csv { render :csv => @search.all }
+    end
+  end
+  
   def new
     params[:search] ||= Hash.new
     populate_service_and_person

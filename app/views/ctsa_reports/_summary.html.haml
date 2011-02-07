@@ -5,10 +5,10 @@
   .span-8
     = link_to "Investigators: #{@investigators.size}", people_path({:search => {:for_reporting_year=>"#{current_ctsa_reporting_year}"}})
   .span-8
-    Trainees: #{@trainees.size}
+    &nbsp;
 .span-24
   .span-8
-    Awards: #{@awards.size}
+    = link_to "Awards: #{@awards.size}", search_awards_path({:search => {:all_for_reporting_year=>"#{current_ctsa_reporting_year}"}})
   .span-8
-    Publications: #{@publications.size}
+    = link_to "Publications: #{@publications.size}", search_publications_path({:search => {:all_for_reporting_year=>"#{current_ctsa_reporting_year}"}})
 .clear

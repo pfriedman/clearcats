@@ -24,6 +24,24 @@ class AwardsController < ApplicationController
     end
   end
 
+  def search
+    params[:search]           ||= Hash.new
+    params[:search][:order]   ||= "descend_by_project_period_start_date"
+    
+    params[:search][:nucats_assisted] = nil  unless params[:search][:nucats_assisted].to_i == 1
+    params[:search][:invalid_for_ctsa] = nil unless params[:search][:invalid_for_ctsa].to_i == 1
+    
+    populate_common
+    
+    @search = Award.search(@search_params)
+    @awards = @search.paginate(:page => params[:page], :per_page => 20)
+    
+    respond_to do |format|
+      format.html 
+      format.csv { render :csv => @search.all }
+    end
+  end
+
   def details
     @award = Award.find(params[:id])
   end

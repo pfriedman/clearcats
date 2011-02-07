@@ -42,13 +42,16 @@
 
     .span-24
       .span-5
-        = f.label :service_rendered, "Service Rendered"
-      .span-7
-        = f.select :service_rendered, [["N/A", nil], ["Yes", true], ["No", false]]
-      .span-5
         = f.label :for_reporting_year, "CTSA Reporting Year"
-      .span-6.last
+      .span-7
         = f.select :for_reporting_year, Person::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
+      .span-6
+        = f.label :invalid_for_ctsa_reporting, "Invalid for CTSA Reporting"
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "/people/invalid_for_ctsa_tooltip"
+      .span-6.last
+        = f.check_box :invalid_for_ctsa_reporting
     .span-24
       .span-5
         = f.label :services_service_line_id_equals, "Service Line"
@@ -63,8 +66,3 @@
     .buttons
       = f.submit "Search", :disable_with => 'Searching...'
       = link_to "Export All Results", { :controller => "people", :action => "index", :format => "csv", :params => params }, { :class => "export_link icon_link" }
-
-/   = link_to "Choose Fields to Export", "#", :onclick => "$('.export_fields_list').toggle();"
-/ 
-/ .export_fields_list{ :style => "display:none;"}
-/   Hi there!

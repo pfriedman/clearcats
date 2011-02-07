@@ -16,12 +16,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :activity_types
   map.resources :awards, :except => [ :destroy ],
     :member => { :versions => :get, :revert => :post, :details => :get },
-    :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post }
+    :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post, :search => :get }
   map.resources :ctsa_reports, :except => [ :show ],
     :member => { :download => :get }
   map.resources :publications, :only => [ :edit, :update, :new, :create ],
     :member => { :versions => :get, :revert => :post },
-    :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post }
+    :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post, :search => :get }
   map.resources :approvals, :only => [ :index ],
     :collection => { :update_approvals => :post }
   map.resources :organizational_units

@@ -433,6 +433,10 @@ table.nested {
   background: url(../images/page_world.png) 0 2px no-repeat !important;
 }
 
+.back_link, .back_link:hover {
+  background: url(../images/arrow_left.png) 0 2px no-repeat !important;
+}
+
 .help_icon, .help_icon:hover {
   padding: 2px 2px 2px 20px;
   margin-left: 5px;

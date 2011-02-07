@@ -36,6 +36,7 @@
 #  invalid              :boolean
 #  validation_messages  :text
 
+require 'comma'
 class Publication < ActiveRecord::Base
   include VersionExportable
   include CtsaReportable
@@ -44,8 +45,8 @@ class Publication < ActiveRecord::Base
   
   belongs_to :person
   
-  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
-  named_scope :invalid_for_ctsa, :conditions => "(publications.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND (pmid IS NULL)"
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "publications.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
+  named_scope :invalid_for_ctsa, :conditions => "(publications.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND (pmid IS NULL OR pmid = '')"
 
   # Attributes from LatticeGrid/PubMed
   attr_accessor :endnote_citation, :authors, :full_authors, :is_first_author_investigator, :is_last_author_investigator
@@ -100,6 +101,24 @@ class Publication < ActiveRecord::Base
   
   def self.reporting_years(reporting_years_mask)
     REPORTING_YEARS.reject { |yr| ((reporting_years_mask || 0) & 2**REPORTING_YEARS.index(yr)).zero? }  
+  end
+  
+  ###
+  #    Support for exporting to CSV
+  ###
+  
+  comma do
+    person
+    pmcid
+    pmid
+    nihms_number
+    publication_date
+    abstract
+    title
+    nucats_assisted
+    cited
+    missing_pmcid_reason
+    ctsa_reporting_years.to_sentence
   end
   
 end

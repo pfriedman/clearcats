@@ -16,15 +16,15 @@
         %th Select
         %th Reporting Years
         %th
-          = order @search, :by => :pmcid, :as => "PMCID", :params => ordering_params
+          = order @search, :by => :pmcid, :as => "PMCID"
         %th
-          = order @search, :by => :pmid, :as => "PMID", :params => ordering_params
+          = order @search, :by => :pmid, :as => "PMID"
         %th
-          = order @search, :by => :nihms_number, :as => "NIHMS Number", :params => ordering_params
+          = order @search, :by => :nihms_number, :as => "NIHMS Number"
         %th
-          = order @search, :by => :publication_date, :as => "Publication Date", :params => ordering_params
+          = order @search, :by => :publication_date, :as => "Publication Date"
         %th
-          = order @search, :by => :title, :as => "Title", :params => ordering_params
+          = order @search, :by => :title, :as => "Title"
         %th 
           = "History" if sysadmin
       - @publications.each do |pub|

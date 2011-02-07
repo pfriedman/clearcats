@@ -1,0 +1,35 @@
+- if @awards.blank?
+  .no-records
+    No awards found.
+- else
+  .records_header
+    .page_entries_info
+      = page_entries_info @awards, :entry_name => "record"
+    = will_paginate @awards
+
+  - current_year = current_ctsa_reporting_year
+  %table.records
+    %tr
+      %th Select
+      %th Reporting Years
+      %th
+        = order @search, :by => :person_last_name, :as => "Person"
+      %th
+        = order @search, :by => :sponsor_name, :as => "Sponsor"
+      %th
+        = order @search, :by => :sponsor_award_number, :as => "Sponsor Award Number"
+      %th
+        = order @search, :by => :grant_title, :as => "Grant Title"
+      %th
+        = order @search, :by => :budget_identifier, :as => "Budget Number"
+    - @awards.each do |award|
+      %tr{ :class => cycle('even_record', 'odd_record') }
+        %td
+          = link_to "Select", { :controller => "awards", :action => "edit", :id => award }, { :class => "edit_link icon_link" } 
+        %td= h award.ctsa_reporting_years.blank? ? "n/a" : award.ctsa_reporting_years.join(",")
+        %td= h award.person
+        %td= h award.sponsor
+        %td= h award.sponsor_award_number
+        %td= h truncate(award.grant_title)
+        %td= h award.budget_identifier.blank? ? 'n/a' : award.budget_identifier.gsub('NORTHWESTU00000', '').gsub('turbocats_import_', '')
+  = will_paginate @awards

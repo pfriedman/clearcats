@@ -1,0 +1,50 @@
+#publication_search_form
+  - form_for @search, :method => :get do |f|
+    .span-24
+      .span-5
+        = f.label :person_first_name_like, "First Name"
+      .span-7
+        = f.text_field :person_first_name_like
+      .span-6
+        = f.label :person_last_name_like, "Last Name"
+      .span-6.last
+        = f.text_field :person_last_name_like
+    .span-24
+      .span-5
+        = f.label :pmcid_like, "PMCID"
+      .span-7
+        = f.text_field :pmcid_like
+      .span-6
+        = f.label :pmid_like, "PMID"
+      .span-6.last
+        = f.text_field :pmid_like
+
+    .span-24
+      .span-5
+        = f.label :title_like, "Title"
+      .span-7
+        = f.text_field :title_like
+      .span-6
+        = f.label :abstract_like, "Abstract"
+      .span-6.last
+        = f.text_field :abstract_like
+
+    .span-24
+      .span-5
+        = f.label :all_for_reporting_year, "CTSA Reporting Year"
+      .span-7
+        = f.select :all_for_reporting_year, Publication::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
+      .span-6
+        = f.label :invalid_for_ctsa, "Invalid for CTSA Reporting"
+        %span{ :class => "help_icon" }
+          &nbsp;
+        = render "/publications/invalid_for_ctsa_tooltip"
+      .span-6.last
+        = f.check_box :invalid_for_ctsa
+        
+        
+    .buttons
+      = f.submit "Search", :disable_with => 'Searching...'
+      = link_to "New Search", {:controller => "publications", :action => "search"}, {:class => "search_link icon_link"}
+      = link_to "Export All Results", { :controller => "publications", :action => "search", :format => "csv", :params => params }, { :class => "export_link icon_link" }
+
