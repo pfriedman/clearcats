@@ -19,3 +19,7 @@ doc/deployment_steps.txt
 tmp/*.json
 doc/webcamp.txt
 CommonsIDs.xlsx
+doc/ctsa/ctsa_schema.xsd
+doc/ctsa/ctsa_report5.xml
+doc/ctsa/ctsa_report2.xml
+doc/ctsa/ctsa_report.xml
