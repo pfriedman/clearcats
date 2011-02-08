@@ -32,8 +32,7 @@ class PublicationsController < ApplicationController
     @search = Publication.search(params[:search])
     @publications = @search.paginate(:page => params[:page], :per_page => 20)
     
-    params[:search].delete(:nucats_assisted) unless params[:search][:nucats_assisted].to_i  == 1
-    params[:search].delete(:invalid_for_ctsa) unless params[:search][:invalid_for_ctsa].to_i == 1
+    purge_search_params
         
     respond_to do |format|
       format.html 

@@ -5,6 +5,8 @@ class PeopleController < ApplicationController
   def index
     params[:search]         ||= Hash.new
     params[:search][:order] ||= "ascend_by_last_name"
+    purge_search_params
+
     @search = Client.search(params[:search])
     @people = @search.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|

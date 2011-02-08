@@ -26,9 +26,7 @@ class AwardsController < ApplicationController
 
   def search
     params[:search]           ||= Hash.new
-    params[:search].delete(:nucats_assisted) unless params[:search][:nucats_assisted].to_i  == 1
-    params[:search].delete(:invalid_for_ctsa) unless params[:search][:invalid_for_ctsa].to_i == 1
-    
+    purge_search_params
     populate_common
     
     @search = Award.search(@search_params)

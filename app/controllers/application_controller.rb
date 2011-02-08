@@ -110,5 +110,15 @@ class ApplicationController < ActionController::Base
         true
       end
     end
+    
+    def purge_search_params
+      params[:search].keys.each do |k| 
+        if params[:search][k].blank?
+          params[:search].delete(k)
+        elsif /\d/ =~ params[:search][k]
+          params[:search].delete(k) unless params[:search][k].to_i > 0
+        end
+      end
+    end
 
 end
