@@ -33,11 +33,18 @@
     %p
       = f.check_box :cited
       = f.label :cited, "Cited #{SYSTEM_CONFIG['grant_name']} (#{SYSTEM_CONFIG['grant_number']})"
+    %p
+      = f.label :citation_cnt, "Citation Count"
+      = f.text_field :citation_cnt, :size => 4
   .span-9.last
     %p
       = f.label :formatted_publication_date, "Publication Date (mm/dd/yyyy)"
       %br
       = f.text_field :formatted_publication_date, :class => "datepicker"
+    %p 
+      = f.label :journal, "Journal"
+      %br
+      = f.text_field :journal
     %p 
       = f.label :title, "Title"
       %br

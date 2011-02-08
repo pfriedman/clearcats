@@ -121,7 +121,7 @@ class LatticeGridWebService
       if pub.nil?
         pub = Publication.new
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
-      elsif pub.versions.empty?
+      elsif !pub.edited_by_user?
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       end
       pub

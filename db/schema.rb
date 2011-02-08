@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119161456) do
+ActiveRecord::Schema.define(:version => 20110208160117) do
 
   create_table "activity_codes", :force => true do |t|
     t.string   "code"
@@ -415,6 +415,8 @@ ActiveRecord::Schema.define(:version => 20110119161456) do
     t.integer  "ctsa_reporting_years_mask"
     t.string   "created_by"
     t.string   "updated_by"
+    t.string   "journal"
+    t.integer  "citation_cnt"
   end
 
   add_index "publications", ["person_id"], :name => "index_publications_on_person_id"

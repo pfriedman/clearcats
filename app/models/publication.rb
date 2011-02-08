@@ -50,8 +50,8 @@ class Publication < ActiveRecord::Base
 
   # Attributes from LatticeGrid/PubMed
   attr_accessor :endnote_citation, :authors, :full_authors, :is_first_author_investigator, :is_last_author_investigator
-  attr_accessor :journal_abbreviation, :journal, :volume, :issue, :pages, :year, :publication_type, :electronic_publication_date
-  attr_accessor :deposited_date, :status, :publication_status, :issn, :isbn, :citation_cnt, :citation_last_get_at, :citation_url, :url, :mesh
+  attr_accessor :journal_abbreviation, :volume, :issue, :pages, :year, :publication_type, :electronic_publication_date
+  attr_accessor :deposited_date, :status, :publication_status, :issn, :isbn, :citation_last_get_at, :citation_url, :url, :mesh
   attr_accessor :created_id, :created_ip, :created_at, :updated_id, :updated_ip, :updated_at, :deleted_at, :deleted_id, :deleted_ip
   
   def pubmed=(pubmed)
@@ -80,16 +80,6 @@ class Publication < ActiveRecord::Base
 
   def pubmed_id
     self.pmid.to_s.strip
-  end
-
-  # TODO: determine attribute to base cited on :citation_cnt OR :citation_last_get_at OR ...
-  def citation_cnt=(cnt)
-    @citation_cnt = cnt
-    self.cited = cnt.to_i > 0
-  end
-  
-  def citation_cnt
-    @citation_cnt
   end
   
   def previously_reported?(yr)

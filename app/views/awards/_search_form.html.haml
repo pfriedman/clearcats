@@ -18,7 +18,7 @@
       .span-6
         = f.label :activity_code_id_equals, "Activity Code"
       .span-6.last
-        = f.select(:activity_code_id_equals, @activity_codes.collect { |a| [ a.to_s, a.id.to_s ] }, { :include_blank => "-- Select PHS Award --"}) 
+        = f.select(:activity_code_id_equals, @activity_codes.collect { |a| [ a.to_s, a.id ] }, { :include_blank => "-- Select PHS Award --"}) 
         
     .span-24
       .span-5
