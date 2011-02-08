@@ -35,8 +35,8 @@
         %td= h pub.person
         %td= h pub.publication_date
         %td= h truncate(pub.title, :length => 50)
-        %td= h pub.pmcid
         %td= h pub.pmid
+        %td= h pub.pmcid
         %td= h pub.nihms_number
         %td= h pub.cited? ? "Yes" : "No"
         %td= h pub.ctsa_reporting_years.join(",")
