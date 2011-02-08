@@ -26,10 +26,8 @@ class AwardsController < ApplicationController
 
   def search
     params[:search]           ||= Hash.new
-    params[:search][:order]   ||= "descend_by_project_period_start_date"
-    
-    params[:search][:nucats_assisted]  = nil unless params[:search][:nucats_assisted].to_i  == 1
-    params[:search][:invalid_for_ctsa] = nil unless params[:search][:invalid_for_ctsa].to_i == 1
+    params[:search].delete(:nucats_assisted) unless params[:search][:nucats_assisted].to_i  == 1
+    params[:search].delete(:invalid_for_ctsa) unless params[:search][:invalid_for_ctsa].to_i == 1
     
     populate_common
     
