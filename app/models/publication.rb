@@ -103,8 +103,9 @@ class Publication < ActiveRecord::Base
     pmid
     nihms_number
     publication_date
-    abstract
+    journal
     title
+    abstract
     nucats_assisted
     cited
     missing_pmcid_reason
