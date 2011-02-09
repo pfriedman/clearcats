@@ -43,6 +43,7 @@ class Award < ActiveRecord::Base
   
   has_paper_trail :ignore => [:ctsa_reporting_years_mask]
   
+  named_scope :nucats_assisted_eq, lambda { |flag| {:conditions => "awards.nucats_assisted IS TRUE"} if (flag == "1" || flag.to_i == 1 || flag == true)}
   named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
   named_scope :invalid_for_ctsa, :joins => "LEFT OUTER JOIN organizations ON organizations.id = awards.organization_id", 
     :conditions => "(awards.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND " +

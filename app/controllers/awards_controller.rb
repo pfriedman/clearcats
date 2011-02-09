@@ -26,6 +26,8 @@ class AwardsController < ApplicationController
 
   def search
     params[:search] ||= Hash.new
+    
+    params[:search].delete(:invalid_for_ctsa) unless params[:search][:invalid_for_ctsa].to_i == 1
     purge_search_params
     populate_common
     

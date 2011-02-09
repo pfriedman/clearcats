@@ -36,9 +36,9 @@
       .span-7
         = f.select :all_for_reporting_year, Approval::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
       .span-6
-        = f.label :nucats_assisted, "NUCATS Assisted"
+        = f.label :nucats_assisted_eq, "NUCATS Assisted"
       .span-6.last
-        = f.check_box :nucats_assisted
+        = f.check_box :nucats_assisted_eq
         
     .buttons
       = f.submit "Search", :disable_with => 'Searching...'
