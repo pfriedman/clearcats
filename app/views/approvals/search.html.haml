@@ -1,0 +1,17 @@
+- stylesheet "approvals", "people"
+- title "Approvals Search"
+
+:javascript
+  $(document).ready(function() {
+    $(".help_icon").tooltip();
+  });
+
+#search_by
+  Search By
+.page_section 
+  = render 'search_form'
+
+#search_results
+  Results
+.page_section
+  = render 'search_results'

@@ -18,6 +18,20 @@ class ApprovalsController < ApplicationController
     end
   end
   
+  def search
+    params[:search] ||= Hash.new
+    purge_search_params
+    
+    @search = Approval.search(params[:search])
+    @approvals = @search.paginate(:page => params[:page], :per_page => 20)
+    
+    respond_to do |format|
+      format.html 
+      format.csv { render :csv => @search.all }
+    end
+    
+  end
+  
   def update_approvals
     attr_params = {}
     # Handle polymorphic person - params key dependent on person class

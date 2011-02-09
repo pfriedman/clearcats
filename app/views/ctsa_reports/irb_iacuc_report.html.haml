@@ -1,0 +1,44 @@
+
+.header
+  .pi
+    Greenland, Philip
+  .grant_number
+    Grant Number: RR025741-03
+  
+.irb_iacuc.title
+  CTSA IRB/IACUC Approval Report
+  %br
+  2010-2011, Year 3: NUCATS Institute
+  
+.note
+  NOTE: this report is to include information ONLY on those protocols that have benefited from CTSA resources during the reporting period (see instructions).
+  
+.title
+  IRB APPROVAL TABLE
+  
+.note
+  Report the latest date of IRB approval, whether new or continuing review approval.
+  
+.table
+  %table.irb
+    - @irbs.sort_by { |a| a.person.last_name }.each do |irb|
+      %tr
+        %td= h irb.person
+        %td= h irb.project_title
+        %td= h irb.tracking_number
+        %td= h irb.formatted_approval_date
+        
+.title
+  IACUC APPROVAL TABLE
+
+.note
+  Report the latest date of IACUC approval.
+
+.table
+  %table.iacuc
+    - @iacucs.sort_by { |a| a.person.last_name }.each do |iacuc|
+      %tr
+        %td= h iacuc.person
+        %td= h iacuc.project_title
+        %td= h iacuc.tracking_number
+        %td= h iacuc.formatted_approval_date

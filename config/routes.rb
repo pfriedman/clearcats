@@ -18,12 +18,12 @@ ActionController::Routing::Routes.draw do |map|
     :member => { :versions => :get, :revert => :post, :details => :get },
     :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post, :search => :get }
   map.resources :ctsa_reports, :except => [ :show ],
-    :member => { :download => :get }
+    :member => { :download => :get, :irb_iacuc_report => :get, :technology_transfer_report => :get }
   map.resources :publications, :only => [ :edit, :update, :new, :create ],
     :member => { :versions => :get, :revert => :post },
     :collection => { :incomplete => :get, :update_ctsa_reporting_year => :post, :search => :get }
   map.resources :approvals, :only => [ :index ],
-    :collection => { :update_approvals => :post }
+    :collection => { :update_approvals => :post, :search => :get }
   map.resources :organizational_units
   
   map.resources :services, 

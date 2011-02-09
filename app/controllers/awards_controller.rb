@@ -25,7 +25,7 @@ class AwardsController < ApplicationController
   end
 
   def search
-    params[:search]           ||= Hash.new
+    params[:search] ||= Hash.new
     purge_search_params
     populate_common
     

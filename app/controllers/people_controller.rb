@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
     purge_search_params
 
     @search = Client.search(params[:search])
-    @people = @search.paginate(:page => params[:page], :per_page => 20)
+    @people = @search.paginate(:select => "distinct people.*", :page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html # index.html.erb
       format.csv { render :csv => @search.all }

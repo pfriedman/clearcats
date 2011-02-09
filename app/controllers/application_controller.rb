@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
         elsif /\d/ =~ params[:search][k]
           params[:search].delete(k) unless params[:search][k].to_i > 0
         end
-      end
+      end      
     end
 
 end

@@ -83,6 +83,23 @@ class CtsaReportsController < ApplicationController
     zip_file = @ctsa_report.create_zip_file
     send_data(zip_file.data, :type => "application/zip", :filename => "ctsa_annual_report.zip")
   end
+  
+  def irb_iacuc_report
+    @irbs   = Approval.search({:approval_type_eq => 'IRB',   :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @iacucs = Approval.search({:approval_type_eq => 'IACUC', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    
+    render :action => "irb_iacuc_report", :layout => "ctsa_report"
+  end
+  
+  def technology_transfer_report
+    @inds = Approval.search({:approval_type_eq => 'IND', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @blas = Approval.search({:approval_type_eq => 'BLA', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @ides = Approval.search({:approval_type_eq => 'IDE', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @ndas = Approval.search({:approval_type_eq => 'NDA', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @patents = Approval.search({:approval_type_eq => 'Patent', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    @others = Approval.search({:approval_type_eq => 'Other', :all_for_reporting_year => current_ctsa_reporting_year}).all
+    render :action => "technology_transfer_report", :layout => "ctsa_report"
+  end
 
   private
     # Quickly show to the user the number of People, Awards, and Publications that have been marked 

@@ -19,6 +19,7 @@
 #  ctsa_reporting_years_mask :integer
 #
 
+require 'comma'
 class Approval < ActiveRecord::Base
   include CtsaReportable
 
@@ -27,6 +28,8 @@ class Approval < ActiveRecord::Base
   validates_inclusion_of :approval_type, :in => Approval::TYPES
 
   belongs_to :person
+
+  named_scope :all_for_reporting_year, lambda { |yr| {:conditions => "approvals.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(yr.to_i)} > 0 "} }
 
   attr_accessor :project_role
   
@@ -54,6 +57,29 @@ class Approval < ActiveRecord::Base
   
   def study_approved_date
     self.approval_date
+  end
+  
+  def formatted_approval_date
+    Date.parse(self.approval_date).strftime("%m/%d/%Y") unless self.approval_date.blank?
+  end
+  
+  def formatted_approval_date=(dt)
+    self.approval_date = dt
+  end
+  
+  ###
+  #    Support for exporting to CSV
+  ###
+  
+  comma do
+    person
+    tracking_number
+    institution
+    approval_type
+    project_title
+    approval_date
+    nucats_assisted
+    ctsa_reporting_years.to_sentence
   end
   
 end
