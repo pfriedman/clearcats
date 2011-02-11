@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
       params[:search].keys.each do |k| 
         if params[:search][k].blank?
           params[:search].delete(k)
-        elsif /\d/ =~ params[:search][k]
+        elsif ((/\d/ =~ params[:search][k]) == 0)
           params[:search].delete(k) unless params[:search][k].to_i > 0
         end
       end      

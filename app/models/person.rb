@@ -349,7 +349,7 @@ class Person < ActiveRecord::Base
   end
 
   def era_commons_id=(commons_name)
-    self.era_commons_username = commons_name
+    self.era_commons_username = commons_name unless commons_name.blank?
   end
   
   def unique_organizational_units
