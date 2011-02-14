@@ -1,28 +1,31 @@
 .page_section
   - form_for @search, participating_organizations_path do |f|
     .span-24
-      .span-12
+      .span-4
         = f.label :name_like, "Name"
+      .span-7
         = f.text_field :name_like
-
-      .span-12.last
+      .span-2
         = f.label :city_like, "City"
+      .span-7
         = f.text_field :city_like
 
     .span-24
-      .span-12
+      .span-4
         = f.label :us_state_id_eq, "US State"
+      .span-7
         = f.select(:us_state_id_eq, UsState.all(:order => :name).collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select State --" })
-        
-      .span-12.last
+      .span-2
         = f.label :country_id_eq, "Country"
+      .span-7
         - usa = Country.find_by_name("UNITED STATES")
         - f.object.country_id = usa.id if f.object.country_id.blank? and !usa.blank?
         = f.select(:country_id_eq, Country.all(:order => :name).collect { |a| [ a.name, a.id ] }, { :include_blank => "-- Select Country --" })
       
     .span-24
-      .span-12
+      .span-4
         = f.label :all_for_reporting_year, "CTSA Reporting Year"
+      .span-7
         = f.select :all_for_reporting_year, ParticipatingOrganization::REPORTING_YEARS.collect{ |yr| [yr.to_i, yr.to_s]}, { :include_blank => "--" }
 
     .buttons
