@@ -207,7 +207,7 @@ class Award < ActiveRecord::Base
     nucats_assisted
     budget_identifier
     sponsor
-    ctsa_reporting_years.to_sentence
+    ctsa_reporting_years :to_sentence => "CTSA Reporting Years"
   end
   
 end

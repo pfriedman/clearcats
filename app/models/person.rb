@@ -547,9 +547,11 @@ class Person < ActiveRecord::Base
   # end
   
   def amplify
-    update_record_via_era_commons_username_map
-    if ["staging", "production"].include?(Rails.env)
-      update_record_via_bcsec
+    unless self.edited_by_user
+      update_record_via_era_commons_username_map
+      if ["staging", "production"].include?(Rails.env)
+        update_record_via_bcsec
+      end
     end
     self
   end

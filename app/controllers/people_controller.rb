@@ -47,7 +47,6 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[@person.class.to_s.downcase.to_sym])
-        redirect_path = (@person.netid == current_user.username) ? edit_person_path(@person) : people_path
         format.html do 
           if faculty_member?
             flash[:notice] = 'Person was successfully updated.'

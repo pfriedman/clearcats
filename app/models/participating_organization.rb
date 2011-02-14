@@ -13,6 +13,7 @@
 #  updated_at     :datetime
 #
 
+require 'comma'
 class ParticipatingOrganization < ActiveRecord::Base
   include CtsaReportable
   
@@ -23,5 +24,11 @@ class ParticipatingOrganization < ActiveRecord::Base
   belongs_to :us_state
   belongs_to :country
   
-  
+  comma do
+    name
+    city
+    us_state
+    country
+    ctsa_reporting_years :to_sentence => "CTSA Reporting Years"
+  end
 end

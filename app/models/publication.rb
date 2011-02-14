@@ -110,7 +110,7 @@ class Publication < ActiveRecord::Base
     nucats_assisted
     cited
     missing_pmcid_reason
-    ctsa_reporting_years.to_sentence
+    ctsa_reporting_years :to_sentence => "CTSA Reporting Years"
   end
   
 end

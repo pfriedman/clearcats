@@ -5,20 +5,22 @@ describe "/participating_organizations/index.html.haml" do
 
   before(:each) do
     assigns[:search] = ParticipatingOrganization.search
+    @country  = Factory(:country)
+    @us_state = Factory(:us_state)
     arr = [
       stub_model(ParticipatingOrganization,
         :name => "value for name",
         :city => "value for city",
-        :country_id => 1,
-        :us_state_id => 1,
-        :reporting_year => 1
+        :country_id => @country.id,
+        :us_state_id => @us_state.id,
+        :ctsa_reporting_years_mask => 1
       ),
       stub_model(ParticipatingOrganization,
         :name => "value for name",
         :city => "value for city",
-        :country_id => 1,
-        :us_state_id => 1,
-        :reporting_year => 1
+        :country_id => @country.id,
+        :us_state_id => @us_state.id,
+        :ctsa_reporting_years_mask => 1
       )
     ]
     assigns[:participating_organizations] = will_paginate_collection(arr)
@@ -28,8 +30,8 @@ describe "/participating_organizations/index.html.haml" do
     render
     response.should have_tag("tr>td", "value for name".to_s, 2)
     response.should have_tag("tr>td", "value for city".to_s, 2)
-    response.should have_tag("tr>td", 1.to_s, 2)
-    response.should have_tag("tr>td", 1.to_s, 2)
-    response.should have_tag("tr>td", 1.to_s, 2)
+    response.should have_tag("tr>td", @country.to_s, 2)
+    response.should have_tag("tr>td", @us_state.to_s, 2)
+    response.should have_tag("tr>td", 2000.to_s, 2)
   end
 end

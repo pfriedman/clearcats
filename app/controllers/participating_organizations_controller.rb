@@ -8,9 +8,11 @@ class ParticipatingOrganizationsController < ApplicationController
     @participating_organizations = @search.paginate(:page => params[:page], :per_page => 20)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @participating_organizations }
+      format.html 
+      format.xml { render :xml => @participating_organizations }
+      format.csv { render :csv => @search.all }
     end
+
   end
 
   # GET /participating_organizations/1
