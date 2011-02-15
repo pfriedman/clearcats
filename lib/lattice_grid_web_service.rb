@@ -46,9 +46,8 @@ class LatticeGridWebService
       if value
         person = find_or_create_person(netid)
         value.each do |attributes|
-          results << instantiate_publication(attributes["abstract"]) 
+          results << instantiate_publication(attributes["abstract"], person) 
         end
-        results.each { |r| r.person = person; r.save! }
       end
 
     rescue Exception => e
@@ -76,7 +75,6 @@ class LatticeGridWebService
     begin
 
       resp = make_request(uri, req)
-
       result = resp.body.include?(invalid_text) ? false : true
 
     rescue Exception => e
@@ -115,13 +113,14 @@ class LatticeGridWebService
       person
     end
     
-    def self.instantiate_publication(attributes)
+    def self.instantiate_publication(attributes, person)
       pub = Publication.find_by_pmid(attributes["pubmed"])
       
       if pub.nil?
-        pub = Publication.new
+        pub = Publication.new(:person => person)
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       elsif !pub.edited_by_user?
+        pub.person = person if pub.person.blank?
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       end
       pub

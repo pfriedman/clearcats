@@ -25,7 +25,7 @@ describe LatticeGridWebService do
 
     context "to discover publications" do
 
-      it "should return publication information for an investigator" do
+      it "should return publication information for an investigator found from the faculty web svc" do
         person = Factory(:person)
         FacultyWebService.stub!(:locate_one).and_return(person)
         LatticeGridWebService.stub!(:make_request).and_return(publications_response)
@@ -33,6 +33,18 @@ describe LatticeGridWebService do
         results.size.should == 2
         results.first.class.should == Publication
         results.first.pmid.should == "20180973"
+        results.first.person.should == person
+        results.first.publication_date.to_s.should == "2010-01-01"
+      end
+      
+      it "should return publication information for an investigator who exists in the local db" do
+        person = Factory(:person, :netid => "wakibbe")
+        LatticeGridWebService.stub!(:make_request).and_return(publications_response)
+        results = LatticeGridWebService.investigator_publications_search('wakibbe')
+        results.size.should == 2
+        results.first.class.should == Publication
+        results.first.pmid.should == "20180973"
+        results.first.person.should == person
         results.first.publication_date.to_s.should == "2010-01-01"
       end
       
