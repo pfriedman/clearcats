@@ -46,7 +46,7 @@ class LatticeGridWebService
       if value
         person = find_or_create_person(netid)
         value.each do |attributes|
-          results << instantiate_publication(attributes["abstract"], person) 
+          results << instantiate_publication(attributes["abstract"]) 
         end
         results.each do |r|
           person.publications << r
@@ -117,14 +117,13 @@ class LatticeGridWebService
       person
     end
     
-    def self.instantiate_publication(attributes, person)
+    def self.instantiate_publication(attributes)
       pub = Publication.find_by_pmid(attributes["pubmed"])
       
       if pub.nil?
-        pub = Publication.new(:person => person)
+        pub = Publication.new
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       elsif !pub.edited_by_user?
-        pub.person = person if pub.person.blank?
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }
       end
       pub
