@@ -48,6 +48,10 @@ class LatticeGridWebService
         value.each do |attributes|
           results << instantiate_publication(attributes["abstract"], person) 
         end
+        results.each do |r|
+          person.publications << r
+        end
+        person.save! unless results.empty?
       end
 
     rescue Exception => e
