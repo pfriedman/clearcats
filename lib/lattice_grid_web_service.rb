@@ -120,6 +120,8 @@ class LatticeGridWebService
     def self.instantiate_publication(attributes)
       pub = Publication.find_by_pmid(attributes["pubmed"])
       
+      attributes.delete("id")
+      
       if pub.nil?
         pub = Publication.new
         attributes.each { |k, v| pub.send("#{k}=", v) if pub.respond_to?("#{k}=") }

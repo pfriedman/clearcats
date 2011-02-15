@@ -54,6 +54,7 @@ class Publication < ActiveRecord::Base
   attr_accessor :journal_abbreviation, :volume, :issue, :pages, :year, :publication_type, :electronic_publication_date
   attr_accessor :deposited_date, :status, :publication_status, :issn, :isbn, :citation_last_get_at, :citation_url, :url, :mesh
   attr_accessor :created_id, :created_ip, :created_at, :updated_id, :updated_ip, :updated_at, :deleted_at, :deleted_id, :deleted_ip
+  attr_accessor :mesh_vector, :journal_vector, :abstract_vector, :is_cancer, :vectors
   
   def pubmed=(pubmed)
     self.pmid = pubmed
