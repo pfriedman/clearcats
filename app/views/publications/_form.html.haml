@@ -2,7 +2,8 @@
 
 - if @show_header
   %span{ :class => "publication_header" }
-    Publication for #{@publication.person}
+    Publication for #{@publication.person} 
+    = link_to "PubMed", "http://www.ncbi.nlm.nih.gov/pubmed?term=#{@publication.pmid}[uid]", :popup => true, :class => "external_link icon_link" unless @publication.pmid.blank?
 
   .header_option
     = link_to("Close", "javascript: jQuery.unblockUI();", :class => "delete_link icon_link")
