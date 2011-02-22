@@ -87,12 +87,12 @@
     %p
       = f.label :department_affiliation, "Department Affiliation" 
       %br
-      = f.text_field :department_affiliation 
+      = f.text_field :department_affiliation, :class => "department_autocomplete" 
 
     %p
       = f.label :school_affiliation, "School Affiliation" 
       %br
-      = f.text_field :school_affiliation
+      = f.text_field :school_affiliation, :class => "school_autocomplete" 
 
   .span-6.last
     .trainee_toggler

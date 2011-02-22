@@ -216,4 +216,30 @@ class PeopleController < ApplicationController
     
   end
   
+  def departments
+    q = "%#{params[:term].to_s.downcase}%"
+    departments  = Person.all( :select => "distinct people.department_affiliation", :conditions => ["lower(department_affiliation) like ?", q] )
+    departments  = departments.map { |d| { :label => d.department_affiliation, :value => d.department_affiliation } }
+    @departments = departments.sort { |a, b| a[:label].downcase <=> b[:label].downcase }
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @departments }
+    end
+  end
+  
+  
+  def schools
+    q = "%#{params[:term].to_s.downcase}%"
+    schools  = Person.all( :select => "distinct people.school_affiliation", :conditions => ["lower(school_affiliation) like ?", q] )
+    schools  = schools.map { |d| { :label => d.school_affiliation, :value => d.school_affiliation } }
+    @schools = schools.sort { |a, b| a[:label].downcase <=> b[:label].downcase }
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @schools }
+    end
+  end
+  
+  
 end

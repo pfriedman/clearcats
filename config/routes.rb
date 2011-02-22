@@ -13,6 +13,9 @@ ActionController::Routing::Routes.draw do |map|
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
 
+  map.departments '/people/departments', :controller => "people", :action => "departments"
+  map.schools     '/people/schools',     :controller => "people", :action => "schools"
+
   map.resources :activity_types
   map.resources :awards, :except => [ :destroy ],
     :member => { :versions => :get, :revert => :post, :details => :get },

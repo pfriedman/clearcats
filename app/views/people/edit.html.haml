@@ -16,6 +16,29 @@
         $("##{@person.class.to_s.downcase}_specialty_id").val(ui.item.id);
       }
     });
+    
+    $('.department_autocomplete').focus(function(){
+      $(this).select();
+    });
+    $('.department_autocomplete').autocomplete({
+      source: "#{departments_path(:format => :json)}",
+      minLength: 2,
+      select: function(event, ui) { 
+        $('.department_autocomplete').val(ui.item.label);
+      }
+    });
+    
+    $('.school_autocomplete').focus(function(){
+      $(this).select();
+    });
+    $('.school_autocomplete').autocomplete({
+      source: "#{schools_path(:format => :json)}",
+      minLength: 2,
+      select: function(event, ui) { 
+        $('.school_autocomplete').val(ui.item.label);
+      }
+    });
+    
   });
   $(function () { $("form").dirty_form(); });
   $(function () { $("a.menu_nav").dirty_stopper(); });
