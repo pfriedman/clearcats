@@ -163,9 +163,9 @@ class Person < ActiveRecord::Base
   
   named_scope :for_reporting_year, lambda { |yr| {:conditions => "people.ctsa_reporting_years_mask & #{2**Person::REPORTING_YEARS.index(yr.to_i)} > 0"} }
   
-  named_scope :scholars,      :conditions => { :training_type => SCHOLAR }
-  named_scope :other_careers, :conditions => { :training_type => OTHER_CAREER }
-  named_scope :trainees,      :conditions => { :training_type => TRAINEE }
+  named_scope :scholars,      :conditions => { :training_type => SCHOLAR, :trainee_status => APPOINTED }
+  named_scope :other_careers, :conditions => { :training_type => OTHER_CAREER, :trainee_status => APPOINTED }
+  named_scope :trainees,      :conditions => { :training_type => TRAINEE, :trainee_status => APPOINTED }
   
   named_scope :invalid_for_ctsa_reporting, :conditions => "(people.ctsa_reporting_years_mask & #{2**REPORTING_YEARS.index(SYSTEM_CONFIG['current_ctsa_reporting_year'].to_i)} > 0) AND (era_commons_username IS NULL OR specialty_id IS NULL)"
   

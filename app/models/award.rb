@@ -174,7 +174,7 @@ class Award < ActiveRecord::Base
   
   def valid_for_ctsa_report?
     result = ctsa_missing_fields.blank?
-    result = ((/\d{6}/ =~ grant_number) && (grant_number.length == 6)) if result && !grant_number.blank?
+    result = ((/\d{6}/ =~ grant_number) && (grant_number.length == 6)) if result && !grant_number.blank? && (!organization.blank? and organization.type == "PhsOrganization")
     result = false if grant_number.blank? && (!organization.blank? and organization.type == "PhsOrganization")
     result
   end
