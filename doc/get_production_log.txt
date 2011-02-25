@@ -1,1 +1,0 @@
-scp pfr957@clinical-rails-prod.nubic.northwestern.edu:/var/www/apps/clearcats/current/log/production.log ./log/production.log

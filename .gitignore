@@ -2,6 +2,8 @@
 log/*.log
 tmp/**/*
 doc/app
+doc/*.txt
+doc/notes
 cc
 reports/cucumber.html
 reports/cucumber-xml/*
