@@ -142,10 +142,12 @@ end
 class PhsAwardBuilder <  REXML::Element
   
   def initialize(award)
-    super "sis:Federal_PHS_Funding"
-    add_element("sis:Organization").add_text(award.organization.code)
-    add_element("sis:Activity_Code").add_text(award.activity_code.code)
-    add_element("sis:Six_Digit_Grant_Number").add_text(award.grant_number)
+    if !award.activity_code.blank? && !award.grant_number.blank?
+      super "sis:Federal_PHS_Funding"
+      add_element("sis:Organization").add_text(award.organization.code)
+      add_element("sis:Activity_Code").add_text(award.activity_code.code)
+      add_element("sis:Six_Digit_Grant_Number").add_text(award.grant_number)
+    end
   end
   
 end
@@ -317,7 +319,7 @@ end
 class CharacteristicsBuilder < REXML::Element
   def initialize(trainees)
     super "sis:Characteristics"
-    Person::TRAINEE_STATUSES.each  do |status|
+    Person::TRAINEE_STATUSES.each do |status|
       Person::TRAINING_TYPES.each do |type|
         add_element(CharacteristicBuilder.new(trainees, nodify(type), nodify(status)))
       end
@@ -369,7 +371,7 @@ class EthnicCategoriesBuilder < REXML::Element
     super "sis:Ethnic_Category"
     ["HispanicOrLatino", "Non-Hispanic", "Unknown"].each do |category|
       #non_nil_trainees = trainees.select{|trainee| not trainee.ethnic_category.nil?}
-      @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? && trainee.ethnic_category.downcase == category.downcase && trainee.valid_for_ctsa_report? }
+      @trainees = trainees.select {|trainee| !trainee.ethnic_category.nil? && trainee.ethnic_category.gsub(" ", "-").downcase == category.downcase && trainee.valid_for_ctsa_report? }
       add_element(EthnicCategoryBuilder.new(@trainees, status, category))
     end
   end
@@ -385,7 +387,7 @@ class EthnicCategoryBuilder < REXML::Element
   # status   - appointed, applicant
   def initialize(trainees, status, category)
     super "sis:#{category}"
-    @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? && trainee.ethnic_category.downcase == category.downcase && trainee.valid_for_ctsa_report?}
+    @trainees = trainees.select {|trainee| !trainee.ethnic_category.nil? && trainee.ethnic_category.gsub(" ", "-").downcase == category.downcase && trainee.valid_for_ctsa_report?}
     if status.downcase == "appointed"
       ["Females", "Males", "Not_Reported"].each do |gender|
         add_element(GenderCountBuilder.new(@trainees, gender))
@@ -405,7 +407,7 @@ end
 class HispanicEnrollmentBuilder < REXML::Element
   def initialize(trainees, status, type)
     super "sis:Hispanic_Enrollment"
-      @trainees = trainees.select {|trainee| not trainee.ethnic_category.nil? && trainee.ethnic_category.downcase == "HispanicOrLatino".downcase && trainee.valid_for_ctsa_report?}
+      @trainees = trainees.select {|trainee| !trainee.ethnic_category.nil? && trainee.ethnic_category.downcase == "HispanicOrLatino".downcase && trainee.valid_for_ctsa_report?}
       @races = ["American_Indian_or_Alaska_Native", "Asian", "Native_Hawaiian_or_Other_Pacific_Islander", 
                 "Black_Or_African_American", "White", "More_Than_One_Race", "Unknown"]
       @races.each do |race|

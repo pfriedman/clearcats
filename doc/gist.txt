@@ -18,12 +18,16 @@ WHERE t1.last_name = t2.last_name AND t1.first_name = t2.first_name AND t1.id <>
 ORDER BY t1.last_name
 
 
-pd_dump
+pg_dump
 
 pg_dump clearcats_production -i -h pprod.bioinformatics.northwestern.edu -U clearcats_production > clearcats_prod.sql
 
 Ziv4?evasion
 
+
+psql
+
+psql -U clearcats_production -d clearcats_production -f db/clearcats_prod.sql
 
 
 xsd validation

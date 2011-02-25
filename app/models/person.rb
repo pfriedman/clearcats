@@ -291,8 +291,8 @@ class Person < ActiveRecord::Base
     result = !era_commons_username.blank? && !specialty.blank? if result 
     if result && trainee?
       result = !mentor_commons_username.blank?
-      result = !degree_1.blank? if result && training_type == TRAINEE
-      result = !date_of_appointment.blank? && !end_date.blank? if result && trainee?
+      result = !degree_1.blank? if result && training_type == TRAINEE && trainee_status == APPOINTED
+      result = !date_of_appointment.blank? && !end_date.blank? if result && trainee? && trainee_status == APPOINTED
     end
     result
   end

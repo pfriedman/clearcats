@@ -141,7 +141,6 @@ class PublicationsController < ApplicationController
       end
     end
     flash[:notice] = "Publications were updated successfully"
-    flash[:notice] = "Awards were updated successfully"
     if faculty_member?
       redirect_to person_approvals_path(@person)
     else

@@ -52,7 +52,7 @@ class Award < ActiveRecord::Base
     "  OR " +
     "  (organization_id IS NOT NULL and organizations.type = 'PhsOrganization' and activity_code_id IS NULL)" +
     "  OR " +
-    "  (organization_id IS NOT NULL and organizations.type = 'NonPhsOrganization' and (grant_number IS NULL OR grant_number = ''))" +
+    "  (organization_id IS NOT NULL and organizations.type = 'PhsOrganization' and (grant_number IS NULL OR grant_number = ''))" +
     ")"
   
   named_scope :phs_organization_id_equals, lambda { |id| {:conditions => "organization_id = #{id.to_i}"} }
@@ -175,6 +175,7 @@ class Award < ActiveRecord::Base
   def valid_for_ctsa_report?
     result = ctsa_missing_fields.blank?
     result = ((/\d{6}/ =~ grant_number) && (grant_number.length == 6)) if result && !grant_number.blank?
+    result = false if grant_number.blank? && (!organization.blank? and organization.type == "PhsOrganization")
     result
   end
   

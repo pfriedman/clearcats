@@ -1,0 +1,39 @@
+CTSA APR 
+
+People marked as non-reportable due to problems with their ERA Commons Username
+------
+
+	Savita 	  Bhalla 	  sbh979 	1063182 	s-bhalla@northwestern.edu 	    SAVITABHALLA
+	Oana 	    Klein 	  olk483 	1071151 	oklein@northwestern.edu 	      OKLEIN
+	Nushmia 	Khokhar 	nkh469 		        n-khokhar@md.northwestern.edu 	NUSHMIA
+	
+
+Awards marked as non-reportable due to 1) not matching cited PHS support or 2) not falling within the current APR reporting period
+------
+
+"reason","grant_number","grant_title","institution_number","first_name","last_name","netid","era_commons_username"
+2,"008338","NRSA: Bioimaging with Nanopyramids (Fellow: Colleen Nehl)","SP0002832","Teri","Odom","two626","TWODOM"
+1, "674400","Chronic Stress in Pregnancy: Self-report, Biomarkers, and Birth Outcomes","","Ann","Borders","abr127","ABORDERS"
+1, "082224","NRSA Postdoctoral Fellowship in Support of Pre-Eclampsia and Risk for CVD in SLE Patients","CNV0043016","Rosalind","Ramsey-Goldman","rgramsey","RAMSEYGOLDMAN"
+1, "051681","NRSA Fellowship in Support of Inflammatory Markers in CVD and OP in SLE Women","CNV0038110","Rosalind","Ramsey-Goldman","rgramsey","RAMSEYGOLDMAN"
+
+3) missing grant number
+
+3, 5P30AG13854-14, Emily J Rogalski, National Institute on Aging, Subproj: Cortical Surface-Based Analysis of Perisylvain Abnormalities in Primary Progressive Aphasia
+
+Publications marked as non-reportable due to the required PMCID not being found in PubMed for given PUBMED ID
+------------
+
+	Holly J Falk-Krzesinski 	2011-09-20 	A Multi-Level Systems Perspective for the Scien... 	20844283 	20973925
+  Bonnie J Spring 	        2010-09-20 	A Multi-Level Systems Perspective for the Scien... 	20844283 	PMC2965626
+ 	Noshir Contractor 	      2010-09-20 	A Multi-Level Systems Perspective for the Scien... 	20844283 	20844283
+ 	Brian Uzzi 	              2010-09-20 	A Multi-Level Systems Perspective for the Scien... 	20844283 	20844283
+ 	
+* Ruchi S Gupta 	          2008-04-01 	Prematurity, chorioamnionitis, and the developm... 	18313129 	PMC2993062 	NIHMSID114516
+ 	Boyd E Metzger 	          2010-01-01 	Acanthosis nigricans identifies youth at high r... 	19796772 		          NIHMSID149561
+  Rosalind Ramsey-Goldman 	2011-01-15 	Malignancies in Juvenile Idiopathic Arthritis: ... 	21239753
+  Rosalind Ramsey-Goldman 	2011-01-15 	Functional Polymorphisms of the Coagulation Fac... 	21239755
+* Jessica K Altman 	        2010-10-01 	Negative regulatory effects of Mnk kinases in t... 	20664001 	PMC2981388
+
+* Has PMCID (checked in http://www.ncbi.nlm.nih.gov/sites/pmctopmid to verify) but NOT in PubMed
+
