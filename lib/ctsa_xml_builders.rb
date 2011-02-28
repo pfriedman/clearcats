@@ -256,20 +256,20 @@ class PublicationBuilder < REXML::Element
   
 end
 
-# TODO: determine if this needs to be changed or should be hard-coded numbers
+# TODO: add as attributes on the CtsaReport model
 #
 # <sis:Resource_Projections>
-#   <sis:Percent_Clinical_Trials>30</sis:Percent_Clinical_Trials>
-#   <sis:Percent_Pediatrics>15</sis:Percent_Pediatrics>
-#   <sis:Percent_AIDS>0</sis:Percent_AIDS>
+#   <sis:Percent_Clinical_Trials>27</sis:Percent_Clinical_Trials>
+#   <sis:Percent_Pediatrics>18</sis:Percent_Pediatrics>
+#   <sis:Percent_AIDS>1</sis:Percent_AIDS>
 # </sis:Resource_Projections>
 class ResourceProjectionsBuilder < REXML::Element
   
   def initialize()
     super "sis:Resource_Projections"
-    add_element("sis:Percent_Clinical_Trials").add_text("30")
-    add_element("sis:Percent_Pediatrics").add_text("15")
-    add_element("sis:Percent_AIDS").add_text("0")
+    add_element("sis:Percent_Clinical_Trials").add_text("27")
+    add_element("sis:Percent_Pediatrics").add_text("18")
+    add_element("sis:Percent_AIDS").add_text("1")
   end
   
 end

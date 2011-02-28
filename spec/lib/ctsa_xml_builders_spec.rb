@@ -65,9 +65,9 @@ describe ReportBuilder do
     "</sis:Publication>" + 
   "</sis:Publications>" + 
   "<sis:Resource_Projections>" +
-		"<sis:Percent_Clinical_Trials>30</sis:Percent_Clinical_Trials>" +
-		"<sis:Percent_Pediatrics>15</sis:Percent_Pediatrics>" +
-		"<sis:Percent_AIDS>0</sis:Percent_AIDS>" +
+		"<sis:Percent_Clinical_Trials>27</sis:Percent_Clinical_Trials>" +
+		"<sis:Percent_Pediatrics>18</sis:Percent_Pediatrics>" +
+		"<sis:Percent_AIDS>1</sis:Percent_AIDS>" +
 	"</sis:Resource_Projections>" +
 	"<sis:Program_Description>" + 
 		"<sis:Participating_Organization_or_Institution>" +

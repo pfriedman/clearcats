@@ -17,6 +17,7 @@
         %th Finalized
         %th Has Errors
         %th Edit
+        %th Delete
       - @ctsa_reports.each do |rpt|
         %tr{:class => cycle('even_record', 'odd_record')}
           %td= link_to 'Download', download_ctsa_report_path(rpt, :format => "zip")
@@ -25,6 +26,7 @@
           %td= rpt.finalized? ? "True" : "False"
           %td= rpt.has_errors? ? "True" : "False"
           %td= link_to 'Edit', edit_ctsa_report_path(rpt), :class => "edit_link icon_link"
+          %td= link_to 'Delete', rpt, :confirm => 'Are you sure?', :method => :delete, :class => "delete_link icon_link"
 
     = will_paginate @ctsa_reports
   
