@@ -25,6 +25,12 @@ gem "zippy"
 
 group :development do
   gem 'capistrano'
+  # metric_fu
+  gem "metric_fu"
+  gem "reek"
+  gem "roodi"
+  gem "ruby-prof"
+  gem 'turbulence'
 end
 
 group :test do
@@ -42,12 +48,6 @@ group :test do
   
   # shoulda
   gem "shoulda"
-  
-  # metric_fu
-  gem "metric_fu"
-  gem "reek"
-  gem "roodi"
-  gem "ruby-prof"
   
   # cucumber
   gem "builder"

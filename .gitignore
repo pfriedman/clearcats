@@ -1,6 +1,7 @@
 .bundle/*
 log/*.log
 tmp/**/*
+turbulence/*
 doc/app
 doc/*.txt
 doc/notes
